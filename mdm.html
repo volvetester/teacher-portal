@@ -364,7 +364,7 @@
     </div>
 
     <div class="mobile-notice no-print">
-      📱 <strong>मोबाइल कीबोर्ड टिप्स:</strong> मोबाइल कीबोर्ड पर <strong>'Next / नीला बाण ➔'</strong> दबाने पर कर्सर प्राइमरी से जूनियर में नहीं जाएगा, सीधे अगली तारीख की प्राइमरी में ही नीचे उतरेगा।
+      📱 <strong>मोबाइल कीबोर्ड:</strong> कीबोर्ड का हरा तीर (➔|) दबाने पर कर्सर केवल प्राथमिक से प्राथमिक में ही नीचे उतरेगा।
     </div>
 
     <div class="table-responsive-box">
@@ -427,7 +427,7 @@ var currentLevel = 'comp';
 var daysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
-// 1. सख्त प्रतिबंध: केवल कैपिटल (A-Z) और स्पेस
+// 1. सख्त प्रतिबंध
 function filterCapital(el) {
   el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
 }
@@ -444,7 +444,57 @@ function filterInt(el) {
   el.value = el.value.replace(/[^0-9]/g, '');
 }
 
-// 2. मोबाइल कीबोर्ड "Next / बाण" एवं लैपटॉप एरो कीबोर्ड नेविगेशन
+// 2. मोबाइल कीबोर्ड हरा तीर जंप प्रिवेंशन इंजन (Strict Column Isolation)
+var lastFocusedType = 'ps';
+var lastFocusedDay = 1;
+
+function onAttFocus(type, day) {
+  lastFocusedType = type;
+  lastFocusedDay = day;
+}
+
+// जब मोबाइल का हरा तीर डिफॉल्ट रूप से उसी लाइन के जूनियर पर जंप मारता है, 
+// तो यह फंक्शन उसे पकड़कर तुरंत अगली तारीख के प्राथमिक पर धकेल देता है
+function onAttBlur(e, type, currentDay) {
+  // छोटा टाइमआउट ताकि ब्राउज़र का अगला फ़ोकस लक्ष्य तय हो सके
+  setTimeout(function() {
+    var active = document.activeElement;
+    if (!active) return;
+
+    var totalDays = new Date(
+      parseInt(document.getElementById('selYear').value, 10),
+      parseInt(document.getElementById('selMonth').value, 10) + 1,
+      0
+    ).getDate();
+
+    // यदि शिक्षक प्राथमिक (PS) में था और कर्सर उसी दिन के जूनियर (UPS) में कूद गया
+    if (type === 'ps' && active.id === ('ups_att_' + currentDay)) {
+      for (var d = currentDay + 1; d <= totalDays; d++) {
+        var nextPs = document.getElementById('ps_att_' + d);
+        if (nextPs && !nextPs.disabled) {
+          nextPs.focus();
+          nextPs.select();
+          nextPs.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          break;
+        }
+      }
+    }
+    // यदि शिक्षक जूनियर (UPS) में था और कर्सर किसी अन्य वर्ग में जाने की कोशिश करे
+    else if (type === 'ups' && active.id === ('ps_att_' + (currentDay + 1))) {
+      for (var d = currentDay + 1; d <= totalDays; d++) {
+        var nextUps = document.getElementById('ups_att_' + d);
+        if (nextUps && !nextUps.disabled) {
+          nextUps.focus();
+          nextUps.select();
+          nextUps.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          break;
+        }
+      }
+    }
+  }, 30);
+}
+
+// कीबोर्ड एंटर / कीडाउन हैंडलर
 function handleTableNavigation(e, type, currentDay) {
   var totalDays = new Date(
     parseInt(document.getElementById('selYear').value, 10),
@@ -452,30 +502,20 @@ function handleTableNavigation(e, type, currentDay) {
     0
   ).getDate();
 
-  // मोबाइल कीबोर्ड का नीला बाण (Enter) या लैपटॉप का Down Arrow
   if (e.key === "Enter" || e.keyCode === 13 || e.key === "ArrowDown") {
     e.preventDefault();
     e.stopPropagation();
 
-    var targetFound = false;
     for (var d = currentDay + 1; d <= totalDays; d++) {
       var nextEl = document.getElementById(type + 'att' + d);
       if (nextEl && !nextEl.disabled) {
         nextEl.focus();
         nextEl.select();
-        // मोबाइल स्क्रीन पर इनपुट बॉक्स को केंद्र में लाना
         nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        targetFound = true;
         break;
       }
     }
-    // यदि माह का अंतिम दिन आ गया हो तो कीबोर्ड क्लोज़ कर दें
-    if (!targetFound) {
-      e.target.blur();
-    }
-  }
-  // लैपटॉप Up Arrow (पिछली तारीख का वही वर्ग)
-  else if (e.key === "ArrowUp") {
+  } else if (e.key === "ArrowUp") {
     e.preventDefault();
     for (var d = currentDay - 1; d >= 1; d--) {
       var prevEl = document.getElementById(type + 'att' + d);
@@ -664,25 +704,20 @@ function generateMonthDays() {
 
     var dateStr = d + '-' + monthNames[m].substring(0,3) + '-' + String(y).slice(-2);
 
-    // tabindex 1 से 31 प्राथमिक के लिए, और 32 से 62 जूनियर के लिए
-    // जिससे मोबाइल ब्राउज़र को सही क्रम पता रहे
-    var tabIndexPs = d;
-    var tabIndexUps = 50 + d;
-
     tr.innerHTML = 
       '<td style="font-weight:bold;">' + dateStr + '</td>' +
       '<td style="font-weight:600;">' + dayName + '</td>' +
       
-      // Primary Input (Mobile Keypad: Enter/Next Arrow strictly moves to Next Primary Date)
-      '<td class="ps-col"><input type="number" inputmode="numeric" enterkeyhint="next" tabindex="' + tabIndexPs + '" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event); handleTableNavigation(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Primary Input
+      '<td class="ps-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in ps-att-field" id="ps_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onfocus="onAttFocus(\'ps\', ' + d + ')" onblur="onAttBlur(event, \'ps\', ' + d + ')" onkeydown="blockDecimal(event); handleTableNavigation(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
       '<td class="ps-col val-wheat" id="ps_w_' + d + '">0.00</td>' +
       '<td class="ps-col val-rice" id="ps_r_' + d + '">0.00</td>' +
       '<td class="ps-col val-fruit" id="ps_f_' + d + '">0</td>' +
       '<td class="ps-col val-cost" id="ps_c_' + d + '">₹0.00</td>' +
 
-      // Upper Primary Input (Mobile Keypad: Enter/Next Arrow strictly moves to Next Upper Primary Date)
-      '<td class="ups-col"><input type="number" inputmode="numeric" enterkeyhint="next" tabindex="' + tabIndexUps + '" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event); handleTableNavigation(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Upper Primary Input
+      '<td class="ups-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in ups-att-field" id="ups_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onfocus="onAttFocus(\'ups\', ' + d + ')" onblur="onAttBlur(event, \'ups\', ' + d + ')" onkeydown="blockDecimal(event); handleTableNavigation(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
       '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
       '<td class="ups-col val-wheat" id="ups_w_' + d + '">0.00</td>' +
       '<td class="ups-col val-rice" id="ups_r_' + d + '">0.00</td>' +
