@@ -17,12 +17,11 @@
     .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
     .form-group input, .form-group select { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
-    .form-group input::placeholder { color: #94a3b8; text-transform: none; }
 
     /* Section Headers */
     .sec-header { background: #1e3a8a; color: white; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; margin: 12px 0 8px 0; display: flex; justify-content: space-between; align-items: center; }
 
-    /* 1. DAILY MDM SECTION */
+    /* Daily MDM Box */
     .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 12px; margin-bottom: 20px; }
     .daily-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
     .daily-meta-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -30,7 +29,6 @@
     .daily-date-badge input[type="date"] { border: 1px solid #16a34a; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-size: 11.5px; }
 
     .btn-print-daily { background: #0f766e; color: white; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-    .btn-print-daily:hover { background: #115e59; }
 
     .table-responsive-box {
       width: 100%;
@@ -48,14 +46,13 @@
     .daily-att-table th, .daily-att-table td { border: 1px solid #94a3b8; padding: 5px 2px; white-space: nowrap; }
     .daily-att-table th { background: #15803d; color: white; font-size: 11px; }
     .daily-att-input { width: 50px; height: 32px; padding: 2px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 13px; }
-    .daily-att-input:focus { outline: 2px solid #047857; background: #ecfdf5; }
 
     .daily-mat-table { width: 100%; min-width: 880px; border-collapse: collapse; text-align: center; background: white; font-size: 11.5px; }
     .daily-mat-table th, .daily-mat-table td { border: 1px solid #94a3b8; padding: 6px 3px; white-space: nowrap; }
     .daily-mat-table th { background: #065f46; color: white; font-size: 11px; }
     .daily-mat-table td.val { font-weight: bold; color: #047857; background: #f0fdf4; }
 
-    /* 2. MONTHLY MDM SECTION */
+    /* Monthly MDM Section */
     .rates-box { display: flex; gap: 12px; align-items: center; background: #ecfdf5; padding: 10px 12px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 12px; font-size: 11.5px; flex-wrap: wrap; }
     .rates-box label { font-weight: bold; color: #065f46; }
     .rates-box input { width: 65px; height: 30px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
@@ -74,7 +71,6 @@
     .summary-card td { padding: 1.5px 3px; }
     .summary-card td.val { font-weight: bold; text-align: right; }
 
-    /* Monthly Table */
     table.mdm-table { width: 100%; min-width: 900px; border-collapse: collapse; text-align: center; font-size: 11px; }
     table.mdm-table th, table.mdm-table td { border: 1px solid #475569; padding: 4px 2px; white-space: nowrap; }
     
@@ -88,7 +84,7 @@
     input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
 
     .sunday-row { background: #fee2e2 !important; color: #991b1b; }
-    .sunday-row input { background: #fecaca; }
+    .sunday-row input { background: #fecaca; color: #991b1b; cursor: not-allowed; }
     .row-footer { background: #f1f5f9; font-weight: bold; }
     .val-wheat { color: #9a3412; font-weight: bold; }
     .val-rice { color: #166534; font-weight: bold; }
@@ -97,13 +93,11 @@
 
     .btn-container-monthly { display: flex; justify-content: flex-end; margin-bottom: 12px; }
     .btn-print-monthly { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-    .btn-print-monthly:hover { background: #15803d; }
 
     .print-banner-block { display: none; text-align: center; margin-bottom: 8px; }
     .print-banner-title { font-size: 14px; font-weight: bold; color: #000; text-transform: uppercase; }
     .print-banner-sub { font-size: 10.5px; font-weight: 600; color: #111; margin-top: 2px; text-transform: uppercase; }
 
-    /* PRINT STYLES */
     @media print {
       body { background: #fff !important; padding: 0 !important; margin: 0 !important; color: #000 !important; }
       .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border: none !important; }
@@ -114,7 +108,6 @@
 
       .table-responsive-box { overflow: visible !important; border: none !important; width: 100% !important; }
 
-      /* Daily Print (Landscape) */
       body.print-mode-daily {
         .monthly-section-wrapper { display: none !important; }
         .daily-box { display: block !important; border: 1.5px solid #000 !important; padding: 8px !important; margin: 0 !important; background: transparent !important; }
@@ -123,7 +116,6 @@
         .daily-att-input { border: none !important; background: transparent !important; height: auto !important; }
       }
 
-      /* Monthly Print (Portrait - 1 Page Strict) */
       body.print-mode-monthly {
         .daily-box { display: none !important; }
         .summary-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: 5px !important; }
@@ -151,7 +143,6 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
-  <!-- School Details -->
   <div class="school-details no-print">
     <div class="form-group">
       <label>विद्यालय का नाम (Capital Only):</label>
@@ -171,7 +162,6 @@
     </div>
   </div>
 
-  <!-- Print Only Header -->
   <div class="print-banner-block">
     <div class="print-banner-title" id="prTitle">MID DAY MEAL REGISTER</div>
     <div class="print-banner-sub" id="prSub"></div>
@@ -197,10 +187,6 @@
         </div>
       </div>
       <button class="btn-print-daily no-print" type="button" onclick="printDailyMdm()">🖨️ दैनिक MDM प्रिंट (Landscape)</button>
-    </div>
-
-    <div class="mobile-notice no-print">
-      👉 मोबाइल में पूरी तालिका देखने हेतु उँगली से बाएँ-दाएँ खिसकाएँ।
     </div>
 
     <div class="table-responsive-box">
@@ -239,23 +225,16 @@
         <thead>
           <tr>
             <th>श्रेणी</th>
-            <th>चावल (kg)</th>
-            <th>आटा (kg)</th>
-            <th>सब्जी (kg)</th>
-            <th>दाल (kg)</th>
-            <th>सोया बड़ी (kg)</th>
-            <th>तेल (g/ml)</th>
-            <th>दूध (L)</th>
-            <th>फल (संख्या)</th>
-            <th>चीनी (kg)</th>
-            <th>गिलास (संख्या)</th>
-            <th class="winter-nutri-col" style="background:#b45309;">भुने चने (g)</th>
+            <th>चावल (kg)</th><th>आटा (kg)</th><th>सब्जी (kg)</th><th>दाल (kg)</th>
+            <th>सोया बड़ी (kg)</th><th>तेल (g/ml)</th><th>दूध (L)</th><th>फल</th>
+            <th>चीनी (kg)</th><th>गिलास</th>
+            <th class="winter-nutri-col" style="background:#b45309;">चने (g)</th>
             <th class="winter-nutri-col" style="background:#b45309;">चिक्की (g)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="font-weight:bold; background:#f8fafc;">दैनिक सामग्री (PS + UPS)</td>
+            <td style="font-weight:bold; background:#f8fafc;">दैनिक सामग्री</td>
             <td class="val" id="dm_rice">0.00</td>
             <td class="val" id="dm_flour">0.00</td>
             <td class="val" id="dm_veg">0.00</td>
@@ -363,10 +342,7 @@
       <button class="btn-print-monthly" type="button" onclick="printMonthlyMdm()">🖨️ मासिक MDM पंजिका प्रिंट (Portrait - 1 Page)</button>
     </div>
 
-    <div class="mobile-notice no-print">
-      📱 <strong>मोबाइल कीबोर्ड:</strong> कीबोर्ड का हरा तीर (➔|) दबाने पर कर्सर केवल प्राथमिक से प्राथमिक में ही नीचे उतरेगा।
-    </div>
-
+    <!-- Monthly Table (One-by-One Strict Mobile Step Navigation) -->
     <div class="table-responsive-box">
       <table class="mdm-table" id="mdmTable">
         <thead>
@@ -427,7 +403,7 @@ var currentLevel = 'comp';
 var daysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
-// 1. सख्त प्रतिबंध
+// इनपुट फिल्टर
 function filterCapital(el) {
   el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
 }
@@ -444,22 +420,11 @@ function filterInt(el) {
   el.value = el.value.replace(/[^0-9]/g, '');
 }
 
-// 2. मोबाइल कीबोर्ड हरा तीर जंप प्रिवेंशन इंजन (Strict Column Isolation)
-var lastFocusedType = 'ps';
-var lastFocusedDay = 1;
-
-function onAttFocus(type, day) {
-  lastFocusedType = type;
-  lastFocusedDay = day;
-}
-
-// जब मोबाइल का हरा तीर डिफॉल्ट रूप से उसी लाइन के जूनियर पर जंप मारता है, 
-// तो यह फंक्शन उसे पकड़कर तुरंत अगली तारीख के प्राथमिक पर धकेल देता है
-function onAttBlur(e, type, currentDay) {
-  // छोटा टाइमआउट ताकि ब्राउज़र का अगला फ़ोकस लक्ष्य तय हो सके
-  setTimeout(function() {
-    var active = document.activeElement;
-    if (!active) return;
+// मोबाइल हरा तीर (➔|) एवं एंटर: ठीक अगले दिन के उसी कॉलम पर जाना
+function jumpToNextRow(e, type, currentDay) {
+  // यदि Enter या ArrowDown दबाया गया हो
+  if (e.key === "Enter" || e.keyCode === 13 || e.key === "ArrowDown") {
+    e.preventDefault();
 
     var totalDays = new Date(
       parseInt(document.getElementById('selYear').value, 10),
@@ -467,69 +432,32 @@ function onAttBlur(e, type, currentDay) {
       0
     ).getDate();
 
-    // यदि शिक्षक प्राथमिक (PS) में था और कर्सर उसी दिन के जूनियर (UPS) में कूद गया
-    if (type === 'ps' && active.id === ('ups_att_' + currentDay)) {
-      for (var d = currentDay + 1; d <= totalDays; d++) {
-        var nextPs = document.getElementById('ps_att_' + d);
-        if (nextPs && !nextPs.disabled) {
-          nextPs.focus();
-          nextPs.select();
-          nextPs.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          break;
-        }
-      }
-    }
-    // यदि शिक्षक जूनियर (UPS) में था और कर्सर किसी अन्य वर्ग में जाने की कोशिश करे
-    else if (type === 'ups' && active.id === ('ps_att_' + (currentDay + 1))) {
-      for (var d = currentDay + 1; d <= totalDays; d++) {
-        var nextUps = document.getElementById('ups_att_' + d);
-        if (nextUps && !nextUps.disabled) {
-          nextUps.focus();
-          nextUps.select();
-          nextUps.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          break;
-        }
-      }
-    }
-  }, 30);
-}
-
-// कीबोर्ड एंटर / कीडाउन हैंडलर
-function handleTableNavigation(e, type, currentDay) {
-  var totalDays = new Date(
-    parseInt(document.getElementById('selYear').value, 10),
-    parseInt(document.getElementById('selMonth').value, 10) + 1,
-    0
-  ).getDate();
-
-  if (e.key === "Enter" || e.keyCode === 13 || e.key === "ArrowDown") {
-    e.preventDefault();
-    e.stopPropagation();
-
+    // ठीक अगली तारीख (day + 1) से आगे खोजना
     for (var d = currentDay + 1; d <= totalDays; d++) {
       var nextEl = document.getElementById(type + 'att' + d);
-      if (nextEl && !nextEl.disabled) {
+      // यदि अगला दिन रविवार नहीं है (readonly नहीं है)
+      if (nextEl && !nextEl.readOnly) {
         nextEl.focus();
         nextEl.select();
         nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        break;
+        return;
       }
     }
-  } else if (e.key === "ArrowUp") {
+  } 
+  else if (e.key === "ArrowUp") {
     e.preventDefault();
     for (var d = currentDay - 1; d >= 1; d--) {
       var prevEl = document.getElementById(type + 'att' + d);
-      if (prevEl && !prevEl.disabled) {
+      if (prevEl && !prevEl.readOnly) {
         prevEl.focus();
         prevEl.select();
         prevEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        break;
+        return;
       }
     }
   }
 }
 
-// 3. वर्ष पॉप्युलेट करना (2015 से 2059)
 function populateYears() {
   var sel = document.getElementById('selYear');
   sel.innerHTML = '';
@@ -542,7 +470,7 @@ function populateYears() {
   }
 }
 
-// ==================== A. दैनिक MDM कैलकुलेटर ====================
+// दैनिक MDM
 function initDailyDate() {
   var today = new Date();
   var yyyy = today.getFullYear();
@@ -662,7 +590,7 @@ function calcDailyMdm() {
   document.getElementById('dm_chikki').innerText = chikki;
 }
 
-// ==================== B. मासिक MDM पंजिका ====================
+// मासिक MDM
 function setMdmLevel(lvl) {
   currentLevel = lvl;
   document.getElementById('btnComp').className = 'tab-btn' + (lvl === 'comp' ? ' active' : '');
@@ -708,8 +636,8 @@ function generateMonthDays() {
       '<td style="font-weight:bold;">' + dateStr + '</td>' +
       '<td style="font-weight:600;">' + dayName + '</td>' +
       
-      // Primary Input
-      '<td class="ps-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in ps-att-field" id="ps_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onfocus="onAttFocus(\'ps\', ' + d + ')" onblur="onAttBlur(event, \'ps\', ' + d + ')" onkeydown="blockDecimal(event); handleTableNavigation(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Primary Input (रविवार पर readonly, jumpToNextRow से बिल्कुल अगले दिन 1→2→3 जाएगा)
+      '<td class="ps-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + (isSunday ? 'readonly placeholder="-"' : '') + ' onkeydown="blockDecimal(event); jumpToNextRow(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
       '<td class="ps-col val-wheat" id="ps_w_' + d + '">0.00</td>' +
       '<td class="ps-col val-rice" id="ps_r_' + d + '">0.00</td>' +
@@ -717,7 +645,7 @@ function generateMonthDays() {
       '<td class="ps-col val-cost" id="ps_c_' + d + '">₹0.00</td>' +
 
       // Upper Primary Input
-      '<td class="ups-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in ups-att-field" id="ups_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onfocus="onAttFocus(\'ups\', ' + d + ')" onblur="onAttBlur(event, \'ups\', ' + d + ')" onkeydown="blockDecimal(event); handleTableNavigation(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      '<td class="ups-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + (isSunday ? 'readonly placeholder="-"' : '') + ' onkeydown="blockDecimal(event); jumpToNextRow(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
       '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
       '<td class="ups-col val-wheat" id="ups_w_' + d + '">0.00</td>' +
       '<td class="ups-col val-rice" id="ups_r_' + d + '">0.00</td>' +
@@ -816,7 +744,7 @@ function recalcAll() {
     document.getElementById('ups_c_' + d).innerText = '₹' + cUps.toFixed(2);
   }
 
-  // Footer Totals
+  // Footers
   document.getElementById('ft_ps_att').innerText = totPsAtt;
   document.getElementById('ft_ps_w').innerText = totPsW.toFixed(2);
   document.getElementById('ft_ps_r').innerText = totPsR.toFixed(2);
@@ -829,7 +757,7 @@ function recalcAll() {
   document.getElementById('ft_ups_f').innerText = totFruitsUps;
   document.getElementById('ft_ups_c').innerText = '₹' + totUpsC.toFixed(2);
 
-  // Summary Cards
+  // Cards
   var totFruitCostPs = totFruitsPs * rFruit;
   var totFruitCostUps = totFruitsUps * rFruit;
 
@@ -875,7 +803,6 @@ function updateHeader() {
   document.getElementById('prSub').innerText = subParts.join(' | ');
 }
 
-// Print Handler (Landscape for Daily, Portrait for Monthly)
 function printDailyMdm() {
   var style = document.createElement('style');
   style.id = 'print-page-style';
@@ -925,7 +852,6 @@ function printMonthlyMdm() {
   }, 1000);
 }
 
-// Initialize on Load
 populateYears();
 initDailyDate();
 generateMonthDays();
