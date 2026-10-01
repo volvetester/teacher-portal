@@ -22,12 +22,18 @@
     /* Section Headers */
     .sec-header { background: #1e3a8a; color: white; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; margin: 12px 0 8px 0; display: flex; justify-content: space-between; align-items: center; }
 
-    /* Daily Calculator Box */
-    .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 12px; margin-bottom: 15px; }
-    .daily-top-row { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
-    .daily-top-row label { font-size: 12px; font-weight: bold; color: #166534; }
+    /* =========================================================
+       1. DAILY MDM SECTION
+       ========================================================= */
+    .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 12px; margin-bottom: 20px; }
+    .daily-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
+    .daily-meta-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .daily-date-badge { background: #ffffff; border: 1.5px solid #16a34a; padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; color: #166534; display: inline-flex; align-items: center; gap: 8px; }
-    .daily-top-row input[type="date"] { border: 1px solid #16a34a; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-size: 11.5px; }
+    .daily-date-badge input[type="date"] { border: 1px solid #16a34a; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-size: 11.5px; }
+
+    /* Button specific to Daily Section */
+    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print-daily:hover { background: #115e59; }
 
     /* Touch Friendly Mobile Horizontal Scroll Container */
     .table-responsive-box {
@@ -36,7 +42,7 @@
       -webkit-overflow-scrolling: touch;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       background: white;
     }
 
@@ -55,7 +61,9 @@
     .daily-mat-table th { background: #065f46; color: white; font-size: 11px; }
     .daily-mat-table td.val { font-weight: bold; color: #047857; background: #f0fdf4; }
 
-    /* Conversion Rates Box */
+    /* =========================================================
+       2. MONTHLY MDM SECTION
+       ========================================================= */
     .rates-box { display: flex; gap: 12px; align-items: center; background: #ecfdf5; padding: 10px 12px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 12px; font-size: 11.5px; flex-wrap: wrap; }
     .rates-box label { font-weight: bold; color: #065f46; }
     .rates-box input { width: 65px; height: 30px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
@@ -77,7 +85,7 @@
     .summary-card td.val { font-weight: bold; text-align: right; }
 
     /* Monthly Table */
-    table.mdm-table { width: 100%; min-width: 1020px; border-collapse: collapse; text-align: center; font-size: 11px; }
+    table.mdm-table { width: 100%; min-width: 900px; border-collapse: collapse; text-align: center; font-size: 11px; }
     table.mdm-table th, table.mdm-table td { border: 1px solid #475569; padding: 4px 2px; white-space: nowrap; }
     
     .th-banner { background: #1e3a8a; color: white; font-size: 12px; font-weight: bold; padding: 6px; text-transform: uppercase; }
@@ -97,10 +105,10 @@
     .val-cost { color: #1e3a8a; font-weight: bold; }
     .val-fruit { color: #d97706; font-weight: bold; }
 
-    /* Print Buttons */
-    .btn-container { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 8px 16px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; }
-    .btn-print-monthly { background: #166534; color: white; border: none; padding: 8px 16px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    /* Button specific to Monthly Section */
+    .btn-container-monthly { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+    .btn-print-monthly { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print-monthly:hover { background: #15803d; }
 
     .print-banner-block { display: none; text-align: center; margin-bottom: 8px; }
     .print-banner-title { font-size: 14px; font-weight: bold; color: #000; text-transform: uppercase; }
@@ -119,16 +127,16 @@
 
       .table-responsive-box { overflow: visible !important; border: none !important; width: 100% !important; }
 
-      /* Daily Print (Landscape) */
+      /* Mode 1: Daily Print (Landscape) */
       body.print-mode-daily {
-        .sec-monthly, .summary-grid, .table-container-monthly { display: none !important; }
+        .monthly-section-wrapper { display: none !important; }
         .daily-box { display: block !important; border: 1.5px solid #000 !important; padding: 8px !important; margin: 0 !important; background: transparent !important; }
         .daily-att-table, .daily-mat-table { font-size: 10px !important; min-width: 100% !important; width: 100% !important; }
         .daily-att-table th, .daily-att-table td, .daily-mat-table th, .daily-mat-table td { border: 1px solid #000 !important; padding: 3px 1px !important; }
         .daily-att-input { border: none !important; background: transparent !important; height: auto !important; }
       }
 
-      /* Monthly Print (Portrait - 1 Page Strict) */
+      /* Mode 2: Monthly Print (Portrait - 1 Page Strict) */
       body.print-mode-monthly {
         .daily-box { display: none !important; }
         .summary-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: 5px !important; }
@@ -137,11 +145,11 @@
         .summary-card table { font-size: 8px !important; }
         .summary-card td { padding: 0.5px 2px !important; }
         
-        table.mdm-table { min-width: 100% !important; width: 100% !important; font-size: 7.8px !important; }
-        table.mdm-table th, table.mdm-table td { border: 1px solid #000 !important; padding: 1.5px 0.5px !important; line-height: 1.05 !important; }
+        table.mdm-table { min-width: 100% !important; width: 100% !important; font-size: 8px !important; }
+        table.mdm-table th, table.mdm-table td { border: 1px solid #000 !important; padding: 1.5px 1px !important; line-height: 1.05 !important; }
         input.att-in { border: none !important; background: transparent !important; width: 100% !important; height: auto !important; font-size: 8px !important; padding: 0 !important; }
         .th-banner { font-size: 9.5px !important; padding: 3px !important; }
-        .th-sub, .th-sub-ups { font-size: 7.2px !important; }
+        .th-sub, .th-sub-ups { font-size: 7.5px !important; }
         .sunday-row { background: #fee2e2 !important; }
       }
     }
@@ -182,24 +190,30 @@
     <div class="print-banner-sub" id="prSub"></div>
   </div>
 
-  <!-- 1. दैनिक MDM कैलकुलेटर -->
+  <!-- =========================================================
+       1. दैनिक MDM कैलकुलेटर (प्रिंट बटन इसी के अंदर है)
+       ========================================================= -->
   <div class="daily-box" id="dailySection">
     <div class="sec-header" style="background:#15803d; margin-top:0;">
       <span>📅 【दैनिक MDM कैलकुलेटर - उपस्थिति एवं सामग्री】</span>
       <span id="dailyMenuName" style="font-size:12px; font-weight:normal; background:#166534; padding:3px 8px; border-radius:4px;">मेनू लोड हो रहा है...</span>
     </div>
 
-    <!-- Daily Date & Day Picker -->
+    <!-- Daily Date, Day & Dedicated Daily Print Button -->
     <div class="daily-top-row">
-      <div class="daily-date-badge">
-        <span>दिनांक:</span>
-        <span id="dispDateFormatted" style="color:#0f172a; font-size:13.5px;">01/10/2026</span>
-        <input type="date" id="dailyDate" class="no-print" onchange="onDailyDateChange()" title="तारीख बदलने के लिए यहाँ क्लिक करें">
+      <div class="daily-meta-group">
+        <div class="daily-date-badge">
+          <span>दिनांक:</span>
+          <span id="dispDateFormatted" style="color:#0f172a; font-size:13.5px;">01/10/2026</span>
+          <input type="date" id="dailyDate" class="no-print" onchange="onDailyDateChange()" title="तारीख बदलने के लिए यहाँ क्लिक करें">
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:bold; color:#166534;">दिन: </label>
+          <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:110px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px;">
+        </div>
       </div>
-      <div>
-        <label>दिन: </label>
-        <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:110px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px;">
-      </div>
+      <!-- दैनिक प्रिंट बटन केवल इस बॉक्स के लिए -->
+      <button class="btn-print-daily no-print" type="button" onclick="printDailyMdm()">🖨️ दैनिक MDM प्रिंट (Landscape)</button>
     </div>
 
     <div class="mobile-notice no-print">
@@ -279,168 +293,161 @@
     </div>
   </div>
 
-  <!-- 2. मासिक MDM पंजिका -->
-  <div class="sec-header sec-monthly no-print">
-    <span>📊 【मासिक मध्याह्न भोजन (MDM) पंजिका】</span>
-    <span style="font-size:11.5px; font-weight:normal;">पूरे महीने का रजिस्टर</span>
-  </div>
+  <!-- =========================================================
+       2. मासिक MDM पंजिका (प्रिंट बटन इसी के अंदर है)
+       ========================================================= -->
+  <div class="monthly-section-wrapper">
+    
+    <div class="sec-header no-print">
+      <span>📊 【मासिक मध्याह्न भोजन (MDM) पंजिका】</span>
+      <span style="font-size:11.5px; font-weight:normal;">पूरे महीने का रजिस्टर</span>
+    </div>
 
-  <!-- Month & Year Selector -->
-  <div class="school-details no-print sec-monthly" style="margin-bottom:12px;">
-    <div class="form-group">
-      <label>सत्र / वर्ष (Year):</label>
-      <select id="selYear" onchange="generateMonthDays()"></select>
+    <!-- Month & Year Selector -->
+    <div class="school-details no-print" style="margin-bottom:12px;">
+      <div class="form-group">
+        <label>सत्र / वर्ष (Year):</label>
+        <select id="selYear" onchange="generateMonthDays()"></select>
+      </div>
+      <div class="form-group">
+        <label>माह (Month):</label>
+        <select id="selMonth" onchange="generateMonthDays()">
+          <option value="0">January</option><option value="1">February</option><option value="2">March</option>
+          <option value="3">April</option><option value="4">May</option><option value="5">June</option>
+          <option value="6">July</option><option value="7">August</option><option value="8">September</option>
+          <option value="9" selected>October</option><option value="10">November</option><option value="11">December</option>
+        </select>
+      </div>
     </div>
-    <div class="form-group">
-      <label>माह (Month):</label>
-      <select id="selMonth" onchange="generateMonthDays()">
-        <option value="0">January</option><option value="1">February</option><option value="2">March</option>
-        <option value="3">April</option><option value="4">May</option><option value="5">June</option>
-        <option value="6">July</option><option value="7">August</option><option value="8">September</option>
-        <option value="9" selected>October</option><option value="10">November</option><option value="11">December</option>
-      </select>
-    </div>
-  </div>
 
-  <!-- Rates Box -->
-  <div class="rates-box no-print sec-monthly">
-    <span style="font-weight:bold; color:#065f46;">⚙️ दरें (प्रति छात्र):</span>
-    <div>
-      <label>प्राथमिक: </label>
-      <input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalcAll()"> ₹
+    <!-- Rates Box -->
+    <div class="rates-box no-print">
+      <span style="font-weight:bold; color:#065f46;">⚙️ दरें (प्रति छात्र):</span>
+      <div>
+        <label>प्राथमिक: </label>
+        <input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalcAll()"> ₹
+      </div>
+      <div>
+        <label>उच्च प्राथमिक: </label>
+        <input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalcAll()"> ₹
+      </div>
+      <div>
+        <label>सोमवार फल: </label>
+        <input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalcAll()"> ₹
+      </div>
+      <div>
+        <label>गुरुवार पोषण (Nov-Mar): </label>
+        <input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalcAll()"> ₹
+      </div>
     </div>
-    <div>
-      <label>उच्च प्राथमिक: </label>
-      <input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalcAll()"> ₹
-    </div>
-    <div>
-      <label>सोमवार फल: </label>
-      <input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalcAll()"> ₹
-    </div>
-    <div>
-      <label>गुरुवार पोषण (Nov-Mar): </label>
-      <input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalcAll()"> ₹
-    </div>
-  </div>
 
-  <!-- Level Tabs -->
-  <div class="tab-container no-print sec-monthly">
-    <button class="tab-btn active" id="btnComp" type="button" onclick="setMdmLevel('comp')">🏫 कंपोजिट (1-8)</button>
-    <button class="tab-btn" id="btnPs" type="button" onclick="setMdmLevel('ps')">🎒 प्राथमिक (1-5)</button>
-    <button class="tab-btn" id="btnUps" type="button" onclick="setMdmLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
-  </div>
+    <!-- Level Tabs -->
+    <div class="tab-container no-print">
+      <button class="tab-btn active" id="btnComp" type="button" onclick="setMdmLevel('comp')">🏫 कंपोजिट (1-8)</button>
+      <button class="tab-btn" id="btnPs" type="button" onclick="setMdmLevel('ps')">🎒 प्राथमिक (1-5)</button>
+      <button class="tab-btn" id="btnUps" type="button" onclick="setMdmLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
+    </div>
 
-  <!-- Summary Cards -->
-  <div class="summary-grid">
-    <div class="summary-card ps" id="sc_ps">
-      <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
-      <table>
-        <tr><td>गेहूं कुल:</td><td class="val" id="sm_ps_w">0.00 kg</td></tr>
-        <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
-        <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ps_f">0</td></tr>
-        <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
-        <tr><td>शीतकालीन पोषण (@₹5):</td><td class="val" id="sm_ps_nc">₹0.00</td></tr>
-        <tr><td>परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ps_c">₹0.00</td></tr>
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+      <div class="summary-card ps" id="sc_ps">
+        <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
+        <table>
+          <tr><td>गेहूं कुल:</td><td class="val" id="sm_ps_w">0.00 kg</td></tr>
+          <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
+          <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ps_f">0</td></tr>
+          <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
+          <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ps_c">₹0.00</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-card ups" id="sc_ups">
+        <h4 style="color:#6d28d9;">★ उच्च प्राथ. (6-8) <span>150g/छात्र</span></h4>
+        <table>
+          <tr><td>गेहूं कुल:</td><td class="val" id="sm_ups_w">0.00 kg</td></tr>
+          <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
+          <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ups_f">0</td></tr>
+          <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
+          <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ups_c">₹0.00</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-card tot" id="sc_tot">
+        <h4 style="color:#854d0e;">★ विद्यालय कुल योग (1-8)</h4>
+        <table>
+          <tr><td>कुल गेहूं:</td><td class="val" id="sm_tot_w">0.00 kg</td></tr>
+          <tr><td>कुल चावल:</td><td class="val" id="sm_tot_r">0.00 kg</td></tr>
+          <tr><td>कुल फल लाभार्थी:</td><td class="val" id="sm_tot_f">0</td></tr>
+          <tr><td>कुल फल धनराशि:</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
+          <tr><td>विद्यालय कुल परिवर्तन लागत:</td><td class="val" style="color:#b91c1c; font-size:12.5px;" id="sm_tot_c">₹0.00</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- मासिक प्रिंट बटन केवल मासिक पंजिका के अंदर -->
+    <div class="btn-container-monthly no-print">
+      <button class="btn-print-monthly" type="button" onclick="printMonthlyMdm()">🖨️ मासिक MDM पंजिका प्रिंट (Portrait - 1 Page)</button>
+    </div>
+
+    <div class="mobile-notice no-print">
+      👉 मासिक रजिस्टर में तारीख-वार छात्र संख्या भरने हेतु तालिका को दाएँ खिसकाएँ।
+    </div>
+
+    <!-- Monthly Table (Scrollable Container) -->
+    <div class="table-responsive-box">
+      <table class="mdm-table" id="mdmTable">
+        <thead>
+          <tr>
+            <th colspan="14" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th>
+          </tr>
+          <tr>
+            <th rowspan="2" style="width: 70px; background:#0f172a; color:white;">दिनांक</th>
+            <th rowspan="2" style="width: 70px; background:#0f172a; color:white;">दिन</th>
+            
+            <!-- Primary Headers (6 Columns) -->
+            <th colspan="6" class="th-ps ps-col">प्राथमिक स्तर (PS : कक्षा 1-5)</th>
+            
+            <!-- Upper Primary Headers (6 Columns) -->
+            <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक स्तर (UPS : कक्षा 6-8)</th>
+          </tr>
+          <tr>
+            <th class="th-sub ps-col" style="width:46px;">छात्र</th>
+            <th class="th-sub ps-col" style="width:48px;">संचयी</th>
+            <th class="th-sub ps-col" style="width:48px;">गेहूं (kg)</th>
+            <th class="th-sub ps-col" style="width:48px;">चावल (kg)</th>
+            <th class="th-sub ps-col" style="width:42px;">फल</th>
+            <th class="th-sub ps-col" style="width:65px;">लागत (₹)</th>
+
+            <th class="th-sub-ups ups-col" style="width:46px;">छात्र</th>
+            <th class="th-sub-ups ups-col" style="width:48px;">संचयी</th>
+            <th class="th-sub-ups ups-col" style="width:48px;">गेहूं (kg)</th>
+            <th class="th-sub-ups ups-col" style="width:48px;">चावल (kg)</th>
+            <th class="th-sub-ups ups-col" style="width:42px;">फल</th>
+            <th class="th-sub-ups ups-col" style="width:65px;">लागत (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="mdmBody"></tbody>
+        <tfoot>
+          <tr class="row-footer" id="mdmFoot">
+            <td colspan="2" style="font-weight:bold;">मासिक कुल योग</td>
+            <td id="ft_ps_att" class="ps-col">0</td>
+            <td id="ft_ps_cumu" class="ps-col">-</td>
+            <td id="ft_ps_w" class="val-wheat ps-col">0.00</td>
+            <td id="ft_ps_r" class="val-rice ps-col">0.00</td>
+            <td id="ft_ps_f" class="val-fruit ps-col">0</td>
+            <td id="ft_ps_c" class="val-cost ps-col">₹0.00</td>
+
+            <td id="ft_ups_att" class="ups-col">0</td>
+            <td id="ft_ups_cumu" class="ups-col">-</td>
+            <td id="ft_ups_w" class="val-wheat ups-col">0.00</td>
+            <td id="ft_ups_r" class="val-rice ups-col">0.00</td>
+            <td id="ft_ups_f" class="val-fruit ups-col">0</td>
+            <td id="ft_ups_c" class="val-cost ups-col">₹0.00</td>
+          </tr>
+        </tfoot>
       </table>
     </div>
 
-    <div class="summary-card ups" id="sc_ups">
-      <h4 style="color:#6d28d9;">★ उच्च प्राथ. (6-8) <span>150g/छात्र</span></h4>
-      <table>
-        <tr><td>गेहूं कुल:</td><td class="val" id="sm_ups_w">0.00 kg</td></tr>
-        <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
-        <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ups_f">0</td></tr>
-        <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
-        <tr><td>शीतकालीन पोषण (@₹5):</td><td class="val" id="sm_ups_nc">₹0.00</td></tr>
-        <tr><td>परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ups_c">₹0.00</td></tr>
-      </table>
-    </div>
-
-    <div class="summary-card tot" id="sc_tot">
-      <h4 style="color:#854d0e;">★ विद्यालय कुल योग (1-8)</h4>
-      <table>
-        <tr><td>कुल गेहूं:</td><td class="val" id="sm_tot_w">0.00 kg</td></tr>
-        <tr><td>कुल चावल:</td><td class="val" id="sm_tot_r">0.00 kg</td></tr>
-        <tr><td>कुल फल लाभार्थी:</td><td class="val" id="sm_tot_f">0</td></tr>
-        <tr><td>कुल फल धनराशि:</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
-        <tr><td>कुल शीतकालीन पोषण:</td><td class="val" id="sm_tot_nc">₹0.00</td></tr>
-        <tr><td>विद्यालय महायोग धनराशि:</td><td class="val" style="color:#b91c1c; font-size:12.5px;" id="sm_tot_c">₹0.00</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- Print Action Buttons -->
-  <div class="btn-container no-print">
-    <button class="btn-print-daily" type="button" onclick="printDailyMdm()">🖨️ दैनिक MDM प्रिंट (Landscape)</button>
-    <button class="btn-print-monthly" type="button" onclick="printMonthlyMdm()">🖨️ मासिक MDM प्रिंट (Portrait - 1 Page)</button>
-  </div>
-
-  <div class="mobile-notice no-print">
-    👉 मासिक रजिस्टर में तारीख-वार छात्र संख्या भरने हेतु तालिका को दाएँ खिसकाएँ।
-  </div>
-
-  <!-- Monthly Table (Scrollable Container) -->
-  <div class="table-responsive-box table-container-monthly">
-    <table class="mdm-table" id="mdmTable">
-      <thead>
-        <tr>
-          <th colspan="17" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th>
-        </tr>
-        <tr>
-          <th rowspan="2" style="width: 65px; background:#0f172a; color:white;">दिनांक</th>
-          <th rowspan="2" style="width: 65px; background:#0f172a; color:white;">दिन</th>
-          
-          <!-- Primary Headers -->
-          <th colspan="7" class="th-ps ps-col">प्राथमिक स्तर (PS : कक्षा 1-5)</th>
-          
-          <!-- Upper Primary Headers -->
-          <th colspan="7" class="th-ups ups-col">उच्च प्राथमिक स्तर (UPS : कक्षा 6-8)</th>
-          
-          <!-- Total Cost -->
-          <th rowspan="2" style="width: 75px; background:#15803d; color:white;" class="tot-col">दैनिक कुल लागत (₹)</th>
-        </tr>
-        <tr>
-          <th class="th-sub ps-col" style="width:42px;">छात्र</th>
-          <th class="th-sub ps-col" style="width:44px;">संचयी</th>
-          <th class="th-sub ps-col" style="width:44px;">गेहूं (kg)</th>
-          <th class="th-sub ps-col" style="width:44px;">चावल (kg)</th>
-          <th class="th-sub ps-col" style="width:40px;">फल</th>
-          <th class="th-sub ps-col" style="width:44px;">पोषण (₹)</th>
-          <th class="th-sub ps-col" style="width:55px;">लागत (₹)</th>
-
-          <th class="th-sub-ups ups-col" style="width:42px;">छात्र</th>
-          <th class="th-sub-ups ups-col" style="width:44px;">संचयी</th>
-          <th class="th-sub-ups ups-col" style="width:44px;">गेहूं (kg)</th>
-          <th class="th-sub-ups ups-col" style="width:44px;">चावल (kg)</th>
-          <th class="th-sub-ups ups-col" style="width:40px;">फल</th>
-          <th class="th-sub-ups ups-col" style="width:44px;">पोषण (₹)</th>
-          <th class="th-sub-ups ups-col" style="width:55px;">लागत (₹)</th>
-        </tr>
-      </thead>
-      <tbody id="mdmBody"></tbody>
-      <tfoot>
-        <tr class="row-footer" id="mdmFoot">
-          <td colspan="2" style="font-weight:bold;">मासिक कुल योग</td>
-          <td id="ft_ps_att" class="ps-col">0</td>
-          <td id="ft_ps_cumu" class="ps-col">-</td>
-          <td id="ft_ps_w" class="val-wheat ps-col">0.00</td>
-          <td id="ft_ps_r" class="val-rice ps-col">0.00</td>
-          <td id="ft_ps_f" class="val-fruit ps-col">0</td>
-          <td id="ft_ps_nutri" class="ps-col">₹0.00</td>
-          <td id="ft_ps_c" class="val-cost ps-col">₹0.00</td>
-
-          <td id="ft_ups_att" class="ups-col">0</td>
-          <td id="ft_ups_cumu" class="ups-col">-</td>
-          <td id="ft_ups_w" class="val-wheat ups-col">0.00</td>
-          <td id="ft_ups_r" class="val-rice ups-col">0.00</td>
-          <td id="ft_ups_f" class="val-fruit ups-col">0</td>
-          <td id="ft_ups_nutri" class="ups-col">₹0.00</td>
-          <td id="ft_ups_c" class="val-cost ups-col">₹0.00</td>
-
-          <td id="ft_tot_c" class="val-cost tot-col" style="color:#b91c1c; font-size:11.5px;">₹0.00</td>
-        </tr>
-      </tfoot>
-    </table>
   </div>
 
 </div>
@@ -617,9 +624,6 @@ function setMdmLevel(lvl) {
   var upsCols = document.querySelectorAll('.ups-col');
   for (var i = 0; i < upsCols.length; i++) upsCols[i].style.display = (lvl === 'ps') ? 'none' : '';
 
-  var totCols = document.querySelectorAll('.tot-col');
-  for (var i = 0; i < totCols.length; i++) totCols[i].style.display = (lvl === 'comp') ? '' : 'none';
-
   updateHeader();
 }
 
@@ -655,7 +659,6 @@ function generateMonthDays() {
       '<td class="ps-col val-wheat" id="ps_w_' + d + '">0.00</td>' +
       '<td class="ps-col val-rice" id="ps_r_' + d + '">0.00</td>' +
       '<td class="ps-col val-fruit" id="ps_f_' + d + '">0</td>' +
-      '<td class="ps-col" id="ps_nutri_' + d + '">₹0.00</td>' +
       '<td class="ps-col val-cost" id="ps_c_' + d + '">₹0.00</td>' +
 
       // Upper Primary Level
@@ -664,11 +667,7 @@ function generateMonthDays() {
       '<td class="ups-col val-wheat" id="ups_w_' + d + '">0.00</td>' +
       '<td class="ups-col val-rice" id="ups_r_' + d + '">0.00</td>' +
       '<td class="ups-col val-fruit" id="ups_f_' + d + '">0</td>' +
-      '<td class="ups-col" id="ups_nutri_' + d + '">₹0.00</td>' +
-      '<td class="ups-col val-cost" id="ups_c_' + d + '">₹0.00</td>' +
-
-      // Total Daily Cost
-      '<td class="tot-col val-cost" id="tot_c_' + d + '">₹0.00</td>';
+      '<td class="ups-col val-cost" id="ups_c_' + d + '">₹0.00</td>';
 
     tbody.appendChild(tr);
   }
@@ -692,8 +691,8 @@ function recalcAll() {
 
   var cumuPs = 0, cumuUps = 0;
   var totPsAtt = 0, totUpsAtt = 0;
-  var totPsW = 0, totPsR = 0, totPsC = 0, totPsNutriCost = 0;
-  var totUpsW = 0, totUpsR = 0, totUpsC = 0, totUpsNutriCost = 0;
+  var totPsW = 0, totPsR = 0, totPsC = 0;
+  var totUpsW = 0, totUpsR = 0, totUpsC = 0;
   var totFruitsPs = 0, totFruitsUps = 0;
 
   for (var d = 1; d <= totalDays; d++) {
@@ -743,12 +742,8 @@ function recalcAll() {
       nutriUpsCost = attUps * rNutri;
     }
 
-    totPsNutriCost += nutriPsCost;
-    totUpsNutriCost += nutriUpsCost;
-
     var cPs = (attPs * rPs) + fruitPsCost + nutriPsCost;
     var cUps = (attUps * rUps) + fruitUpsCost + nutriUpsCost;
-    var cTotDay = cPs + cUps;
 
     totPsW += wPs; totPsR += rcvPs; totPsC += cPs;
     totUpsW += wUps; totUpsR += rcvUps; totUpsC += cUps;
@@ -757,17 +752,13 @@ function recalcAll() {
     document.getElementById('ps_w_' + d).innerText = wPs ? wPs.toFixed(2) : '0.00';
     document.getElementById('ps_r_' + d).innerText = rcvPs ? rcvPs.toFixed(2) : '0.00';
     document.getElementById('ps_f_' + d).innerText = fruitPs;
-    document.getElementById('ps_nutri_' + d).innerText = '₹' + nutriPsCost.toFixed(2);
     document.getElementById('ps_c_' + d).innerText = '₹' + cPs.toFixed(2);
 
     document.getElementById('ups_cumu_' + d).innerText = cumuUps;
     document.getElementById('ups_w_' + d).innerText = wUps ? wUps.toFixed(2) : '0.00';
     document.getElementById('ups_r_' + d).innerText = rcvUps ? rcvUps.toFixed(2) : '0.00';
     document.getElementById('ups_f_' + d).innerText = fruitUps;
-    document.getElementById('ups_nutri_' + d).innerText = '₹' + nutriUpsCost.toFixed(2);
     document.getElementById('ups_c_' + d).innerText = '₹' + cUps.toFixed(2);
-
-    document.getElementById('tot_c_' + d).innerText = '₹' + cTotDay.toFixed(2);
   }
 
   // Footer Totals
@@ -775,17 +766,13 @@ function recalcAll() {
   document.getElementById('ft_ps_w').innerText = totPsW.toFixed(2);
   document.getElementById('ft_ps_r').innerText = totPsR.toFixed(2);
   document.getElementById('ft_ps_f').innerText = totFruitsPs;
-  document.getElementById('ft_ps_nutri').innerText = '₹' + totPsNutriCost.toFixed(2);
   document.getElementById('ft_ps_c').innerText = '₹' + totPsC.toFixed(2);
 
   document.getElementById('ft_ups_att').innerText = totUpsAtt;
   document.getElementById('ft_ups_w').innerText = totUpsW.toFixed(2);
   document.getElementById('ft_ups_r').innerText = totUpsR.toFixed(2);
   document.getElementById('ft_ups_f').innerText = totFruitsUps;
-  document.getElementById('ft_ups_nutri').innerText = '₹' + totUpsNutriCost.toFixed(2);
   document.getElementById('ft_ups_c').innerText = '₹' + totUpsC.toFixed(2);
-
-  document.getElementById('ft_tot_c').innerText = '₹' + (totPsC + totUpsC).toFixed(2);
 
   // Summary Cards
   var totFruitCostPs = totFruitsPs * rFruit;
@@ -795,21 +782,18 @@ function recalcAll() {
   document.getElementById('sm_ps_r').innerText = totPsR.toFixed(2) + ' kg';
   document.getElementById('sm_ps_f').innerText = totFruitsPs;
   document.getElementById('sm_ps_fc').innerText = '₹' + totFruitCostPs.toFixed(2);
-  document.getElementById('sm_ps_nc').innerText = '₹' + totPsNutriCost.toFixed(2);
   document.getElementById('sm_ps_c').innerText = '₹' + totPsC.toFixed(2);
 
   document.getElementById('sm_ups_w').innerText = totUpsW.toFixed(2) + ' kg';
   document.getElementById('sm_ups_r').innerText = totUpsR.toFixed(2) + ' kg';
   document.getElementById('sm_ups_f').innerText = totFruitsUps;
   document.getElementById('sm_ups_fc').innerText = '₹' + totFruitCostUps.toFixed(2);
-  document.getElementById('sm_ups_nc').innerText = '₹' + totUpsNutriCost.toFixed(2);
   document.getElementById('sm_ups_c').innerText = '₹' + totUpsC.toFixed(2);
 
   document.getElementById('sm_tot_w').innerText = (totPsW + totUpsW).toFixed(2) + ' kg';
   document.getElementById('sm_tot_r').innerText = (totPsR + totUpsR).toFixed(2) + ' kg';
   document.getElementById('sm_tot_f').innerText = totFruitsPs + totFruitsUps;
   document.getElementById('sm_tot_fc').innerText = '₹' + (totFruitCostPs + totFruitCostUps).toFixed(2);
-  document.getElementById('sm_tot_nc').innerText = '₹' + (totPsNutriCost + totUpsNutriCost).toFixed(2);
   document.getElementById('sm_tot_c').innerText = '₹' + (totPsC + totUpsC).toFixed(2);
 }
 
@@ -872,7 +856,7 @@ function printDailyMdm() {
 function printMonthlyMdm() {
   var style = document.createElement('style');
   style.id = 'print-page-style';
-  style.innerHTML = '@page { size: A4 portrait; margin: 4mm; }';
+  style.innerHTML = '@page { size: A4 portrait; margin: 5mm; }';
   document.head.appendChild(style);
 
   updateHeader();
