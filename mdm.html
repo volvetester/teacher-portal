@@ -84,7 +84,7 @@
     .th-sub { background: #3b82f6; color: white; font-size: 10px; }
     .th-sub-ups { background: #8b5cf6; color: white; font-size: 10px; }
     
-    input.att-in { width: 48px; height: 32px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; }
+    input.att-in { width: 50px; height: 34px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13.5px; }
     input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
 
     .sunday-row { background: #fee2e2 !important; color: #991b1b; }
@@ -218,14 +218,14 @@
         <tbody>
           <tr>
             <td style="font-weight:bold; background:#f8fafc;">उपस्थिति</td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_1" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_2" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_3" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_4" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_5" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_6" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_7" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
-            <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_8" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_1" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_2" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_3" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_4" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_5" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_6" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_7" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
+            <td><input type="number" inputmode="numeric" min="0" step="1" class="daily-att-input" id="d_cls_8" onkeydown="blockDecimal(event)" oninput="filterInt(this); calcDailyMdm();"></td>
             <td style="font-weight:bold; color:#1e3a8a; font-size:13px; background:#eff6ff;" id="d_tot_ps">0</td>
             <td style="font-weight:bold; color:#6d28d9; font-size:13px; background:#f5f3ff;" id="d_tot_ups">0</td>
             <td style="font-weight:bold; color:#b91c1c; font-size:14px; background:#fee2e2;" id="d_tot_all">0</td>
@@ -364,7 +364,7 @@
     </div>
 
     <div class="mobile-notice no-print">
-      👉 तालिका में नीचे जाने के लिए 'Enter' या '↓' दबाएँ (प्राइमरी में हैं तो अगली प्राइमरी, जूनियर में हैं तो अगली जूनियर में ही जाएगा)।
+      📱 <strong>मोबाइल कीबोर्ड टिप्स:</strong> मोबाइल कीबोर्ड पर <strong>'Next / नीला बाण ➔'</strong> दबाने पर कर्सर प्राइमरी से जूनियर में नहीं जाएगा, सीधे अगली तारीख की प्राइमरी में ही नीचे उतरेगा।
     </div>
 
     <div class="table-responsive-box">
@@ -444,7 +444,7 @@ function filterInt(el) {
   el.value = el.value.replace(/[^0-9]/g, '');
 }
 
-// 2. कॉलम-वार कीबोर्ड नेविगेशन (स्मार्ट एरो और एंटर हैंडलर)
+// 2. मोबाइल कीबोर्ड "Next / बाण" एवं लैपटॉप एरो कीबोर्ड नेविगेशन
 function handleTableNavigation(e, type, currentDay) {
   var totalDays = new Date(
     parseInt(document.getElementById('selYear').value, 10),
@@ -452,19 +452,29 @@ function handleTableNavigation(e, type, currentDay) {
     0
   ).getDate();
 
-  // नीचे जाना: Enter या Down Arrow
-  if (e.key === "Enter" || e.key === "ArrowDown") {
+  // मोबाइल कीबोर्ड का नीला बाण (Enter) या लैपटॉप का Down Arrow
+  if (e.key === "Enter" || e.keyCode === 13 || e.key === "ArrowDown") {
     e.preventDefault();
+    e.stopPropagation();
+
+    var targetFound = false;
     for (var d = currentDay + 1; d <= totalDays; d++) {
       var nextEl = document.getElementById(type + 'att' + d);
       if (nextEl && !nextEl.disabled) {
         nextEl.focus();
         nextEl.select();
+        // मोबाइल स्क्रीन पर इनपुट बॉक्स को केंद्र में लाना
+        nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetFound = true;
         break;
       }
     }
+    // यदि माह का अंतिम दिन आ गया हो तो कीबोर्ड क्लोज़ कर दें
+    if (!targetFound) {
+      e.target.blur();
+    }
   }
-  // ऊपर जाना: Up Arrow
+  // लैपटॉप Up Arrow (पिछली तारीख का वही वर्ग)
   else if (e.key === "ArrowUp") {
     e.preventDefault();
     for (var d = currentDay - 1; d >= 1; d--) {
@@ -472,26 +482,9 @@ function handleTableNavigation(e, type, currentDay) {
       if (prevEl && !prevEl.disabled) {
         prevEl.focus();
         prevEl.select();
+        prevEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         break;
       }
-    }
-  }
-  // दाएँ जाना: Right Arrow (प्राइमरी से जूनियर में जाना)
-  else if (e.key === "ArrowRight" && type === "ps") {
-    var upsEl = document.getElementById('ups_att_' + currentDay);
-    if (upsEl && !upsEl.disabled && currentLevel !== 'ps') {
-      e.preventDefault();
-      upsEl.focus();
-      upsEl.select();
-    }
-  }
-  // बाएँ जाना: Left Arrow (जूनियर से प्राइमरी में जाना)
-  else if (e.key === "ArrowLeft" && type === "ups") {
-    var psEl = document.getElementById('ps_att_' + currentDay);
-    if (psEl && !psEl.disabled && currentLevel !== 'ups') {
-      e.preventDefault();
-      psEl.focus();
-      psEl.select();
     }
   }
 }
@@ -671,20 +664,25 @@ function generateMonthDays() {
 
     var dateStr = d + '-' + monthNames[m].substring(0,3) + '-' + String(y).slice(-2);
 
+    // tabindex 1 से 31 प्राथमिक के लिए, और 32 से 62 जूनियर के लिए
+    // जिससे मोबाइल ब्राउज़र को सही क्रम पता रहे
+    var tabIndexPs = d;
+    var tabIndexUps = 50 + d;
+
     tr.innerHTML = 
       '<td style="font-weight:bold;">' + dateStr + '</td>' +
       '<td style="font-weight:600;">' + dayName + '</td>' +
       
-      // Primary Input (Enter/Arrows down within Primary)
-      '<td class="ps-col"><input type="number" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event); handleTableNavigation(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Primary Input (Mobile Keypad: Enter/Next Arrow strictly moves to Next Primary Date)
+      '<td class="ps-col"><input type="number" inputmode="numeric" enterkeyhint="next" tabindex="' + tabIndexPs + '" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event); handleTableNavigation(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
       '<td class="ps-col val-wheat" id="ps_w_' + d + '">0.00</td>' +
       '<td class="ps-col val-rice" id="ps_r_' + d + '">0.00</td>' +
       '<td class="ps-col val-fruit" id="ps_f_' + d + '">0</td>' +
       '<td class="ps-col val-cost" id="ps_c_' + d + '">₹0.00</td>' +
 
-      // Upper Primary Input (Enter/Arrows down within Upper Primary)
-      '<td class="ups-col"><input type="number" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event); handleTableNavigation(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Upper Primary Input (Mobile Keypad: Enter/Next Arrow strictly moves to Next Upper Primary Date)
+      '<td class="ups-col"><input type="number" inputmode="numeric" enterkeyhint="next" tabindex="' + tabIndexUps + '" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event); handleTableNavigation(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
       '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
       '<td class="ups-col val-wheat" id="ups_w_' + d + '">0.00</td>' +
       '<td class="ups-col val-rice" id="ups_r_' + d + '">0.00</td>' +
