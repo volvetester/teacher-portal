@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily & Monthly Mid Day Meal (MDM) Register</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f8fafc; margin: 0; padding: 15px; color: #0f172a; }
+    .container { max-width: 1550px; margin: auto; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    
+    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px; }
+    .top-bar h2 { margin: 0; font-size: 20px; color: #1e3a8a; }
+    .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 14px; }
+
+    /* School Details */
+    .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; color: #334155; }
+    .form-group input, .form-group select { width: 100%; padding: 6px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
+    .form-group input::placeholder { color: #94a3b8; text-transform: none; }
+
+    /* Section Headers */
+    .sec-header { background: #1e3a8a; color: white; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; margin: 15px 0 10px 0; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Daily Calculator Box */
+    .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 14px; margin-bottom: 20px; }
+    .daily-top-row { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .daily-top-row label { font-size: 12px; font-weight: bold; color: #166534; }
+    .daily-date-badge { background: #ffffff; border: 1.5px solid #16a34a; padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; color: #166534; display: inline-flex; align-items: center; gap: 8px; }
+    .daily-top-row input[type="date"] { border: 1px solid #16a34a; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-size: 11.5px; }
+
+    /* Class Attendance Table */
+    .daily-att-table { width: 100%; border-collapse: collapse; text-align: center; margin-bottom: 12px; background: white; font-size: 11.5px; }
+    .daily-att-table th, .daily-att-table td { border: 1px solid #94a3b8; padding: 5px 2px; }
+    .daily-att-table th { background: #15803d; color: white; font-size: 11px; }
+    .daily-att-input { width: 45px; padding: 4px 1px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 12px; }
+    .daily-att-input:focus { outline: 2px solid #047857; background: #ecfdf5; }
+
+    /* Daily Material Output Table */
+    .daily-mat-table { width: 100%; border-collapse: collapse; text-align: center; background: white; font-size: 11px; }
+    .daily-mat-table th, .daily-mat-table td { border: 1px solid #94a3b8; padding: 5px 3px; }
+    .daily-mat-table th { background: #065f46; color: white; font-size: 10.5px; }
+    .daily-mat-table td.val { font-weight: bold; color: #047857; background: #f0fdf4; }
+
+    /* Conversion Rates Box */
+    .rates-box { display: flex; gap: 15px; align-items: center; background: #ecfdf5; padding: 10px 15px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 15px; font-size: 11.5px; flex-wrap: wrap; }
+    .rates-box label { font-weight: bold; color: #065f46; }
+    .rates-box input { width: 70px; padding: 4px 6px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
+
+    /* Level Tabs */
+    .tab-container { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 16px; border: 2px solid #1e3a8a; background: white; color: #1e3a8a; font-weight: bold; font-size: 13px; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .tab-btn.active { background: #1e3a8a; color: white; }
+
+    /* Summary Cards */
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-bottom: 12px; }
+    .summary-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; font-size: 11.5px; }
+    .summary-card.ps { background: #eff6ff; border-top: 3.5px solid #2563eb; }
+    .summary-card.ups { background: #f5f3ff; border-top: 3.5px solid #7c3aed; }
+    .summary-card.tot { background: #fefce8; border-top: 3.5px solid #ca8a04; }
+    .summary-card h4 { margin: 0 0 4px 0; font-size: 12px; display: flex; justify-content: space-between; }
+    .summary-card table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+    .summary-card td { padding: 1.5px 3px; }
+    .summary-card td.val { font-weight: bold; text-align: right; }
+
+    /* Print Headers */
+    .print-banner-block { display: none; text-align: center; margin-bottom: 8px; }
+    .print-banner-title { font-size: 14px; font-weight: bold; color: #000; text-transform: uppercase; }
+    .print-banner-sub { font-size: 10.5px; font-weight: 600; color: #111; margin-top: 2px; text-transform: uppercase; }
+
+    /* Table Styling */
+    .table-container { overflow-x: auto; margin-bottom: 20px; }
+    table.mdm-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 10.5px; }
+    table.mdm-table th, table.mdm-table td { border: 1px solid #475569; padding: 3px 1.5px; }
+    
+    .th-banner { background: #1e3a8a; color: white; font-size: 12px; font-weight: bold; padding: 6px; text-transform: uppercase; }
+    .th-ps { background: #1d4ed8; color: white; }
+    .th-ups { background: #6d28d9; color: white; }
+    .th-sub { background: #3b82f6; color: white; font-size: 9.5px; }
+    .th-sub-ups { background: #8b5cf6; color: white; font-size: 9.5px; }
+    
+    input.att-in { width: 38px; padding: 2px 1px; text-align: center; border: 1px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 10.5px; }
+    input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
+
+    .sunday-row { background: #fee2e2 !important; color: #991b1b; }
+    .sunday-row input { background: #fecaca; }
+    .row-footer { background: #f1f5f9; font-weight: bold; }
+    .val-wheat { color: #9a3412; font-weight: bold; }
+    .val-rice { color: #166534; font-weight: bold; }
+    .val-cost { color: #1e3a8a; font-weight: bold; }
+    .val-fruit { color: #d97706; font-weight: bold; }
+
+    /* Action Buttons */
+    .btn-container { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 12px; }
+    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    .btn-print-daily:hover { background: #115e59; }
+    .btn-print-monthly { background: #166534; color: white; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    .btn-print-monthly:hover { background: #15803d; }
+
+    /* ============================================================
+       PRINT MEDIA QUERIES (SEPARATE MODES FOR DAILY & MONTHLY)
+       ============================================================ */
+    @media print {
+      body { background: #fff !important; padding: 0 !important; margin: 0 !important; color: #000 !important; }
+      .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border: none !important; }
+      .no-print { display: none !important; }
+      .print-banner-block { display: block !important; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      /* --- MODE 1: DAILY PRINT (A4 LANDSCAPE) --- */
+      body.print-mode-daily {
+        /* Hide monthly sections entirely */
+        .sec-monthly, .summary-grid, .table-container { display: none !important; }
+        .daily-box { display: block !important; border: 1.5px solid #000 !important; padding: 8px !important; margin: 0 !important; background: transparent !important; }
+        .daily-att-table, .daily-mat-table { font-size: 10px !important; width: 100% !important; }
+        .daily-att-table th, .daily-att-table td, .daily-mat-table th, .daily-mat-table td { border: 1px solid #000 !important; padding: 3px 1px !important; }
+        .daily-att-input { border: none !important; background: transparent !important; }
+      }
+
+      /* --- MODE 2: MONTHLY PRINT (A4 PORTRAIT - STRICTLY 1 PAGE) --- */
+      body.print-mode-monthly {
+        /* Hide daily calculator entirely */
+        .daily-box { display: none !important; }
+        
+        /* 1 Page Compact Scaling */
+        .summary-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: 5px !important; }
+        .summary-card { padding: 3px 5px !important; font-size: 8.5px !important; border: 1px solid #000 !important; }
+        .summary-card h4 { font-size: 9px !important; margin-bottom: 2px !important; }
+        .summary-card table { font-size: 8px !important; }
+        .summary-card td { padding: 0.5px 2px !important; }
+        
+        .table-container { margin-bottom: 0 !important; overflow: visible !important; }
+        table.mdm-table { width: 100% !important; font-size: 7.8px !important; }
+        table.mdm-table th, table.mdm-table td { border: 1px solid #000 !important; padding: 1.5px 0.5px !important; line-height: 1.05 !important; }
+        input.att-in { border: none !important; background: transparent !important; width: 100% !important; font-size: 8px !important; padding: 0 !important; }
+        
+        .th-banner { font-size: 9.5px !important; padding: 3px !important; }
+        .th-sub, .th-sub-ups { font-size: 7.2px !important; }
+        .sunday-row { background: #fee2e2 !important; }
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="top-bar no-print">
+    <h2>🍲 Daily & Monthly Mid Day Meal (MDM) Register</h2>
+    <a href="index.html">← Homepage</a>
+  </div>
+
+  <!-- School Details (Strict Validations) -->
+  <div class="school-details no-print">
+    <div class="form-group">
+      <label>School Name (Capital Letters & Space Only):</label>
+      <input type="text" id="inSchool" placeholder="e.g. COMPOSITE SCHOOL" oninput="filterCapitalLettersAndSpace(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>Block (Capital Letters & Space Only):</label>
+      <input type="text" id="inBlock" placeholder="e.g. MOHALI" oninput="filterCapitalLettersAndSpace(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>District (Capital Letters & Space Only):</label>
+      <input type="text" id="inDistrict" placeholder="e.g. KANPUR" oninput="filterCapitalLettersAndSpace(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>UDISE Code (Strictly Numbers, No Space):</label>
+      <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="11" id="inUdise" placeholder="e.g. 08750350708" onkeydown="blockSpace(event)" oninput="filterNumbersNoSpace(this); updateHeader();">
+    </div>
+  </div>
+
+  <!-- Print Only Header -->
+  <div class="print-banner-block">
+    <div class="print-banner-title" id="prTitle">MID DAY MEAL REGISTER</div>
+    <div class="print-banner-sub" id="prSub"></div>
+  </div>
+
+  <!-- 1. दैनिक MDM कैलकुलेटर (Daily Kitchen Calculator) -->
+  <div class="daily-box" id="dailySection">
+    <div class="sec-header" style="background:#15803d; margin-top:0;">
+      <span>📅 【दैनिक MDM कैलकुलेटर - वास्तविक उपस्थिति एवं रसोई सामग्री】</span>
+      <span id="dailyMenuName" style="font-size:12px; font-weight:normal; background:#166534; padding:3px 8px; border-radius:4px;">मेनू: लोड हो रहा है...</span>
+    </div>
+
+    <!-- Daily Date (DD/MM/YYYY Format) & Day Picker -->
+    <div class="daily-top-row">
+      <div class="daily-date-badge">
+        <span>दिनांक (Date):</span>
+        <span id="dispDateFormatted" style="color:#0f172a; font-size:14px;">01/10/2026</span>
+        <input type="date" id="dailyDate" class="no-print" onchange="onDailyDateChange()" title="तारीख बदलने के लिए यहाँ क्लिक करें">
+      </div>
+      <div>
+        <label>दिन (Day): </label>
+        <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:110px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:4px 8px; border-radius:4px;">
+      </div>
+      <div class="no-print" style="font-size:11.5px; color:#15803d; font-weight:bold;">
+        (दिनांक DD/MM/YYYY में है। तारीख बदलने के लिए कैलेंडर आइकन चुनें)
+      </div>
+    </div>
+
+    <!-- Class 1 to 8 Attendance Row -->
+    <table class="daily-att-table">
+      <thead>
+        <tr>
+          <th>वर्ग</th>
+          <th>कक्षा 1</th><th>कक्षा 2</th><th>कक्षा 3</th><th>कक्षा 4</th><th>कक्षा 5</th>
+          <th>कक्षा 6</th><th>कक्षा 7</th><th>कक्षा 8</th>
+          <th style="background:#1e3a8a;">प्राथमिक (1-5)</th>
+          <th style="background:#6d28d9;">उच्च प्राथ. (6-8)</th>
+          <th style="background:#b91c1c;">कुल छात्र (Total)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:bold; background:#f8fafc;">उपस्थिति</td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_1" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_2" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_3" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_4" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_5" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_6" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_7" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td><input type="number" min="0" step="1" class="daily-att-input" id="d_cls_8" onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); calcDailyMdm();"></td>
+          <td style="font-weight:bold; color:#1e3a8a; font-size:13px; background:#eff6ff;" id="d_tot_ps">0</td>
+          <td style="font-weight:bold; color:#6d28d9; font-size:13px; background:#f5f3ff;" id="d_tot_ups">0</td>
+          <td style="font-weight:bold; color:#b91c1c; font-size:14px; background:#fee2e2;" id="d_tot_all">0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Calculated Material Table (Winter Nutrition Visible ONLY in Nov-Mar) -->
+    <table class="daily-mat-table">
+      <thead>
+        <tr>
+          <th>श्रेणी</th>
+          <th>चावल (kg)</th>
+          <th>आटा (kg)</th>
+          <th>सब्जी (kg)</th>
+          <th>दाल (kg)</th>
+          <th>सोया बड़ी (kg)</th>
+          <th>तेल (g/ml)</th>
+          <th>दूध (L)</th>
+          <th>फल (संख्या)</th>
+          <th>चीनी (kg)</th>
+          <th>गिलास (संख्या)</th>
+          <!-- केवल Nov, Dec, Jan, Feb, Mar में प्रदर्शित होंगे -->
+          <th class="winter-nutri-col" style="background:#b45309;">भुने चने (g)</th>
+          <th class="winter-nutri-col" style="background:#b45309;">चिक्की (g)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:bold; background:#f8fafc;">दैनिक सामग्री (PS + UPS)</td>
+          <td class="val" id="dm_rice">0.00</td>
+          <td class="val" id="dm_flour">0.00</td>
+          <td class="val" id="dm_veg">0.00</td>
+          <td class="val" id="dm_dal">0.00</td>
+          <td class="val" id="dm_soya">0.00</td>
+          <td class="val" id="dm_oil">0.00</td>
+          <td class="val" id="dm_milk">0.00</td>
+          <td class="val" id="dm_fruit">0</td>
+          <td class="val" id="dm_sugar">0.00</td>
+          <td class="val" id="dm_glass">0</td>
+          <td class="val winter-nutri-col" id="dm_chana" style="color:#b45309;">0</td>
+          <td class="val winter-nutri-col" id="dm_chikki" style="color:#b45309;">0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. मासिक MDM पंजिका (Monthly Register) -->
+  <div class="sec-header sec-monthly no-print">
+    <span>📊 【मासिक मध्याह्न भोजन (MDM) पंजिका】</span>
+    <span style="font-size:11.5px; font-weight:normal;">पूरे महीने का रजिस्टर एवं संचयी योग</span>
+  </div>
+
+  <!-- Month & Year Selector for Monthly Register -->
+  <div class="school-details no-print sec-monthly" style="margin-bottom:12px;">
+    <div class="form-group">
+      <label>Year (2015 to 2059):</label>
+      <select id="selYear" onchange="generateMonthDays()">
+        <option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option>
+        <option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option>
+        <option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option>
+        <option value="2024">2024</option><option value="2025">2025</option><option value="2026" selected>2026</option>
+        <option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option>
+        <option value="2030">2030</option><option value="2031">2031</option><option value="2032">2032</option>
+        <option value="2033">2033</option><option value="2034">2034</option><option value="2035">2035</option>
+        <option value="2036">2036</option><option value="2037">2037</option><option value="2038">2038</option>
+        <option value="2039">2039</option><option value="2040">2040</option><option value="2041">2041</option>
+        <option value="2042">2042</option><option value="2043">2043</option><option value="2044">2044</option>
+        <option value="2045">2045</option><option value="2046">2046</option><option value="2047">2047</option>
+        <option value="2048">2048</option><option value="2049">2049</option><option value="2050">2050</option>
+        <option value="2051">2051</option><option value="2052">2052</option><option value="2053">2053</option>
+        <option value="2054">2054</option><option value="2055">2055</option><option value="2056">2056</option>
+        <option value="2057">2057</option><option value="2058">2058</option><option value="2059">2059</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Month:</label>
+      <select id="selMonth" onchange="generateMonthDays()">
+        <option value="0">January</option><option value="1">February</option><option value="2">March</option>
+        <option value="3">April</option><option value="4">May</option><option value="5">June</option>
+        <option value="6">July</option><option value="7">August</option><option value="8">September</option>
+        <option value="9" selected>October</option><option value="10">November</option><option value="11">December</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Conversion Rates -->
+  <div class="rates-box no-print sec-monthly">
+    <span style="font-weight:bold; color:#065f46;">⚙️ Rates (Per Child / Day):</span>
+    <div>
+      <label>Primary Rate: </label>
+      <input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalcAll()"> ₹
+    </div>
+    <div>
+      <label>Upper Primary Rate: </label>
+      <input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalcAll()"> ₹
+    </div>
+    <div>
+      <label>Monday Fruit Rate: </label>
+      <input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalcAll()"> ₹
+    </div>
+    <div>
+      <label>Thursday Nutrition (Nov-Mar): </label>
+      <input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalcAll()"> ₹
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-container no-print sec-monthly">
+    <button class="tab-btn active" id="btnComp" type="button" onclick="setMdmLevel('comp')">🏫 Total School Composite (Class 1-8)</button>
+    <button class="tab-btn" id="btnPs" type="button" onclick="setMdmLevel('ps')">🎒 Primary Level (Class 1-5)</button>
+    <button class="tab-btn" id="btnUps" type="button" onclick="setMdmLevel('ups')">🏛️ Upper Primary Level (Class 6-8)</button>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="summary-card ps" id="sc_ps">
+      <h4 style="color:#1d4ed8;">★ Primary Level (PS: 1-5) <span>100g/Child</span></h4>
+      <table>
+        <tr><td>Total Wheat (Wheat PS):</td><td class="val" id="sm_ps_w">0.00 kg</td></tr>
+        <tr><td>Total Rice (Rice PS):</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
+        <tr><td>Fruit Beneficiary (Monday):</td><td class="val" id="sm_ps_f">0</td></tr>
+        <tr><td>Fruit Cost (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
+        <tr><td>Winter Nutrition Cost (Nov-Mar @₹5):</td><td class="val" id="sm_ps_nc">₹0.00</td></tr>
+        <tr><td>Total Cost (PS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ps_c">₹0.00</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card ups" id="sc_ups">
+      <h4 style="color:#6d28d9;">★ Upper Primary Level (UPS: 6-8) <span>150g/Child</span></h4>
+      <table>
+        <tr><td>Total Wheat (Wheat UPS):</td><td class="val" id="sm_ups_w">0.00 kg</td></tr>
+        <tr><td>Total Rice (Rice UPS):</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
+        <tr><td>Fruit Beneficiary (Monday):</td><td class="val" id="sm_ups_f">0</td></tr>
+        <tr><td>Fruit Cost (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
+        <tr><td>Winter Nutrition Cost (Nov-Mar @₹5):</td><td class="val" id="sm_ups_nc">₹0.00</td></tr>
+        <tr><td>Total Cost (UPS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ups_c">₹0.00</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card tot" id="sc_tot">
+      <h4 style="color:#854d0e;">★ Total School Composite</h4>
+      <table>
+        <tr><td>School Total Wheat:</td><td class="val" id="sm_tot_w">0.00 kg</td></tr>
+        <tr><td>School Total Rice:</td><td class="val" id="sm_tot_r">0.00 kg</td></tr>
+        <tr><td>Total Fruit Beneficiaries:</td><td class="val" id="sm_tot_f">0</td></tr>
+        <tr><td>Total Fruit Cost:</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
+        <tr><td>Total Winter Nutrition Cost:</td><td class="val" id="sm_tot_nc">₹0.00</td></tr>
+        <tr><td>School Grand Total Cost:</td><td class="val" style="color:#b91c1c; font-size:12.5px;" id="sm_tot_c">₹0.00</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Individual Print Buttons -->
+  <div class="btn-container no-print">
+    <button class="btn-print-daily" type="button" onclick="printDailyMdm()">🖨️ दैनिक MDM प्रिंट (Landscape)</button>
+    <button class="btn-print-monthly" type="button" onclick="printMonthlyMdm()">🖨️ मासिक MDM प्रिंट (Portrait - 1 Page)</button>
+  </div>
+
+  <!-- Main Table -->
+  <div class="table-container">
+    <table class="mdm-table" id="mdmTable">
+      <thead>
+        <tr>
+          <th colspan="17" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th>
+        </tr>
+        <tr>
+          <th rowspan="2" style="width: 65px; background:#0f172a; color:white;">Date</th>
+          <th rowspan="2" style="width: 65px; background:#0f172a; color:white;">Day</th>
+          
+          <!-- Primary Headers -->
+          <th colspan="7" class="th-ps ps-col">Primary Level (PS : Class 1-5)</th>
+          
+          <!-- Upper Primary Headers -->
+          <th colspan="7" class="th-ups ups-col">Upper Primary Level (UPS : Class 6-8)</th>
+          
+          <!-- Total Cost -->
+          <th rowspan="2" style="width: 75px; background:#15803d; color:white;" class="tot-col">Daily Total Cost (₹)</th>
+        </tr>
+        <tr>
+          <th class="th-sub ps-col" style="width:40px;">Students</th>
+          <th class="th-sub ps-col" style="width:42px;">Cumulative</th>
+          <th class="th-sub ps-col" style="width:42px;">Wheat (kg)</th>
+          <th class="th-sub ps-col" style="width:42px;">Rice (kg)</th>
+          <th class="th-sub ps-col" style="width:38px;">Fruits</th>
+          <th class="th-sub ps-col" style="width:42px;">Nutrition (₹)</th>
+          <th class="th-sub ps-col" style="width:55px;">Cost (₹)</th>
+
+          <th class="th-sub-ups ups-col" style="width:40px;">Students</th>
+          <th class="th-sub-ups ups-col" style="width:42px;">Cumulative</th>
+          <th class="th-sub-ups ups-col" style="width:42px;">Wheat (kg)</th>
+          <th class="th-sub-ups ups-col" style="width:42px;">Rice (kg)</th>
+          <th class="th-sub-ups ups-col" style="width:38px;">Fruits</th>
+          <th class="th-sub-ups ups-col" style="width:42px;">Nutrition (₹)</th>
+          <th class="th-sub-ups ups-col" style="width:55px;">Cost (₹)</th>
+        </tr>
+      </thead>
+      <tbody id="mdmBody"></tbody>
+      <tfoot>
+        <tr class="row-footer" id="mdmFoot">
+          <td colspan="2" style="font-weight:bold;">Monthly Total</td>
+          <td id="ft_ps_att" class="ps-col">0</td>
+          <td id="ft_ps_cumu" class="ps-col">-</td>
+          <td id="ft_ps_w" class="val-wheat ps-col">0.00</td>
+          <td id="ft_ps_r" class="val-rice ps-col">0.00</td>
+          <td id="ft_ps_f" class="val-fruit ps-col">0</td>
+          <td id="ft_ps_nutri" class="ps-col">₹0.00</td>
+          <td id="ft_ps_c" class="val-cost ps-col">₹0.00</td>
+
+          <td id="ft_ups_att" class="ups-col">0</td>
+          <td id="ft_ups_cumu" class="ups-col">-</td>
+          <td id="ft_ups_w" class="val-wheat ups-col">0.00</td>
+          <td id="ft_ups_r" class="val-rice ups-col">0.00</td>
+          <td id="ft_ups_f" class="val-fruit ups-col">0</td>
+          <td id="ft_ups_nutri" class="ups-col">₹0.00</td>
+          <td id="ft_ups_c" class="val-cost ups-col">₹0.00</td>
+
+          <td id="ft_tot_c" class="val-cost tot-col" style="color:#b91c1c; font-size:11.5px;">₹0.00</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+
+<script>
+var currentLevel = 'comp';
+var daysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+// 1. सख्त प्रतिबंध: केवल कैपिटल अक्षर (A-Z) और स्पेस
+function filterCapitalLettersAndSpace(input) {
+  input.value = input.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
+}
+
+// 2. यू-डायस कोड: केवल शुद्ध अंक
+function filterNumbersNoSpace(input) {
+  input.value = input.value.replace(/[^0-9]/g, '');
+}
+
+function blockSpace(e) {
+  if (e.key === " " || e.code === "Space") e.preventDefault();
+}
+
+// 3. दशमलव ब्लॉक (छात्र संख्या में . पूरी तरह ब्लॉक)
+function blockDecimal(e) {
+  if (e.key === "." || e.key === "," || e.code === "NumpadDecimal") {
+    e.preventDefault();
+  }
+}
+
+function filterIntegerOnly(input) {
+  input.value = input.value.replace(/[^0-9]/g, '');
+}
+
+// ==================== A. दैनिक MDM कैलकुलेटर इंजन ====================
+function initDailyDate() {
+  var today = new Date();
+  var yyyy = today.getFullYear();
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var dd = String(today.getDate()).padStart(2, '0');
+  
+  var dInput = document.getElementById('dailyDate');
+  dInput.value = yyyy + '-' + mm + '-' + dd;
+  onDailyDateChange();
+}
+
+function onDailyDateChange() {
+  var dInput = document.getElementById('dailyDate');
+  if (!dInput.value) return;
+  var parts = dInput.value.split('-');
+  var yr = parseInt(parts[0], 10);
+  var mo = parseInt(parts[1], 10);
+  var da = parseInt(parts[2], 10);
+
+  var ddStr = String(da).padStart(2, '0');
+  var mmStr = String(mo).padStart(2, '0');
+  document.getElementById('dispDateFormatted').innerText = ddStr + '/' + mmStr + '/' + yr;
+
+  var dt = new Date(yr, mo - 1, da);
+  var dayName = daysArr[dt.getDay()];
+  document.getElementById('dailyDayName').value = dayName;
+
+  var isWinterMonth = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
+
+  var winterCols = document.querySelectorAll('.winter-nutri-col');
+  for (var i = 0; i < winterCols.length; i++) {
+    winterCols[i].style.display = isWinterMonth ? '' : 'none';
+  }
+
+  var menuText = "";
+  if (dayName === "Monday") menuText = "सोमवार: सब्जी, रोटी व ताजा फल";
+  else if (dayName === "Tuesday") menuText = "मंगलवार: सब्जी युक्त दाल व चावल";
+  else if (dayName === "Wednesday") menuText = "बुधवार: सोया बड़ी युक्त तहरी व गर्म दूध";
+  else if (dayName === "Thursday") {
+    menuText = isWinterMonth 
+      ? "गुरुवार: सब्जी युक्त दाल, रोटी, भुने चने व चिक्की (शीतकालीन पोषण)" 
+      : "गुरुवार: सब्जी युक्त दाल व रोटी";
+  }
+  else if (dayName === "Friday") menuText = "शुक्रवार: सोया बड़ी युक्त तहरी";
+  else if (dayName === "Saturday") menuText = "शनिवार: सोया बड़ी युक्त सब्जी व चावल";
+  else if (dayName === "Sunday") menuText = "रविवार: साप्ताहिक अवकाश (रसोई बंद)";
+
+  document.getElementById('dailyMenuName').innerText = "मेनू: " + menuText;
+  calcDailyMdm();
+  updateHeader();
+}
+
+function getDailyClassVal(clsNum) {
+  var el = document.getElementById('d_cls_' + clsNum);
+  if (!el || !el.value) return 0;
+  var n = parseInt(el.value, 10);
+  return isNaN(n) ? 0 : n;
+}
+
+function calcDailyMdm() {
+  var dInput = document.getElementById('dailyDate');
+  var parts = dInput.value.split('-');
+  var mo = parseInt(parts[1], 10);
+  var isWinterMonth = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
+
+  var dayName = document.getElementById('dailyDayName').value;
+  var isSun = (dayName === "Sunday");
+
+  var dPs = getDailyClassVal(1) + getDailyClassVal(2) + getDailyClassVal(3) + getDailyClassVal(4) + getDailyClassVal(5);
+  var dUps = getDailyClassVal(6) + getDailyClassVal(7) + getDailyClassVal(8);
+  var dTot = dPs + dUps;
+
+  document.getElementById('d_tot_ps').innerText = dPs;
+  document.getElementById('d_tot_ups').innerText = dUps;
+  document.getElementById('d_tot_all').innerText = dTot;
+
+  if (isSun || dTot === 0) {
+    document.getElementById('dm_rice').innerText = "0.00";
+    document.getElementById('dm_flour').innerText = "0.00";
+    document.getElementById('dm_veg').innerText = "0.00";
+    document.getElementById('dm_dal').innerText = "0.00";
+    document.getElementById('dm_soya').innerText = "0.00";
+    document.getElementById('dm_oil').innerText = "0.00";
+    document.getElementById('dm_milk').innerText = "0.00";
+    document.getElementById('dm_fruit').innerText = "0";
+    document.getElementById('dm_sugar').innerText = "0.00";
+    document.getElementById('dm_glass').innerText = "0";
+    document.getElementById('dm_chana').innerText = "0";
+    document.getElementById('dm_chikki').innerText = "0";
+    return;
+  }
+
+  var rice = (dayName === "Tuesday" || dayName === "Wednesday" || dayName === "Friday" || dayName === "Saturday") ? (dPs * 0.1 + dUps * 0.15) : 0;
+  var flour = (dayName === "Monday" || dayName === "Thursday") ? (dPs * 0.1 + dUps * 0.15) : 0;
+  var veg = (dPs * 0.05 + dUps * 0.075);
+  var dal = (dayName === "Tuesday" || dayName === "Thursday") ? (dPs * 0.02 + dUps * 0.03) : 0;
+  var soya = (dayName === "Wednesday" || dayName === "Friday" || dayName === "Saturday") ? ((dPs * 0.1 + dUps * 0.15) * 0.1) : 0;
+  var oil = (dPs * 5 + dUps * 7.5);
+  var milk = (dayName === "Wednesday") ? (dPs * 0.15 + dUps * 0.2) : 0;
+  var fruit = (dayName === "Monday") ? dTot : 0;
+  var sugar = (dayName === "Wednesday") ? ((dPs * 0.15 + dUps * 0.2) * 0.1) : 0;
+  var glass = (dayName === "Wednesday") ? dTot : 0;
+  var chana = (dayName === "Thursday" && isWinterMonth) ? (dTot * 50) : 0;
+  var chikki = (dayName === "Thursday" && isWinterMonth) ? (dTot * 20) : 0;
+
+  document.getElementById('dm_rice').innerText = rice ? rice.toFixed(2) : "0.00";
+  document.getElementById('dm_flour').innerText = flour ? flour.toFixed(2) : "0.00";
+  document.getElementById('dm_veg').innerText = veg ? veg.toFixed(3) : "0.00";
+  document.getElementById('dm_dal').innerText = dal ? dal.toFixed(2) : "0.00";
+  document.getElementById('dm_soya').innerText = soya ? soya.toFixed(2) : "0.00";
+  document.getElementById('dm_oil').innerText = oil ? oil.toFixed(1) : "0.00";
+  document.getElementById('dm_milk').innerText = milk ? milk.toFixed(2) : "0.00";
+  document.getElementById('dm_fruit').innerText = fruit;
+  document.getElementById('dm_sugar').innerText = sugar ? sugar.toFixed(2) : "0.00";
+  document.getElementById('dm_glass').innerText = glass;
+  document.getElementById('dm_chana').innerText = chana;
+  document.getElementById('dm_chikki').innerText = chikki;
+}
+
+// ==================== B. मासिक MDM पंजिका इंजन ====================
+function setMdmLevel(lvl) {
+  currentLevel = lvl;
+  document.getElementById('btnComp').className = 'tab-btn' + (lvl === 'comp' ? ' active' : '');
+  document.getElementById('btnPs').className = 'tab-btn' + (lvl === 'ps' ? ' active' : '');
+  document.getElementById('btnUps').className = 'tab-btn' + (lvl === 'ups' ? ' active' : '');
+
+  document.getElementById('sc_ps').style.display = (lvl === 'ups') ? 'none' : '';
+  document.getElementById('sc_ups').style.display = (lvl === 'ps') ? 'none' : '';
+  document.getElementById('sc_tot').style.display = (lvl === 'comp') ? '' : 'none';
+
+  var psCols = document.querySelectorAll('.ps-col');
+  for (var i = 0; i < psCols.length; i++) psCols[i].style.display = (lvl === 'ups') ? 'none' : '';
+
+  var upsCols = document.querySelectorAll('.ups-col');
+  for (var i = 0; i < upsCols.length; i++) upsCols[i].style.display = (lvl === 'ps') ? 'none' : '';
+
+  var totCols = document.querySelectorAll('.tot-col');
+  for (var i = 0; i < totCols.length; i++) totCols[i].style.display = (lvl === 'comp') ? '' : 'none';
+
+  updateHeader();
+}
+
+function generateMonthDays() {
+  var selY = document.getElementById('selYear');
+  var selM = document.getElementById('selMonth');
+  var y = parseInt(selY.value, 10);
+  var m = parseInt(selM.value, 10);
+  var totalDays = new Date(y, m + 1, 0).getDate();
+
+  var tbody = document.getElementById('mdmBody');
+  tbody.innerHTML = '';
+
+  for (var d = 1; d <= totalDays; d++) {
+    var dt = new Date(y, m, d);
+    var dayName = daysArr[dt.getDay()];
+    var isSunday = (dt.getDay() === 0);
+
+    var tr = document.createElement('tr');
+    tr.id = 'row_' + d;
+    tr.setAttribute('data-day', dayName);
+    if (isSunday) tr.className = 'sunday-row';
+
+    var dateStr = d + '-' + monthNames[m].substring(0,3) + '-' + String(y).slice(-2);
+
+    tr.innerHTML = 
+      '<td style="font-weight:bold;">' + dateStr + '</td>' +
+      '<td style="font-weight:600;">' + dayName + '</td>' +
+      
+      // Primary Level
+      '<td class="ps-col"><input type="number" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); recalcAll();"></td>' +
+      '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
+      '<td class="ps-col val-wheat" id="ps_w_' + d + '">0.00</td>' +
+      '<td class="ps-col val-rice" id="ps_r_' + d + '">0.00</td>' +
+      '<td class="ps-col val-fruit" id="ps_f_' + d + '">0</td>' +
+      '<td class="ps-col" id="ps_nutri_' + d + '">₹0.00</td>' +
+      '<td class="ps-col val-cost" id="ps_c_' + d + '">₹0.00</td>' +
+
+      // Upper Primary Level
+      '<td class="ups-col"><input type="number" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + (isSunday ? 'disabled' : '') + ' onkeydown="blockDecimal(event)" oninput="filterIntegerOnly(this); recalcAll();"></td>' +
+      '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
+      '<td class="ups-col val-wheat" id="ups_w_' + d + '">0.00</td>' +
+      '<td class="ups-col val-rice" id="ups_r_' + d + '">0.00</td>' +
+      '<td class="ups-col val-fruit" id="ups_f_' + d + '">0</td>' +
+      '<td class="ups-col" id="ups_nutri_' + d + '">₹0.00</td>' +
+      '<td class="ups-col val-cost" id="ups_c_' + d + '">₹0.00</td>' +
+
+      // Total Daily Cost
+      '<td class="tot-col val-cost" id="tot_c_' + d + '">₹0.00</td>';
+
+    tbody.appendChild(tr);
+  }
+
+  setMdmLevel(currentLevel);
+  recalcAll();
+  updateHeader();
+}
+
+function recalcAll() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var totalDays = new Date(y, m + 1, 0).getDate();
+
+  var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
+  var rUps = parseFloat(document.getElementById('rateUps').value) || 10.17;
+  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 4.00;
+  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 5.00;
+
+  var isWinterNutriMonth = (m === 10 || m === 11 || m === 0 || m === 1 || m === 2);
+
+  var cumuPs = 0, cumuUps = 0;
+  var totPsAtt = 0, totUpsAtt = 0;
+  var totPsW = 0, totPsR = 0, totPsC = 0, totPsNutriCost = 0;
+  var totUpsW = 0, totUpsR = 0, totUpsC = 0, totUpsNutriCost = 0;
+  var totFruitsPs = 0, totFruitsUps = 0;
+
+  for (var d = 1; d <= totalDays; d++) {
+    var tr = document.getElementById('row_' + d);
+    if (!tr) continue;
+    var dayName = tr.getAttribute('data-day');
+    var isSunday = (dayName === 'Sunday');
+    var isMonday = (dayName === 'Monday');
+    var isThursday = (dayName === 'Thursday');
+
+    var inPs = document.getElementById('ps_att_' + d);
+    var inUps = document.getElementById('ups_att_' + d);
+
+    var attPs = (inPs && !isSunday) ? (parseInt(inPs.value, 10) || 0) : 0;
+    var attUps = (inUps && !isSunday) ? (parseInt(inUps.value, 10) || 0) : 0;
+
+    cumuPs += attPs;
+    cumuUps += attUps;
+    totPsAtt += attPs;
+    totUpsAtt += attUps;
+
+    var wPs = 0, rcvPs = 0;
+    var wUps = 0, rcvUps = 0;
+
+    if (!isSunday) {
+      if (isMonday || isThursday) {
+        wPs = attPs * 0.100;
+        wUps = attUps * 0.150;
+      } else {
+        rcvPs = attPs * 0.100;
+        rcvUps = attUps * 0.150;
+      }
+    }
+
+    var fruitPs = isMonday ? attPs : 0;
+    var fruitUps = isMonday ? attUps : 0;
+    var fruitPsCost = fruitPs * rFruit;
+    var fruitUpsCost = fruitUps * rFruit;
+
+    totFruitsPs += fruitPs;
+    totFruitsUps += fruitUps;
+
+    var nutriPsCost = 0;
+    var nutriUpsCost = 0;
+    if (isThursday && isWinterNutriMonth && !isSunday) {
+      nutriPsCost = attPs * rNutri;
+      nutriUpsCost = attUps * rNutri;
+    }
+
+    totPsNutriCost += nutriPsCost;
+    totUpsNutriCost += nutriUpsCost;
+
+    var cPs = (attPs * rPs) + fruitPsCost + nutriPsCost;
+    var cUps = (attUps * rUps) + fruitUpsCost + nutriUpsCost;
+    var cTotDay = cPs + cUps;
+
+    totPsW += wPs; totPsR += rcvPs; totPsC += cPs;
+    totUpsW += wUps; totUpsR += rcvUps; totUpsC += cUps;
+
+    document.getElementById('ps_cumu_' + d).innerText = cumuPs;
+    document.getElementById('ps_w_' + d).innerText = wPs ? wPs.toFixed(2) : '0.00';
+    document.getElementById('ps_r_' + d).innerText = rcvPs ? rcvPs.toFixed(2) : '0.00';
+    document.getElementById('ps_f_' + d).innerText = fruitPs;
+    document.getElementById('ps_nutri_' + d).innerText = '₹' + nutriPsCost.toFixed(2);
+    document.getElementById('ps_c_' + d).innerText = '₹' + cPs.toFixed(2);
+
+    document.getElementById('ups_cumu_' + d).innerText = cumuUps;
+    document.getElementById('ups_w_' + d).innerText = wUps ? wUps.toFixed(2) : '0.00';
+    document.getElementById('ups_r_' + d).innerText = rcvUps ? rcvUps.toFixed(2) : '0.00';
+    document.getElementById('ups_f_' + d).innerText = fruitUps;
+    document.getElementById('ups_nutri_' + d).innerText = '₹' + nutriUpsCost.toFixed(2);
+    document.getElementById('ups_c_' + d).innerText = '₹' + cUps.toFixed(2);
+
+    document.getElementById('tot_c_' + d).innerText = '₹' + cTotDay.toFixed(2);
+  }
+
+  // Footer Totals
+  document.getElementById('ft_ps_att').innerText = totPsAtt;
+  document.getElementById('ft_ps_w').innerText = totPsW.toFixed(2);
+  document.getElementById('ft_ps_r').innerText = totPsR.toFixed(2);
+  document.getElementById('ft_ps_f').innerText = totFruitsPs;
+  document.getElementById('ft_ps_nutri').innerText = '₹' + totPsNutriCost.toFixed(2);
+  document.getElementById('ft_ps_c').innerText = '₹' + totPsC.toFixed(2);
+
+  document.getElementById('ft_ups_att').innerText = totUpsAtt;
+  document.getElementById('ft_ups_w').innerText = totUpsW.toFixed(2);
+  document.getElementById('ft_ups_r').innerText = totUpsR.toFixed(2);
+  document.getElementById('ft_ups_f').innerText = totFruitsUps;
+  document.getElementById('ft_ups_nutri').innerText = '₹' + totUpsNutriCost.toFixed(2);
+  document.getElementById('ft_ups_c').innerText = '₹' + totUpsC.toFixed(2);
+
+  document.getElementById('ft_tot_c').innerText = '₹' + (totPsC + totUpsC).toFixed(2);
+
+  // Summary Cards
+  var totFruitCostPs = totFruitsPs * rFruit;
+  var totFruitCostUps = totFruitsUps * rFruit;
+
+  document.getElementById('sm_ps_w').innerText = totPsW.toFixed(2) + ' kg';
+  document.getElementById('sm_ps_r').innerText = totPsR.toFixed(2) + ' kg';
+  document.getElementById('sm_ps_f').innerText = totFruitsPs;
+  document.getElementById('sm_ps_fc').innerText = '₹' + totFruitCostPs.toFixed(2);
+  document.getElementById('sm_ps_nc').innerText = '₹' + totPsNutriCost.toFixed(2);
+  document.getElementById('sm_ps_c').innerText = '₹' + totPsC.toFixed(2);
+
+  document.getElementById('sm_ups_w').innerText = totUpsW.toFixed(2) + ' kg';
+  document.getElementById('sm_ups_r').innerText = totUpsR.toFixed(2) + ' kg';
+  document.getElementById('sm_ups_f').innerText = totFruitsUps;
+  document.getElementById('sm_ups_fc').innerText = '₹' + totFruitCostUps.toFixed(2);
+  document.getElementById('sm_ups_nc').innerText = '₹' + totUpsNutriCost.toFixed(2);
+  document.getElementById('sm_ups_c').innerText = '₹' + totUpsC.toFixed(2);
+
+  document.getElementById('sm_tot_w').innerText = (totPsW + totUpsW).toFixed(2) + ' kg';
+  document.getElementById('sm_tot_r').innerText = (totPsR + totUpsR).toFixed(2) + ' kg';
+  document.getElementById('sm_tot_f').innerText = totFruitsPs + totFruitsUps;
+  document.getElementById('sm_tot_fc').innerText = '₹' + (totFruitCostPs + totFruitCostUps).toFixed(2);
+  document.getElementById('sm_tot_nc').innerText = '₹' + (totPsNutriCost + totUpsNutriCost).toFixed(2);
+  document.getElementById('sm_tot_c').innerText = '₹' + (totPsC + totUpsC).toFixed(2);
+}
+
+function updateHeader() {
+  var y = document.getElementById('selYear').value;
+  var m = monthNames[parseInt(document.getElementById('selMonth').value, 10)];
+  var sch = document.getElementById('inSchool').value.trim();
+  var blk = document.getElementById('inBlock').value.trim();
+  var dst = document.getElementById('inDistrict').value.trim();
+  var udi = document.getElementById('inUdise').value.trim();
+
+  var banner = "MID DAY MEAL REGISTER - " + m + " " + y;
+  var subParts = [];
+
+  if (sch) subParts.push(sch);
+  if (blk) subParts.push("BLOCK: " + blk);
+  if (dst) subParts.push("DISTRICT: " + dst + " UTTAR PRADESH");
+  if (udi) subParts.push("(UDISE CODE-" + udi + ")");
+
+  var fullBanner = subParts.length > 0 ? banner + ", " + subParts.join(', ') : banner;
+  
+  document.getElementById('thBanner').innerText = fullBanner;
+  document.getElementById('prTitle').innerText = banner;
+  document.getElementById('prSub').innerText = subParts.join(' | ');
+}
+
+// ==================== C. प्रिंट हैंडलर (Landscape vs Portrait) ====================
+function printDailyMdm() {
+  // 1. डायनामिक स्टाइल शीट जोड़कर पेज ओरिएंटेशन Landscape सेट करना
+  var style = document.createElement('style');
+  style.id = 'print-page-style';
+  style.innerHTML = '@page { size: A4 landscape; margin: 8mm; }';
+  document.head.appendChild(style);
+
+  // 2. प्रिंट हेडर में दैनिक तारीख जोड़ना
+  var dStr = document.getElementById('dispDateFormatted').innerText;
+  var dName = document.getElementById('dailyDayName').value;
+  var sch = document.getElementById('inSchool').value.trim();
+  var blk = document.getElementById('inBlock').value.trim();
+  var dst = document.getElementById('inDistrict').value.trim();
+  var udi = document.getElementById('inUdise').value.trim();
+
+  document.getElementById('prTitle').innerText = "DAILY MID DAY MEAL (MDM) REPORT - " + dStr + " (" + dName + ")";
+  var subParts = [];
+  if (sch) subParts.push(sch);
+  if (blk) subParts.push("BLOCK: " + blk);
+  if (dst) subParts.push("DISTRICT: " + dst + " UTTAR PRADESH");
+  if (udi) subParts.push("(UDISE CODE-" + udi + ")");
+  document.getElementById('prSub').innerText = subParts.join(' | ');
+
+  document.body.className = 'print-mode-daily';
+  window.print();
+
+  // प्रिंट के बाद वापस सामान्य मोड में लाना
+  setTimeout(function() {
+    document.body.className = '';
+    var st = document.getElementById('print-page-style');
+    if (st) st.remove();
+    updateHeader();
+  }, 1000);
+}
+
+function printMonthlyMdm() {
+  // 1. डायनामिक स्टाइल शीट जोड़कर पेज ओरिएंटेशन Portrait सेट करना (Strict 1 Page Fit)
+  var style = document.createElement('style');
+  style.id = 'print-page-style';
+  style.innerHTML = '@page { size: A4 portrait; margin: 4mm; }';
+  document.head.appendChild(style);
+
+  updateHeader();
+  document.body.className = 'print-mode-monthly';
+  window.print();
+
+  // प्रिंट के बाद वापस सामान्य मोड में लाना
+  setTimeout(function() {
+    document.body.className = '';
+    var st = document.getElementById('print-page-style');
+    if (st) st.remove();
+  }, 1000);
+}
+
+// प्रारंभ करना
+initDailyDate();
+generateMonthDays();
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नवीन प्रवेश: आयु-संगत कक्षा निर्धारक टूल</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: #f8fafc; margin: 0; padding: 20px; color: #1e293b; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
+    
+    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 20px; }
+    .top-bar h2 { margin: 0; font-size: 19px; color: #1e3a8a; }
+    .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
+
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; color: #334155; }
+    
+    input[type="date"], select { 
+      width: 100%; 
+      padding: 12px; 
+      border: 1px solid #94a3b8; 
+      border-radius: 6px; 
+      font-size: 16px; 
+      background: white; 
+      color: #0f172a; 
+      font-weight: 500;
+    }
+    input[type="date"]:focus, select:focus { outline: 2px solid #2563eb; }
+
+    .btn-calc { 
+      width: 100%; 
+      background: #1e3a8a; 
+      color: white; 
+      border: none; 
+      padding: 14px; 
+      font-size: 16px; 
+      font-weight: bold; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      transition: 0.2s; 
+      margin-top: 10px; 
+    }
+    .btn-calc:hover { background: #1d4ed8; }
+
+    /* परिणाम बॉक्स - डिफ़ॉल्ट रूप से साफ़ दिखेगा */
+    .result-box { 
+      margin-top: 25px; 
+      padding: 20px; 
+      border-radius: 8px; 
+      border: 2px solid #3b82f6; 
+      background: #f8fafc;
+    }
+    .class-badge { 
+      display: inline-block; 
+      font-size: 22px; 
+      font-weight: bold; 
+      padding: 8px 18px; 
+      border-radius: 8px; 
+      margin: 10px 0 8px; 
+    }
+    .info-list { font-size: 14px; line-height: 1.6; color: #334155; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="top-bar">
+    <h2>🎯 आयु-संगत कक्षा निर्धारक</h2>
+    <a href="index.html">← होमपेज</a>
+  </div>
+
+  <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">
+    RTE नियमावली अनुसार 1 अप्रैल आधार तिथि पर छात्र की वास्तविक आयु व अनुमन्य कक्षा ज्ञात करें।
+  </p>
+
+  <div class="form-group">
+    <label>प्रवेश सत्र चुनें (1 अप्रैल आधार तिथि):</label>
+    <select id="sessionYear" onchange="calculateClass()">
+      <option value="2024">सत्र 2024-25 (आधार तिथि: 01/04/2024)</option>
+      <option value="2025">सत्र 2025-26 (आधार तिथि: 01/04/2025)</option>
+      <option value="2026" selected>सत्र 2026-27 (आधार तिथि: 01/04/2026)</option>
+      <option value="2027">सत्र 2027-28 (आधार तिथि: 01/04/2027)</option>
+      <option value="2028">सत्र 2028-29 (आधार तिथि: 01/04/2028)</option>
+      <option value="2029">सत्र 2029-30 (आधार तिथि: 01/04/2029)</option>
+      <option value="2030">सत्र 2030-31 (आधार तिथि: 01/04/2030)</option>
+      <option value="2031">सत्र 2031-32 (आधार तिथि: 01/04/2031)</option>
+      <option value="2032">सत्र 2032-33 (आधार तिथि: 01/04/2032)</option>
+      <option value="2033">सत्र 2033-34 (आधार तिथि: 01/04/2033)</option>
+      <option value="2034">सत्र 2034-35 (आधार तिथि: 01/04/2034)</option>
+      <option value="2035">सत्र 2035-36 (आधार तिथि: 01/04/2035)</option>
+      <option value="2036">सत्र 2036-37 (आधार तिथि: 01/04/2036)</option>
+      <option value="2037">सत्र 2037-38 (आधार तिथि: 01/04/2037)</option>
+      <option value="2038">सत्र 2038-39 (आधार तिथि: 01/04/2038)</option>
+      <option value="2039">सत्र 2039-40 (आधार तिथि: 01/04/2039)</option>
+      <option value="2040">सत्र 2040-41 (आधार तिथि: 01/04/2040)</option>
+      <option value="2041">सत्र 2041-42 (आधार तिथि: 01/04/2041)</option>
+      <option value="2042">सत्र 2042-43 (आधार तिथि: 01/04/2042)</option>
+      <option value="2043">सत्र 2043-44 (आधार तिथि: 01/04/2043)</option>
+      <option value="2044">सत्र 2044-45 (आधार तिथि: 01/04/2044)</option>
+      <option value="2045">सत्र 2045-46 (आधार तिथि: 01/04/2045)</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>छात्र की जन्मतिथि (कैलेंडर से चुनें या सीधे टाइप करें):</label>
+    <input type="date" id="dobInput" oninput="calculateClass()" onchange="calculateClass()">
+  </div>
+
+  <button type="button" class="btn-calc" onclick="calculateClass()">🔍 आयु व कक्षा ज्ञात करें</button>
+
+  <div id="resultBox" class="result-box" style="display: none;">
+    <div style="font-size: 13px; font-weight: bold; color: #1e3a8a;">1 अप्रैल को छात्र की वास्तविक आयु:</div>
+    <div id="ageDisplay" style="font-size: 18px; font-weight: bold; color: #0f172a; margin: 4px 0 10px;"></div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #1e3a8a;">RTE नियमानुसार प्रवेश योग्य कक्षा:</div>
+    <div id="classResultBadge" class="class-badge"></div>
+
+    <div class="info-list" id="detailText"></div>
+  </div>
+
+</div>
+
+<script>
+function calculateClass() {
+  const dobInput = document.getElementById('dobInput');
+  const baseYear = parseInt(document.getElementById('sessionYear').value, 10);
+  const resultBox = document.getElementById('resultBox');
+  const ageDisplay = document.getElementById('ageDisplay');
+  const badge = document.getElementById('classResultBadge');
+  const detail = document.getElementById('detailText');
+
+  const val = dobInput.value;
+  if (!val) {
+    resultBox.style.display = 'none';
+    return;
+  }
+
+  // YYYY-MM-DD फॉर्मेट को सीधे नंबरों में निकालना
+  let y = 0, m = 0, d = 0;
+  if (val.indexOf('-') !== -1) {
+    const p = val.split('-');
+    y = parseInt(p[0], 10);
+    m = parseInt(p[1], 10);
+    d = parseInt(p[2], 10);
+  } else if (val.indexOf('/') !== -1) {
+    const p = val.split('/');
+    d = parseInt(p[0], 10);
+    m = parseInt(p[1], 10);
+    y = parseInt(p[2], 10);
+  }
+
+  if (!y || !m || !d || isNaN(y) || isNaN(m) || isNaN(d)) {
+    return;
+  }
+
+  // 1 अप्रैल आधार तिथि: दिन=1, माह=4, वर्ष=baseYear
+  const cutoffD = 1;
+  const cutoffM = 4;
+  const cutoffY = baseYear;
+
+  // यदि जन्मतिथि कट-ऑफ तिथि के बाद की है
+  if (y > cutoffY || (y === cutoffY && m > cutoffM) || (y === cutoffY && m === cutoffM && d > cutoffD)) {
+    alert("जन्मतिथि 1 अप्रैल " + baseYear + " से बाद की नहीं हो सकती!");
+    resultBox.style.display = 'none';
+    return;
+  }
+
+  // शुद्ध गणितीय आयु गणना (बिना किसी Date ऑब्जेक्ट के एरर के)
+  let calcDays = cutoffD - d;
+  let calcMonths = cutoffM - m;
+  let calcYears = cutoffY - y;
+
+  if (calcDays < 0) {
+    calcMonths--;
+    // मार्च महीने के कुल 31 दिन
+    calcDays += 31;
+  }
+
+  if (calcMonths < 0) {
+    calcYears--;
+    calcMonths += 12;
+  }
+
+  ageDisplay.innerText = calcYears + " वर्ष, " + calcMonths + " माह, " + calcDays + " दिन";
+
+  let className = "";
+  let badgeBg = "#dcfce7";
+  let badgeColor = "#15803d";
+  let note = "";
+
+  if (calcYears < 3) {
+    className = "प्रवेश हेतु अपरिपक्व (Underage)";
+    badgeBg = "#fee2e2"; badgeColor = "#991b1b";
+    note = "छात्र की आयु 3 वर्ष से कम है। बेसिक शिक्षा नियमावली अनुसार अभी विद्यालय या आंगनवाड़ी में प्रवेश मान्य नहीं है।";
+  } else if (calcYears >= 3 && calcYears < 6) {
+    className = "आंगनवाड़ी / बालवाटिका (Pre-Primary)";
+    badgeBg = "#fef3c7"; badgeColor = "#92400e";
+    note = "छात्र की आयु 3 से 6 वर्ष के बीच है। इसे प्राथमिक विद्यालय की बालवाटिका अथवा आंगनवाड़ी केंद्र में नामांकित करें।";
+  } else if (calcYears >= 6 && calcYears < 7) {
+    className = "कक्षा 1 (Class 1)";
+    badgeBg = "#dbeafe"; badgeColor = "#1e40af";
+    note = "1 अप्रैल को 6 वर्ष पूर्ण होने पर छात्र कक्षा 1 में नवीन प्रवेश हेतु पूर्ण पात्र है।";
+  } else if (calcYears >= 7 && calcYears < 8) {
+    className = "कक्षा 2 (Class 2)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 7 वर्ष पूर्ण होने पर छात्र का प्रवेश कक्षा 2 में अनुमन्य है।";
+  } else if (calcYears >= 8 && calcYears < 9) {
+    className = "कक्षा 3 (Class 3)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 8 वर्ष पूर्ण होने पर छात्र का प्रवेश कक्षा 3 में अनुमन्य है।";
+  } else if (calcYears >= 9 && calcYears < 10) {
+    className = "कक्षा 4 (Class 4)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 9 वर्ष पूर्ण होने पर छात्र का प्रवेश कक्षा 4 में अनुमन्य है।";
+  } else if (calcYears >= 10 && calcYears < 11) {
+    className = "कक्षा 5 (Class 5)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 10 वर्ष पूर्ण होने पर प्राथमिक स्तर की कक्षा 5 में प्रवेश अनुमन्य है।";
+  } else if (calcYears >= 11 && calcYears < 12) {
+    className = "कक्षा 6 (उच्च प्राथमिक)";
+    badgeBg = "#f3e8ff"; badgeColor = "#6b21a8";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 11 वर्ष पूर्ण होने पर उच्च प्राथमिक स्तर की कक्षा 6 में प्रवेश अनुमन्य है।";
+  } else if (calcYears >= 12 && calcYears < 13) {
+    className = "कक्षा 7 (उच्च प्राथमिक)";
+    badgeBg = "#f3e8ff"; badgeColor = "#6b21a8";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 12 वर्ष पूर्ण होने पर कक्षा 7 में प्रवेश अनुमन्य है।";
+  } else if (calcYears >= 13 && calcYears <= 14) {
+    className = "कक्षा 8 (उच्च प्राथमिक)";
+    badgeBg = "#f3e8ff"; badgeColor = "#6b21a8";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 13 से 14 वर्ष पूर्ण होने पर कक्षा 8 में प्रवेश अनुमन्य है।";
+  } else {
+    className = "कक्षा 8 (विशेष प्रशिक्षण उपरांत)";
+    badgeBg = "#ffedd5"; badgeColor = "#9a3412";
+    note = "छात्र की आयु 14 वर्ष से अधिक है। नियमानुसार कक्षा 8 में दाखिला देकर विशेष उपचारात्मक शिक्षण दिया जाए।";
+  }
+
+  badge.innerText = className;
+  badge.style.backgroundColor = badgeBg;
+  badge.style.color = badgeColor;
+  detail.innerText = note;
+  
+  resultBox.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
