@@ -28,7 +28,7 @@
     .daily-date-badge { background: #ffffff; border: 1.5px solid #16a34a; padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; color: #166534; display: inline-flex; align-items: center; gap: 8px; }
     .daily-date-badge input[type="date"] { border: 1px solid #16a34a; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-size: 11.5px; }
 
-    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: bold; border-radius: 6px; cursor: pointer; }
 
     .table-responsive-box {
       width: 100%;
@@ -80,6 +80,7 @@
     .th-sub { background: #3b82f6; color: white; font-size: 10px; }
     .th-sub-ups { background: #8b5cf6; color: white; font-size: 10px; }
     
+    .cell-form { margin: 0; padding: 0; display: inline-block; }
     input.att-in { width: 50px; height: 34px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13.5px; }
     input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
 
@@ -92,7 +93,7 @@
     .val-fruit { color: #d97706; font-weight: bold; }
 
     .btn-container-monthly { display: flex; justify-content: flex-end; margin-bottom: 12px; }
-    .btn-print-monthly { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print-monthly { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; }
 
     .print-banner-block { display: none; text-align: center; margin-bottom: 8px; }
     .print-banner-title { font-size: 14px; font-weight: bold; color: #000; text-transform: uppercase; }
@@ -342,7 +343,7 @@
       <button class="btn-print-monthly" type="button" onclick="printMonthlyMdm()">🖨️ मासिक MDM पंजिका प्रिंट (Portrait - 1 Page)</button>
     </div>
 
-    <!-- Monthly Table (One-by-One Strict Mobile Step Navigation) -->
+    <!-- Monthly Table -->
     <div class="table-responsive-box">
       <table class="mdm-table" id="mdmTable">
         <thead>
@@ -420,31 +421,36 @@ function filterInt(el) {
   el.value = el.value.replace(/[^0-9]/g, '');
 }
 
-// मोबाइल हरा तीर (➔|) एवं एंटर: ठीक अगले दिन के उसी कॉलम पर जाना
-function jumpToNextRow(e, type, currentDay) {
-  // यदि Enter या ArrowDown दबाया गया हो
-  if (e.key === "Enter" || e.keyCode === 13 || e.key === "ArrowDown") {
-    e.preventDefault();
+// मोबाइल हरा तीर (Form Submit) इंटरसेप्टर: 100% सटीक दिन + 1 पर भेजना
+function onCellSubmit(e, type, currentDay) {
+  e.preventDefault(); // ब्राउज़र के डिफ़ॉल्ट जंप को तुरंत रोकें
 
-    var totalDays = new Date(
-      parseInt(document.getElementById('selYear').value, 10),
-      parseInt(document.getElementById('selMonth').value, 10) + 1,
-      0
-    ).getDate();
+  var totalDays = new Date(
+    parseInt(document.getElementById('selYear').value, 10),
+    parseInt(document.getElementById('selMonth').value, 10) + 1,
+    0
+  ).getDate();
 
-    // ठीक अगली तारीख (day + 1) से आगे खोजना
-    for (var d = currentDay + 1; d <= totalDays; d++) {
-      var nextEl = document.getElementById(type + 'att' + d);
-      // यदि अगला दिन रविवार नहीं है (readonly नहीं है)
-      if (nextEl && !nextEl.readOnly) {
-        nextEl.focus();
-        nextEl.select();
-        nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
+  // ठीक अगली तारीख (currentDay + 1) के उसी प्रकार (ps या ups) पर फ़ोकस
+  for (var d = currentDay + 1; d <= totalDays; d++) {
+    var nextEl = document.getElementById(type + 'att' + d);
+    if (nextEl && !nextEl.readOnly) {
+      nextEl.focus();
+      nextEl.select();
+      nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
     }
-  } 
-  else if (e.key === "ArrowUp") {
+  }
+
+  // यदि महीने का अंतिम दिन आ गया हो तो कीबोर्ड बंद करें
+  var cur = document.getElementById(type + 'att' + currentDay);
+  if (cur) cur.blur();
+  return false;
+}
+
+// लैपटॉप एरो की (Up Arrow)
+function onCellKeyDown(e, type, currentDay) {
+  if (e.key === "ArrowUp") {
     e.preventDefault();
     for (var d = currentDay - 1; d >= 1; d--) {
       var prevEl = document.getElementById(type + 'att' + d);
@@ -632,20 +638,34 @@ function generateMonthDays() {
 
     var dateStr = d + '-' + monthNames[m].substring(0,3) + '-' + String(y).slice(-2);
 
+    // प्रत्येक इनपुट बॉक्स एक स्वतंत्र form में लपेटा गया है (action="javascript:void(0);")
+    // जब मोबाइल का हरा तीर दबाया जाता है, तो onsubmit कॉल होता है और वह केवल d+1 पर ही जाता है
     tr.innerHTML = 
       '<td style="font-weight:bold;">' + dateStr + '</td>' +
       '<td style="font-weight:600;">' + dayName + '</td>' +
       
-      // Primary Input (रविवार पर readonly, jumpToNextRow से बिल्कुल अगले दिन 1→2→3 जाएगा)
-      '<td class="ps-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + (isSunday ? 'readonly placeholder="-"' : '') + ' onkeydown="blockDecimal(event); jumpToNextRow(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Primary Input Form
+      '<td class="ps-col">' +
+        '<form class="cell-form" action="javascript:void(0);" onsubmit="return onCellSubmit(event, \'ps\', ' + d + ');">' +
+          '<input type="number" inputmode="numeric" min="0" step="1" class="att-in" id="ps_att_' + d + '" ' + 
+          (isSunday ? 'readonly placeholder="-"' : '') + 
+          ' onkeydown="blockDecimal(event); onCellKeyDown(event, \'ps\', ' + d + ');" oninput="filterInt(this); recalcAll();">' +
+        '</form>' +
+      '</td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
       '<td class="ps-col val-wheat" id="ps_w_' + d + '">0.00</td>' +
       '<td class="ps-col val-rice" id="ps_r_' + d + '">0.00</td>' +
       '<td class="ps-col val-fruit" id="ps_f_' + d + '">0</td>' +
       '<td class="ps-col val-cost" id="ps_c_' + d + '">₹0.00</td>' +
 
-      // Upper Primary Input
-      '<td class="ups-col"><input type="number" inputmode="numeric" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + (isSunday ? 'readonly placeholder="-"' : '') + ' onkeydown="blockDecimal(event); jumpToNextRow(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();"></td>' +
+      // Upper Primary Input Form
+      '<td class="ups-col">' +
+        '<form class="cell-form" action="javascript:void(0);" onsubmit="return onCellSubmit(event, \'ups\', ' + d + ');">' +
+          '<input type="number" inputmode="numeric" min="0" step="1" class="att-in" id="ups_att_' + d + '" ' + 
+          (isSunday ? 'readonly placeholder="-"' : '') + 
+          ' onkeydown="blockDecimal(event); onCellKeyDown(event, \'ups\', ' + d + ');" oninput="filterInt(this); recalcAll();">' +
+        '</form>' +
+      '</td>' +
       '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
       '<td class="ups-col val-wheat" id="ups_w_' + d + '">0.00</td>' +
       '<td class="ups-col val-rice" id="ups_r_' + d + '">0.00</td>' +
