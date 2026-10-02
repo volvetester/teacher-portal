@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>दैनिक MDM कैलकुलेटर (Daily MDM Calculator)</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f8fafc; margin: 0; padding: 12px; color: #0f172a; }
+    .container { max-width: 1100px; margin: auto; background: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    
+    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 15px; }
+    .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
+    .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
+
+    /* School Details */
+    .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
+    .form-group input { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
+
+    /* Daily Control Box */
+    .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+    .daily-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+    .daily-meta-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .daily-date-badge { background: #ffffff; border: 1.5px solid #16a34a; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; color: #166534; display: inline-flex; align-items: center; gap: 8px; }
+    .daily-date-badge input[type="date"] { border: 1px solid #16a34a; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-size: 12px; }
+
+    .menu-badge { background: #166534; color: white; padding: 6px 12px; border-radius: 6px; font-size: 12.5px; font-weight: bold; margin-bottom: 12px; }
+
+    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    .btn-print-daily:hover { background: #115e59; }
+
+    .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
+
+    .daily-att-table { width: 100%; min-width: 780px; border-collapse: collapse; text-align: center; font-size: 12px; }
+    .daily-att-table th, .daily-att-table td { border: 1px solid #94a3b8; padding: 6px 3px; white-space: nowrap; }
+    .daily-att-table th { background: #15803d; color: white; font-size: 11.5px; }
+    .daily-att-input { width: 52px; height: 34px; padding: 2px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 14px; }
+    .daily-att-input:focus { outline: 2px solid #047857; background: #ecfdf5; }
+
+    .daily-mat-table { width: 100%; min-width: 880px; border-collapse: collapse; text-align: center; font-size: 12px; }
+    .daily-mat-table th, .daily-mat-table td { border: 1px solid #94a3b8; padding: 8px 4px; white-space: nowrap; }
+    .daily-mat-table th { background: #065f46; color: white; font-size: 11.5px; }
+    .daily-mat-table td.val { font-weight: bold; color: #047857; background: #f0fdf4; font-size: 13px; }
+
+    .print-header { display: none; text-align: center; margin-bottom: 10px; }
+    .print-header h3 { margin: 0; font-size: 16px; text-transform: uppercase; }
+    .print-header p { margin: 2px 0 0 0; font-size: 11px; font-weight: bold; }
+
+    @media print {
+      body { background: white !important; padding: 0 !important; margin: 0 !important; }
+      .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border: none !important; }
+      .no-print { display: none !important; }
+      .print-header { display: block !important; }
+      .table-responsive-box { overflow: visible !important; border: none !important; }
+      .daily-att-table, .daily-mat-table { font-size: 10.5px !important; min-width: 100% !important; width: 100% !important; }
+      .daily-att-table th, .daily-att-table td, .daily-mat-table th, .daily-mat-table td { border: 1px solid #000 !important; padding: 4px 2px !important; }
+      .daily-att-input { border: none !important; background: transparent !important; }
+      @page { size: A4 landscape; margin: 8mm; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="top-bar no-print">
+    <h2>🍲 दैनिक MDM कैलकुलेटर (Daily Report)</h2>
+    <a href="index.html">← होमपेज</a>
+  </div>
+
+  <div class="school-details no-print">
+    <div class="form-group">
+      <label>विद्यालय का नाम:</label>
+      <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>विकास खंड (Block):</label>
+      <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCap(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>जनपद (District):</label>
+      <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCap(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>यू-डायस कोड:</label>
+      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNum(this); updateHeader();">
+    </div>
+  </div>
+
+  <div class="print-header">
+    <h3 id="prTitle">DAILY MID DAY MEAL REPORT</h3>
+    <p id="prSub"></p>
+  </div>
+
+  <div class="daily-box">
+    <div class="daily-top-row">
+      <div class="daily-meta-group">
+        <div class="daily-date-badge">
+          <span>दिनांक:</span>
+          <span id="dispDateFormatted">01/10/2026</span>
+          <input type="date" id="dailyDate" class="no-print" onchange="onDailyDateChange()">
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:bold; color:#166534;">दिन: </label>
+          <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:110px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px;">
+        </div>
+      </div>
+      <button class="btn-print-daily no-print" type="button" onclick="window.print()">🖨️ दैनिक MDM प्रिंट (Landscape)</button>
+    </div>
+
+    <div class="menu-badge" id="dailyMenuName">मेनू लोड हो रहा है...</div>
+
+    <div style="font-size:11px; color:#065f46; font-weight:bold; margin-bottom:6px;" class="no-print">
+      👉 कक्षा 1 से 8 की दैनिक उपस्थिति दर्ज करें (उँगली से बाएँ-दाएँ खिसकाएँ):
+    </div>
+
+    <div class="table-responsive-box">
+      <table class="daily-att-table">
+        <thead>
+          <tr>
+            <th>वर्ग</th>
+            <th>कक्षा 1</th><th>कक्षा 2</th><th>कक्षा 3</th><th>कक्षा 4</th><th>कक्षा 5</th>
+            <th>कक्षा 6</th><th>कक्षा 7</th><th>कक्षा 8</th>
+            <th style="background:#1e3a8a;">प्राथमिक (1-5)</th>
+            <th style="background:#6d28d9;">उच्च प्राथ. (6-8)</th>
+            <th style="background:#b91c1c;">कुल छात्र</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:bold; background:#f8fafc;">उपस्थिति</td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_1" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_2" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_3" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_4" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_5" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_6" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_7" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_8" oninput="cleanNum(this); calcDaily();"></td>
+            <td style="font-weight:bold; color:#1e3a8a; font-size:14px; background:#eff6ff;" id="d_tot_ps">0</td>
+            <td style="font-weight:bold; color:#6d28d9; font-size:14px; background:#f5f3ff;" id="d_tot_ups">0</td>
+            <td style="font-weight:bold; color:#b91c1c; font-size:15px; background:#fee2e2;" id="d_tot_all">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="font-size:11px; color:#065f46; font-weight:bold; margin-bottom:6px;">
+      📦 आज बनने वाली कुल आवश्यक सामग्री (PS + UPS):
+    </div>
+
+    <div class="table-responsive-box">
+      <table class="daily-mat-table">
+        <thead>
+          <tr>
+            <th>चावल (kg)</th><th>आटा (kg)</th><th>सब्जी (kg)</th><th>दाल (kg)</th>
+            <th>सोया बड़ी (kg)</th><th>तेल (g/ml)</th><th>दूध (L)</th><th>फल (संख्या)</th>
+            <th>चीनी (kg)</th><th>गिलास</th>
+            <th class="winter-nutri-col" style="background:#b45309;">भुने चने (g)</th>
+            <th class="winter-nutri-col" style="background:#b45309;">चिक्की (g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val" id="dm_rice">0.00</td>
+            <td class="val" id="dm_flour">0.00</td>
+            <td class="val" id="dm_veg">0.00</td>
+            <td class="val" id="dm_dal">0.00</td>
+            <td class="val" id="dm_soya">0.00</td>
+            <td class="val" id="dm_oil">0.00</td>
+            <td class="val" id="dm_milk">0.00</td>
+            <td class="val" id="dm_fruit">0</td>
+            <td class="val" id="dm_sugar">0.00</td>
+            <td class="val" id="dm_glass">0</td>
+            <td class="val winter-nutri-col" id="dm_chana" style="color:#b45309;">0</td>
+            <td class="val winter-nutri-col" id="dm_chikki" style="color:#b45309;">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var daysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
+function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+function cleanNum(el) {
+  var pos = el.selectionStart - 1;
+  el.value = el.value.replace(/[^0-9]/g, '');
+  if (pos >= 0) el.setSelectionRange(pos, pos);
+}
+
+function initDate() {
+  var today = new Date();
+  var yyyy = today.getFullYear();
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var dd = String(today.getDate()).padStart(2, '0');
+  document.getElementById('dailyDate').value = yyyy + '-' + mm + '-' + dd;
+  onDailyDateChange();
+}
+
+function onDailyDateChange() {
+  var dInput = document.getElementById('dailyDate');
+  if (!dInput.value) return;
+  var p = dInput.value.split('-');
+  var yr = parseInt(p[0], 10);
+  var mo = parseInt(p[1], 10);
+  var da = parseInt(p[2], 10);
+
+  document.getElementById('dispDateFormatted').innerText = String(da).padStart(2, '0') + '/' + String(mo).padStart(2, '0') + '/' + yr;
+
+  var dt = new Date(yr, mo - 1, da);
+  var dayName = daysArr[dt.getDay()];
+  document.getElementById('dailyDayName').value = dayName;
+
+  var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
+  var wCols = document.querySelectorAll('.winter-nutri-col');
+  for (var i = 0; i < wCols.length; i++) wCols[i].style.display = isWinter ? '' : 'none';
+
+  var mText = "";
+  if (dayName === "Monday") mText = "सोमवार: सब्जी, रोटी व ताजा फल";
+  else if (dayName === "Tuesday") mText = "मंगलवार: सब्जी युक्त दाल व चावल";
+  else if (dayName === "Wednesday") mText = "बुधवार: सोया बड़ी युक्त तहरी व गर्म दूध";
+  else if (dayName === "Thursday") mText = isWinter ? "गुरुवार: सब्जी दाल, रोटी, भुने चने व चिक्की (शीतकालीन पोषण)" : "गुरुवार: सब्जी युक्त दाल व रोटी";
+  else if (dayName === "Friday") mText = "शुक्रवार: सोया बड़ी युक्त तहरी";
+  else if (dayName === "Saturday") mText = "शनिवार: सोया बड़ी युक्त सब्जी व चावल";
+  else if (dayName === "Sunday") mText = "रविवार: साप्ताहिक अवकाश (रसोई बंद)";
+
+  document.getElementById('dailyMenuName').innerText = "मेनू: " + mText;
+  calcDaily();
+  updateHeader();
+}
+
+function getVal(id) {
+  var el = document.getElementById(id);
+  return el ? (parseInt(el.value, 10) || 0) : 0;
+}
+
+function calcDaily() {
+  var p = document.getElementById('dailyDate').value.split('-');
+  var mo = parseInt(p[1], 10);
+  var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
+  var day = document.getElementById('dailyDayName').value;
+  var isSun = (day === "Sunday");
+
+  var ps = getVal('d_cls_1') + getVal('d_cls_2') + getVal('d_cls_3') + getVal('d_cls_4') + getVal('d_cls_5');
+  var ups = getVal('d_cls_6') + getVal('d_cls_7') + getVal('d_cls_8');
+  var tot = ps + ups;
+
+  document.getElementById('d_tot_ps').innerText = ps;
+  document.getElementById('d_tot_ups').innerText = ups;
+  document.getElementById('d_tot_all').innerText = tot;
+
+  if (isSun || tot === 0) {
+    var zeros = ['dm_rice','dm_flour','dm_veg','dm_dal','dm_soya','dm_oil','dm_milk','dm_sugar'];
+    zeros.forEach(function(id) { document.getElementById(id).innerText = "0.00"; });
+    ['dm_fruit','dm_glass','dm_chana','dm_chikki'].forEach(function(id) { document.getElementById(id).innerText = "0"; });
+    return;
+  }
+
+  var rice = (day === "Tuesday" || day === "Wednesday" || day === "Friday" || day === "Saturday") ? (ps * 0.1 + ups * 0.15) : 0;
+  var flour = (day === "Monday" || day === "Thursday") ? (ps * 0.1 + ups * 0.15) : 0;
+  var veg = (ps * 0.05 + ups * 0.075);
+  var dal = (day === "Tuesday" || day === "Thursday") ? (ps * 0.02 + ups * 0.03) : 0;
+  var soya = (day === "Wednesday" || day === "Friday" || day === "Saturday") ? ((ps * 0.1 + ups * 0.15) * 0.1) : 0;
+  var oil = (ps * 5 + ups * 7.5);
+  var milk = (day === "Wednesday") ? (ps * 0.15 + ups * 0.2) : 0;
+  var fruit = (day === "Monday") ? tot : 0;
+  var sugar = (day === "Wednesday") ? ((ps * 0.15 + ups * 0.2) * 0.1) : 0;
+  var glass = (day === "Wednesday") ? tot : 0;
+  var chana = (day === "Thursday" && isWinter) ? (tot * 50) : 0;
+  var chikki = (day === "Thursday" && isWinter) ? (tot * 20) : 0;
+
+  document.getElementById('dm_rice').innerText = rice ? rice.toFixed(2) : "0.00";
+  document.getElementById('dm_flour').innerText = flour ? flour.toFixed(2) : "0.00";
+  document.getElementById('dm_veg').innerText = veg ? veg.toFixed(3) : "0.00";
+  document.getElementById('dm_dal').innerText = dal ? dal.toFixed(2) : "0.00";
+  document.getElementById('dm_soya').innerText = soya ? soya.toFixed(2) : "0.00";
+  document.getElementById('dm_oil').innerText = oil ? oil.toFixed(1) : "0.00";
+  document.getElementById('dm_milk').innerText = milk ? milk.toFixed(2) : "0.00";
+  document.getElementById('dm_fruit').innerText = fruit;
+  document.getElementById('dm_sugar').innerText = sugar ? sugar.toFixed(2) : "0.00";
+  document.getElementById('dm_glass').innerText = glass;
+  document.getElementById('dm_chana').innerText = chana;
+  document.getElementById('dm_chikki').innerText = chikki;
+}
+
+function updateHeader() {
+  var dStr = document.getElementById('dispDateFormatted').innerText;
+  var dName = document.getElementById('dailyDayName').value;
+  var sch = document.getElementById('inSchool').value.trim();
+  var blk = document.getElementById('inBlock').value.trim();
+  var dst = document.getElementById('inDistrict').value.trim();
+  var udi = document.getElementById('inUdise').value.trim();
+
+  document.getElementById('prTitle').innerText = "DAILY MID DAY MEAL REPORT - " + dStr + " (" + dName + ")";
+  var sub = [];
+  if (sch) sub.push(sch);
+  if (blk) sub.push("BLOCK: " + blk);
+  if (dst) sub.push("DISTRICT: " + dst);
+  if (udi) sub.push("(UDISE: " + udi + ")");
+  document.getElementById('prSub').innerText = sub.join(' | ');
+}
+
+initDate();
+</script>
+</body>
+</html>
