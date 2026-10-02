@@ -32,14 +32,14 @@
     /* Responsive Screen Container */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
 
-    table.count-table { width: 100%; min-width: 980px; border-collapse: collapse; text-align: center; font-size: 11.5px; }
-    table.count-table th, table.count-table td { border: 1px solid #64748b; padding: 5px 2px; white-space: nowrap; }
+    table.count-table { width: 100%; min-width: 1050px; border-collapse: collapse; text-align: center; font-size: 12px; }
+    table.count-table th, table.count-table td { border: 1px solid #64748b; padding: 6px 2px; white-space: nowrap; }
 
     .th-main { background: #1e3a8a; color: white; font-size: 13px; font-weight: bold; padding: 7px; text-transform: uppercase; }
-    .th-cat { color: white; font-weight: bold; font-size: 11.5px; }
-    .th-sub { background: #0284c7; color: white; font-size: 10.5px; padding: 4px 2px; }
+    .th-cat { color: white; font-weight: bold; font-size: 11.5px; padding: 5px 2px; }
+    .th-sub { background: #0284c7; color: white; font-size: 11px; padding: 4px 2px; }
 
-    input.cnt-in { width: 50px; height: 32px; padding: 2px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; background: #ffffff; }
+    input.cnt-in { width: 48px; height: 32px; padding: 2px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; background: #ffffff; }
     input.cnt-in:focus { outline: 2px solid #2563eb; background: #eff6ff; }
 
     .col-sc { background: #f8fafc; }
@@ -51,7 +51,7 @@
     .tot-cell { font-weight: bold; font-size: 12px; }
     .row-ps-tot { background: #fef08a !important; font-weight: bold; color: #854d0e; }
     .row-ups-tot { background: #e9d5ff !important; font-weight: bold; color: #6b21a8; }
-    .row-grand-tot { background: #bfdbfe !important; font-weight: bold; font-size: 12.5px; color: #1e3a8a; }
+    .row-grand-tot { background: #bfdbfe !important; font-weight: bold; font-size: 13px; color: #1e3a8a; }
 
     .print-header { display: none; text-align: center; margin-bottom: 8px; }
     .print-header h2 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; font-weight: 800; }
@@ -59,17 +59,16 @@
     .print-sign-row { display: none; }
 
     /* =========================================================
-       100% फुल A4 LANDSCAPE (आड़ा पेज) प्रिंट स्टाइल
+       100% परफेक्ट A4 LANDSCAPE (आड़ा पेज) प्रिंट स्टाइल
        ========================================================= */
     @page {
-      size: A4 landscape !important;
+      size: landscape !important;
       margin: 6mm 8mm !important;
     }
 
     @media print {
       html, body {
         width: 100% !important;
-        height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         background: #ffffff !important;
@@ -85,10 +84,6 @@
         width: 100% !important;
         max-width: 100% !important;
         border: none !important;
-        height: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
       }
 
       .no-print { display: none !important; }
@@ -96,66 +91,74 @@
 
       .print-header { display: block !important; }
       .print-header h2 { font-size: 15px !important; margin: 0 !important; }
-      .print-header p { font-size: 11px !important; margin: 2px 0 5px 0 !important; }
+      .print-header p { font-size: 11px !important; margin: 2px 0 6px 0 !important; }
 
       .table-responsive-box {
         overflow: visible !important;
         border: none !important;
         margin-bottom: 0 !important;
         width: 100% !important;
-        flex-grow: 1 !important;
       }
 
-      /* पूरी टेबल 100% फुल लैंडस्केप फैलाव (Full Height + Full Width) */
+      /* Fixed Table Layout - कोई भी कॉलम नहीं दबेगा, अंतिम लाइन सुरक्षित रहेगी */
       table.count-table {
         width: 100% !important;
         min-width: 100% !important;
+        table-layout: fixed !important;
         border: 1.5px solid #000 !important;
         border-collapse: collapse !important;
-        font-size: 11px !important;
       }
 
-      table.count-table tr {
-        height: 10mm !important; /* हर पंक्ति 10mm ऊंचाई लेगी जिससे पेज पूरा भरेगा */
+      /* हर पंक्ति की ऊंचाई 11.5mm - पूरा A4 लैंडस्केप भरेगा */
+      table.count-table tbody tr {
+        height: 11.5mm !important;
       }
-
+      table.count-table tfoot tr {
+        height: 11mm !important;
+      }
       table.count-table thead tr {
-        height: 7.5mm !important;
+        height: 8mm !important;
       }
 
       table.count-table th, table.count-table td {
         border: 1px solid #000 !important;
-        padding: 0 2px !important;
+        padding: 0 1px !important;
         color: #000 !important;
         vertical-align: middle !important;
+        font-size: 11.5px !important;
       }
 
       table.count-table th {
         font-weight: 800 !important;
-      }
-
-      .th-main {
         background: #e2e8f0 !important;
         color: #000 !important;
-        font-size: 12px !important;
       }
+
+      /* आनुपातिक प्रिंट कॉलम चौड़ाई सेटिंग्स */
+      col.c-cls { width: 8.5% !important; }
+      col.c-b { width: 6% !important; }
+      col.c-g { width: 6% !important; }
+      col.c-t { width: 7% !important; }
+      col.c-tot-b { width: 4.5% !important; }
+      col.c-tot-g { width: 4.5% !important; }
+      col.c-tot-all { width: 6.5% !important; }
 
       .th-cat {
         background: #cbd5e1 !important;
         color: #000 !important;
-        font-size: 10.5px !important;
+        font-size: 11px !important;
       }
 
       .th-sub {
         background: #f1f5f9 !important;
         color: #000 !important;
-        font-size: 9.5px !important;
+        font-size: 10px !important;
       }
 
       input.cnt-in {
         border: none !important;
         background: transparent !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -165,28 +168,29 @@
       }
 
       .tot-cell {
-        font-size: 12px !important;
+        font-size: 13px !important;
+        font-weight: bold !important;
       }
 
       .row-ps-tot { background: #fef9c3 !important; }
       .row-ups-tot { background: #f3e8ff !important; }
       .row-grand-tot { background: #dbeafe !important; }
 
-      /* हस्ताक्षर ब्लॉक */
+      /* हस्ताक्षर ब्लॉक - संतुलित निचला मार्जिन */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 15px !important;
+        margin-top: 25px !important;
         padding: 0 50px !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 12px !important;
+        font-size: 12.5px !important;
         font-weight: bold !important;
         border-top: 1.5px dashed #000 !important;
         width: 220px !important;
-        padding-top: 4px !important;
+        padding-top: 5px !important;
       }
     }
   </style>
@@ -248,12 +252,36 @@
   <!-- रिस्पॉन्सिव टेबल कंटेनर -->
   <div class="table-responsive-box">
     <table class="count-table" id="countTable">
+      <!-- कॉलम चौड़ाई गाइड (प्रिंट और स्क्रीन दोनों के लिए) -->
+      <colgroup>
+        <col class="c-cls" style="width: 8.5%;">
+        <!-- SC -->
+        <col class="c-b" style="width: 6%;">
+        <col class="c-g" style="width: 6%;">
+        <col class="c-t" style="width: 7%;">
+        <!-- ST -->
+        <col class="c-b" style="width: 6%;">
+        <col class="c-g" style="width: 6%;">
+        <col class="c-t" style="width: 7%;">
+        <!-- OBC -->
+        <col class="c-b" style="width: 6%;">
+        <col class="c-g" style="width: 6%;">
+        <col class="c-t" style="width: 7%;">
+        <!-- GEN -->
+        <col class="c-b" style="width: 6%;">
+        <col class="c-g" style="width: 6%;">
+        <col class="c-t" style="width: 7%;">
+        <!-- TOTAL -->
+        <col class="c-tot-b" style="width: 4.5%;">
+        <col class="c-tot-g" style="width: 4.5%;">
+        <col class="c-tot-all" style="width: 6.5%;">
+      </colgroup>
       <thead>
         <tr class="no-print">
-          <th colspan="17" class="th-main" id="tblBanner">STUDENTS COUNT REGISTER</th>
+          <th colspan="16" class="th-main" id="tblBanner">STUDENTS COUNT REGISTER</th>
         </tr>
         <tr>
-          <th rowspan="2" style="width: 80px; background:#0f172a; color:white;">कक्षा (CLASS)</th>
+          <th rowspan="2" style="background:#0f172a; color:white;">कक्षा</th>
           <th colspan="3" class="th-cat" style="background:#1d4ed8;">अनुसूचित जाति (SC)</th>
           <th colspan="3" class="th-cat" style="background:#7c3aed;">अनुसूचित जनजाति (ST)</th>
           <th colspan="3" class="th-cat" style="background:#0284c7;">अन्य पिछड़ा वर्ग (OBC)</th>
@@ -272,30 +300,30 @@
       <tfoot>
         <!-- प्राथमिक कुल (1 से 5) -->
         <tr class="row-ps-tot" id="rowPsTot">
-          <td style="font-weight:bold;">प्राथमिक कुल (1-5)</td>
+          <td style="font-weight:bold;">प्राथमिक (1-5)</td>
           <td id="tot_ps_sc_b">0</td><td id="tot_ps_sc_g">0</td><td id="tot_ps_sc_t" class="tot-cell">0</td>
           <td id="tot_ps_st_b">0</td><td id="tot_ps_st_g">0</td><td id="tot_ps_st_t" class="tot-cell">0</td>
           <td id="tot_ps_obc_b">0</td><td id="tot_ps_obc_g">0</td><td id="tot_ps_obc_t" class="tot-cell">0</td>
           <td id="tot_ps_gen_b">0</td><td id="tot_ps_gen_g">0</td><td id="tot_ps_gen_t" class="tot-cell">0</td>
-          <td id="tot_ps_all_b">0</td><td id="tot_ps_all_g">0</td><td id="tot_ps_grand" class="tot-cell" style="font-size:13px;">0</td>
+          <td id="tot_ps_all_b">0</td><td id="tot_ps_all_g">0</td><td id="tot_ps_grand" class="tot-cell" style="font-size:13.5px;">0</td>
         </tr>
         <!-- उच्च प्राथमिक कुल (6 से 8) -->
         <tr class="row-ups-tot" id="rowUpsTot">
-          <td style="font-weight:bold;">उच्च प्राथ. कुल (6-8)</td>
+          <td style="font-weight:bold;">उच्च प्राथ. (6-8)</td>
           <td id="tot_ups_sc_b">0</td><td id="tot_ups_sc_g">0</td><td id="tot_ups_sc_t" class="tot-cell">0</td>
           <td id="tot_ups_st_b">0</td><td id="tot_ups_st_g">0</td><td id="tot_ups_st_t" class="tot-cell">0</td>
           <td id="tot_ups_obc_b">0</td><td id="tot_ups_obc_g">0</td><td id="tot_ups_obc_t" class="tot-cell">0</td>
           <td id="tot_ups_gen_b">0</td><td id="tot_ups_gen_g">0</td><td id="tot_ups_gen_t" class="tot-cell">0</td>
-          <td id="tot_ups_all_b">0</td><td id="tot_ups_all_g">0</td><td id="tot_ups_grand" class="tot-cell" style="font-size:13px;">0</td>
+          <td id="tot_ups_all_b">0</td><td id="tot_ups_all_g">0</td><td id="tot_ups_grand" class="tot-cell" style="font-size:13.5px;">0</td>
         </tr>
         <!-- संपूर्ण विद्यालय महायोग (1 से 8) -->
         <tr class="row-grand-tot" id="rowGrandTot">
-          <td style="font-weight:bold;">विद्यालय महायोग (1-8)</td>
+          <td style="font-weight:bold;">विद्यालय महायोग</td>
           <td id="tot_sc_b">0</td><td id="tot_sc_g">0</td><td id="tot_sc_t" class="tot-cell">0</td>
           <td id="tot_st_b">0</td><td id="tot_st_g">0</td><td id="tot_st_t" class="tot-cell">0</td>
           <td id="tot_obc_b">0</td><td id="tot_obc_g">0</td><td id="tot_obc_t" class="tot-cell">0</td>
           <td id="tot_gen_b">0</td><td id="tot_gen_g">0</td><td id="tot_gen_t" class="tot-cell">0</td>
-          <td id="tot_all_b">0</td><td id="tot_all_g">0</td><td id="tot_all_grand" class="tot-cell" style="font-size:14px; color:#b91c1c;">0</td>
+          <td id="tot_all_b">0</td><td id="tot_all_g">0</td><td id="tot_all_grand" class="tot-cell" style="font-size:14.5px; color:#b91c1c;">0</td>
         </tr>
       </tfoot>
     </table>
@@ -471,7 +499,7 @@ function updateHeader() {
   var dst = document.getElementById('inDistrict').value.trim();
   var udi = document.getElementById('inUdise').value.trim();
 
-  var banner = "STUDENTS COUNT REGISTER - SESSION " + ses;
+  var banner = "STUDENTS ENROLLMENT REGISTER - SESSION " + ses;
   var sub = [];
   if (sch) sub.push("विद्यालय: " + sch);
   if (blk) sub.push("ब्लॉक: " + blk);
