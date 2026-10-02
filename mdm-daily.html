@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,16 +7,18 @@
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background: #f8fafc; margin: 0; padding: 12px; color: #0f172a; }
-    .container { max-width: 1300px; margin: auto; background: #ffffff; padding: 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    .container { max-width: 900px; margin: auto; background: #ffffff; padding: 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
     
     .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 15px; }
     .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
+    /* School Details */
     .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
     .form-group input { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12.5px; background: white; text-transform: uppercase; }
 
+    /* Daily Box */
     .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
     .daily-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
     .daily-meta-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -25,37 +27,35 @@
 
     .menu-badge { background: #166534; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 14px; text-transform: uppercase; }
 
-    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 11px 24px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print-daily:hover { background: #115e59; }
 
+    /* Screen Tables */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
-
-    .daily-att-table { width: 100%; min-width: 850px; border-collapse: collapse; text-align: center; font-size: 12px; }
-    .daily-att-table th, .daily-att-table td { border: 1px solid #94a3b8; padding: 7px 3px; white-space: nowrap; text-transform: uppercase; }
-    .daily-att-table th { background: #15803d; color: white; font-size: 11.5px; }
-    .daily-att-input { width: 54px; height: 34px; padding: 2px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 14px; }
+    table.daily-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12.5px; }
+    table.daily-table th, table.daily-table td { border: 1px solid #94a3b8; padding: 8px 4px; white-space: nowrap; }
+    table.daily-table th { background: #15803d; color: white; font-size: 12px; }
+    .daily-att-input { width: 55px; height: 35px; padding: 2px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 15px; }
     .daily-att-input:focus { outline: 2px solid #047857; background: #ecfdf5; }
 
-    .daily-mat-table { width: 100%; min-width: 600px; border-collapse: collapse; text-align: center; font-size: 12.5px; }
-    .daily-mat-table th, .daily-mat-table td { border: 1px solid #94a3b8; padding: 10px 5px; white-space: nowrap; text-transform: uppercase; }
-    .daily-mat-table th { background: #065f46; color: white; font-size: 12px; }
-    .daily-mat-table td.val { font-weight: bold; color: #047857; background: #f0fdf4; font-size: 14px; }
-
     .print-header { display: none; text-align: center; margin-bottom: 8px; }
-    .print-header h2 { margin: 0; font-size: 17px; color: #000; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
-    .print-header p { margin: 3px 0 0 0; font-size: 11.5px; font-weight: bold; color: #111; text-transform: uppercase; }
+    .print-header h2 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; font-weight: 800; }
+    .print-header p { margin: 3px 0 0 0; font-size: 11.5px; font-weight: bold; color: #111; }
     .print-menu-box { display: none; }
     .print-sign-row { display: none; }
 
+    /* =========================================================
+       100% डिफ़ॉल्ट A4 PORTRAIT (खड़ा पन्ना) फुल पेज प्रिंट इंजन
+       ========================================================= */
     @page {
-      size: 297mm 210mm !important;
-      margin: 8mm 12mm !important;
+      size: portrait !important;
+      margin: 8mm 10mm !important;
     }
 
     @media print {
       html, body {
-        width: 297mm !important;
-        height: 210mm !important;
+        width: 100% !important;
+        height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         background: #ffffff !important;
@@ -79,20 +79,19 @@
 
       .no-print { display: none !important; }
       
-      .print-header { display: block !important; margin-bottom: 6px !important; }
-      .print-header h2 { font-size: 16px !important; margin: 0 !important; }
-      .print-header p { font-size: 11.5px !important; margin: 3px 0 6px 0 !important; }
+      .print-header { display: block !important; }
+      .print-header h2 { font-size: 15px !important; margin: 0 !important; }
+      .print-header p { font-size: 11px !important; margin: 3px 0 6px 0 !important; }
 
       .print-menu-box {
         display: block !important;
         border: 1.5px solid #000 !important;
         background: #f1f5f9 !important;
-        padding: 8px 12px !important;
-        margin-bottom: 15px !important;
-        font-size: 12.5px !important;
+        padding: 8px 10px !important;
+        margin-bottom: 12px !important;
+        font-size: 12px !important;
         font-weight: bold !important;
         text-align: left !important;
-        text-transform: uppercase !important;
       }
 
       .daily-box {
@@ -101,110 +100,96 @@
         margin: 0 !important;
         background: transparent !important;
         flex-grow: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
       }
 
       .table-responsive-box {
         overflow: visible !important;
         border: none !important;
-        margin-bottom: 18px !important;
+        margin-bottom: 15px !important;
         width: 100% !important;
       }
 
-      table.daily-att-table {
+      /* उपस्थिति तालिका (Portrait Fit) */
+      table.att-portrait-table {
         width: 100% !important;
-        min-width: 100% !important;
         border: 1.5px solid #000 !important;
         border-collapse: collapse !important;
-        table-layout: fixed !important;
       }
 
-      table.daily-att-table thead tr {
-        height: 12mm !important;
-      }
-
-      table.daily-att-table tbody tr {
-        height: 18mm !important;
-      }
-
-      table.daily-att-table th, table.daily-att-table td {
+      table.att-portrait-table th, table.att-portrait-table td {
         border: 1px solid #000 !important;
-        padding: 0 2px !important;
-        color: #000 !important;
-        vertical-align: middle !important;
+        padding: 6px 4px !important;
         font-size: 11.5px !important;
+        color: #000 !important;
+        text-align: center !important;
       }
 
-      table.daily-att-table th {
+      table.att-portrait-table th {
         background: #e2e8f0 !important;
-        color: #000 !important;
         font-weight: 800 !important;
       }
 
       .daily-att-input {
         border: none !important;
         background: transparent !important;
-        font-size: 15px !important;
+        font-size: 14px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
-        height: 100% !important;
+        height: auto !important;
         text-align: center !important;
       }
 
-      table.daily-mat-table {
+      /* सामग्री तालिका (खड़े पन्ने पर बड़ा व स्पष्ट फैलाव) */
+      table.mat-portrait-table {
         width: 100% !important;
-        min-width: 100% !important;
         border: 1.5px solid #000 !important;
         border-collapse: collapse !important;
       }
 
-      table.daily-mat-table thead tr {
-        height: 14mm !important;
+      table.mat-portrait-table tr {
+        height: 12mm !important; /* पंक्तियां बड़ी होकर पेज भरेंगी */
       }
 
-      table.daily-mat-table tbody tr {
-        height: 25mm !important;
-      }
-
-      table.daily-mat-table th, table.daily-mat-table td {
+      table.mat-portrait-table th, table.mat-portrait-table td {
         border: 1px solid #000 !important;
-        padding: 0 4px !important;
+        padding: 6px 8px !important;
         color: #000 !important;
         vertical-align: middle !important;
       }
 
-      table.daily-mat-table th {
+      table.mat-portrait-table th {
         background: #cbd5e1 !important;
-        color: #000 !important;
         font-weight: 800 !important;
-        font-size: 13px !important;
+        font-size: 12.5px !important;
+        text-align: left !important;
+        width: 60% !important;
       }
 
-      table.daily-mat-table td.val {
+      table.mat-portrait-table td.val {
         background: transparent !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 17px !important;
+        font-size: 15px !important;
+        text-align: center !important;
+        width: 40% !important;
       }
 
+      /* हस्ताक्षर ब्लॉक */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 35px !important;
-        padding: 0 40px !important;
+        margin-top: 30px !important;
+        padding: 0 15px !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 12.5px !important;
+        font-size: 11.5px !important;
         font-weight: bold !important;
         border-top: 1.5px dashed #000 !important;
-        width: 240px !important;
-        padding-top: 6px !important;
-        text-transform: uppercase !important;
+        width: 180px !important;
+        padding-top: 5px !important;
       }
     }
   </style>
@@ -214,36 +199,38 @@
 <div class="container">
   
   <div class="top-bar no-print">
-    <h2>🍲 Daily MDM Register & Calculation</h2>
+    <h2>🍲 दैनिक MDM कैलकुलेटर (Daily Report)</h2>
     <a href="index.html">← होमपेज</a>
   </div>
 
   <div class="school-details no-print">
     <div class="form-group">
-      <label>SCHOOL NAME:</label>
+      <label>SCHOOL NAME (विद्यालय का नाम):</label>
       <input type="text" id="inSchool" placeholder="E.G. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>BLOCK:</label>
+      <label>BLOCK (विकास खंड):</label>
       <input type="text" id="inBlock" placeholder="E.G. MOHALI" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>DISTRICT:</label>
+      <label>DISTRICT (जनपद):</label>
       <input type="text" id="inDistrict" placeholder="E.G. KANPUR" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>UDISE CODE:</label>
+      <label>UDISE CODE (यू-डायस कोड):</label>
       <input type="tel" maxlength="11" id="inUdise" placeholder="E.G. 08750350708" oninput="filterNum(this); updateHeader();">
     </div>
   </div>
 
+  <!-- Print Header -->
   <div class="print-header">
-    <h2 id="prTitle">DAILY MID DAY MEAL (MDM) CONSUMPTION & DISTRIBUTION REGISTER</h2>
+    <h2 id="prTitle">दैनिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका</h2>
     <p id="prSub"></p>
   </div>
 
+  <!-- Print Menu Box -->
   <div class="print-menu-box" id="prMenu">
-    TODAY'S MENU: LOADING...
+    दैनिक मेनू: लोड हो रहा है...
   </div>
 
   <div class="daily-box">
@@ -251,39 +238,41 @@
     <div class="daily-top-row no-print">
       <div class="daily-meta-group">
         <div class="daily-date-badge">
-          <span>DATE:</span>
+          <span>दिनांक:</span>
           <span id="dispDateFormatted">01/10/2026</span>
           <input type="date" id="dailyDate" onchange="onDailyDateChange()">
         </div>
         <div>
-          <label style="font-size:12px; font-weight:bold; color:#166534;">DAY: </label>
-          <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:130px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px; text-transform:uppercase;">
+          <label style="font-size:12px; font-weight:bold; color:#166534;">दिन: </label>
+          <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:130px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px;">
         </div>
       </div>
-      <button class="btn-print-daily" type="button" onclick="forceLandscapePrint()">🖨️️ A4 LANDSCAPE PRINT (FULL PAGE)</button>
+      <!-- सामान्य 1-क्लिक प्रिंट बटन -->
+      <button class="btn-print-daily" type="button" onclick="triggerPortraitPrint()">🖨️ A4 पोर्ट्रेट प्रिंट निकालें (1 Page Full)</button>
     </div>
 
-    <div class="menu-badge no-print" id="dailyMenuName">MENU LOADING...</div>
+    <div class="menu-badge no-print" id="dailyMenuName">मेनू लोड हो रहा है...</div>
 
     <div style="font-size:11.5px; color:#065f46; font-weight:bold; margin-bottom:6px;" class="no-print">
-      👉 ENTER CLASS-WISE BENEFICIARY ATTENDANCE (CLASS 1 TO 8):
+      👉 कक्षा 1 से 8 की दैनिक उपस्थिति दर्ज करें:
     </div>
 
+    <!-- 1. कक्षा-वार उपस्थिति (Portrait Fit Table) -->
     <div class="table-responsive-box">
-      <table class="daily-att-table">
+      <table class="daily-table att-portrait-table">
         <thead>
           <tr>
-            <th style="width:110px;">CATEGORY</th>
-            <th>CLASS 1</th><th>CLASS 2</th><th>CLASS 3</th><th>CLASS 4</th><th>CLASS 5</th>
-            <th>CLASS 6</th><th>CLASS 7</th><th>CLASS 8</th>
-            <th style="background:#1e3a8a;">PRIMARY (1-5)</th>
-            <th style="background:#6d28d9;">UPPER PR. (6-8)</th>
-            <th style="background:#b91c1c;">TOTAL BENEFICIARIES</th>
+            <th colspan="5" style="background:#1e3a8a;">प्राथमिक स्तर (कक्षा 1 से 5)</th>
+            <th colspan="3" style="background:#6d28d9;">उच्च प्राथमिक (कक्षा 6 से 8)</th>
+            <th rowspan="2" style="background:#b91c1c;">कुल छात्र</th>
+          </tr>
+          <tr>
+            <th>कक्षा 1</th><th>कक्षा 2</th><th>कक्षा 3</th><th>कक्षा 4</th><th>कक्षा 5</th>
+            <th>कक्षा 6</th><th>कक्षा 7</th><th>कक्षा 8</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="font-weight:bold; background:#f8fafc;">ATTENDANCE</td>
             <td><input type="tel" class="daily-att-input" id="d_cls_1" oninput="cleanNum(this); calcDaily();"></td>
             <td><input type="tel" class="daily-att-input" id="d_cls_2" oninput="cleanNum(this); calcDaily();"></td>
             <td><input type="tel" class="daily-att-input" id="d_cls_3" oninput="cleanNum(this); calcDaily();"></td>
@@ -292,29 +281,39 @@
             <td><input type="tel" class="daily-att-input" id="d_cls_6" oninput="cleanNum(this); calcDaily();"></td>
             <td><input type="tel" class="daily-att-input" id="d_cls_7" oninput="cleanNum(this); calcDaily();"></td>
             <td><input type="tel" class="daily-att-input" id="d_cls_8" oninput="cleanNum(this); calcDaily();"></td>
-            <td style="font-weight:bold; color:#1e3a8a; font-size:14px; background:#eff6ff;" id="d_tot_ps">0</td>
-            <td style="font-weight:bold; color:#6d28d9; font-size:14px; background:#f5f3ff;" id="d_tot_ups">0</td>
-            <td style="font-weight:bold; color:#b91c1c; font-size:15px; background:#fee2e2;" id="d_tot_all">0</td>
+            <td style="font-weight:bold; color:#b91c1c; font-size:16px; background:#fee2e2;" id="d_tot_all">0</td>
+          </tr>
+          <tr style="background:#f8fafc; font-weight:bold;">
+            <td colspan="5" style="color:#1e3a8a;">प्राथमिक योग: <span id="d_tot_ps">0</span></td>
+            <td colspan="3" style="color:#6d28d9;">उच्च प्राथ. योग: <span id="d_tot_ups">0</span></td>
+            <td>-</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div style="font-size:11.5px; color:#065f46; font-weight:bold; margin-bottom:6px; text-transform:uppercase;">
-      📦 REQUIRED FOODGRAIN & MATERIAL TODAY (PRIMARY + UPPER PRIMARY):
+    <div style="font-size:12px; color:#065f46; font-weight:bold; margin-bottom:6px;">
+      📦 आज बनने वाली कुल आवश्यक सामग्री व खाद्यान्न:
     </div>
 
+    <!-- 2. डायनामिक सामग्री तालिका (खड़े पन्ने पर नीचे तक विस्तार) -->
     <div class="table-responsive-box">
-      <table class="daily-mat-table">
-        <thead id="matTableHead"></thead>
+      <table class="daily-table mat-portrait-table">
+        <thead>
+          <tr>
+            <th>खाद्यान्न / सामग्री का नाम</th>
+            <th>आवश्यक कुल मात्रा (PS + UPS)</th>
+          </tr>
+        </thead>
         <tbody id="matTableBody"></tbody>
       </table>
     </div>
 
+    <!-- हस्ताक्षर ब्लॉक -->
     <div class="print-sign-row">
-      <div class="print-sign-col">SIGNATURE COOK</div>
-      <div class="print-sign-col">SIGNATURE MDM IN-CHARGE</div>
-      <div class="print-sign-col">SIGNATURE HEADMASTER / PRINCIPAL</div>
+      <div class="print-sign-col">हस्ताक्षर रसोइया</div>
+      <div class="print-sign-col">हस्ताक्षर एमडीएम प्रभारी</div>
+      <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
     </div>
 
   </div>
@@ -323,6 +322,10 @@
 
 <script>
 var daysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var daysHindi = {
+  "Sunday": "रविवार", "Monday": "सोमवार", "Tuesday": "मंगलवार",
+  "Wednesday": "बुधवार", "Thursday": "गुरुवार", "Friday": "शुक्रवार", "Saturday": "शनिवार"
+};
 
 function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
@@ -354,25 +357,25 @@ function onDailyDateChange() {
 
   var dt = new Date(yr, mo - 1, da);
   var dayName = daysArr[dt.getDay()];
-  document.getElementById('dailyDayName').value = dayName;
+  document.getElementById('dailyDayName').value = daysHindi[dayName] + " (" + dayName + ")";
 
   var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
 
   var mText = "";
-  if (dayName === "Monday") mText = "MONDAY: ROTI WITH MIXED VEGETABLE & FRESH SEASONAL FRUIT";
-  else if (dayName === "Tuesday") mText = "TUESDAY: DAL WITH VEGETABLES & RICE";
-  else if (dayName === "Wednesday") mText = "WEDNESDAY: TAHARI WITH SOYA CHUNKS, VEGETABLES & BOILED MILK";
+  if (dayName === "Monday") mText = "सोमवार: सब्जी, रोटी व ताजा मौसमी फल";
+  else if (dayName === "Tuesday") mText = "मंगलवार: सब्जी युक्त दाल व चावल";
+  else if (dayName === "Wednesday") mText = "बुधवार: सोया बड़ी युक्त तहरी व गर्म पका हुआ दूध";
   else if (dayName === "Thursday") {
     mText = isWinter 
-      ? "THURSDAY: ROTI, DAL-VEGETABLE, ROASTED GRAM (CHANA) & CHIKKI (WINTER NUTRITION)"
-      : "THURSDAY: ROTI WITH DAL & VEGETABLES";
+      ? "गुरुवार: सब्जी युक्त दाल, रोटी, भुने चने व चिक्की (शीतकालीन पोषण)"
+      : "गुरुवार: सब्जी युक्त दाल व रोटी";
   }
-  else if (dayName === "Friday") mText = "FRIDAY: TAHARI WITH SOYA CHUNKS & VEGETABLES";
-  else if (dayName === "Saturday") mText = "SATURDAY: RICE WITH SOYA CHUNKS & MIXED VEGETABLES";
-  else if (dayName === "Sunday") mText = "SUNDAY: WEEKLY HOLIDAY (KITCHEN CLOSED)";
+  else if (dayName === "Friday") mText = "शुक्रवार: सोया बड़ी युक्त सब्जी व तहरी";
+  else if (dayName === "Saturday") mText = "शनिवार: सोया बड़ी युक्त सब्जी व चावल";
+  else if (dayName === "Sunday") mText = "रविवार: साप्ताहिक अवकाश (रसोई बंद)";
 
-  document.getElementById('dailyMenuName').innerText = "TODAY'S MENU: " + mText;
-  document.getElementById('prMenu').innerText = "TODAY'S MENU: " + mText + " | DATE: " + dFormatted + " (" + dayName.toUpperCase() + ")";
+  document.getElementById('dailyMenuName').innerText = "दैनिक मेनू: " + mText;
+  document.getElementById('prMenu').innerText = "दैनिक मेनू: " + mText + " | दिनांक: " + dFormatted + " (" + daysHindi[dayName] + ")";
 
   calcDaily();
   updateHeader();
@@ -399,15 +402,14 @@ function calcDaily() {
   document.getElementById('d_tot_ups').innerText = ups;
   document.getElementById('d_tot_all').innerText = tot;
 
-  var thHead = document.getElementById('matTableHead');
   var tbBody = document.getElementById('matTableBody');
 
   if (isSun) {
-    thHead.innerHTML = '<tr><th style="padding:15px;">HOLIDAY</th></tr>';
-    tbBody.innerHTML = '<tr><td style="font-weight:bold; color:#b91c1c; padding:20px;">SUNDAY - KITCHEN CLOSED</td></tr>';
+    tbBody.innerHTML = '<tr><td colspan="2" style="font-weight:bold; color:#b91c1c; padding:25px; text-align:center;">रविवार - साप्ताहिक अवकाश (रसोई बंद)</td></tr>';
     return;
   }
 
+  // Calculate Materials
   var rice = (day === "Tuesday" || day === "Wednesday" || day === "Friday" || day === "Saturday") ? (ps * 0.1 + ups * 0.15) : 0;
   var flour = (day === "Monday" || day === "Thursday") ? (ps * 0.1 + ups * 0.15) : 0;
   var veg = (ps * 0.05 + ups * 0.075);
@@ -421,65 +423,63 @@ function calcDaily() {
   var chana = (day === "Thursday" && isWinter) ? (tot * 50) : 0;
   var chikki = (day === "Thursday" && isWinter) ? (tot * 20) : 0;
 
+  // Items List based on Menu
   var items = [];
 
   if (day === "Monday") {
-    items.push({ name: "WHEAT FLOUR (KG)", val: flour.toFixed(2) });
-    items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
-    items.push({ name: "FRESH FRUITS (QTY)", val: fruit });
+    items.push({ name: "गेहूं का आटा (Wheat Flour)", val: flour.toFixed(2) + " kg" });
+    items.push({ name: "हरी सब्जी (Vegetables)", val: veg.toFixed(3) + " kg" });
+    items.push({ name: "खाद्य तेल (Cooking Oil)", val: oil.toFixed(1) + " g/ml" });
+    items.push({ name: "ताजा मौसमी फल (Fresh Fruits)", val: fruit + " फल" });
   } 
   else if (day === "Tuesday") {
-    items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
-    items.push({ name: "DAL / PULSES (KG)", val: dal.toFixed(2) });
-    items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "चावल (Rice)", val: rice.toFixed(2) + " kg" });
+    items.push({ name: "दाल (Pulses / Dal)", val: dal.toFixed(2) + " kg" });
+    items.push({ name: "हरी सब्जी (Vegetables)", val: veg.toFixed(3) + " kg" });
+    items.push({ name: "खाद्य तेल (Cooking Oil)", val: oil.toFixed(1) + " g/ml" });
   } 
   else if (day === "Wednesday") {
-    items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
-    items.push({ name: "SOYA CHUNKS (KG)", val: soya.toFixed(2) });
-    items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
-    items.push({ name: "BOILED MILK (L)", val: milk.toFixed(2) });
-    items.push({ name: "SUGAR (KG)", val: sugar.toFixed(2) });
-    items.push({ name: "GLASSES (QTY)", val: glass });
+    items.push({ name: "चावल / तहरी (Rice)", val: rice.toFixed(2) + " kg" });
+    items.push({ name: "सोयाबीन बड़ी (Soya Chunks)", val: soya.toFixed(2) + " kg" });
+    items.push({ name: "हरी सब्जी (Vegetables)", val: veg.toFixed(3) + " kg" });
+    items.push({ name: "खाद्य तेल (Cooking Oil)", val: oil.toFixed(1) + " g/ml" });
+    items.push({ name: "गर्म पका दूध (Boiled Milk)", val: milk.toFixed(2) + " Ltr" });
+    items.push({ name: "चीनी (Sugar for Milk)", val: sugar.toFixed(2) + " kg" });
+    items.push({ name: "दूध के गिलास (Glasses)", val: glass + " गिलास" });
   } 
   else if (day === "Thursday") {
-    items.push({ name: "WHEAT FLOUR (KG)", val: flour.toFixed(2) });
-    items.push({ name: "DAL / PULSES (KG)", val: dal.toFixed(2) });
-    items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "गेहूं का आटा (Wheat Flour)", val: flour.toFixed(2) + " kg" });
+    items.push({ name: "दाल (Pulses / Dal)", val: dal.toFixed(2) + " kg" });
+    items.push({ name: "हरी सब्जी (Vegetables)", val: veg.toFixed(3) + " kg" });
+    items.push({ name: "खाद्य तेल (Cooking Oil)", val: oil.toFixed(1) + " g/ml" });
     if (isWinter) {
-      items.push({ name: "ROASTED GRAM (G)", val: chana });
-      items.push({ name: "CHIKKI (G)", val: chikki });
+      items.push({ name: "भुने चने (Roasted Gram)", val: chana + " g" });
+      items.push({ name: "गुड़ की चिक्की (Chikki)", val: chikki + " g" });
     }
   } 
   else if (day === "Friday") {
-    items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
-    items.push({ name: "SOYA CHUNKS (KG)", val: soya.toFixed(2) });
-    items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "चावल / तहरी (Rice)", val: rice.toFixed(2) + " kg" });
+    items.push({ name: "सोयाबीन बड़ी (Soya Chunks)", val: soya.toFixed(2) + " kg" });
+    items.push({ name: "हरी सब्जी (Vegetables)", val: veg.toFixed(3) + " kg" });
+    items.push({ name: "खाद्य तेल (Cooking Oil)", val: oil.toFixed(1) + " g/ml" });
   } 
   else if (day === "Saturday") {
-    items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
-    items.push({ name: "SOYA CHUNKS (KG)", val: soya.toFixed(2) });
-    items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "चावल (Rice)", val: rice.toFixed(2) + " kg" });
+    items.push({ name: "सोयाबीन बड़ी (Soya Chunks)", val: soya.toFixed(2) + " kg" });
+    items.push({ name: "हरी सब्जी (Vegetables)", val: veg.toFixed(3) + " kg" });
+    items.push({ name: "खाद्य तेल (Cooking Oil)", val: oil.toFixed(1) + " g/ml" });
   }
 
-  var trHead = '<tr>';
-  var trBody = '<tr>';
-
+  // Render Table Rows
+  var html = "";
   for (var i = 0; i < items.length; i++) {
-    trHead += '<th>' + items[i].name + '</th>';
-    trBody += '<td class="val">' + (tot === 0 ? "0.00" : items[i].val) + '</td>';
+    html += 
+      '<tr>' +
+        '<td style="font-weight:600; text-align:left; padding-left:12px;">' + (i + 1) + '. ' + items[i].name + '</td>' +
+        '<td class="val">' + (tot === 0 ? "0.00" : items[i].val) + '</td>' +
+      '</tr>';
   }
-
-  trHead += '</tr>';
-  trBody += '</tr>';
-
-  thHead.innerHTML = trHead;
-  tbBody.innerHTML = trBody;
+  tbBody.innerHTML = html;
 }
 
 function updateHeader() {
@@ -488,7 +488,6 @@ function updateHeader() {
   var dst = document.getElementById('inDistrict').value.trim();
   var udi = document.getElementById('inUdise').value.trim();
 
-  document.getElementById('prTitle').innerText = "DAILY MID DAY MEAL (MDM) CONSUMPTION & DISTRIBUTION REGISTER";
   var sub = [];
   if (sch) sub.push("SCHOOL: " + sch);
   if (blk) sub.push("BLOCK: " + blk);
@@ -497,20 +496,10 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
-function forceLandscapePrint() {
+// डिफ़ॉल्ट पोर्ट्रेट प्रिंट ट्रिगर
+function triggerPortraitPrint() {
   updateHeader();
-  
-  var style = document.createElement('style');
-  style.id = 'force-landscape-style';
-  style.innerHTML = '@page { size: 297mm 210mm !important; margin: 8mm 12mm !important; }';
-  document.head.appendChild(style);
-
   window.print();
-
-  setTimeout(function() {
-    var s = document.getElementById('force-landscape-style');
-    if (s) s.remove();
-  }, 1000);
 }
 
 initDate();
