@@ -49,7 +49,7 @@
        ========================================================= */
     @page {
       size: portrait;
-      margin: 5mm 6mm !important;
+      margin: 6mm 7mm !important;
     }
 
     @media print {
@@ -76,7 +76,7 @@
 
       .no-print { display: none !important; }
       
-      .print-header { display: block !important; margin-bottom: 4px !important; }
+      .print-header { display: block !important; margin-bottom: 5px !important; }
       .print-header h2 { font-size: 13.5px !important; margin: 0 !important; }
       .print-header p { font-size: 10px !important; margin: 1px 0 4px 0 !important; }
 
@@ -85,7 +85,7 @@
         border: 1.5px solid #000 !important;
         background: #f1f5f9 !important;
         padding: 5px 8px !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 10px !important;
         font-size: 11px !important;
         font-weight: bold !important;
         text-align: left !important;
@@ -102,11 +102,11 @@
       .table-responsive-box {
         overflow: visible !important;
         border: none !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 12px !important;
         width: 100% !important;
       }
 
-      /* 1. Attendance Table in Print */
+      /* 1. Attendance Table */
       table.att-portrait-table {
         width: 100% !important;
         border: 1.5px solid #000 !important;
@@ -115,7 +115,7 @@
 
       table.att-portrait-table th, table.att-portrait-table td {
         border: 1px solid #000 !important;
-        padding: 4px 2px !important;
+        padding: 5px 2px !important;
         font-size: 10.5px !important;
         color: #000 !important;
         text-align: center !important;
@@ -139,60 +139,53 @@
         padding: 0 !important;
       }
 
-      /* 2. Material Table in Print (Strict 1-Page Height) */
-      table.mat-portrait-table {
+      /* 2. Direct 2-Column Material Table */
+      table.mat-direct-table {
         width: 100% !important;
         border: 1.5px solid #000 !important;
         border-collapse: collapse !important;
       }
 
-      table.mat-portrait-table tr {
-        height: 8.5mm !important; /* कॉम्पैक्ट हाइट जिससे 1 ही पेज में रहे */
+      table.mat-direct-table tr {
+        height: 10mm !important;
       }
 
-      table.mat-portrait-table th, table.mat-portrait-table td {
+      table.mat-direct-table th, table.mat-direct-table td {
         border: 1px solid #000 !important;
-        padding: 2px 5px !important;
+        padding: 4px 8px !important;
         color: #000 !important;
         vertical-align: middle !important;
         text-transform: uppercase !important;
       }
 
-      table.mat-portrait-table th {
+      table.mat-direct-table th {
         background: #cbd5e1 !important;
         font-weight: 800 !important;
-        font-size: 10.5px !important;
-        text-align: center !important;
-      }
-
-      table.mat-portrait-table td.mat-name {
-        font-weight: 700 !important;
         font-size: 11px !important;
-        text-align: left !important;
-        padding-left: 8px !important;
       }
 
-      table.mat-portrait-table td.val {
+      table.mat-direct-table td.mat-name {
+        font-weight: 700 !important;
+        font-size: 11.5px !important;
+        text-align: left !important;
+        padding-left: 12px !important;
+        width: 65% !important;
+      }
+
+      table.mat-direct-table td.val-tot {
         background: transparent !important;
         color: #000 !important;
-        font-weight: bold !important;
-        font-size: 11.5px !important;
-        text-align: center !important;
-      }
-
-      table.mat-portrait-table td.val-tot {
-        background: #f1f5f9 !important;
-        color: #000 !important;
         font-weight: 800 !important;
-        font-size: 12px !important;
+        font-size: 13.5px !important;
         text-align: center !important;
+        width: 35% !important;
       }
 
-      /* Signatures in Print */
+      /* 3. Signature Block with Proper Signing Gap */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 20px !important;
+        margin-top: 55px !important; /* हस्ताक्षर के लिए पर्याप्त खुली जगह */
         padding: 0 15px !important;
         page-break-inside: avoid !important;
       }
@@ -203,7 +196,7 @@
         font-weight: bold !important;
         border-top: 1.2px dashed #000 !important;
         width: 200px !important;
-        padding-top: 4px !important;
+        padding-top: 6px !important;
         text-transform: uppercase !important;
       }
     }
@@ -237,13 +230,13 @@
     </div>
   </div>
 
-  <!-- Print Header (Pure English) -->
+  <!-- Print Header -->
   <div class="print-header">
     <h2 id="prTitle">DAILY MID DAY MEAL (MDM) CONSUMPTION & DISTRIBUTION REGISTER</h2>
     <p id="prSub"></p>
   </div>
 
-  <!-- Print Menu Box (Pure English) -->
+  <!-- Print Menu Box -->
   <div class="print-menu-box" id="prMenu">
     TODAY'S MENU: LOADING...
   </div>
@@ -307,25 +300,23 @@
     </div>
 
     <div style="font-size:12px; color:#065f46; font-weight:bold; margin-bottom:6px; text-transform:uppercase;">
-      📦 REQUIRED FOODGRAIN, MATERIAL & DAILY CONVERSION COST:
+      📦 REQUIRED FOODGRAIN & MATERIAL TODAY (TOTAL QUANTITY):
     </div>
 
-    <!-- 2. Dynamic Material Table (Pure English) -->
+    <!-- 2. Direct Material Table (Pure Total Quantity Only, No Cost) -->
     <div class="table-responsive-box">
-      <table class="daily-table mat-portrait-table">
+      <table class="daily-table mat-direct-table">
         <thead>
           <tr>
-            <th style="width:40%;">ITEM / MATERIAL DESCRIPTION</th>
-            <th style="width:20%;">PRIMARY (1-5)</th>
-            <th style="width:20%;">UPPER PR. (6-8)</th>
-            <th style="width:20%; background:#0f766e;">TOTAL QUANTITY</th>
+            <th style="width:65%; text-align:left; padding-left:12px;">ITEM / MATERIAL DESCRIPTION</th>
+            <th style="width:35%; background:#0f766e;">TOTAL REQUIRED QUANTITY</th>
           </tr>
         </thead>
         <tbody id="matTableBody"></tbody>
       </table>
     </div>
 
-    <!-- 3. Signatures (Pure English) -->
+    <!-- 3. Signatures with Adequate Spacing -->
     <div class="print-sign-row">
       <div class="print-sign-col">SIGNATURE COOK</div>
       <div class="print-sign-col">SIGNATURE MDM IN-CHARGE</div>
@@ -373,7 +364,6 @@ function onDailyDateChange() {
 
   var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
 
-  // English Menus
   var mText = "";
   if (dayName === "Monday") mText = "MONDAY: ROTI WITH MIXED VEGETABLE & FRESH SEASONAL FRUIT";
   else if (dayName === "Tuesday") mText = "TUESDAY: DAL WITH VEGETABLES & RICE";
@@ -418,7 +408,7 @@ function calcDaily() {
   var tbBody = document.getElementById('matTableBody');
 
   if (isSun) {
-    tbBody.innerHTML = '<tr><td colspan="4" style="font-weight:bold; color:#b91c1c; padding:30px; text-align:center;">SUNDAY - WEEKLY HOLIDAY (KITCHEN CLOSED)</td></tr>';
+    tbBody.innerHTML = '<tr><td colspan="2" style="font-weight:bold; color:#b91c1c; padding:30px; text-align:center;">SUNDAY - WEEKLY HOLIDAY (KITCHEN CLOSED)</td></tr>';
     return;
   }
 
@@ -428,10 +418,7 @@ function calcDaily() {
   if (day === "Monday" || day === "Thursday") {
     rows.push({
       name: "1. WHEAT FLOUR (ROTI)",
-      unit: "KG",
-      ps: (ps * 0.1).toFixed(2),
-      ups: (ups * 0.15).toFixed(2),
-      tot: (ps * 0.1 + ups * 0.15).toFixed(2)
+      val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG"
     });
   }
 
@@ -439,10 +426,7 @@ function calcDaily() {
   if (day === "Tuesday" || day === "Wednesday" || day === "Friday" || day === "Saturday") {
     rows.push({
       name: "1. RICE / FOODGRAIN",
-      unit: "KG",
-      ps: (ps * 0.1).toFixed(2),
-      ups: (ups * 0.15).toFixed(2),
-      tot: (ps * 0.1 + ups * 0.15).toFixed(2)
+      val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG"
     });
   }
 
@@ -450,10 +434,7 @@ function calcDaily() {
   if (day === "Tuesday" || day === "Thursday") {
     rows.push({
       name: "2. PULSES (DAL)",
-      unit: "KG",
-      ps: (ps * 0.02).toFixed(2),
-      ups: (ups * 0.03).toFixed(2),
-      tot: (ps * 0.02 + ups * 0.03).toFixed(2)
+      val: (ps * 0.02 + ups * 0.03).toFixed(2) + " KG"
     });
   }
 
@@ -461,53 +442,35 @@ function calcDaily() {
   if (day === "Wednesday" || day === "Friday" || day === "Saturday") {
     rows.push({
       name: "2. SOYA CHUNKS",
-      unit: "KG",
-      ps: ((ps * 0.1) * 0.1).toFixed(2),
-      ups: ((ups * 0.15) * 0.1).toFixed(2),
-      tot: (((ps * 0.1 + ups * 0.15)) * 0.1).toFixed(2)
+      val: (((ps * 0.1 + ups * 0.15)) * 0.1).toFixed(2) + " KG"
     });
   }
 
   // 5. Vegetables
   rows.push({
     name: "3. MIXED VEGETABLES",
-    unit: "KG",
-    ps: (ps * 0.05).toFixed(3),
-    ups: (ups * 0.075).toFixed(3),
-    tot: (ps * 0.05 + ups * 0.075).toFixed(3)
+    val: (ps * 0.05 + ups * 0.075).toFixed(3) + " KG"
   });
 
   // 6. Cooking Oil (Only Oil)
   rows.push({
     name: "4. COOKING OIL",
-    unit: "G/ML",
-    ps: (ps * 5).toFixed(1),
-    ups: (ups * 7.5).toFixed(1),
-    tot: (ps * 5 + ups * 7.5).toFixed(1)
+    val: (ps * 5 + ups * 7.5).toFixed(1) + " G/ML"
   });
 
   // 7. Milk & Sugar (Wednesday)
   if (day === "Wednesday") {
     rows.push({
       name: "5. BOILED MILK",
-      unit: "L",
-      ps: (ps * 0.15).toFixed(2),
-      ups: (ups * 0.20).toFixed(2),
-      tot: (ps * 0.15 + ups * 0.20).toFixed(2)
+      val: (ps * 0.15 + ups * 0.20).toFixed(2) + " LTR"
     });
     rows.push({
       name: "6. SUGAR FOR MILK",
-      unit: "KG",
-      ps: ((ps * 0.15) * 0.1).toFixed(2),
-      ups: ((ups * 0.20) * 0.1).toFixed(2),
-      tot: (((ps * 0.15 + ups * 0.20)) * 0.1).toFixed(2)
+      val: (((ps * 0.15 + ups * 0.20)) * 0.1).toFixed(2) + " KG"
     });
     rows.push({
       name: "7. MILK GLASSES",
-      unit: "QTY",
-      ps: ps,
-      ups: ups,
-      tot: tot
+      val: tot + " GLASSES"
     });
   }
 
@@ -515,10 +478,7 @@ function calcDaily() {
   if (day === "Monday") {
     rows.push({
       name: "5. FRESH FRUITS",
-      unit: "QTY",
-      ps: ps,
-      ups: ups,
-      tot: tot
+      val: tot + " FRUITS"
     });
   }
 
@@ -526,46 +486,21 @@ function calcDaily() {
   if (day === "Thursday" && isWinter) {
     rows.push({
       name: "5. ROASTED GRAM (CHANA)",
-      unit: "G",
-      ps: (ps * 50),
-      ups: (ups * 50),
-      tot: (tot * 50)
+      val: (tot * 50) + " G"
     });
     rows.push({
       name: "6. CHIKKI",
-      unit: "G",
-      ps: (ps * 20),
-      ups: (ups * 20),
-      tot: (tot * 20)
+      val: (tot * 20) + " G"
     });
   }
 
-  // 10. Conversion Cost
-  var ratePs = 6.78;
-  var rateUps = 10.17;
-  var costPs = (ps * ratePs) + (day === "Monday" ? ps * 4.0 : 0) + ((day === "Thursday" && isWinter) ? ps * 5.0 : 0);
-  var costUps = (ups * rateUps) + (day === "Monday" ? ups * 4.0 : 0) + ((day === "Thursday" && isWinter) ? ups * 5.0 : 0);
-  var costTot = costPs + costUps;
-
-  rows.push({
-    name: "★ TOTAL CONVERSION COST",
-    unit: "₹",
-    ps: "₹" + (tot === 0 ? "0.00" : costPs.toFixed(2)),
-    ups: "₹" + (tot === 0 ? "0.00" : costUps.toFixed(2)),
-    tot: "₹" + (tot === 0 ? "0.00" : costTot.toFixed(2))
-  });
-
-  // Render Table
+  // Render Table (Pure 2 Columns)
   var html = "";
   for (var i = 0; i < rows.length; i++) {
-    var isCost = (i === rows.length - 1);
-    var u = rows[i].unit;
     html += 
-      '<tr' + (isCost ? ' style="background:#fefce8; font-weight:bold;"' : '') + '>' +
-        '<td class="mat-name"' + (isCost ? ' style="color:#b91c1c; font-weight:800;"' : '') + '>' + rows[i].name + '</td>' +
-        '<td class="val">' + (tot === 0 ? "-" : rows[i].ps + (isCost ? "" : " " + u)) + '</td>' +
-        '<td class="val">' + (tot === 0 ? "-" : rows[i].ups + (isCost ? "" : " " + u)) + '</td>' +
-        '<td class="val-tot"' + (isCost ? ' style="color:#b91c1c; font-size:12.5px;"' : '') + '>' + (tot === 0 ? "-" : rows[i].tot + (isCost ? "" : " " + u)) + '</td>' +
+      '<tr>' +
+        '<td class="mat-name">' + rows[i].name + '</td>' +
+        '<td class="val-tot">' + (tot === 0 ? "0.00" : rows[i].val) + '</td>' +
       '</tr>';
   }
   tbBody.innerHTML = html;
