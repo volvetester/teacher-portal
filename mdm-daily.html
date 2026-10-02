@@ -116,7 +116,6 @@
         width: 100% !important;
       }
 
-      /* Attendance Table in Print */
       table.daily-att-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -154,7 +153,6 @@
         text-align: center !important;
       }
 
-      /* Dynamic Material Table in Print - Expanded Rows */
       table.daily-mat-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -163,7 +161,7 @@
       }
 
       table.daily-mat-table tr {
-        height: 15mm !important; /* पंक्तियां बड़ी होकर पेज भरेंगी */
+        height: 15mm !important;
       }
 
       table.daily-mat-table th, table.daily-mat-table td {
@@ -187,7 +185,6 @@
         font-size: 14.5px !important;
       }
 
-      /* Signatures Footer */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
@@ -235,13 +232,13 @@
     </div>
   </div>
 
-  <!-- Print Header (Pure English) -->
+  <!-- Print Header -->
   <div class="print-header">
     <h2 id="prTitle">DAILY MID DAY MEAL (MDM) CONSUMPTION & DISTRIBUTION REGISTER</h2>
     <p id="prSub"></p>
   </div>
 
-  <!-- Print Menu Box (Pure English) -->
+  <!-- Print Menu Box -->
   <div class="print-menu-box" id="prMenu">
     TODAY'S MENU: LOADING...
   </div>
@@ -269,7 +266,7 @@
       👉 ENTER CLASS-WISE BENEFICIARY ATTENDANCE (CLASS 1 TO 8):
     </div>
 
-    <!-- 1. Class-wise Attendance Table -->
+    <!-- Attendance Table -->
     <div class="table-responsive-box">
       <table class="daily-att-table">
         <thead>
@@ -305,7 +302,7 @@
       📦 REQUIRED FOODGRAIN & MATERIAL TODAY (PRIMARY + UPPER PRIMARY):
     </div>
 
-    <!-- 2. DYNAMIC Material Table (Only Required Items Displayed) -->
+    <!-- DYNAMIC Material Table -->
     <div class="table-responsive-box">
       <table class="daily-mat-table">
         <thead id="matTableHead"></thead>
@@ -313,7 +310,7 @@
       </table>
     </div>
 
-    <!-- Print Signatures (Pure English) -->
+    <!-- Signatures -->
     <div class="print-sign-row">
       <div class="print-sign-col">SIGNATURE COOK</div>
       <div class="print-sign-col">SIGNATURE MDM IN-CHARGE</div>
@@ -361,7 +358,6 @@ function onDailyDateChange() {
 
   var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
 
-  // English Menu Definitions
   var mText = "";
   if (dayName === "Monday") mText = "MONDAY: ROTI WITH MIXED VEGETABLE & FRESH SEASONAL FRUIT";
   else if (dayName === "Tuesday") mText = "TUESDAY: DAL WITH VEGETABLES & RICE";
@@ -426,26 +422,26 @@ function calcDaily() {
   var chana = (day === "Thursday" && isWinter) ? (tot * 50) : 0;
   var chikki = (day === "Thursday" && isWinter) ? (tot * 20) : 0;
 
-  // Build DYNAMIC Material Columns based on DAY
+  // Build DYNAMIC Material Columns (OIL only, SPICES removed)
   var items = [];
 
   if (day === "Monday") {
     items.push({ name: "WHEAT FLOUR (KG)", val: flour.toFixed(2) });
     items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL / SPICES (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
     items.push({ name: "FRESH FRUITS (QTY)", val: fruit });
   } 
   else if (day === "Tuesday") {
     items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
     items.push({ name: "DAL / PULSES (KG)", val: dal.toFixed(2) });
     items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL / SPICES (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
   } 
   else if (day === "Wednesday") {
     items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
     items.push({ name: "SOYA CHUNKS (KG)", val: soya.toFixed(2) });
     items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL / SPICES (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
     items.push({ name: "BOILED MILK (L)", val: milk.toFixed(2) });
     items.push({ name: "SUGAR (KG)", val: sugar.toFixed(2) });
     items.push({ name: "GLASSES (QTY)", val: glass });
@@ -454,7 +450,7 @@ function calcDaily() {
     items.push({ name: "WHEAT FLOUR (KG)", val: flour.toFixed(2) });
     items.push({ name: "DAL / PULSES (KG)", val: dal.toFixed(2) });
     items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL / SPICES (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
     if (isWinter) {
       items.push({ name: "ROASTED GRAM (G)", val: chana });
       items.push({ name: "CHIKKI (G)", val: chikki });
@@ -464,13 +460,13 @@ function calcDaily() {
     items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
     items.push({ name: "SOYA CHUNKS (KG)", val: soya.toFixed(2) });
     items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL / SPICES (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
   } 
   else if (day === "Saturday") {
     items.push({ name: "RICE (KG)", val: rice.toFixed(2) });
     items.push({ name: "SOYA CHUNKS (KG)", val: soya.toFixed(2) });
     items.push({ name: "VEGETABLES (KG)", val: veg.toFixed(3) });
-    items.push({ name: "OIL / SPICES (G/ML)", val: oil.toFixed(1) });
+    items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
   }
 
   // Generate Table HTML
