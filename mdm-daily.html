@@ -13,12 +13,10 @@
     .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
-    /* School Details */
     .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
     .form-group input { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12.5px; background: white; text-transform: uppercase; }
 
-    /* Daily Control Box */
     .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
     .daily-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
     .daily-meta-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -30,7 +28,6 @@
     .btn-print-daily { background: #0f766e; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print-daily:hover { background: #115e59; }
 
-    /* Scrollable Container for Screen */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
 
     .daily-att-table { width: 100%; min-width: 850px; border-collapse: collapse; text-align: center; font-size: 12px; }
@@ -50,18 +47,15 @@
     .print-menu-box { display: none; }
     .print-sign-row { display: none; }
 
-    /* =========================================================
-       100% COMPLETE A4 LANDSCAPE FULL PAGE FIT ENGINE
-       ========================================================= */
     @page {
-      size: A4 landscape !important;
+      size: 297mm 210mm !important;
       margin: 8mm 12mm !important;
     }
 
     @media print {
       html, body {
-        width: 100% !important;
-        height: 100% !important;
+        width: 297mm !important;
+        height: 210mm !important;
         margin: 0 !important;
         padding: 0 !important;
         background: #ffffff !important;
@@ -119,7 +113,6 @@
         width: 100% !important;
       }
 
-      /* उपस्थिति तालिका (Attendance Table) - प्रॉपर ऊँचाई */
       table.daily-att-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -129,11 +122,11 @@
       }
 
       table.daily-att-table thead tr {
-        height: 11mm !important;
+        height: 12mm !important;
       }
 
       table.daily-att-table tbody tr {
-        height: 16mm !important;
+        height: 18mm !important;
       }
 
       table.daily-att-table th, table.daily-att-table td {
@@ -161,7 +154,6 @@
         text-align: center !important;
       }
 
-      /* सामग्री तालिका (Material Table) - बड़ा व स्पष्ट फैलाव */
       table.daily-mat-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -170,11 +162,11 @@
       }
 
       table.daily-mat-table thead tr {
-        height: 13mm !important;
+        height: 14mm !important;
       }
 
       table.daily-mat-table tbody tr {
-        height: 22mm !important; /* बड़ी पंक्तियाँ जिससे पेज खाली न रहे */
+        height: 25mm !important;
       }
 
       table.daily-mat-table th, table.daily-mat-table td {
@@ -195,10 +187,9 @@
         background: transparent !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 16.5px !important;
+        font-size: 17px !important;
       }
 
-      /* हस्ताक्षर ब्लॉक */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
@@ -246,13 +237,11 @@
     </div>
   </div>
 
-  <!-- Print Header -->
   <div class="print-header">
     <h2 id="prTitle">DAILY MID DAY MEAL (MDM) CONSUMPTION & DISTRIBUTION REGISTER</h2>
     <p id="prSub"></p>
   </div>
 
-  <!-- Print Menu Box -->
   <div class="print-menu-box" id="prMenu">
     TODAY'S MENU: LOADING...
   </div>
@@ -271,7 +260,7 @@
           <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:130px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px; text-transform:uppercase;">
         </div>
       </div>
-      <button class="btn-print-daily" type="button" onclick="forceLandscapePrint()">🖨️ A4 LANDSCAPE PRINT (FULL PAGE)</button>
+      <button class="btn-print-daily" type="button" onclick="forceLandscapePrint()">🖨️️ A4 LANDSCAPE PRINT (FULL PAGE)</button>
     </div>
 
     <div class="menu-badge no-print" id="dailyMenuName">MENU LOADING...</div>
@@ -280,7 +269,6 @@
       👉 ENTER CLASS-WISE BENEFICIARY ATTENDANCE (CLASS 1 TO 8):
     </div>
 
-    <!-- Attendance Table -->
     <div class="table-responsive-box">
       <table class="daily-att-table">
         <thead>
@@ -316,7 +304,6 @@
       📦 REQUIRED FOODGRAIN & MATERIAL TODAY (PRIMARY + UPPER PRIMARY):
     </div>
 
-    <!-- DYNAMIC Material Table -->
     <div class="table-responsive-box">
       <table class="daily-mat-table">
         <thead id="matTableHead"></thead>
@@ -324,7 +311,6 @@
       </table>
     </div>
 
-    <!-- Signatures -->
     <div class="print-sign-row">
       <div class="print-sign-col">SIGNATURE COOK</div>
       <div class="print-sign-col">SIGNATURE MDM IN-CHARGE</div>
@@ -372,7 +358,6 @@ function onDailyDateChange() {
 
   var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
 
-  // English Menu Definitions
   var mText = "";
   if (dayName === "Monday") mText = "MONDAY: ROTI WITH MIXED VEGETABLE & FRESH SEASONAL FRUIT";
   else if (dayName === "Tuesday") mText = "TUESDAY: DAL WITH VEGETABLES & RICE";
@@ -423,7 +408,6 @@ function calcDaily() {
     return;
   }
 
-  // Calculate Materials
   var rice = (day === "Tuesday" || day === "Wednesday" || day === "Friday" || day === "Saturday") ? (ps * 0.1 + ups * 0.15) : 0;
   var flour = (day === "Monday" || day === "Thursday") ? (ps * 0.1 + ups * 0.15) : 0;
   var veg = (ps * 0.05 + ups * 0.075);
@@ -437,7 +421,6 @@ function calcDaily() {
   var chana = (day === "Thursday" && isWinter) ? (tot * 50) : 0;
   var chikki = (day === "Thursday" && isWinter) ? (tot * 20) : 0;
 
-  // DYNAMIC Material Columns (OIL only)
   var items = [];
 
   if (day === "Monday") {
@@ -484,7 +467,6 @@ function calcDaily() {
     items.push({ name: "OIL (G/ML)", val: oil.toFixed(1) });
   }
 
-  // Generate Table HTML
   var trHead = '<tr>';
   var trBody = '<tr>';
 
@@ -515,13 +497,12 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
-// लैंडस्केप को फ़ोर्स करने वाला प्रिंट इंजन
 function forceLandscapePrint() {
   updateHeader();
   
   var style = document.createElement('style');
   style.id = 'force-landscape-style';
-  style.innerHTML = '@page { size: landscape !important; margin: 8mm 12mm !important; }';
+  style.innerHTML = '@page { size: 297mm 210mm !important; margin: 8mm 12mm !important; }';
   document.head.appendChild(style);
 
   window.print();
