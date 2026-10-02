@@ -61,18 +61,17 @@
     .btn-print { background: #166534; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print:hover { background: #15803d; }
 
-    /* Print Header & Signatures (Default Hidden on Screen) */
     .print-header { display: none; text-align: center; margin-bottom: 6px; }
     .print-header h2 { margin: 0; font-size: 15px; text-transform: uppercase; font-weight: 800; color: #000; }
-    .print-header p { margin: 2px 0 0 0; font-size: 10.5px; font-weight: bold; color: #111; }
+    .print-header p { margin: 2px 0 0 0; font-size: 11px; font-weight: bold; color: #111; }
     .print-sign-row { display: none; }
 
     /* =========================================================
-       सख्त A4 PORTRAIT (खड़ा पेज) प्रिंट स्टाइल (FULL PAGE 1-PAGE FIT)
+       सख्त A4 PORTRAIT (खड़ा पेज) - 100% FULL PAGE EXPANSION
        ========================================================= */
     @page {
-      size: A4 portrait !important; /* खड़ा (पोर्ट्रेट) पेज */
-      margin: 5mm 6mm !important;    /* 1-पेज फिटिंग हेतु सुव्यवस्थित मार्जिन */
+      size: A4 portrait !important;
+      margin: 6mm 7mm !important;
     }
 
     @media print {
@@ -96,46 +95,48 @@
       }
 
       .no-print { display: none !important; }
-      .print-header { display: block !important; }
+      .print-header { display: block !important; margin-bottom: 5px !important; }
+      .print-header h2 { font-size: 14px !important; }
+      .print-header p { font-size: 10px !important; }
 
-      /* Summary Cards in Print */
+      /* Summary Cards - प्रॉपर चौड़ाई और ऊंचाई */
       .summary-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 5px !important;
+        gap: 6px !important;
         margin-bottom: 6px !important;
       }
 
       .summary-card {
-        padding: 4px 6px !important;
-        font-size: 8.5px !important;
+        padding: 5px 7px !important;
+        font-size: 9.5px !important;
         border: 1px solid #000 !important;
-        border-top-width: 2.5px !important;
+        border-top-width: 3px !important;
       }
-      .summary-card h4 { font-size: 9px !important; margin-bottom: 2px !important; }
-      .summary-card table { font-size: 8px !important; }
-      .summary-card td { padding: 0.5px 2px !important; }
+      .summary-card h4 { font-size: 10px !important; margin-bottom: 3px !important; font-weight: bold !important; }
+      .summary-card table { font-size: 9px !important; }
+      .summary-card td { padding: 1px 2px !important; }
 
       .table-responsive-box {
         overflow: visible !important;
         border: none !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
         width: 100% !important;
       }
 
-      /* पूरी टेबल 100% फुल पोर्ट्रेट चौड़ाई पर */
+      /* पूरी टेबल को पूरे पेज पर फैलाने हेतु पंक्ति ऊंचाई (Height Expansion) */
       table.mdm-table {
         width: 100% !important;
         min-width: 100% !important;
-        font-size: 8.2px !important;
         border: 1.5px solid #000 !important;
+        font-size: 9.5px !important; /* 30% बड़ा फॉन्ट */
       }
 
       table.mdm-table th, table.mdm-table td {
         border: 1px solid #000 !important;
-        padding: 1.8px 1px !important;
+        padding: 3.5px 1.5px !important; /* पंक्तियां बड़ी और साफ दिखेंगी */
         color: #000 !important;
-        line-height: 1.1 !important;
+        line-height: 1.15 !important;
       }
 
       table.mdm-table th {
@@ -144,13 +145,13 @@
         font-weight: 800 !important;
       }
 
-      .th-banner { font-size: 9.5px !important; padding: 3px !important; }
-      .th-sub, .th-sub-ups { font-size: 7.8px !important; }
+      .th-banner { font-size: 10.5px !important; padding: 4px !important; }
+      .th-sub, .th-sub-ups { font-size: 9px !important; }
 
       input.att-in {
         border: none !important;
         background: transparent !important;
-        font-size: 8.5px !important;
+        font-size: 10px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -160,21 +161,21 @@
 
       .sunday-row { background: #fee2e2 !important; }
 
-      /* हस्ताक्षर ब्लॉक */
+      /* हस्ताक्षर ब्लॉक - पेज के निचले हिस्से में */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 20px !important;
-        padding: 0 25px !important;
+        margin-top: 25px !important;
+        padding: 0 35px !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 11px !important;
+        font-size: 12px !important;
         font-weight: bold !important;
-        border-top: 1.2px dashed #000 !important;
-        width: 180px !important;
-        padding-top: 4px !important;
+        border-top: 1.5px dashed #000 !important;
+        width: 200px !important;
+        padding-top: 5px !important;
       }
     }
   </style>
@@ -188,7 +189,6 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
-  <!-- विद्यालय व माह विवरण (स्क्रीन) -->
   <div class="school-details no-print">
     <div class="form-group">
       <label>सत्र / वर्ष:</label>
@@ -221,7 +221,6 @@
     </div>
   </div>
 
-  <!-- दरें (स्क्रीन) -->
   <div class="rates-box no-print">
     <span style="font-weight:bold; color:#065f46;">⚙️ दरें (प्रति छात्र):</span>
     <div><label>प्राथमिक: </label><input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalc()"> ₹</div>
@@ -230,14 +229,12 @@
     <div><label>गुरुवार पोषण: </label><input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalc()"> ₹</div>
   </div>
 
-  <!-- वर्ग चयन टैब (स्क्रीन) -->
   <div class="tab-container no-print">
     <button class="tab-btn active" id="btnComp" onclick="setLevel('comp')">🏫 कंपोजिट (1-8)</button>
     <button class="tab-btn" id="btnPs" onclick="setLevel('ps')">🎒 प्राथमिक (1-5)</button>
     <button class="tab-btn" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
   </div>
 
-  <!-- मासिक समरी कार्ड्स -->
   <div class="summary-grid">
     <div class="summary-card ps" id="sc_ps">
       <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
@@ -274,16 +271,14 @@
   </div>
 
   <div class="btn-container no-print">
-    <button class="btn-print" type="button" onclick="forcePortraitPrint()">🖨️ A4 पोर्ट्रेट प्रिंट निकालें (1 Page)</button>
+    <button class="btn-print" type="button" onclick="forcePortraitPrint()">🖨️ A4 पोर्ट्रेट प्रिंट निकालें (1 Page Full)</button>
   </div>
 
-  <!-- प्रिंट हेडर -->
   <div class="print-header">
     <h2 id="prTitle">मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका</h2>
     <p id="prSub"></p>
   </div>
 
-  <!-- मासिक तालिका -->
   <div class="table-responsive-box">
     <table class="mdm-table">
       <thead>
@@ -310,7 +305,6 @@
     </table>
   </div>
 
-  <!-- प्रिंट हस्ताक्षर ब्लॉक -->
   <div class="print-sign-row">
     <div class="print-sign-col">हस्ताक्षर एमडीएम प्रभारी</div>
     <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
@@ -331,7 +325,6 @@ function cleanNum(el) {
   if (p >= 0) el.setSelectionRange(p, p);
 }
 
-// मोबाइल हरा तीर एवं एंटर: ठीक अगले दिन के उसी कॉलम पर जाना
 function moveNext(e, type, day) {
   var code = e.keyCode || e.which;
   if (code === 13 || e.key === "Enter" || code === 40 || e.key === "ArrowDown") {
@@ -404,16 +397,16 @@ function buildMonth() {
       '<td style="font-weight:600;">' + dn + '</td>' +
       '<td class="ps-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ps_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ps\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
-      '<td class="ps-col" id="ps_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
-      '<td class="ps-col" id="ps_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
-      '<td class="ps-col" id="ps_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
-      '<td class="ps-col" id="ps_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>' +
+      '<td class="ps-col val-wheat" id="ps_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
+      '<td class="ps-col val-rice" id="ps_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
+      '<td class="ps-col val-fruit" id="ps_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
+      '<td class="ps-col val-cost" id="ps_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>' +
       '<td class="ups-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ups_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ups\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
       '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
-      '<td class="ups-col" id="ups_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
-      '<td class="ups-col" id="ups_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
-      '<td class="ups-col" id="ups_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
-      '<td class="ups-col" id="ups_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>';
+      '<td class="ups-col val-wheat" id="ups_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
+      '<td class="ups-col val-rice" id="ups_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
+      '<td class="ups-col val-fruit" id="ups_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
+      '<td class="ups-col val-cost" id="ups_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>';
 
     tb.appendChild(tr);
   }
@@ -535,17 +528,17 @@ function updateHeader() {
   if (udi) sub.push("(यू-डायस: " + udi + ")");
 
   document.getElementById('thBanner').innerText = banner;
-  document.getElementById('prTitle').innerText = banner;
+  document.getElementById('prTitle').innerText = "मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका - " + m + " " + y;
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
-// पोर्ट्रेट लेआउट को फ़ोर्स करने वाला प्रिंट इंजन (1-Page Strict)
+// 100% फुल पोर्ट्रेट फ़ोर्स करने वाला प्रिंट इंजन
 function forcePortraitPrint() {
   updateHeader();
   
   var style = document.createElement('style');
   style.id = 'force-portrait-style';
-  style.innerHTML = '@page { size: portrait !important; margin: 5mm 6mm !important; }';
+  style.innerHTML = '@page { size: portrait !important; margin: 6mm 7mm !important; }';
   document.head.appendChild(style);
 
   window.print();
