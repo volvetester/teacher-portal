@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>छात्र संख्या पंजिका (Student Enrollment Register)</title>
+  <title>Student Enrollment Register</title>
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background: #f8fafc; margin: 0; padding: 12px; color: #0f172a; }
@@ -36,8 +36,8 @@
     table.count-table th, table.count-table td { border: 1px solid #64748b; padding: 6px 2px; white-space: nowrap; }
 
     .th-main { background: #1e3a8a; color: white; font-size: 13px; font-weight: bold; padding: 7px; text-transform: uppercase; }
-    .th-cat { color: white; font-weight: bold; font-size: 11.5px; padding: 5px 2px; }
-    .th-sub { background: #0284c7; color: white; font-size: 11px; padding: 4px 2px; }
+    .th-cat { color: white; font-weight: bold; font-size: 11.5px; padding: 5px 2px; text-transform: uppercase; }
+    .th-sub { background: #0284c7; color: white; font-size: 11px; padding: 4px 2px; text-transform: uppercase; }
 
     input.cnt-in { width: 48px; height: 32px; padding: 2px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; background: #ffffff; }
     input.cnt-in:focus { outline: 2px solid #2563eb; background: #eff6ff; }
@@ -54,12 +54,12 @@
     .row-grand-tot { background: #bfdbfe !important; font-weight: bold; font-size: 13px; color: #1e3a8a; }
 
     .print-header { display: none; text-align: center; margin-bottom: 8px; }
-    .print-header h2 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; font-weight: 800; }
-    .print-header p { margin: 2px 0 0 0; font-size: 11.5px; font-weight: bold; color: #111; }
+    .print-header h2 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
+    .print-header p { margin: 2px 0 0 0; font-size: 11px; font-weight: bold; color: #111; text-transform: uppercase; }
     .print-sign-row { display: none; }
 
     /* =========================================================
-       100% परफेक्ट A4 LANDSCAPE (आड़ा पेज) प्रिंट स्टाइल
+       100% COMPLETE ENGLISH A4 LANDSCAPE PRINT ENGINE
        ========================================================= */
     @page {
       size: landscape !important;
@@ -84,6 +84,10 @@
         width: 100% !important;
         max-width: 100% !important;
         border: none !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
       }
 
       .no-print { display: none !important; }
@@ -91,7 +95,7 @@
 
       .print-header { display: block !important; }
       .print-header h2 { font-size: 15px !important; margin: 0 !important; }
-      .print-header p { font-size: 11px !important; margin: 2px 0 6px 0 !important; }
+      .print-header p { font-size: 10.5px !important; margin: 2px 0 6px 0 !important; }
 
       .table-responsive-box {
         overflow: visible !important;
@@ -100,7 +104,7 @@
         width: 100% !important;
       }
 
-      /* Fixed Table Layout - कोई भी कॉलम नहीं दबेगा, अंतिम लाइन सुरक्षित रहेगी */
+      /* Fixed Table Layout - No column crushing, outer borders locked */
       table.count-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -109,7 +113,6 @@
         border-collapse: collapse !important;
       }
 
-      /* हर पंक्ति की ऊंचाई 11.5mm - पूरा A4 लैंडस्केप भरेगा */
       table.count-table tbody tr {
         height: 11.5mm !important;
       }
@@ -126,6 +129,7 @@
         color: #000 !important;
         vertical-align: middle !important;
         font-size: 11.5px !important;
+        text-transform: uppercase !important;
       }
 
       table.count-table th {
@@ -134,7 +138,6 @@
         color: #000 !important;
       }
 
-      /* आनुपातिक प्रिंट कॉलम चौड़ाई सेटिंग्स */
       col.c-cls { width: 8.5% !important; }
       col.c-b { width: 6% !important; }
       col.c-g { width: 6% !important; }
@@ -146,13 +149,13 @@
       .th-cat {
         background: #cbd5e1 !important;
         color: #000 !important;
-        font-size: 11px !important;
+        font-size: 10.5px !important;
       }
 
       .th-sub {
         background: #f1f5f9 !important;
         color: #000 !important;
-        font-size: 10px !important;
+        font-size: 9.5px !important;
       }
 
       input.cnt-in {
@@ -176,7 +179,7 @@
       .row-ups-tot { background: #f3e8ff !important; }
       .row-grand-tot { background: #dbeafe !important; }
 
-      /* हस्ताक्षर ब्लॉक - संतुलित निचला मार्जिन */
+      /* Signature Footer */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
@@ -186,11 +189,12 @@
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 12.5px !important;
+        font-size: 12px !important;
         font-weight: bold !important;
         border-top: 1.5px dashed #000 !important;
-        width: 220px !important;
+        width: 250px !important;
         padding-top: 5px !important;
+        text-transform: uppercase !important;
       }
     }
   </style>
@@ -204,42 +208,42 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
-  <!-- विद्यालय एवं सत्र विवरण -->
+  <!-- विद्यालय एवं सत्र विवरण (स्क्रीन) -->
   <div class="school-details no-print">
     <div class="form-group">
-      <label>सत्र (Session):</label>
+      <label>सत्र (SESSION):</label>
       <select id="selSession" onchange="updateHeader()"></select>
     </div>
     <div class="form-group">
-      <label>विद्यालय का नाम:</label>
+      <label>विद्यालय का नाम (SCHOOL NAME):</label>
       <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCapital(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>विकास खंड (Block):</label>
+      <label>विकास खंड (BLOCK):</label>
       <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCapital(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>जनपद (District):</label>
+      <label>जनपद (DISTRICT):</label>
       <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCapital(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>यू-डायस कोड:</label>
+      <label>यू-डायस कोड (UDISE CODE):</label>
       <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNumbers(this); updateHeader();">
     </div>
   </div>
 
   <!-- स्तर चयन टैब -->
   <div class="tab-container no-print">
-    <button class="tab-btn active" id="btnComp" type="button" onclick="setLevel('comp')">🏫 कंपोजिट विद्यालय (1 से 8)</button>
-    <button class="tab-btn" id="btnPs" type="button" onclick="setLevel('ps')">🎒 प्राथमिक विद्यालय (1 से 5)</button>
-    <button class="tab-btn" id="btnUps" type="button" onclick="setLevel('ups')">🏛️ उच्च प्राथमिक विद्यालय (6 से 8)</button>
+    <button class="tab-btn active" id="btnComp" type="button" onclick="setLevel('comp')">🏫 COMPOSITE SCHOOL (1 TO 8)</button>
+    <button class="tab-btn" id="btnPs" type="button" onclick="setLevel('ps')">🎒 PRIMARY SCHOOL (1 TO 5)</button>
+    <button class="tab-btn" id="btnUps" type="button" onclick="setLevel('ups')">🏛️ UPPER PRIMARY SCHOOL (6 TO 8)</button>
   </div>
 
   <div class="btn-container no-print">
-    <button class="btn-print" type="button" onclick="forceLandscapePrint()">🖨️ A4 लैंडस्केप प्रिंट निकालें (Full Page)</button>
+    <button class="btn-print" type="button" onclick="forceLandscapePrint()">🖨️ A4 LANDSCAPE PRINT (FULL PAGE)</button>
   </div>
 
-  <!-- प्रिंट हेडर -->
+  <!-- प्रिंट हेडर (Pure English) -->
   <div class="print-header">
     <h2 id="prTitle">STUDENTS ENROLLMENT REGISTER</h2>
     <p id="prSub"></p>
@@ -252,7 +256,6 @@
   <!-- रिस्पॉन्सिव टेबल कंटेनर -->
   <div class="table-responsive-box">
     <table class="count-table" id="countTable">
-      <!-- कॉलम चौड़ाई गाइड (प्रिंट और स्क्रीन दोनों के लिए) -->
       <colgroup>
         <col class="c-cls" style="width: 8.5%;">
         <!-- SC -->
@@ -278,29 +281,29 @@
       </colgroup>
       <thead>
         <tr class="no-print">
-          <th colspan="16" class="th-main" id="tblBanner">STUDENTS COUNT REGISTER</th>
+          <th colspan="16" class="th-main" id="tblBanner">STUDENTS ENROLLMENT REGISTER</th>
         </tr>
         <tr>
-          <th rowspan="2" style="background:#0f172a; color:white;">कक्षा</th>
-          <th colspan="3" class="th-cat" style="background:#1d4ed8;">अनुसूचित जाति (SC)</th>
-          <th colspan="3" class="th-cat" style="background:#7c3aed;">अनुसूचित जनजाति (ST)</th>
-          <th colspan="3" class="th-cat" style="background:#0284c7;">अन्य पिछड़ा वर्ग (OBC)</th>
-          <th colspan="3" class="th-cat" style="background:#475569;">सामान्य (GEN)</th>
-          <th colspan="3" class="th-cat" style="background:#15803d;">कुल योग (TOTAL)</th>
+          <th rowspan="2" style="background:#0f172a; color:white;">CLASS</th>
+          <th colspan="3" class="th-cat" style="background:#1d4ed8;">SCHEDULED CASTE (SC)</th>
+          <th colspan="3" class="th-cat" style="background:#7c3aed;">SCHEDULED TRIBE (ST)</th>
+          <th colspan="3" class="th-cat" style="background:#0284c7;">OTHER BACKWARD CLASS (OBC)</th>
+          <th colspan="3" class="th-cat" style="background:#475569;">GENERAL (GEN)</th>
+          <th colspan="3" class="th-cat" style="background:#15803d;">GRAND TOTAL</th>
         </tr>
         <tr>
-          <th class="th-sub">बालक</th><th class="th-sub">बालिका</th><th class="th-sub" style="background:#1e40af;">योग</th>
-          <th class="th-sub">बालक</th><th class="th-sub">बालिका</th><th class="th-sub" style="background:#6b21a8;">योग</th>
-          <th class="th-sub">बालक</th><th class="th-sub">बालिका</th><th class="th-sub" style="background:#0369a1;">योग</th>
-          <th class="th-sub">बालक</th><th class="th-sub">बालिका</th><th class="th-sub" style="background:#334155;">योग</th>
-          <th class="th-sub" style="background:#166534;">बालक</th><th class="th-sub" style="background:#166534;">बालिका</th><th class="th-sub" style="background:#14532d;">महायोग</th>
+          <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#1e40af;">TOTAL</th>
+          <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#6b21a8;">TOTAL</th>
+          <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#0369a1;">TOTAL</th>
+          <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#334155;">TOTAL</th>
+          <th class="th-sub" style="background:#166534;">BOYS</th><th class="th-sub" style="background:#166534;">GIRLS</th><th class="th-sub" style="background:#14532d;">TOTAL</th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
       <tfoot>
         <!-- प्राथमिक कुल (1 से 5) -->
         <tr class="row-ps-tot" id="rowPsTot">
-          <td style="font-weight:bold;">प्राथमिक (1-5)</td>
+          <td style="font-weight:bold;">PRIMARY TOTAL (1-5)</td>
           <td id="tot_ps_sc_b">0</td><td id="tot_ps_sc_g">0</td><td id="tot_ps_sc_t" class="tot-cell">0</td>
           <td id="tot_ps_st_b">0</td><td id="tot_ps_st_g">0</td><td id="tot_ps_st_t" class="tot-cell">0</td>
           <td id="tot_ps_obc_b">0</td><td id="tot_ps_obc_g">0</td><td id="tot_ps_obc_t" class="tot-cell">0</td>
@@ -309,7 +312,7 @@
         </tr>
         <!-- उच्च प्राथमिक कुल (6 से 8) -->
         <tr class="row-ups-tot" id="rowUpsTot">
-          <td style="font-weight:bold;">उच्च प्राथ. (6-8)</td>
+          <td style="font-weight:bold;">UPPER PRIMARY (6-8)</td>
           <td id="tot_ups_sc_b">0</td><td id="tot_ups_sc_g">0</td><td id="tot_ups_sc_t" class="tot-cell">0</td>
           <td id="tot_ups_st_b">0</td><td id="tot_ups_st_g">0</td><td id="tot_ups_st_t" class="tot-cell">0</td>
           <td id="tot_ups_obc_b">0</td><td id="tot_ups_obc_g">0</td><td id="tot_ups_obc_t" class="tot-cell">0</td>
@@ -318,7 +321,7 @@
         </tr>
         <!-- संपूर्ण विद्यालय महायोग (1 से 8) -->
         <tr class="row-grand-tot" id="rowGrandTot">
-          <td style="font-weight:bold;">विद्यालय महायोग</td>
+          <td style="font-weight:bold;">GRAND TOTAL (1-8)</td>
           <td id="tot_sc_b">0</td><td id="tot_sc_g">0</td><td id="tot_sc_t" class="tot-cell">0</td>
           <td id="tot_st_b">0</td><td id="tot_st_g">0</td><td id="tot_st_t" class="tot-cell">0</td>
           <td id="tot_obc_b">0</td><td id="tot_obc_g">0</td><td id="tot_obc_t" class="tot-cell">0</td>
@@ -329,10 +332,10 @@
     </table>
   </div>
 
-  <!-- हस्ताक्षर ब्लॉक -->
+  <!-- हस्ताक्षर ब्लॉक (Pure English) -->
   <div class="print-sign-row">
-    <div class="print-sign-col">हस्ताक्षर नामांकन प्रभारी</div>
-    <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
+    <div class="print-sign-col">SIGNATURE IN-CHARGE</div>
+    <div class="print-sign-col">SIGNATURE HEADMASTER / PRINCIPAL</div>
   </div>
 
 </div>
@@ -348,7 +351,7 @@ function populateSessions() {
     var ny = String(y + 1).slice(-2);
     var opt = document.createElement('option');
     opt.value = y + '-' + ny;
-    opt.innerText = 'सत्र ' + y + '-' + ny;
+    opt.innerText = 'SESSION ' + y + '-' + ny;
     if (y === 2026) opt.selected = true;
     sel.appendChild(opt);
   }
@@ -370,7 +373,7 @@ function buildTable() {
     var tr = document.createElement('tr');
     tr.id = 'row_cls_' + c;
 
-    var html = '<td style="font-weight:bold; background:#f8fafc;">कक्षा ' + c + '</td>';
+    var html = '<td style="font-weight:bold; background:#f8fafc;">CLASS ' + c + '</td>';
     for (var i = 0; i < cats.length; i++) {
       var cat = cats[i];
       html += 
@@ -501,13 +504,13 @@ function updateHeader() {
 
   var banner = "STUDENTS ENROLLMENT REGISTER - SESSION " + ses;
   var sub = [];
-  if (sch) sub.push("विद्यालय: " + sch);
-  if (blk) sub.push("ब्लॉक: " + blk);
-  if (dst) sub.push("जनपद: " + dst);
-  if (udi) sub.push("(यू-डायस: " + udi + ")");
+  if (sch) sub.push("SCHOOL: " + sch);
+  if (blk) sub.push("BLOCK: " + blk);
+  if (dst) sub.push("DISTRICT: " + dst);
+  if (udi) sub.push("(UDISE: " + udi + ")");
 
   document.getElementById('tblBanner').innerText = sub.length > 0 ? banner + " (" + sub.join(' | ') + ")" : banner;
-  document.getElementById('prTitle').innerText = "छात्र संख्या (नामांकन) पंजिका - सत्र " + ses;
+  document.getElementById('prTitle').innerText = "STUDENTS ENROLLMENT REGISTER - " + ses;
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
