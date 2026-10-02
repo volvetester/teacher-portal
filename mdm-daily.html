@@ -30,12 +30,11 @@
     .btn-print-daily { background: #0f766e; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print-daily:hover { background: #115e59; }
 
-    /* Scrollable Container for Mobile Screen */
+    /* Scrollable Container for Screen */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
 
-    /* Screen Tables */
     .daily-att-table { width: 100%; min-width: 800px; border-collapse: collapse; text-align: center; font-size: 12px; }
-    .daily-att-table th, .daily-att-table td { border: 1px solid #94a3b8; padding: 6px 3px; white-space: nowrap; }
+    .daily-att-table th, .daily-att-table td { border: 1px solid #94a3b8; padding: 7px 3px; white-space: nowrap; }
     .daily-att-table th { background: #15803d; color: white; font-size: 11.5px; }
     .daily-att-input { width: 54px; height: 34px; padding: 2px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 14px; }
     .daily-att-input:focus { outline: 2px solid #047857; background: #ecfdf5; }
@@ -45,26 +44,27 @@
     .daily-mat-table th { background: #065f46; color: white; font-size: 11.5px; }
     .daily-mat-table td.val { font-weight: bold; color: #047857; background: #f0fdf4; font-size: 13px; }
 
-    /* Print Header & Signatures (Default Hidden on Screen) */
-    .print-header { display: none; text-align: center; margin-bottom: 12px; }
-    .print-header h2 { margin: 0; font-size: 17px; color: #000; text-transform: uppercase; font-weight: 800; }
-    .print-header p { margin: 3px 0 0 0; font-size: 12px; font-weight: bold; color: #222; }
+    .print-header { display: none; text-align: center; margin-bottom: 10px; }
+    .print-header h2 { margin: 0; font-size: 18px; color: #000; text-transform: uppercase; font-weight: 800; }
+    .print-header p { margin: 4px 0 0 0; font-size: 13px; font-weight: bold; color: #111; }
     .print-menu-box { display: none; }
     .print-sign-row { display: none; }
 
     /* =========================================================
-       सटीक A4 LANDSCAPE (आड़ा पेज) प्रिंट लेआउट (FULL PAGE FIT)
+       सख्त A4 LANDSCAPE प्रिंट स्टाइल (FULL WIDTH 275mm)
        ========================================================= */
-    @media print {
-      @page {
-        size: A4 landscape; /* आड़ा (हॉरिजॉन्टल/लैंडस्केप) पेज */
-        margin: 8mm 10mm;   /* चारों तरफ बराबर व संतुलित मार्जिन */
-      }
+    @page {
+      size: A4 landscape !important;
+      margin: 8mm 10mm !important;
+    }
 
-      body {
-        background: #ffffff !important;
+    @media print {
+      html, body {
+        width: 100% !important;
+        height: auto !important;
         margin: 0 !important;
         padding: 0 !important;
+        background: #ffffff !important;
         color: #000000 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -73,9 +73,9 @@
       .container {
         box-shadow: none !important;
         padding: 0 !important;
-        margin: 0 !important;
-        max-width: 100% !important;
+        margin: 0 auto !important;
         width: 100% !important;
+        max-width: 100% !important;
         border: none !important;
       }
 
@@ -87,9 +87,9 @@
         display: block !important;
         border: 1.5px solid #000 !important;
         background: #f1f5f9 !important;
-        padding: 6px 10px !important;
-        margin-bottom: 12px !important;
-        font-size: 12px !important;
+        padding: 8px 12px !important;
+        margin-bottom: 14px !important;
+        font-size: 13px !important;
         font-weight: bold !important;
         text-align: left !important;
       }
@@ -104,35 +104,36 @@
       .table-responsive-box {
         overflow: visible !important;
         border: none !important;
-        margin-bottom: 14px !important;
+        margin-bottom: 16px !important;
         width: 100% !important;
       }
 
-      /* तालिका पूरे 100% A4 पेज पर फैलेगी */
+      /* तालिका पूरे A4 लैंडस्केप पर फैलेगी */
       table.daily-att-table, table.daily-mat-table {
         width: 100% !important;
         min-width: 100% !important;
-        font-size: 11px !important;
         border: 1.5px solid #000 !important;
+        font-size: 12px !important;
       }
 
       table.daily-att-table th, table.daily-att-table td,
       table.daily-mat-table th, table.daily-mat-table td {
         border: 1px solid #000 !important;
-        padding: 6px 3px !important;
+        padding: 8px 4px !important;
         color: #000 !important;
       }
 
       table.daily-att-table th, table.daily-mat-table th {
         background: #e2e8f0 !important;
         color: #000 !important;
-        font-weight: bold !important;
+        font-weight: 800 !important;
+        font-size: 12px !important;
       }
 
       .daily-att-input {
         border: none !important;
         background: transparent !important;
-        font-size: 12px !important;
+        font-size: 13.5px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -143,24 +144,23 @@
         background: transparent !important;
         color: #000 !important;
         font-weight: bold !important;
-        font-size: 11.5px !important;
+        font-size: 13px !important;
       }
 
-      /* हस्ताक्षर ब्लॉक */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 35px !important;
-        padding: 0 15px !important;
+        margin-top: 45px !important;
+        padding: 0 20px !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
         font-weight: bold !important;
-        border-top: 1px dashed #000 !important;
-        width: 180px !important;
-        padding-top: 5px !important;
+        border-top: 1.5px dashed #000 !important;
+        width: 200px !important;
+        padding-top: 6px !important;
       }
     }
   </style>
@@ -174,7 +174,6 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
-  <!-- विद्यालय विवरण (स्क्रीन) -->
   <div class="school-details no-print">
     <div class="form-group">
       <label>विद्यालय का नाम:</label>
@@ -194,7 +193,7 @@
     </div>
   </div>
 
-  <!-- प्रिंट हेडर (केवल प्रिंट में दिखाई देगा) -->
+  <!-- प्रिंट हेडर -->
   <div class="print-header">
     <h2 id="prTitle">दैनिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका</h2>
     <p id="prSub"></p>
@@ -219,8 +218,7 @@
           <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:110px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px;">
         </div>
       </div>
-      <!-- प्रिंट ट्रिगर बटन -->
-      <button class="btn-print-daily" type="button" onclick="triggerPrint()">🖨️ A4 लैंडस्केप प्रिंट निकालें</button>
+      <button class="btn-print-daily" type="button" onclick="forceLandscapePrint()">🖨️ A4 लैंडस्केप प्रिंट निकालें</button>
     </div>
 
     <div class="menu-badge no-print" id="dailyMenuName">मेनू लोड हो रहा है...</div>
@@ -234,7 +232,7 @@
       <table class="daily-att-table">
         <thead>
           <tr>
-            <th style="width:100px;">वर्ग</th>
+            <th style="width:110px;">वर्ग</th>
             <th>कक्षा 1</th><th>कक्षा 2</th><th>कक्षा 3</th><th>कक्षा 4</th><th>कक्षा 5</th>
             <th>कक्षा 6</th><th>कक्षा 7</th><th>कक्षा 8</th>
             <th style="background:#1e3a8a;">प्राथमिक (1-5)</th>
@@ -296,7 +294,7 @@
       </table>
     </div>
 
-    <!-- प्रिंट हस्ताक्षर फुटर -->
+    <!-- प्रिंट हस्ताक्षर -->
     <div class="print-sign-row">
       <div class="print-sign-col">हस्ताक्षर रसोइया</div>
       <div class="print-sign-col">हस्ताक्षर एमडीएम प्रभारी</div>
@@ -422,7 +420,6 @@ function calcDaily() {
 }
 
 function updateHeader() {
-  var dStr = document.getElementById('dispDateFormatted').innerText;
   var sch = document.getElementById('inSchool').value.trim();
   var blk = document.getElementById('inBlock').value.trim();
   var dst = document.getElementById('inDistrict').value.trim();
@@ -437,9 +434,22 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
-function triggerPrint() {
+// लैंडस्केप को फ़ोर्स करने वाला प्रिंट इंजन
+function forceLandscapePrint() {
   updateHeader();
+  
+  // ब्राउज़र प्रिंटर को लैंडस्केप फ़ोर्स करने के लिए डायनामिक स्टाइल
+  var style = document.createElement('style');
+  style.id = 'force-landscape-style';
+  style.innerHTML = '@page { size: landscape !important; margin: 8mm 10mm !important; }';
+  document.head.appendChild(style);
+
   window.print();
+
+  setTimeout(function() {
+    var s = document.getElementById('force-landscape-style');
+    if (s) s.remove();
+  }, 1000);
 }
 
 initDate();
