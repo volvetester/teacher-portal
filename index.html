@@ -14,27 +14,52 @@
     header h1 { margin: 0; font-size: 24px; color: #1e3a8a; }
     header p { margin: 6px 0 0 0; color: #475569; font-size: 13.5px; font-weight: 500; }
 
-    /* Grid Layout */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    /* Cards Grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
 
-    /* Cards */
-    .card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; position: relative; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    /* Card Styling */
+    .card { background: white; border-radius: 12px; padding: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e2e8f0; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
 
-    .card-badge { position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: bold; padding: 3px 8px; border-radius: 12px; }
-    .badge-active { background: #dcfce7; color: #15803d; }
-    .badge-dev { background: #fef3c7; color: #b45309; }
+    /* Active Badge */
+    .card-badge { position: absolute; top: 14px; right: 14px; font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 14px; background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
 
-    .card-icon { font-size: 32px; margin-bottom: 10px; }
-    .card-title { font-size: 17px; font-weight: 700; color: #1e3a8a; margin-bottom: 6px; }
-    .card-desc { font-size: 12.5px; color: #64748b; line-height: 1.4; margin-bottom: 16px; flex-grow: 1; }
+    .card-icon { font-size: 34px; margin-bottom: 12px; }
+    .card-title { font-size: 18px; font-weight: 700; color: #1e3a8a; margin-bottom: 8px; }
+    .card-desc { font-size: 13px; color: #64748b; line-height: 1.5; margin-bottom: 18px; flex-grow: 1; }
 
-    .card-btn { display: block; text-align: center; text-decoration: none; background: #2563eb; color: white; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 13.5px; transition: background 0.2s; }
-    .card-btn:hover { background: #1d4ed8; }
-    .card-btn.secondary { background: #0f766e; }
-    .card-btn.secondary:hover { background: #115e59; }
+    /* Single Action Button */
+    .btn-single { display: block; text-align: center; text-decoration: none; background: #1e3a8a; color: white; padding: 11px; border-radius: 7px; font-weight: 600; font-size: 13.5px; transition: background 0.2s; }
+    .btn-single:hover { background: #172554; }
 
-    footer { text-align: center; margin-top: 35px; font-size: 12px; color: #64748b; padding-bottom: 15px; }
+    /* Two-Column Action Buttons (Mobile Responsive) */
+    .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-col { display: block; text-align: center; text-decoration: none; padding: 10px 6px; border-radius: 7px; font-weight: 600; font-size: 12.5px; transition: background 0.2s; line-height: 1.25; }
+    
+    /* Button Themes */
+    .btn-green { background: #15803d; color: white; }
+    .btn-green:hover { background: #166534; }
+    
+    .btn-teal { background: #0f766e; color: white; }
+    .btn-teal:hover { background: #115e59; }
+
+    .btn-blue { background: #2563eb; color: white; }
+    .btn-blue:hover { background: #1d4ed8; }
+
+    .btn-indigo { background: #4f46e5; color: white; }
+    .btn-indigo:hover { background: #4338ca; }
+
+    .btn-amber { background: #b45309; color: white; }
+    .btn-amber:hover { background: #92400e; }
+
+    .btn-purple { background: #7e22ce; color: white; }
+    .btn-purple:hover { background: #6b21a8; }
+
+    footer { text-align: center; margin-top: 40px; font-size: 12.5px; color: #64748b; padding-bottom: 20px; }
+
+    @media (max-width: 380px) {
+      .btn-group { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -43,81 +68,72 @@
 
   <header>
     <h1>🏫 बेसिक शिक्षक डिजिटल सेवा पोर्टल</h1>
-    <p>परिषदीय प्राथमिक, उच्च प्राथमिक एवं कंपोजिट विद्यालयों के दैनिक व मासिक अभिलेख प्रबंधन प्रणाली</p>
+    <p>परिषदीय प्राथमिक, उच्च प्राथमिक एवं कंपोजिट विद्यालयों के डिजिटल अभिलेख एवं गणना प्रणाली</p>
   </header>
 
   <div class="grid">
 
     <!-- 1. छात्र संख्या पंजिका -->
     <div class="card">
-      <span class="card-badge badge-active">चालू है</span>
+      <span class="card-badge">● चालू है</span>
       <div class="card-icon">📊</div>
       <div class="card-title">छात्र संख्या पंजिका</div>
       <div class="card-desc">कक्षा 1 से 8 की जातिवार (SC, ST, OBC, GEN) बालक-बालिका नामांकन संख्या एवं A4 लैंडस्केप प्रिंट।</div>
-      <a href="student-count.html" class="card-btn">पंजिका खोलें →</a>
+      <a href="student-count.html" class="btn-single">छात्र संख्या पंजिका खोलें →</a>
     </div>
 
-    <!-- 2. दैनिक MDM कैलकुलेटर (नया अलग कार्ड) -->
+    <!-- 2. मध्याह्न भोजन (MDM) - 2 कॉलम विकल्प -->
     <div class="card">
-      <span class="card-badge badge-active">चालू है</span>
+      <span class="card-badge">● चालू है</span>
       <div class="card-icon">🍲</div>
-      <div class="card-title">दैनिक MDM कैलकुलेटर</div>
-      <div class="card-desc">प्रतिदिन की कक्षा 1-8 उपस्थिति अनुसार खाद्यान्न, सब्जी, तेल, दूध, फल व पोषण सामग्री की त्वरित गणना व लैंडस्केप प्रिंट।</div>
-      <a href="mdm-daily.html" class="card-btn secondary">दैनिक MDM खोलें →</a>
+      <div class="card-title">मध्याह्न भोजन (MDM) पंजिका</div>
+      <div class="card-desc">दैनिक मेनू अनुसार खाद्यान्न-दूध-फल सामग्री गणना अथवा पूरे महीने का रजिस्टर तैयार करें।</div>
+      <div class="btn-group">
+        <a href="mdm-daily.html" class="btn-col btn-teal">🍲 दैनिक MDM खोलें →</a>
+        <a href="mdm-monthly.html" class="btn-col btn-green">📅 मासिक MDM खोलें →</a>
+      </div>
     </div>
 
-    <!-- 3. मासिक MDM पंजिका (नया अलग कार्ड) -->
+    <!-- 3. म्युचुअल ट्रांसफर - 2 कॉलम विकल्प -->
     <div class="card">
-      <span class="card-badge badge-active">चालू है</span>
-      <div class="card-icon">📅</div>
-      <div class="card-title">मासिक MDM पंजिका</div>
-      <div class="card-desc">माह के 1 से 31 तारीख तक की दैनिक उपस्थिति, गेहूं-चावल व लागत रजिस्टर (A4 पोर्ट्रेट 1-पेज प्रिंट)।</div>
-      <a href="mdm-monthly.html" class="card-btn secondary">मासिक MDM खोलें →</a>
+      <span class="card-badge">● चालू है</span>
+      <div class="card-icon">🔄</div>
+      <div class="card-title">पारस्परिक (म्युचुअल) ट्रांसफर</div>
+      <div class="card-desc">जिले के अंदर (ब्लॉक-टू-ब्लॉक) अथवा अंतर-जनपदीय स्थानांतरण हेतु साथी शिक्षक खोज व सहमति पत्र।</div>
+      <div class="btn-group">
+        <a href="mutual-intra.html" class="btn-col btn-blue">🏛️ अंतः जनपदीय ट्रांसफर →</a>
+        <a href="mutual-inter.html" class="btn-col btn-indigo">🚚 अंतर्जनपदीय ट्रांसफर →</a>
+      </div>
     </div>
 
-    <!-- 4. अंक पत्र मेकर (Report Card) -->
+    <!-- 4. शिक्षक वेतन एवं आयकर (फॉर्म 16) - 2 कॉलम विकल्प -->
     <div class="card">
-      <span class="card-badge badge-active">चालू है</span>
+      <span class="card-badge">● चालू है</span>
+      <div class="card-icon">💰</div>
+      <div class="card-title">शिक्षक वेतन एवं आयकर गणना</div>
+      <div class="card-desc">मूल वेतन, DA, HRA, NPS अनुसार मासिक वेतन गणना एवं आयकर / फॉर्म 16 विवरण पत्रक।</div>
+      <div class="btn-group">
+        <a href="salary-calculator.html" class="btn-col btn-amber">💵 वेतन कैलकुलेटर खोलें →</a>
+        <a href="form16.html" class="btn-col btn-purple">📋 फॉर्म 16 / आयकर गणना →</a>
+      </div>
+    </div>
+
+    <!-- 5. अंक पत्र / प्रगति पत्रक मेकर -->
+    <div class="card">
+      <span class="card-badge">● चालू है</span>
       <div class="card-icon">📜</div>
       <div class="card-title">अंक पत्र / प्रगति पत्रक मेकर</div>
       <div class="card-desc">कक्षा 1 से 8 के स्वतः परिषदीय विषय, अर्धवार्षिक व वार्षिक परीक्षा अंक गणना और A4 पोर्ट्रेट रिपोर्ट कार्ड प्रिंट।</div>
-      <a href="report-card.html" class="card-btn">अंक पत्र तैयार करें →</a>
+      <a href="report-card.html" class="btn-single">अंक पत्र तैयार करें →</a>
     </div>
 
-    <!-- 5. अंतः जनपदीय म्युचुअल ट्रांसफर -->
+    <!-- 6. जन्म तिथि / आयु कैलकुलेटर -->
     <div class="card">
-      <span class="card-badge badge-dev">कार्य प्रगति पर</span>
-      <div class="card-icon">🔄</div>
-      <div class="card-title">अंतः जनपदीय म्युचुअल ट्रांसफर</div>
-      <div class="card-desc">एक ही जिले के अंदर ब्लॉक से ब्लॉक में समान पद व विषय वाले साथी शिक्षक की खोज एवं संयुक्त सहमति पत्र।</div>
-      <a href="mutual-intra.html" class="card-btn">विवरण देखें →</a>
-    </div>
-
-    <!-- 6. अंतर्जनपदीय म्युचुअल ट्रांसफर -->
-    <div class="card">
-      <span class="card-badge badge-dev">कार्य प्रगति पर</span>
-      <div class="card-icon">🚚</div>
-      <div class="card-title">अंतर्जनपदीय म्युचुअल ट्रांसफर</div>
-      <div class="card-desc">एक जिले से दूसरे जिले में स्थानांतरण हेतु साथी शिक्षक सर्च एवं संयुक्त आवेदन पत्र प्रारूप।</div>
-      <a href="mutual-inter.html" class="card-btn">विवरण देखें →</a>
-    </div>
-
-    <!-- 7. शिक्षक वेतन कैलकुलेटर -->
-    <div class="card">
-      <span class="card-badge badge-dev">कार्य प्रगति पर</span>
-      <div class="card-icon">💰</div>
-      <div class="card-title">शिक्षक वेतन कैलकुलेटर</div>
-      <div class="card-desc">मूल वेतन, महंगाई भत्ता (DA), मकान किराया भत्ता (HRA), GIS एवं NPS कटौती अनुसार शुद्ध वेतन गणना।</div>
-      <a href="salary-calculator.html" class="card-btn">कैलकुलेटर खोलें →</a>
-    </div>
-
-    <!-- 8. जन्म तिथि / आयु कैलकुलेटर -->
-    <div class="card">
-      <span class="card-badge badge-active">चालू है</span>
+      <span class="card-badge">● चालू है</span>
       <div class="card-icon">🎂</div>
       <div class="card-title">आयु / जन्म तिथि कैलकुलेटर</div>
-      <div class="card-desc">प्रवेश के समय छात्र-छात्राओं की नियत तिथि पर वर्ष, माह और दिन की सटीक गणना।</div>
-      <a href="age-calculator.html" class="card-btn">आयु निकालें →</a>
+      <div class="card-desc">नवीन प्रवेश के समय छात्र-छात्राओं की कट-ऑफ तिथि पर वर्ष, माह और दिन की तत्काल सटीक गणना।</div>
+      <a href="age-calculator.html" class="btn-single">आयु कैलकुलेटर खोलें →</a>
     </div>
 
   </div>
