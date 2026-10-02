@@ -13,7 +13,7 @@
     .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
-    /* School Details Form */
+    /* School Details */
     .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
     .form-group input, .form-group select { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
@@ -23,63 +23,25 @@
     .tab-btn { padding: 8px 14px; border: 2px solid #1e3a8a; background: white; color: #1e3a8a; font-weight: bold; font-size: 12.5px; border-radius: 6px; cursor: pointer; }
     .tab-btn.active { background: #1e3a8a; color: white; }
 
-    /* Print Header (Only in Print) */
-    .print-header { display: none; text-align: center; margin-bottom: 10px; }
-    .print-header h3 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; }
-    .print-header p { margin: 2px 0 0 0; font-size: 11px; font-weight: 600; color: #111; text-transform: uppercase; }
+    .btn-container { text-align: right; margin-bottom: 12px; }
+    .btn-print { background: #166534; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print:hover { background: #15803d; }
 
-    /* Mobile Scroll Notice */
     .mobile-notice { display: block; font-size: 11px; color: #0f766e; background: #ccfbf1; padding: 6px 10px; border-radius: 6px; margin-bottom: 8px; font-weight: 600; text-align: center; }
 
-    /* =========================================================
-       RESPONSIVE HORIZONTAL SCROLL WRAPPER (Fixes squishing)
-       ========================================================= */
-    .table-responsive-box {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      background: white;
-    }
+    /* Responsive Screen Container */
+    .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
 
-    table.count-table {
-      width: 100%;
-      min-width: 980px; /* टेबल को दबने से रोकने के लिए न्यूनतम चौड़ाई */
-      border-collapse: collapse;
-      text-align: center;
-      font-size: 11px;
-    }
-
-    table.count-table th, table.count-table td {
-      border: 1px solid #64748b;
-      padding: 5px 2px;
-      white-space: nowrap;
-    }
+    table.count-table { width: 100%; min-width: 980px; border-collapse: collapse; text-align: center; font-size: 11.5px; }
+    table.count-table th, table.count-table td { border: 1px solid #64748b; padding: 5px 2px; white-space: nowrap; }
 
     .th-main { background: #1e3a8a; color: white; font-size: 13px; font-weight: bold; padding: 7px; text-transform: uppercase; }
-    .th-cat { color: white; font-weight: bold; font-size: 11px; }
-    .th-sub { background: #0284c7; color: white; font-size: 10px; padding: 4px 2px; }
+    .th-cat { color: white; font-weight: bold; font-size: 11.5px; }
+    .th-sub { background: #0284c7; color: white; font-size: 10.5px; padding: 4px 2px; }
 
-    /* Input Cells (Touch Friendly) */
-    input.cnt-in {
-      width: 50px;
-      height: 32px;
-      padding: 2px;
-      text-align: center;
-      border: 1.5px solid #94a3b8;
-      border-radius: 4px;
-      font-weight: bold;
-      font-size: 13px;
-      background: #ffffff;
-    }
-    input.cnt-in:focus {
-      outline: 2px solid #2563eb;
-      background: #eff6ff;
-    }
+    input.cnt-in { width: 50px; height: 32px; padding: 2px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; background: #ffffff; }
+    input.cnt-in:focus { outline: 2px solid #2563eb; background: #eff6ff; }
 
-    /* Column Themes */
     .col-sc { background: #f8fafc; }
     .col-st { background: #f1f5f9; }
     .col-obc { background: #f8fafc; }
@@ -91,27 +53,141 @@
     .row-ups-tot { background: #e9d5ff !important; font-weight: bold; color: #6b21a8; }
     .row-grand-tot { background: #bfdbfe !important; font-weight: bold; font-size: 12.5px; color: #1e3a8a; }
 
-    .btn-container { text-align: right; margin-bottom: 12px; }
-    .btn-print { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    .print-header { display: none; text-align: center; margin-bottom: 8px; }
+    .print-header h2 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; font-weight: 800; }
+    .print-header p { margin: 2px 0 0 0; font-size: 11.5px; font-weight: bold; color: #111; }
+    .print-sign-row { display: none; }
 
     /* =========================================================
-       PRINT STYLES (A4 LANDSCAPE 1-PAGE PERFECTION)
+       100% फुल A4 LANDSCAPE (आड़ा पेज) प्रिंट स्टाइल
        ========================================================= */
+    @page {
+      size: A4 landscape !important;
+      margin: 6mm 8mm !important;
+    }
+
     @media print {
-      body { background: white !important; padding: 0 !important; margin: 0 !important; }
-      .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border: none !important; }
+      html, body {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .container {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border: none !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+
       .no-print { display: none !important; }
-      .print-header { display: block !important; }
       .mobile-notice { display: none !important; }
 
-      .table-responsive-box { overflow: visible !important; border: none !important; width: 100% !important; }
-      table.count-table { min-width: 100% !important; width: 100% !important; font-size: 9.5px !important; }
-      table.count-table th, table.count-table td { border: 1px solid #000 !important; padding: 2.5px 1px !important; }
-      
-      input.cnt-in { border: none !important; background: transparent !important; width: 100% !important; height: auto !important; font-size: 10px !important; }
-      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      
-      @page { size: A4 landscape; margin: 5mm; }
+      .print-header { display: block !important; }
+      .print-header h2 { font-size: 15px !important; margin: 0 !important; }
+      .print-header p { font-size: 11px !important; margin: 2px 0 5px 0 !important; }
+
+      .table-responsive-box {
+        overflow: visible !important;
+        border: none !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        flex-grow: 1 !important;
+      }
+
+      /* पूरी टेबल 100% फुल लैंडस्केप फैलाव (Full Height + Full Width) */
+      table.count-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        border: 1.5px solid #000 !important;
+        border-collapse: collapse !important;
+        font-size: 11px !important;
+      }
+
+      table.count-table tr {
+        height: 10mm !important; /* हर पंक्ति 10mm ऊंचाई लेगी जिससे पेज पूरा भरेगा */
+      }
+
+      table.count-table thead tr {
+        height: 7.5mm !important;
+      }
+
+      table.count-table th, table.count-table td {
+        border: 1px solid #000 !important;
+        padding: 0 2px !important;
+        color: #000 !important;
+        vertical-align: middle !important;
+      }
+
+      table.count-table th {
+        font-weight: 800 !important;
+      }
+
+      .th-main {
+        background: #e2e8f0 !important;
+        color: #000 !important;
+        font-size: 12px !important;
+      }
+
+      .th-cat {
+        background: #cbd5e1 !important;
+        color: #000 !important;
+        font-size: 10.5px !important;
+      }
+
+      .th-sub {
+        background: #f1f5f9 !important;
+        color: #000 !important;
+        font-size: 9.5px !important;
+      }
+
+      input.cnt-in {
+        border: none !important;
+        background: transparent !important;
+        font-size: 12px !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        width: 100% !important;
+        height: 100% !important;
+        text-align: center !important;
+        padding: 0 !important;
+      }
+
+      .tot-cell {
+        font-size: 12px !important;
+      }
+
+      .row-ps-tot { background: #fef9c3 !important; }
+      .row-ups-tot { background: #f3e8ff !important; }
+      .row-grand-tot { background: #dbeafe !important; }
+
+      /* हस्ताक्षर ब्लॉक */
+      .print-sign-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        margin-top: 15px !important;
+        padding: 0 50px !important;
+      }
+
+      .print-sign-col {
+        text-align: center !important;
+        font-size: 12px !important;
+        font-weight: bold !important;
+        border-top: 1.5px dashed #000 !important;
+        width: 220px !important;
+        padding-top: 4px !important;
+      }
     }
   </style>
 </head>
@@ -127,11 +203,11 @@
   <!-- विद्यालय एवं सत्र विवरण -->
   <div class="school-details no-print">
     <div class="form-group">
-      <label>सत्र (Session 2026 to 2059):</label>
+      <label>सत्र (Session):</label>
       <select id="selSession" onchange="updateHeader()"></select>
     </div>
     <div class="form-group">
-      <label>विद्यालय का नाम (Capital Only):</label>
+      <label>विद्यालय का नाम:</label>
       <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCapital(this); updateHeader();">
     </div>
     <div class="form-group">
@@ -143,8 +219,8 @@
       <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCapital(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>यू-डायस कोड (Numbers Only):</label>
-      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" onkeydown="blockSpace(event)" oninput="filterNumbers(this); updateHeader();">
+      <label>यू-डायस कोड:</label>
+      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNumbers(this); updateHeader();">
     </div>
   </div>
 
@@ -156,29 +232,28 @@
   </div>
 
   <div class="btn-container no-print">
-    <button class="btn-print" type="button" onclick="window.print()">🖨️ A4 लैंडस्केप प्रिंट / PDF निकालें</button>
+    <button class="btn-print" type="button" onclick="forceLandscapePrint()">🖨️ A4 लैंडस्केप प्रिंट निकालें (Full Page)</button>
   </div>
 
   <!-- प्रिंट हेडर -->
   <div class="print-header">
-    <h3 id="prTitle">STUDENTS ENROLLMENT REGISTER</h3>
+    <h2 id="prTitle">STUDENTS ENROLLMENT REGISTER</h2>
     <p id="prSub"></p>
   </div>
 
-  <!-- मोबाइल उपयोगकर्ताओं के लिए सूचना पट्टी -->
   <div class="mobile-notice no-print">
-    👉 मोबाइल में पूरी तालिका देखने हेतु उँगली से बाएँ-दाएँ (Left-Right) खिसकाएँ।
+    👉 मोबाइल में पूरी तालिका देखने हेतु उँगली से बाएँ-दाएँ खिसकाएँ।
   </div>
 
   <!-- रिस्पॉन्सिव टेबल कंटेनर -->
   <div class="table-responsive-box">
     <table class="count-table" id="countTable">
       <thead>
-        <tr>
-          <th colspan="17" class="th-main" id="tblBanner">STUDENTS COUNT REGISTER - SESSION 2026-27</th>
+        <tr class="no-print">
+          <th colspan="17" class="th-main" id="tblBanner">STUDENTS COUNT REGISTER</th>
         </tr>
         <tr>
-          <th rowspan="2" style="width: 70px; background:#0f172a; color:white;">कक्षा (CLASS)</th>
+          <th rowspan="2" style="width: 80px; background:#0f172a; color:white;">कक्षा (CLASS)</th>
           <th colspan="3" class="th-cat" style="background:#1d4ed8;">अनुसूचित जाति (SC)</th>
           <th colspan="3" class="th-cat" style="background:#7c3aed;">अनुसूचित जनजाति (ST)</th>
           <th colspan="3" class="th-cat" style="background:#0284c7;">अन्य पिछड़ा वर्ग (OBC)</th>
@@ -197,7 +272,7 @@
       <tfoot>
         <!-- प्राथमिक कुल (1 से 5) -->
         <tr class="row-ps-tot" id="rowPsTot">
-          <td>प्राथमिक कुल (1-5)</td>
+          <td style="font-weight:bold;">प्राथमिक कुल (1-5)</td>
           <td id="tot_ps_sc_b">0</td><td id="tot_ps_sc_g">0</td><td id="tot_ps_sc_t" class="tot-cell">0</td>
           <td id="tot_ps_st_b">0</td><td id="tot_ps_st_g">0</td><td id="tot_ps_st_t" class="tot-cell">0</td>
           <td id="tot_ps_obc_b">0</td><td id="tot_ps_obc_g">0</td><td id="tot_ps_obc_t" class="tot-cell">0</td>
@@ -206,7 +281,7 @@
         </tr>
         <!-- उच्च प्राथमिक कुल (6 से 8) -->
         <tr class="row-ups-tot" id="rowUpsTot">
-          <td>उच्च प्राथ. कुल (6-8)</td>
+          <td style="font-weight:bold;">उच्च प्राथ. कुल (6-8)</td>
           <td id="tot_ups_sc_b">0</td><td id="tot_ups_sc_g">0</td><td id="tot_ups_sc_t" class="tot-cell">0</td>
           <td id="tot_ups_st_b">0</td><td id="tot_ups_st_g">0</td><td id="tot_ups_st_t" class="tot-cell">0</td>
           <td id="tot_ups_obc_b">0</td><td id="tot_ups_obc_g">0</td><td id="tot_ups_obc_t" class="tot-cell">0</td>
@@ -215,7 +290,7 @@
         </tr>
         <!-- संपूर्ण विद्यालय महायोग (1 से 8) -->
         <tr class="row-grand-tot" id="rowGrandTot">
-          <td>विद्यालय महायोग (1-8)</td>
+          <td style="font-weight:bold;">विद्यालय महायोग (1-8)</td>
           <td id="tot_sc_b">0</td><td id="tot_sc_g">0</td><td id="tot_sc_t" class="tot-cell">0</td>
           <td id="tot_st_b">0</td><td id="tot_st_g">0</td><td id="tot_st_t" class="tot-cell">0</td>
           <td id="tot_obc_b">0</td><td id="tot_obc_g">0</td><td id="tot_obc_t" class="tot-cell">0</td>
@@ -226,13 +301,18 @@
     </table>
   </div>
 
+  <!-- हस्ताक्षर ब्लॉक -->
+  <div class="print-sign-row">
+    <div class="print-sign-col">हस्ताक्षर नामांकन प्रभारी</div>
+    <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
+  </div>
+
 </div>
 
 <script>
 var currentLevel = 'comp';
 var cats = ['sc', 'st', 'obc', 'gen'];
 
-// 1. सत्र 2026-27 से 2059-60
 function populateSessions() {
   var sel = document.getElementById('selSession');
   sel.innerHTML = '';
@@ -246,24 +326,14 @@ function populateSessions() {
   }
 }
 
-// 2. इनपुट फ़िल्टर (केवल अक्षर / केवल संख्या)
-function filterCapital(el) {
-  el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
-}
-function filterNumbers(el) {
+function filterCapital(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
+function filterNumbers(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+function cleanInt(el) {
+  var p = el.selectionStart - 1;
   el.value = el.value.replace(/[^0-9]/g, '');
-}
-function blockSpace(e) {
-  if (e.key === " " || e.code === "Space") e.preventDefault();
-}
-function blockDecimal(e) {
-  if (e.key === "." || e.key === "," || e.code === "NumpadDecimal") e.preventDefault();
-}
-function filterInt(el) {
-  el.value = el.value.replace(/[^0-9]/g, '');
+  if (p >= 0) el.setSelectionRange(p, p);
 }
 
-// 3. कक्षा 1 से 8 टेबल का निर्माण
 function buildTable() {
   var tbody = document.getElementById('tableBody');
   tbody.innerHTML = '';
@@ -271,18 +341,16 @@ function buildTable() {
   for (var c = 1; c <= 8; c++) {
     var tr = document.createElement('tr');
     tr.id = 'row_cls_' + c;
-    tr.setAttribute('data-class', c);
 
     var html = '<td style="font-weight:bold; background:#f8fafc;">कक्षा ' + c + '</td>';
     for (var i = 0; i < cats.length; i++) {
       var cat = cats[i];
       html += 
-        '<td class="col-' + cat + '"><input type="number" min="0" step="1" class="cnt-in" id="' + cat + 'b' + c + '" onkeydown="blockDecimal(event)" oninput="filterInt(this); recalcAll();"></td>' +
-        '<td class="col-' + cat + '"><input type="number" min="0" step="1" class="cnt-in" id="' + cat + 'g' + c + '" onkeydown="blockDecimal(event)" oninput="filterInt(this); recalcAll();"></td>' +
+        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + 'b' + c + '" oninput="cleanInt(this); recalcAll();"></td>' +
+        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + 'g' + c + '" oninput="cleanInt(this); recalcAll();"></td>' +
         '<td class="col-' + cat + ' tot-cell" id="' + cat + 't' + c + '">0</td>';
     }
 
-    // कक्षा कुल योग
     html += 
       '<td class="col-tot" id="cls_b_' + c + '">0</td>' +
       '<td class="col-tot" id="cls_g_' + c + '">0</td>' +
@@ -293,7 +361,6 @@ function buildTable() {
   }
 }
 
-// 4. स्तर चुनना (Primary / Upper Primary / Composite)
 function setLevel(lvl) {
   currentLevel = lvl;
   document.getElementById('btnComp').className = 'tab-btn' + (lvl === 'comp' ? ' active' : '');
@@ -321,12 +388,9 @@ function setLevel(lvl) {
 
 function getVal(id) {
   var el = document.getElementById(id);
-  if (!el || !el.value) return 0;
-  var v = parseInt(el.value, 10);
-  return isNaN(v) ? 0 : v;
+  return el ? (parseInt(el.value, 10) || 0) : 0;
 }
 
-// 5. पूर्ण स्वतः गणना
 function recalcAll() {
   var catTotals = {
     sc: { b: 0, g: 0, ps_b: 0, ps_g: 0, ups_b: 0, ups_g: 0 },
@@ -372,18 +436,16 @@ function recalcAll() {
     else { upsBoy += rowB; upsGirl += rowG; }
   }
 
-  // फुटर मान भरना
   for (var j = 0; j < cats.length; j++) {
     var k = cats[j];
-    // PS
     document.getElementById('tot_ps_' + k + '_b').innerText = catTotals[k].ps_b;
     document.getElementById('tot_ps_' + k + '_g').innerText = catTotals[k].ps_g;
     document.getElementById('tot_ps_' + k + '_t').innerText = (catTotals[k].ps_b + catTotals[k].ps_g);
-    // UPS
+
     document.getElementById('tot_ups_' + k + '_b').innerText = catTotals[k].ups_b;
     document.getElementById('tot_ups_' + k + '_g').innerText = catTotals[k].ups_g;
     document.getElementById('tot_ups_' + k + '_t').innerText = (catTotals[k].ups_b + catTotals[k].ups_g);
-    // Grand
+
     document.getElementById('tot_' + k + '_b').innerText = catTotals[k].b;
     document.getElementById('tot_' + k + '_g').innerText = catTotals[k].g;
     document.getElementById('tot_' + k + '_t').innerText = (catTotals[k].b + catTotals[k].g);
@@ -402,7 +464,6 @@ function recalcAll() {
   document.getElementById('tot_all_grand').innerText = (psBoy + psGirl + upsBoy + upsGirl);
 }
 
-// 6. हेडर अपडेट
 function updateHeader() {
   var ses = document.getElementById('selSession').value;
   var sch = document.getElementById('inSchool').value.trim();
@@ -412,17 +473,33 @@ function updateHeader() {
 
   var banner = "STUDENTS COUNT REGISTER - SESSION " + ses;
   var sub = [];
-  if (sch) sub.push(sch);
-  if (blk) sub.push("BLOCK: " + blk);
-  if (dst) sub.push("DISTRICT: " + dst + " UTTAR PRADESH");
-  if (udi) sub.push("(UDISE CODE-" + udi + ")");
+  if (sch) sub.push("विद्यालय: " + sch);
+  if (blk) sub.push("ब्लॉक: " + blk);
+  if (dst) sub.push("जनपद: " + dst);
+  if (udi) sub.push("(यू-डायस: " + udi + ")");
 
   document.getElementById('tblBanner').innerText = sub.length > 0 ? banner + " (" + sub.join(' | ') + ")" : banner;
-  document.getElementById('prTitle').innerText = banner;
+  document.getElementById('prTitle').innerText = "छात्र संख्या (नामांकन) पंजिका - सत्र " + ses;
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
-// लोड होते ही चालू करना
+// लैंडस्केप को फ़ोर्स करने वाला प्रिंट इंजन (Full Page Fit)
+function forceLandscapePrint() {
+  updateHeader();
+  
+  var style = document.createElement('style');
+  style.id = 'force-landscape-style';
+  style.innerHTML = '@page { size: landscape !important; margin: 6mm 8mm !important; }';
+  document.head.appendChild(style);
+
+  window.print();
+
+  setTimeout(function() {
+    var s = document.getElementById('force-landscape-style');
+    if (s) s.remove();
+  }, 1000);
+}
+
 populateSessions();
 buildTable();
 setLevel('comp');
