@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>मासिक MDM पंजिका (Monthly Register)</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f8fafc; margin: 0; padding: 12px; color: #0f172a; }
+    .container { max-width: 1400px; margin: auto; background: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    
+    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px; }
+    .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
+    .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
+
+    .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
+    .form-group input, .form-group select { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
+
+    .rates-box { display: flex; gap: 12px; align-items: center; background: #ecfdf5; padding: 10px 12px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 12px; font-size: 11.5px; flex-wrap: wrap; }
+    .rates-box label { font-weight: bold; color: #065f46; }
+    .rates-box input { width: 65px; height: 30px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
+
+    .tab-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 14px; border: 2px solid #1e3a8a; background: white; color: #1e3a8a; font-weight: bold; font-size: 12.5px; border-radius: 6px; cursor: pointer; }
+    .tab-btn.active { background: #1e3a8a; color: white; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 10px; margin-bottom: 12px; }
+    .summary-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; font-size: 11.5px; }
+    .summary-card.ps { background: #eff6ff; border-top: 3.5px solid #2563eb; }
+    .summary-card.ups { background: #f5f3ff; border-top: 3.5px solid #7c3aed; }
+    .summary-card.tot { background: #fefce8; border-top: 3.5px solid #ca8a04; }
+    .summary-card h4 { margin: 0 0 4px 0; font-size: 12px; display: flex; justify-content: space-between; }
+    .summary-card table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+    .summary-card td { padding: 1.5px 3px; }
+    .summary-card td.val { font-weight: bold; text-align: right; }
+
+    .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 12px; background: white; }
+
+    table.mdm-table { width: 100%; min-width: 900px; border-collapse: collapse; text-align: center; font-size: 11px; }
+    table.mdm-table th, table.mdm-table td { border: 1px solid #475569; padding: 4px 2px; white-space: nowrap; }
+    .th-banner { background: #1e3a8a; color: white; font-size: 12px; font-weight: bold; padding: 6px; text-transform: uppercase; }
+    .th-ps { background: #1d4ed8; color: white; }
+    .th-ups { background: #6d28d9; color: white; }
+    .th-sub { background: #3b82f6; color: white; font-size: 10px; }
+    .th-sub-ups { background: #8b5cf6; color: white; font-size: 10px; }
+
+    input.att-in { width: 50px; height: 34px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13.5px; }
+    input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
+
+    .sunday-row { background: #fee2e2 !important; color: #991b1b; }
+    .sunday-row input { background: #fecaca; color: #991b1b; cursor: not-allowed; }
+    .row-footer { background: #f1f5f9; font-weight: bold; }
+
+    .btn-container { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+    .btn-print { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+
+    .print-header { display: none; text-align: center; margin-bottom: 8px; }
+    .print-header h3 { margin: 0; font-size: 14px; text-transform: uppercase; }
+    .print-header p { margin: 2px 0 0 0; font-size: 10px; font-weight: bold; }
+
+    @media print {
+      body { background: white !important; padding: 0 !important; margin: 0 !important; }
+      .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border: none !important; }
+      .no-print { display: none !important; }
+      .print-header { display: block !important; }
+      .table-responsive-box { overflow: visible !important; border: none !important; }
+      .summary-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: 5px !important; }
+      table.mdm-table { min-width: 100% !important; width: 100% !important; font-size: 8px !important; }
+      table.mdm-table th, table.mdm-table td { border: 1px solid #000 !important; padding: 1.5px 1px !important; }
+      input.att-in { border: none !important; background: transparent !important; }
+      @page { size: A4 portrait; margin: 5mm; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="top-bar no-print">
+    <h2>📅 मासिक MDM पंजिका (Monthly Register)</h2>
+    <a href="index.html">← होमपेज</a>
+  </div>
+
+  <div class="school-details no-print">
+    <div class="form-group">
+      <label>सत्र / वर्ष:</label>
+      <select id="selYear" onchange="buildMonth()"></select>
+    </div>
+    <div class="form-group">
+      <label>माह:</label>
+      <select id="selMonth" onchange="buildMonth()">
+        <option value="0">January</option><option value="1">February</option><option value="2">March</option>
+        <option value="3">April</option><option value="4">May</option><option value="5">June</option>
+        <option value="6">July</option><option value="7">August</option><option value="8">September</option>
+        <option value="9" selected>October</option><option value="10">November</option><option value="11">December</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>विद्यालय का नाम:</label>
+      <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>विकास खंड:</label>
+      <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCap(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>जनपद:</label>
+      <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCap(this); updateHeader();">
+    </div>
+    <div class="form-group">
+      <label>यू-डायस कोड:</label>
+      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNum(this); updateHeader();">
+    </div>
+  </div>
+
+  <div class="rates-box no-print">
+    <span style="font-weight:bold; color:#065f46;">⚙️ दरें (प्रति छात्र):</span>
+    <div><label>प्राथमिक: </label><input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalc()"> ₹</div>
+    <div><label>उच्च प्राथ.: </label><input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalc()"> ₹</div>
+    <div><label>सोमवार फल: </label><input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalc()"> ₹</div>
+    <div><label>गुरुवार पोषण: </label><input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalc()"> ₹</div>
+  </div>
+
+  <div class="tab-container no-print">
+    <button class="tab-btn active" id="btnComp" onclick="setLevel('comp')">🏫 कंपोजिट (1-8)</button>
+    <button class="tab-btn" id="btnPs" onclick="setLevel('ps')">🎒 प्राथमिक (1-5)</button>
+    <button class="tab-btn" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card ps" id="sc_ps">
+      <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
+      <table>
+        <tr><td>गेहूं कुल:</td><td class="val" id="sm_ps_w">0.00 kg</td></tr>
+        <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
+        <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ps_f">0</td></tr>
+        <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
+        <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ps_c">₹0.00</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card ups" id="sc_ups">
+      <h4 style="color:#6d28d9;">★ उच्च प्राथ. (6-8) <span>150g/छात्र</span></h4>
+      <table>
+        <tr><td>गेहूं कुल:</td><td class="val" id="sm_ups_w">0.00 kg</td></tr>
+        <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
+        <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ups_f">0</td></tr>
+        <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
+        <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ups_c">₹0.00</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card tot" id="sc_tot">
+      <h4 style="color:#854d0e;">★ विद्यालय कुल योग (1-8)</h4>
+      <table>
+        <tr><td>कुल गेहूं:</td><td class="val" id="sm_tot_w">0.00 kg</td></tr>
+        <tr><td>कुल चावल:</td><td class="val" id="sm_tot_r">0.00 kg</td></tr>
+        <tr><td>कुल फल लाभार्थी:</td><td class="val" id="sm_tot_f">0</td></tr>
+        <tr><td>कुल फल धनराशि:</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
+        <tr><td>विद्यालय कुल लागत:</td><td class="val" style="color:#b91c1c; font-size:12.5px;" id="sm_tot_c">₹0.00</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="btn-container no-print">
+    <button class="btn-print" onclick="window.print()">🖨️ मासिक MDM पंजिका प्रिंट (Portrait - 1 Page)</button>
+  </div>
+
+  <div class="print-header">
+    <h3 id="prTitle">MID DAY MEAL REGISTER</h3>
+    <p id="prSub"></p>
+  </div>
+
+  <div class="table-responsive-box">
+    <table class="mdm-table">
+      <thead>
+        <tr><th colspan="14" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
+        <tr>
+          <th rowspan="2" style="width:70px; background:#0f172a; color:white;">दिनांक</th>
+          <th rowspan="2" style="width:70px; background:#0f172a; color:white;">दिन</th>
+          <th colspan="6" class="th-ps ps-col">प्राथमिक स्तर (PS : 1-5)</th>
+          <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक (UPS : 6-8)</th>
+        </tr>
+        <tr>
+          <th class="th-sub ps-col">छात्र</th><th class="th-sub ps-col">संचयी</th><th class="th-sub ps-col">गेहूं</th><th class="th-sub ps-col">चावल</th><th class="th-sub ps-col">फल</th><th class="th-sub ps-col">लागत (₹)</th>
+          <th class="th-sub-ups ups-col">छात्र</th><th class="th-sub-ups ups-col">संचयी</th><th class="th-sub-ups ups-col">गेहूं</th><th class="th-sub-ups ups-col">चावल</th><th class="th-sub-ups ups-col">फल</th><th class="th-sub-ups ups-col">लागत (₹)</th>
+        </tr>
+      </thead>
+      <tbody id="mdmBody"></tbody>
+      <tfoot>
+        <tr class="row-footer">
+          <td colspan="2">मासिक कुल योग</td>
+          <td id="ft_ps_att" class="ps-col">0</td><td id="ft_ps_cumu" class="ps-col">-</td><td id="ft_ps_w" class="ps-col" style="color:#9a3412;">0.00</td><td id="ft_ps_r" class="ps-col" style="color:#166534;">0.00</td><td id="ft_ps_f" class="ps-col" style="color:#d97706;">0</td><td id="ft_ps_c" class="ps-col" style="color:#1e3a8a;">₹0.00</td>
+          <td id="ft_ups_att" class="ups-col">0</td><td id="ft_ups_cumu" class="ups-col">-</td><td id="ft_ups_w" class="ups-col" style="color:#9a3412;">0.00</td><td id="ft_ups_r" class="ups-col" style="color:#166534;">0.00</td><td id="ft_ups_f" class="ups-col" style="color:#d97706;">0</td><td id="ft_ups_c" class="ups-col" style="color:#1e3a8a;">₹0.00</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+
+<script>
+var curLvl = 'comp';
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
+function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+function cleanNum(el) {
+  var p = el.selectionStart - 1;
+  el.value = el.value.replace(/[^0-9]/g, '');
+  if (p >= 0) el.setSelectionRange(p, p);
+}
+
+// मोबाइल हरा तीर एवं एंटर: ठीक अगले दिन के उसी कॉलम पर जाना
+function moveNext(e, type, day) {
+  var code = e.keyCode || e.which;
+  if (code === 13 || e.key === "Enter" || code === 40 || e.key === "ArrowDown") {
+    e.preventDefault();
+    var tot = new Date(parseInt(document.getElementById('selYear').value, 10), parseInt(document.getElementById('selMonth').value, 10) + 1, 0).getDate();
+    for (var d = day + 1; d <= tot; d++) {
+      var n = document.getElementById(type + 'att' + d);
+      if (n && !n.readOnly) {
+        n.focus(); n.select();
+        n.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+    }
+    e.target.blur();
+  }
+}
+
+function initYears() {
+  var s = document.getElementById('selYear');
+  s.innerHTML = '';
+  for (var y = 2015; y <= 2059; y++) {
+    var o = document.createElement('option');
+    o.value = y; o.innerText = y;
+    if (y === 2026) o.selected = true;
+    s.appendChild(o);
+  }
+}
+
+function setLevel(lvl) {
+  curLvl = lvl;
+  document.getElementById('btnComp').className = 'tab-btn' + (lvl === 'comp' ? ' active' : '');
+  document.getElementById('btnPs').className = 'tab-btn' + (lvl === 'ps' ? ' active' : '');
+  document.getElementById('btnUps').className = 'tab-btn' + (lvl === 'ups' ? ' active' : '');
+
+  document.getElementById('sc_ps').style.display = (lvl === 'ups') ? 'none' : '';
+  document.getElementById('sc_ups').style.display = (lvl === 'ps') ? 'none' : '';
+  document.getElementById('sc_tot').style.display = (lvl === 'comp') ? '' : 'none';
+
+  var p = document.querySelectorAll('.ps-col');
+  for (var i = 0; i < p.length; i++) p[i].style.display = (lvl === 'ups') ? 'none' : '';
+
+  var u = document.querySelectorAll('.ups-col');
+  for (var j = 0; j < u.length; j++) u[j].style.display = (lvl === 'ps') ? 'none' : '';
+
+  updateHeader();
+}
+
+function buildMonth() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  var tb = document.getElementById('mdmBody');
+  tb.innerHTML = '';
+
+  for (var d = 1; d <= tot; d++) {
+    var dt = new Date(y, m, d);
+    var dn = days[dt.getDay()];
+    var isSun = (dt.getDay() === 0);
+
+    var tr = document.createElement('tr');
+    tr.id = 'row_' + d;
+    tr.setAttribute('data-day', dn);
+    if (isSun) tr.className = 'sunday-row';
+
+    var dStr = d + '-' + months[m].substring(0,3) + '-' + String(y).slice(-2);
+
+    tr.innerHTML = 
+      '<td style="font-weight:bold;">' + dStr + '</td>' +
+      '<td style="font-weight:600;">' + dn + '</td>' +
+      '<td class="ps-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ps_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ps\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
+      '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
+      '<td class="ps-col" id="ps_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
+      '<td class="ps-col" id="ps_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
+      '<td class="ps-col" id="ps_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
+      '<td class="ps-col" id="ps_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>' +
+      '<td class="ups-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ups_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ups\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
+      '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
+      '<td class="ups-col" id="ups_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
+      '<td class="ups-col" id="ups_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
+      '<td class="ups-col" id="ups_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
+      '<td class="ups-col" id="ups_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>';
+
+    tb.appendChild(tr);
+  }
+
+  setLevel(curLvl);
+  recalc();
+  updateHeader();
+}
+
+function recalc() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
+  var rUps = parseFloat(document.getElementById('rateUps').value) || 10.17;
+  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 4.00;
+  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 5.00;
+  var isWinter = (m === 10 || m === 11 || m === 0 || m === 1 || m === 2);
+
+  var cPs = 0, cUps = 0;
+  var tPsAtt = 0, tUpsAtt = 0;
+  var tPsW = 0, tPsR = 0, tPsC = 0;
+  var tUpsW = 0, tUpsR = 0, tUpsC = 0;
+  var tFPs = 0, tFUps = 0;
+
+  for (var d = 1; d <= tot; d++) {
+    var tr = document.getElementById('row_' + d);
+    if (!tr) continue;
+    var dn = tr.getAttribute('data-day');
+    var isSun = (dn === 'Sunday');
+    var isMon = (dn === 'Monday');
+    var isThu = (dn === 'Thursday');
+
+    var inPs = document.getElementById('ps_att_' + d);
+    var inUps = document.getElementById('ups_att_' + d);
+
+    var aPs = (inPs && !isSun) ? (parseInt(inPs.value, 10) || 0) : 0;
+    var aUps = (inUps && !isSun) ? (parseInt(inUps.value, 10) || 0) : 0;
+
+    cPs += aPs; cUps += aUps;
+    tPsAtt += aPs; tUpsAtt += aUps;
+
+    var wP = (!isSun && (isMon || isThu)) ? (aPs * 0.1) : 0;
+    var rP = (!isSun && !isMon && !isThu) ? (aPs * 0.1) : 0;
+    var wU = (!isSun && (isMon || isThu)) ? (aUps * 0.15) : 0;
+    var rU = (!isSun && !isMon && !isThu) ? (aUps * 0.15) : 0;
+
+    var fP = isMon ? aPs : 0;
+    var fU = isMon ? aUps : 0;
+    tFPs += fP; tFUps += fU;
+
+    var nP = (isThu && isWinter && !isSun) ? (aPs * rNutri) : 0;
+    var nU = (isThu && isWinter && !isSun) ? (aUps * rNutri) : 0;
+
+    var costP = (aPs * rPs) + (fP * rFruit) + nP;
+    var costU = (aUps * rUps) + (fU * rFruit) + nU;
+
+    tPsW += wP; tPsR += rP; tPsC += costP;
+    tUpsW += wU; tUpsR += rU; tUpsC += costU;
+
+    document.getElementById('ps_cumu_' + d).innerText = cPs;
+    document.getElementById('ps_w_' + d).innerText = wP.toFixed(2);
+    document.getElementById('ps_r_' + d).innerText = rP.toFixed(2);
+    document.getElementById('ps_f_' + d).innerText = fP;
+    document.getElementById('ps_c_' + d).innerText = '₹' + costP.toFixed(2);
+
+    document.getElementById('ups_cumu_' + d).innerText = cUps;
+    document.getElementById('ups_w_' + d).innerText = wU.toFixed(2);
+    document.getElementById('ups_r_' + d).innerText = rU.toFixed(2);
+    document.getElementById('ups_f_' + d).innerText = fU;
+    document.getElementById('ups_c_' + d).innerText = '₹' + costU.toFixed(2);
+  }
+
+  document.getElementById('ft_ps_att').innerText = tPsAtt;
+  document.getElementById('ft_ps_w').innerText = tPsW.toFixed(2);
+  document.getElementById('ft_ps_r').innerText = tPsR.toFixed(2);
+  document.getElementById('ft_ps_f').innerText = tFPs;
+  document.getElementById('ft_ps_c').innerText = '₹' + tPsC.toFixed(2);
+
+  document.getElementById('ft_ups_att').innerText = tUpsAtt;
+  document.getElementById('ft_ups_w').innerText = tUpsW.toFixed(2);
+  document.getElementById('ft_ups_r').innerText = tUpsR.toFixed(2);
+  document.getElementById('ft_ups_f').innerText = tFUps;
+  document.getElementById('ft_ups_c').innerText = '₹' + tUpsC.toFixed(2);
+
+  document.getElementById('sm_ps_w').innerText = tPsW.toFixed(2) + ' kg';
+  document.getElementById('sm_ps_r').innerText = tPsR.toFixed(2) + ' kg';
+  document.getElementById('sm_ps_f').innerText = tFPs;
+  document.getElementById('sm_ps_fc').innerText = '₹' + (tFPs * rFruit).toFixed(2);
+  document.getElementById('sm_ps_c').innerText = '₹' + tPsC.toFixed(2);
+
+  document.getElementById('sm_ups_w').innerText = tUpsW.toFixed(2) + ' kg';
+  document.getElementById('sm_ups_r').innerText = tUpsR.toFixed(2) + ' kg';
+  document.getElementById('sm_ups_f').innerText = tFUps;
+  document.getElementById('sm_ups_fc').innerText = '₹' + (tFUps * rFruit).toFixed(2);
+  document.getElementById('sm_ups_c').innerText = '₹' + tUpsC.toFixed(2);
+
+  document.getElementById('sm_tot_w').innerText = (tPsW + tUpsW).toFixed(2) + ' kg';
+  document.getElementById('sm_tot_r').innerText = (tPsR + tUpsR).toFixed(2) + ' kg';
+  document.getElementById('sm_tot_f').innerText = (tFPs + tFUps);
+  document.getElementById('sm_tot_fc').innerText = '₹' + ((tFPs + tFUps) * rFruit).toFixed(2);
+  document.getElementById('sm_tot_c').innerText = '₹' + (tPsC + tUpsC).toFixed(2);
+}
+
+function updateHeader() {
+  var y = document.getElementById('selYear').value;
+  var m = months[parseInt(document.getElementById('selMonth').value, 10)];
+  var sch = document.getElementById('inSchool').value.trim();
+  var blk = document.getElementById('inBlock').value.trim();
+  var dst = document.getElementById('inDistrict').value.trim();
+  var udi = document.getElementById('inUdise').value.trim();
+
+  var banner = "MID DAY MEAL REGISTER - " + m + " " + y;
+  var sub = [];
+  if (sch) sub.push(sch);
+  if (blk) sub.push("BLOCK: " + blk);
+  if (dst) sub.push("DISTRICT: " + dst);
+  if (udi) sub.push("(UDISE: " + udi + ")");
+
+  document.getElementById('thBanner').innerText = sub.length ? banner + " (" + sub.join(' | ') + ")" : banner;
+  document.getElementById('prTitle').innerText = banner;
+  document.getElementById('prSub').innerText = sub.join(' | ');
+}
+
+initYears();
+buildMonth();
+</script>
+</body>
+</html>
