@@ -67,7 +67,7 @@
     .print-sign-row { display: none; }
 
     /* =========================================================
-       100% फुल A4 PORTRAIT पेज प्रिंट इंजन
+       100% फुल A4 PORTRAIT पेज प्रिंट इंजन (हस्ताक्षर गैप फिक्स)
        ========================================================= */
     @page {
       size: portrait;
@@ -98,25 +98,25 @@
 
       .no-print { display: none !important; }
       .print-header { display: block !important; }
-      .print-header h2 { font-size: 13px !important; margin: 0 !important; }
-      .print-header p { font-size: 10px !important; margin: 1px 0 3px 0 !important; }
+      .print-header h2 { font-size: 12.5px !important; margin: 0 !important; }
+      .print-header p { font-size: 9.5px !important; margin: 1px 0 3px 0 !important; }
 
       /* Summary Cards in Print */
       .summary-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 5px !important;
-        margin-bottom: 4px !important;
+        gap: 4px !important;
+        margin-bottom: 3px !important;
       }
 
       .summary-card {
-        padding: 3px 5px !important;
+        padding: 2.5px 4.5px !important;
         border: 1px solid #000 !important;
         border-top-width: 2.5px !important;
       }
-      .summary-card h4 { font-size: 9.5px !important; margin: 0 0 2px 0 !important; font-weight: bold !important; }
-      .summary-card table { font-size: 8.5px !important; }
-      .summary-card td { padding: 0.5px 2px !important; }
+      .summary-card h4 { font-size: 9px !important; margin: 0 0 1.5px 0 !important; font-weight: bold !important; }
+      .summary-card table { font-size: 8px !important; }
+      .summary-card td { padding: 0.3px 1.5px !important; }
 
       .table-responsive-box {
         overflow: visible !important;
@@ -125,17 +125,17 @@
         width: 100% !important;
       }
 
-      /* 31 दिनों के लिए फिक्स रो हाइट (Single Page Fit) */
+      /* 31 दिनों के लिए संतुलित रो हाइट */
       table.mdm-table {
         width: 100% !important;
         min-width: 100% !important;
         border: 1.5px solid #000 !important;
-        font-size: 9px !important;
+        font-size: 8.8px !important;
         border-collapse: collapse !important;
       }
 
       table.mdm-table tr {
-        height: 5.6mm !important;
+        height: 5.0mm !important; /* हाइट संतुलित ताकि नीचे साइन गैप बने */
       }
 
       table.mdm-table th, table.mdm-table td {
@@ -143,24 +143,24 @@
         padding: 0 1px !important;
         color: #000 !important;
         vertical-align: middle !important;
-        line-height: 1.1 !important;
+        line-height: 1.05 !important;
       }
 
       table.mdm-table th {
         background: #e2e8f0 !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 8.8px !important;
-        height: 6mm !important;
+        font-size: 8.5px !important;
+        height: 5.5mm !important;
       }
 
-      .th-banner { font-size: 9.5px !important; height: 5mm !important; }
-      .th-sub, .th-sub-ups { font-size: 8.2px !important; }
+      .th-banner { font-size: 9px !important; height: 4.5mm !important; }
+      .th-sub, .th-sub-ups { font-size: 8px !important; }
 
       input.att-in {
         border: none !important;
         background: transparent !important;
-        font-size: 9.5px !important;
+        font-size: 9.2px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -171,22 +171,22 @@
 
       .sunday-row { background: #fee2e2 !important; }
 
-      /* हस्ताक्षर ब्लॉक */
+      /* हस्ताक्षर ब्लॉक - टेबल से पर्याप्त खुला गैप */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 12px !important;
-        padding: 0 35px !important;
+        margin-top: 42px !important; /* टेबल और साइन के बीच खुला गैप */
+        padding: 0 40px !important;
         page-break-inside: avoid !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 10.5px !important;
+        font-size: 11px !important;
         font-weight: bold !important;
         border-top: 1.2px dashed #000 !important;
-        width: 200px !important;
-        padding-top: 3px !important;
+        width: 220px !important;
+        padding-top: 4px !important;
       }
     }
   </style>
@@ -263,14 +263,13 @@
         <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
         <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ps_f">0</td></tr>
         <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
-        <!-- केवल शीतकालीन माह (नवंबर, दिसंबर, जनवरी, फरवरी) में दृश्यमान -->
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>अतिरिक्त पोषण लाभार्थी (गुरुवार):</td><td class="val" id="sm_ps_n">0</td>
         </tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ps_nc">₹0.00</td>
         </tr>
-        <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_ps_c">₹0.00</td></tr>
+        <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:11px;" id="sm_ps_c">₹0.00</td></tr>
       </table>
     </div>
 
@@ -281,14 +280,13 @@
         <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
         <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ups_f">0</td></tr>
         <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
-        <!-- केवल शीतकालीन माह में दृश्यमान -->
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>अतिरिक्त पोषण लाभार्थी (गुरुवार):</td><td class="val" id="sm_ups_n">0</td>
         </tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ups_nc">₹0.00</td>
         </tr>
-        <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_ups_c">₹0.00</td></tr>
+        <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:11px;" id="sm_ups_c">₹0.00</td></tr>
       </table>
     </div>
 
@@ -299,14 +297,13 @@
         <tr><td>कुल चावल:</td><td class="val" id="sm_tot_r">0.00 kg</td></tr>
         <tr><td>कुल फल लाभार्थी:</td><td class="val" id="sm_tot_f">0</td></tr>
         <tr><td>कुल फल धनराशि:</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
-        <!-- केवल शीतकालीन माह में दृश्यमान -->
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>कुल अतिरिक्त पोषण लाभार्थी:</td><td class="val" id="sm_tot_n">0</td>
         </tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>कुल अतिरिक्त पोषण धनराशि:</td><td class="val" id="sm_tot_nc">₹0.00</td>
         </tr>
-        <tr><td>विद्यालय कुल लागत:</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_tot_c">₹0.00</td></tr>
+        <tr><td>विद्यालय कुल लागत:</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_tot_c">₹0.00</td></tr>
       </table>
     </div>
   </div>
@@ -348,6 +345,7 @@
     </table>
   </div>
 
+  <!-- हस्ताक्षर ब्लॉक (42px गैप के साथ) -->
   <div class="print-sign-row">
     <div class="print-sign-col">हस्ताक्षर एमडीएम प्रभारी</div>
     <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
@@ -420,7 +418,6 @@ function buildMonth() {
   var m = parseInt(document.getElementById('selMonth').value, 10);
   var tot = new Date(y, m + 1, 0).getDate();
 
-  // केवल नवंबर (10), दिसंबर (11), जनवरी (0), फरवरी (1) में ही शीतकालीन पोषण लागू होगा
   var isWinter = (m === 10 || m === 11 || m === 0 || m === 1);
   var wRows = document.querySelectorAll('.winter-summary-row');
   for (var i = 0; i < wRows.length; i++) {
@@ -477,7 +474,6 @@ function recalc() {
   var rFruit = parseFloat(document.getElementById('rateFruit').value) || 4.00;
   var rNutri = parseFloat(document.getElementById('rateNutri').value) || 5.00;
   
-  // केवल नवंबर, दिसंबर, जनवरी, फरवरी में ही शीतकालीन पोषण लागू होगा
   var isWinter = (m === 10 || m === 11 || m === 0 || m === 1);
 
   var cPs = 0, cUps = 0;
@@ -536,7 +532,6 @@ function recalc() {
     document.getElementById('ups_c_' + d).innerText = '₹' + costU.toFixed(2);
   }
 
-  // फुटर मान
   document.getElementById('ft_ps_att').innerText = tPsAtt;
   document.getElementById('ft_ps_w').innerText = tPsW.toFixed(2);
   document.getElementById('ft_ps_r').innerText = tPsR.toFixed(2);
@@ -549,7 +544,6 @@ function recalc() {
   document.getElementById('ft_ups_f').innerText = tFUps;
   document.getElementById('ft_ups_c').innerText = '₹' + tUpsC.toFixed(2);
 
-  // प्राथमिक कार्ड
   document.getElementById('sm_ps_w').innerText = tPsW.toFixed(2) + ' kg';
   document.getElementById('sm_ps_r').innerText = tPsR.toFixed(2) + ' kg';
   document.getElementById('sm_ps_f').innerText = tFPs;
@@ -558,7 +552,6 @@ function recalc() {
   document.getElementById('sm_ps_nc').innerText = '₹' + (tNPs * rNutri).toFixed(2);
   document.getElementById('sm_ps_c').innerText = '₹' + tPsC.toFixed(2);
 
-  // उच्च प्राथमिक कार्ड
   document.getElementById('sm_ups_w').innerText = tUpsW.toFixed(2) + ' kg';
   document.getElementById('sm_ups_r').innerText = tUpsR.toFixed(2) + ' kg';
   document.getElementById('sm_ups_f').innerText = tFUps;
@@ -567,7 +560,6 @@ function recalc() {
   document.getElementById('sm_ups_nc').innerText = '₹' + (tNUps * rNutri).toFixed(2);
   document.getElementById('sm_ups_c').innerText = '₹' + tUpsC.toFixed(2);
 
-  // विद्यालय कुल योग कार्ड
   document.getElementById('sm_tot_w').innerText = (tPsW + tUpsW).toFixed(2) + ' kg';
   document.getElementById('sm_tot_r').innerText = (tPsR + tUpsR).toFixed(2) + ' kg';
   document.getElementById('sm_tot_f').innerText = (tFPs + tFUps);
