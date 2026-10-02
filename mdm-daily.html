@@ -51,11 +51,11 @@
     .print-sign-row { display: none; }
 
     /* =========================================================
-       100% COMPLETE ENGLISH A4 LANDSCAPE PRINT ENGINE
+       100% COMPLETE A4 LANDSCAPE FULL PAGE FIT ENGINE
        ========================================================= */
     @page {
-      size: landscape !important;
-      margin: 8mm 10mm !important;
+      size: A4 landscape !important;
+      margin: 8mm 12mm !important;
     }
 
     @media print {
@@ -85,7 +85,7 @@
 
       .no-print { display: none !important; }
       
-      .print-header { display: block !important; }
+      .print-header { display: block !important; margin-bottom: 6px !important; }
       .print-header h2 { font-size: 16px !important; margin: 0 !important; }
       .print-header p { font-size: 11.5px !important; margin: 3px 0 6px 0 !important; }
 
@@ -95,7 +95,7 @@
         background: #f1f5f9 !important;
         padding: 8px 12px !important;
         margin-bottom: 15px !important;
-        font-size: 12px !important;
+        font-size: 12.5px !important;
         font-weight: bold !important;
         text-align: left !important;
         text-transform: uppercase !important;
@@ -107,6 +107,9 @@
         margin: 0 !important;
         background: transparent !important;
         flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
       }
 
       .table-responsive-box {
@@ -116,6 +119,7 @@
         width: 100% !important;
       }
 
+      /* उपस्थिति तालिका (Attendance Table) - प्रॉपर ऊँचाई */
       table.daily-att-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -124,8 +128,12 @@
         table-layout: fixed !important;
       }
 
-      table.daily-att-table tr {
-        height: 12mm !important;
+      table.daily-att-table thead tr {
+        height: 11mm !important;
+      }
+
+      table.daily-att-table tbody tr {
+        height: 16mm !important;
       }
 
       table.daily-att-table th, table.daily-att-table td {
@@ -133,7 +141,7 @@
         padding: 0 2px !important;
         color: #000 !important;
         vertical-align: middle !important;
-        font-size: 11px !important;
+        font-size: 11.5px !important;
       }
 
       table.daily-att-table th {
@@ -145,7 +153,7 @@
       .daily-att-input {
         border: none !important;
         background: transparent !important;
-        font-size: 13.5px !important;
+        font-size: 15px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -153,6 +161,7 @@
         text-align: center !important;
       }
 
+      /* सामग्री तालिका (Material Table) - बड़ा व स्पष्ट फैलाव */
       table.daily-mat-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -160,8 +169,12 @@
         border-collapse: collapse !important;
       }
 
-      table.daily-mat-table tr {
-        height: 15mm !important;
+      table.daily-mat-table thead tr {
+        height: 13mm !important;
+      }
+
+      table.daily-mat-table tbody tr {
+        height: 22mm !important; /* बड़ी पंक्तियाँ जिससे पेज खाली न रहे */
       }
 
       table.daily-mat-table th, table.daily-mat-table td {
@@ -175,30 +188,31 @@
         background: #cbd5e1 !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
       }
 
       table.daily-mat-table td.val {
         background: transparent !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 14.5px !important;
+        font-size: 16.5px !important;
       }
 
+      /* हस्ताक्षर ब्लॉक */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 30px !important;
-        padding: 0 30px !important;
+        margin-top: 35px !important;
+        padding: 0 40px !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 12px !important;
+        font-size: 12.5px !important;
         font-weight: bold !important;
         border-top: 1.5px dashed #000 !important;
-        width: 220px !important;
-        padding-top: 5px !important;
+        width: 240px !important;
+        padding-top: 6px !important;
         text-transform: uppercase !important;
       }
     }
@@ -358,6 +372,7 @@ function onDailyDateChange() {
 
   var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
 
+  // English Menu Definitions
   var mText = "";
   if (dayName === "Monday") mText = "MONDAY: ROTI WITH MIXED VEGETABLE & FRESH SEASONAL FRUIT";
   else if (dayName === "Tuesday") mText = "TUESDAY: DAL WITH VEGETABLES & RICE";
@@ -422,7 +437,7 @@ function calcDaily() {
   var chana = (day === "Thursday" && isWinter) ? (tot * 50) : 0;
   var chikki = (day === "Thursday" && isWinter) ? (tot * 20) : 0;
 
-  // Build DYNAMIC Material Columns (OIL only, SPICES removed)
+  // DYNAMIC Material Columns (OIL only)
   var items = [];
 
   if (day === "Monday") {
@@ -500,12 +515,13 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
+// लैंडस्केप को फ़ोर्स करने वाला प्रिंट इंजन
 function forceLandscapePrint() {
   updateHeader();
   
   var style = document.createElement('style');
   style.id = 'force-landscape-style';
-  style.innerHTML = '@page { size: landscape !important; margin: 8mm 10mm !important; }';
+  style.innerHTML = '@page { size: landscape !important; margin: 8mm 12mm !important; }';
   document.head.appendChild(style);
 
   window.print();
