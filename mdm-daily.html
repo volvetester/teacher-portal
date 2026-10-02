@@ -106,7 +106,7 @@
         width: 100% !important;
       }
 
-      /* 1. Attendance Table */
+      /* Attendance Table - No Empty Cells */
       table.att-portrait-table {
         width: 100% !important;
         border: 1.5px solid #000 !important;
@@ -139,7 +139,7 @@
         padding: 0 !important;
       }
 
-      /* 2. Direct 2-Column Material Table */
+      /* Material Table */
       table.mat-direct-table {
         width: 100% !important;
         border: 1.5px solid #000 !important;
@@ -181,11 +181,11 @@
         width: 35% !important;
       }
 
-      /* 3. Signature Block with Proper Signing Gap */
+      /* Signatures with Proper Gap */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 55px !important; /* हस्ताक्षर के लिए पर्याप्त खुली जगह */
+        margin-top: 55px !important;
         padding: 0 15px !important;
         page-break-inside: avoid !important;
       }
@@ -255,7 +255,7 @@
           <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:130px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px; text-transform:uppercase;">
         </div>
       </div>
-      <button class="btn-print-daily" type="button" onclick="window.print()">🖨️ A4 PRINT (SINGLE PAGE)</button>
+      <button class="btn-print-daily" type="button" onclick="window.print()">🖨️️ A4 PRINT (SINGLE PAGE)</button>
     </div>
 
     <div class="menu-badge no-print" id="dailyMenuName">MENU LOADING...</div>
@@ -264,14 +264,14 @@
       👉 ENTER CLASS-WISE BENEFICIARY ATTENDANCE (CLASS 1 TO 8):
     </div>
 
-    <!-- 1. Attendance Table -->
+    <!-- 1. Attendance Table (No Empty Cell) -->
     <div class="table-responsive-box">
       <table class="daily-table att-portrait-table">
         <thead>
           <tr>
             <th colspan="5" style="background:#1e3a8a;">PRIMARY LEVEL (CLASS 1 TO 5)</th>
             <th colspan="3" style="background:#6d28d9;">UPPER PRIMARY (CLASS 6 TO 8)</th>
-            <th rowspan="2" style="background:#b91c1c;">TOTAL BENEFICIARIES</th>
+            <th rowspan="2" style="background:#b91c1c; width:130px;">TOTAL BENEFICIARIES</th>
           </tr>
           <tr>
             <th>CLASS 1</th><th>CLASS 2</th><th>CLASS 3</th><th>CLASS 4</th><th>CLASS 5</th>
@@ -288,12 +288,12 @@
             <td><input type="tel" class="daily-att-input" id="d_cls_6" oninput="cleanNum(this); calcDaily();"></td>
             <td><input type="tel" class="daily-att-input" id="d_cls_7" oninput="cleanNum(this); calcDaily();"></td>
             <td><input type="tel" class="daily-att-input" id="d_cls_8" oninput="cleanNum(this); calcDaily();"></td>
-            <td style="font-weight:bold; color:#b91c1c; font-size:15px; background:#fee2e2;" id="d_tot_all">0</td>
+            <!-- Full Height Cell (rowspan=2) for Grand Total -->
+            <td rowspan="2" style="font-weight:bold; color:#b91c1c; font-size:18px; background:#fee2e2; vertical-align:middle;" id="d_tot_all">0</td>
           </tr>
           <tr style="background:#f8fafc; font-weight:bold;">
             <td colspan="5" style="color:#1e3a8a;">PRIMARY TOTAL: <span id="d_tot_ps">0</span></td>
             <td colspan="3" style="color:#6d28d9;">UPPER PRIMARY TOTAL: <span id="d_tot_ups">0</span></td>
-            <td>-</td>
           </tr>
         </tbody>
       </table>
@@ -303,7 +303,7 @@
       📦 REQUIRED FOODGRAIN & MATERIAL TODAY (TOTAL QUANTITY):
     </div>
 
-    <!-- 2. Direct Material Table (Pure Total Quantity Only, No Cost) -->
+    <!-- 2. Direct Material Table -->
     <div class="table-responsive-box">
       <table class="daily-table mat-direct-table">
         <thead>
@@ -316,7 +316,7 @@
       </table>
     </div>
 
-    <!-- 3. Signatures with Adequate Spacing -->
+    <!-- 3. Signatures -->
     <div class="print-sign-row">
       <div class="print-sign-col">SIGNATURE COOK</div>
       <div class="print-sign-col">SIGNATURE MDM IN-CHARGE</div>
@@ -494,7 +494,7 @@ function calcDaily() {
     });
   }
 
-  // Render Table (Pure 2 Columns)
+  // Render Table
   var html = "";
   for (var i = 0; i < rows.length; i++) {
     html += 
