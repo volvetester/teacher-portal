@@ -67,7 +67,7 @@
     .print-sign-row { display: none; }
 
     /* =========================================================
-       100% फुल A4 PORTRAIT पेज भरने वाला सख्त प्रिंट इंजन
+       100% फुल A4 PORTRAIT पेज प्रिंट इंजन (शुद्ध हिंदी लेआउट)
        ========================================================= */
     @page {
       size: A4 portrait !important;
@@ -101,8 +101,8 @@
 
       .no-print { display: none !important; }
       .print-header { display: block !important; }
-      .print-header h2 { font-size: 13.5px !important; margin: 0 !important; }
-      .print-header p { font-size: 10.5px !important; margin: 1px 0 4px 0 !important; }
+      .print-header h2 { font-size: 14px !important; margin: 0 !important; }
+      .print-header p { font-size: 11px !important; margin: 1px 0 4px 0 !important; font-family: monospace, sans-serif !important; }
 
       /* Summary Cards */
       .summary-grid {
@@ -129,17 +129,17 @@
         flex-grow: 1 !important;
       }
 
-      /* पूरी टेबल की पंक्तियों की ऊंचाई लॉक (6.2mm) */
+      /* 31 दिनों के लिए फिक्स ऊंचाई ताकि पूरा पेज भरे */
       table.mdm-table {
         width: 100% !important;
         min-width: 100% !important;
         border: 1.5px solid #000 !important;
-        font-size: 10px !important; /* बड़ा व स्पष्ट फॉन्ट */
+        font-size: 10px !important;
         border-collapse: collapse !important;
       }
 
       table.mdm-table tr {
-        height: 6.2mm !important; /* हर पंक्ति पूरे पेज को भरने के लिए 6.2mm होगी */
+        height: 6.2mm !important;
       }
 
       table.mdm-table th, table.mdm-table td {
@@ -175,7 +175,7 @@
 
       .sunday-row { background: #fee2e2 !important; }
 
-      /* हस्ताक्षर ब्लॉक सीधे बॉटम पर */
+      /* हस्ताक्षर ब्लॉक */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
@@ -211,26 +211,26 @@
     <div class="form-group">
       <label>माह:</label>
       <select id="selMonth" onchange="buildMonth()">
-        <option value="0">January</option><option value="1">February</option><option value="2">March</option>
-        <option value="3">April</option><option value="4">May</option><option value="5">June</option>
-        <option value="6">July</option><option value="7">August</option><option value="8">September</option>
-        <option value="9" selected>October</option><option value="10">November</option><option value="11">December</option>
+        <option value="0">जनवरी (January)</option><option value="1">फ़रवरी (February)</option><option value="2">मार्च (March)</option>
+        <option value="3">अप्रैल (April)</option><option value="4">मई (May)</option><option value="5">जून (June)</option>
+        <option value="6">जुलाई (July)</option><option value="7">अगस्त (August)</option><option value="8">सितंबर (September)</option>
+        <option value="9" selected>अक्टूबर (October)</option><option value="10">नवंबर (November)</option><option value="11">दिसंबर (December)</option>
       </select>
     </div>
     <div class="form-group">
-      <label>विद्यालय का नाम:</label>
+      <label>विद्यालय का नाम (Capital Only):</label>
       <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>विकास खंड:</label>
+      <label>विकास खंड (Block):</label>
       <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>जनपद:</label>
+      <label>जनपद (District):</label>
       <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
-      <label>यू-डायस कोड:</label>
+      <label>यू-डायस कोड (Numbers Only):</label>
       <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNum(this); updateHeader();">
     </div>
   </div>
@@ -249,14 +249,14 @@
     <button class="tab-btn" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
   </div>
 
-  <!-- मासिक समरी कार्ड्स -->
+  <!-- मासिक समरी कार्ड्स (शुद्ध हिंदी) -->
   <div class="summary-grid">
     <div class="summary-card ps" id="sc_ps">
       <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
       <table>
         <tr><td>गेहूं कुल:</td><td class="val" id="sm_ps_w">0.00 kg</td></tr>
         <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
-        <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ps_f">0</td></tr>
+        <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ps_f">0</td></tr>
         <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
         <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ps_c">₹0.00</td></tr>
       </table>
@@ -267,7 +267,7 @@
       <table>
         <tr><td>गेहूं कुल:</td><td class="val" id="sm_ups_w">0.00 kg</td></tr>
         <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
-        <tr><td>फल लाभार्थी (सोम):</td><td class="val" id="sm_ups_f">0</td></tr>
+        <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ups_f">0</td></tr>
         <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
         <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_ups_c">₹0.00</td></tr>
       </table>
@@ -295,20 +295,20 @@
     <p id="prSub"></p>
   </div>
 
-  <!-- मासिक तालिका -->
+  <!-- मासिक तालिका (शुद्ध हिंदी कॉलम) -->
   <div class="table-responsive-box">
     <table class="mdm-table">
       <thead>
-        <tr><th colspan="14" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
+        <tr class="no-print"><th colspan="14" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
         <tr>
           <th rowspan="2" style="width:70px; background:#0f172a; color:white;">दिनांक</th>
           <th rowspan="2" style="width:65px; background:#0f172a; color:white;">दिन</th>
-          <th colspan="6" class="th-ps ps-col">प्राथमिक स्तर (PS : 1-5)</th>
-          <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक स्तर (UPS : 6-8)</th>
+          <th colspan="6" class="th-ps ps-col">प्राथमिक स्तर (कक्षा 1 से 5)</th>
+          <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक स्तर (कक्षा 6 से 8)</th>
         </tr>
         <tr>
-          <th class="th-sub ps-col">छात्र</th><th class="th-sub ps-col">संचयी</th><th class="th-sub ps-col">गेहूं</th><th class="th-sub ps-col">चावल</th><th class="th-sub ps-col">फल</th><th class="th-sub ps-col">लागत (₹)</th>
-          <th class="th-sub-ups ups-col">छात्र</th><th class="th-sub-ups ups-col">संचयी</th><th class="th-sub-ups ups-col">गेहूं</th><th class="th-sub-ups ups-col">चावल</th><th class="th-sub-ups ups-col">फल</th><th class="th-sub-ups ups-col">लागत (₹)</th>
+          <th class="th-sub ps-col">छात्र</th><th class="th-sub ps-col">संचयी</th><th class="th-sub ps-col">गेहूं (kg)</th><th class="th-sub ps-col">चावल (kg)</th><th class="th-sub ps-col">फल</th><th class="th-sub ps-col">लागत (₹)</th>
+          <th class="th-sub-ups ups-col">छात्र</th><th class="th-sub-ups ups-col">संचयी</th><th class="th-sub-ups ups-col">गेहूं (kg)</th><th class="th-sub-ups ups-col">चावल (kg)</th><th class="th-sub-ups ups-col">फल</th><th class="th-sub-ups ups-col">लागत (₹)</th>
         </tr>
       </thead>
       <tbody id="mdmBody"></tbody>
@@ -331,8 +331,8 @@
 
 <script>
 var curLvl = 'comp';
-var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+var daysHindi = ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"];
+var monthsHindi = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"];
 
 function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
@@ -362,7 +362,7 @@ function moveNext(e, type, day) {
 function initYears() {
   var s = document.getElementById('selYear');
   s.innerHTML = '';
-  for (var y = 2015; y <= 2059; y++) {
+  for (var y = 2026; y <= 2059; y++) {
     var o = document.createElement('option');
     o.value = y; o.innerText = y;
     if (y === 2026) o.selected = true;
@@ -399,19 +399,20 @@ function buildMonth() {
 
   for (var d = 1; d <= tot; d++) {
     var dt = new Date(y, m, d);
-    var dn = days[dt.getDay()];
-    var isSun = (dt.getDay() === 0);
+    var dayIdx = dt.getDay();
+    var dHindi = daysHindi[dayIdx];
+    var isSun = (dayIdx === 0);
 
     var tr = document.createElement('tr');
     tr.id = 'row_' + d;
-    tr.setAttribute('data-day', dn);
+    tr.setAttribute('data-day', dayIdx);
     if (isSun) tr.className = 'sunday-row';
 
-    var dStr = d + '-' + months[m].substring(0,3) + '-' + String(y).slice(-2);
+    var dStr = String(d).padStart(2, '0') + '/' + String(m + 1).padStart(2, '0') + '/' + y;
 
     tr.innerHTML = 
       '<td style="font-weight:bold;">' + dStr + '</td>' +
-      '<td style="font-weight:600;">' + dn + '</td>' +
+      '<td style="font-weight:600;">' + dHindi + '</td>' +
       '<td class="ps-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ps_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ps\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
       '<td class="ps-col val-wheat" id="ps_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
@@ -453,10 +454,10 @@ function recalc() {
   for (var d = 1; d <= tot; d++) {
     var tr = document.getElementById('row_' + d);
     if (!tr) continue;
-    var dn = tr.getAttribute('data-day');
-    var isSun = (dn === 'Sunday');
-    var isMon = (dn === 'Monday');
-    var isThu = (dn === 'Thursday');
+    var dayIdx = parseInt(tr.getAttribute('data-day'), 10);
+    var isSun = (dayIdx === 0);
+    var isMon = (dayIdx === 1);
+    var isThu = (dayIdx === 4);
 
     var inPs = document.getElementById('ps_att_' + d);
     var inUps = document.getElementById('ups_att_' + d);
@@ -531,21 +532,21 @@ function recalc() {
 
 function updateHeader() {
   var y = document.getElementById('selYear').value;
-  var m = months[parseInt(document.getElementById('selMonth').value, 10)];
+  var mIdx = parseInt(document.getElementById('selMonth').value, 10);
+  var mHindi = monthsHindi[mIdx];
   var sch = document.getElementById('inSchool').value.trim();
   var blk = document.getElementById('inBlock').value.trim();
   var dst = document.getElementById('inDistrict').value.trim();
   var udi = document.getElementById('inUdise').value.trim();
 
-  var banner = "MID DAY MEAL REGISTER - " + m + " " + y;
+  // विद्यालय, ब्लॉक, जनपद और यू-डायस कैपिटल इंग्लिश में रहेंगे
   var sub = [];
-  if (sch) sub.push("विद्यालय: " + sch);
-  if (blk) sub.push("ब्लॉक: " + blk);
-  if (dst) sub.push("जनपद: " + dst);
-  if (udi) sub.push("(यू-डायस: " + udi + ")");
+  if (sch) sub.push("SCHOOL: " + sch);
+  if (blk) sub.push("BLOCK: " + blk);
+  if (dst) sub.push("DISTRICT: " + dst);
+  if (udi) sub.push("(UDISE: " + udi + ")");
 
-  document.getElementById('thBanner').innerText = banner;
-  document.getElementById('prTitle').innerText = "मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका - " + m + " " + y;
+  document.getElementById('prTitle').innerText = "मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका - " + mHindi + " " + y;
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
