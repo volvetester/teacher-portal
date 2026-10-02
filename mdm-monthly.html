@@ -67,7 +67,7 @@
     .print-sign-row { display: none; }
 
     /* =========================================================
-       100% A4 PORTRAIT सिंगल पेज (बड़े कॉलम व पंक्ति विस्तार)
+       100% A4 PORTRAIT सिंगल पेज
        ========================================================= */
     @page {
       size: portrait;
@@ -101,7 +101,6 @@
       .print-header h2 { font-size: 13px !important; margin: 0 !important; }
       .print-header p { font-size: 9.8px !important; margin: 1px 0 3px 0 !important; }
 
-      /* Summary Cards in Print */
       .summary-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
@@ -125,17 +124,16 @@
         width: 100% !important;
       }
 
-      /* पंक्तियाँ बड़ी और चौड़ी (5.6mm) */
       table.mdm-table {
         width: 100% !important;
         min-width: 100% !important;
         border: 1.5px solid #000 !important;
-        font-size: 9.5px !important; /* बड़ा व स्पष्ट फ़ॉन्ट */
+        font-size: 9.5px !important;
         border-collapse: collapse !important;
       }
 
       table.mdm-table tr {
-        height: 5.6mm !important; /* पर्याप्त बड़ा पंक्ति आकार */
+        height: 5.6mm !important;
       }
 
       table.mdm-table th, table.mdm-table td {
@@ -171,7 +169,6 @@
 
       .sunday-row { background: #fee2e2 !important; }
 
-      /* हस्ताक्षर ब्लॉक - संतुलित दूरी */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
@@ -262,12 +259,12 @@
         <tr><td>गेहूं कुल:</td><td class="val" id="sm_ps_w">0.00 kg</td></tr>
         <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r">0.00 kg</td></tr>
         <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ps_f">0</td></tr>
-        <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
+        <tr><td id="lbl_ps_fruit">फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc">₹0.00</td></tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>अतिरिक्त पोषण लाभार्थी (गुरुवार):</td><td class="val" id="sm_ps_n">0</td>
         </tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
-          <td>अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ps_nc">₹0.00</td>
+          <td id="lbl_ps_nutri">अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ps_nc">₹0.00</td>
         </tr>
         <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_ps_c">₹0.00</td></tr>
       </table>
@@ -279,12 +276,12 @@
         <tr><td>गेहूं कुल:</td><td class="val" id="sm_ups_w">0.00 kg</td></tr>
         <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r">0.00 kg</td></tr>
         <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ups_f">0</td></tr>
-        <tr><td>फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
+        <tr><td id="lbl_ups_fruit">फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc">₹0.00</td></tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>अतिरिक्त पोषण लाभार्थी (गुरुवार):</td><td class="val" id="sm_ups_n">0</td>
         </tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
-          <td>अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ups_nc">₹0.00</td>
+          <td id="lbl_ups_nutri">अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ups_nc">₹0.00</td>
         </tr>
         <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_ups_c">₹0.00</td></tr>
       </table>
@@ -296,12 +293,12 @@
         <tr><td>कुल गेहूं:</td><td class="val" id="sm_tot_w">0.00 kg</td></tr>
         <tr><td>कुल चावल:</td><td class="val" id="sm_tot_r">0.00 kg</td></tr>
         <tr><td>कुल फल लाभार्थी:</td><td class="val" id="sm_tot_f">0</td></tr>
-        <tr><td>कुल फल धनराशि:</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
+        <tr><td id="lbl_tot_fruit">कुल फल धनराशि (@₹4):</td><td class="val" id="sm_tot_fc">₹0.00</td></tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
           <td>कुल अतिरिक्त पोषण लाभार्थी:</td><td class="val" id="sm_tot_n">0</td>
         </tr>
         <tr class="winter-summary-row" style="display:none; color:#b45309;">
-          <td>कुल अतिरिक्त पोषण धनराशि:</td><td class="val" id="sm_tot_nc">₹0.00</td>
+          <td id="lbl_tot_nutri">कुल अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_tot_nc">₹0.00</td>
         </tr>
         <tr><td>विद्यालय कुल लागत:</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_tot_c">₹0.00</td></tr>
       </table>
@@ -383,7 +380,6 @@ function moveNext(e, type, day) {
   }
 }
 
-// वर्तमान साल और महीने को स्वतः सिलेक्ट करने वाला सिस्टम
 function initCurrentDates() {
   var today = new Date();
   var curYear = today.getFullYear();
@@ -479,9 +475,20 @@ function recalc() {
 
   var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
   var rUps = parseFloat(document.getElementById('rateUps').value) || 10.17;
-  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 4.00;
-  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 5.00;
+  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 0;
+  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 0;
   
+  // डायनामिक लेबल अपडेट (@दर)
+  var fruitText = 'फल धनराशि (@₹' + rFruit + '):';
+  var nutriText = 'अतिरिक्त पोषण धनराशि (@₹' + rNutri + '):';
+  document.getElementById('lbl_ps_fruit').innerText = fruitText;
+  document.getElementById('lbl_ups_fruit').innerText = fruitText;
+  document.getElementById('lbl_tot_fruit').innerText = 'कुल ' + fruitText;
+
+  document.getElementById('lbl_ps_nutri').innerText = nutriText;
+  document.getElementById('lbl_ups_nutri').innerText = nutriText;
+  document.getElementById('lbl_tot_nutri').innerText = 'कुल ' + nutriText;
+
   var isWinter = (m === 10 || m === 11 || m === 0 || m === 1);
 
   var cPs = 0, cUps = 0;
@@ -596,7 +603,6 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
-// शुरुआत में वर्तमान दिनांक व वर्ष स्वतः सेट करें
 initCurrentDates();
 buildMonth();
 </script>
