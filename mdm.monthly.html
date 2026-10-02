@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>मासिक MDM पंजिका (Monthly Register)</title>
+  <title>मासिक मध्याह्न भोजन (MDM) पंजिका - Monthly Register</title>
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background: #f8fafc; margin: 0; padding: 12px; color: #0f172a; }
@@ -13,18 +13,22 @@
     .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
+    /* School Details */
     .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
     .form-group input, .form-group select { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
 
+    /* Rates Box */
     .rates-box { display: flex; gap: 12px; align-items: center; background: #ecfdf5; padding: 10px 12px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 12px; font-size: 11.5px; flex-wrap: wrap; }
     .rates-box label { font-weight: bold; color: #065f46; }
     .rates-box input { width: 65px; height: 30px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
 
+    /* Level Selector Tabs */
     .tab-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
     .tab-btn { padding: 8px 14px; border: 2px solid #1e3a8a; background: white; color: #1e3a8a; font-weight: bold; font-size: 12.5px; border-radius: 6px; cursor: pointer; }
     .tab-btn.active { background: #1e3a8a; color: white; }
 
+    /* Summary Cards */
     .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 10px; margin-bottom: 12px; }
     .summary-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; font-size: 11.5px; }
     .summary-card.ps { background: #eff6ff; border-top: 3.5px solid #2563eb; }
@@ -35,6 +39,7 @@
     .summary-card td { padding: 1.5px 3px; }
     .summary-card td.val { font-weight: bold; text-align: right; }
 
+    /* Mobile Screen Horizontal Scroll Box */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 12px; background: white; }
 
     table.mdm-table { width: 100%; min-width: 900px; border-collapse: collapse; text-align: center; font-size: 11px; }
@@ -53,23 +58,124 @@
     .row-footer { background: #f1f5f9; font-weight: bold; }
 
     .btn-container { display: flex; justify-content: flex-end; margin-bottom: 12px; }
-    .btn-print { background: #166534; color: white; border: none; padding: 9px 20px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    .btn-print { background: #166534; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print:hover { background: #15803d; }
 
-    .print-header { display: none; text-align: center; margin-bottom: 8px; }
-    .print-header h3 { margin: 0; font-size: 14px; text-transform: uppercase; }
-    .print-header p { margin: 2px 0 0 0; font-size: 10px; font-weight: bold; }
+    /* Print Header & Signatures (Default Hidden on Screen) */
+    .print-header { display: none; text-align: center; margin-bottom: 6px; }
+    .print-header h2 { margin: 0; font-size: 15px; text-transform: uppercase; font-weight: 800; color: #000; }
+    .print-header p { margin: 2px 0 0 0; font-size: 10.5px; font-weight: bold; color: #111; }
+    .print-sign-row { display: none; }
+
+    /* =========================================================
+       सख्त A4 PORTRAIT (खड़ा पेज) प्रिंट स्टाइल (FULL PAGE 1-PAGE FIT)
+       ========================================================= */
+    @page {
+      size: A4 portrait !important; /* खड़ा (पोर्ट्रेट) पेज */
+      margin: 5mm 6mm !important;    /* 1-पेज फिटिंग हेतु सुव्यवस्थित मार्जिन */
+    }
 
     @media print {
-      body { background: white !important; padding: 0 !important; margin: 0 !important; }
-      .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border: none !important; }
+      html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .container {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border: none !important;
+      }
+
       .no-print { display: none !important; }
       .print-header { display: block !important; }
-      .table-responsive-box { overflow: visible !important; border: none !important; }
-      .summary-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: 5px !important; }
-      table.mdm-table { min-width: 100% !important; width: 100% !important; font-size: 8px !important; }
-      table.mdm-table th, table.mdm-table td { border: 1px solid #000 !important; padding: 1.5px 1px !important; }
-      input.att-in { border: none !important; background: transparent !important; }
-      @page { size: A4 portrait; margin: 5mm; }
+
+      /* Summary Cards in Print */
+      .summary-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5px !important;
+        margin-bottom: 6px !important;
+      }
+
+      .summary-card {
+        padding: 4px 6px !important;
+        font-size: 8.5px !important;
+        border: 1px solid #000 !important;
+        border-top-width: 2.5px !important;
+      }
+      .summary-card h4 { font-size: 9px !important; margin-bottom: 2px !important; }
+      .summary-card table { font-size: 8px !important; }
+      .summary-card td { padding: 0.5px 2px !important; }
+
+      .table-responsive-box {
+        overflow: visible !important;
+        border: none !important;
+        margin-bottom: 6px !important;
+        width: 100% !important;
+      }
+
+      /* पूरी टेबल 100% फुल पोर्ट्रेट चौड़ाई पर */
+      table.mdm-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        font-size: 8.2px !important;
+        border: 1.5px solid #000 !important;
+      }
+
+      table.mdm-table th, table.mdm-table td {
+        border: 1px solid #000 !important;
+        padding: 1.8px 1px !important;
+        color: #000 !important;
+        line-height: 1.1 !important;
+      }
+
+      table.mdm-table th {
+        background: #e2e8f0 !important;
+        color: #000 !important;
+        font-weight: 800 !important;
+      }
+
+      .th-banner { font-size: 9.5px !important; padding: 3px !important; }
+      .th-sub, .th-sub-ups { font-size: 7.8px !important; }
+
+      input.att-in {
+        border: none !important;
+        background: transparent !important;
+        font-size: 8.5px !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+      }
+
+      .sunday-row { background: #fee2e2 !important; }
+
+      /* हस्ताक्षर ब्लॉक */
+      .print-sign-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        margin-top: 20px !important;
+        padding: 0 25px !important;
+      }
+
+      .print-sign-col {
+        text-align: center !important;
+        font-size: 11px !important;
+        font-weight: bold !important;
+        border-top: 1.2px dashed #000 !important;
+        width: 180px !important;
+        padding-top: 4px !important;
+      }
     }
   </style>
 </head>
@@ -82,6 +188,7 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
+  <!-- विद्यालय व माह विवरण (स्क्रीन) -->
   <div class="school-details no-print">
     <div class="form-group">
       <label>सत्र / वर्ष:</label>
@@ -114,6 +221,7 @@
     </div>
   </div>
 
+  <!-- दरें (स्क्रीन) -->
   <div class="rates-box no-print">
     <span style="font-weight:bold; color:#065f46;">⚙️ दरें (प्रति छात्र):</span>
     <div><label>प्राथमिक: </label><input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalc()"> ₹</div>
@@ -122,12 +230,14 @@
     <div><label>गुरुवार पोषण: </label><input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalc()"> ₹</div>
   </div>
 
+  <!-- वर्ग चयन टैब (स्क्रीन) -->
   <div class="tab-container no-print">
     <button class="tab-btn active" id="btnComp" onclick="setLevel('comp')">🏫 कंपोजिट (1-8)</button>
     <button class="tab-btn" id="btnPs" onclick="setLevel('ps')">🎒 प्राथमिक (1-5)</button>
     <button class="tab-btn" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
   </div>
 
+  <!-- मासिक समरी कार्ड्स -->
   <div class="summary-grid">
     <div class="summary-card ps" id="sc_ps">
       <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
@@ -164,23 +274,25 @@
   </div>
 
   <div class="btn-container no-print">
-    <button class="btn-print" onclick="window.print()">🖨️ मासिक MDM पंजिका प्रिंट (Portrait - 1 Page)</button>
+    <button class="btn-print" type="button" onclick="forcePortraitPrint()">🖨️ A4 पोर्ट्रेट प्रिंट निकालें (1 Page)</button>
   </div>
 
+  <!-- प्रिंट हेडर -->
   <div class="print-header">
-    <h3 id="prTitle">MID DAY MEAL REGISTER</h3>
+    <h2 id="prTitle">मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका</h2>
     <p id="prSub"></p>
   </div>
 
+  <!-- मासिक तालिका -->
   <div class="table-responsive-box">
     <table class="mdm-table">
       <thead>
         <tr><th colspan="14" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
         <tr>
           <th rowspan="2" style="width:70px; background:#0f172a; color:white;">दिनांक</th>
-          <th rowspan="2" style="width:70px; background:#0f172a; color:white;">दिन</th>
+          <th rowspan="2" style="width:65px; background:#0f172a; color:white;">दिन</th>
           <th colspan="6" class="th-ps ps-col">प्राथमिक स्तर (PS : 1-5)</th>
-          <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक (UPS : 6-8)</th>
+          <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक स्तर (UPS : 6-8)</th>
         </tr>
         <tr>
           <th class="th-sub ps-col">छात्र</th><th class="th-sub ps-col">संचयी</th><th class="th-sub ps-col">गेहूं</th><th class="th-sub ps-col">चावल</th><th class="th-sub ps-col">फल</th><th class="th-sub ps-col">लागत (₹)</th>
@@ -196,6 +308,12 @@
         </tr>
       </tfoot>
     </table>
+  </div>
+
+  <!-- प्रिंट हस्ताक्षर ब्लॉक -->
+  <div class="print-sign-row">
+    <div class="print-sign-col">हस्ताक्षर एमडीएम प्रभारी</div>
+    <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
   </div>
 
 </div>
@@ -411,14 +529,31 @@ function updateHeader() {
 
   var banner = "MID DAY MEAL REGISTER - " + m + " " + y;
   var sub = [];
-  if (sch) sub.push(sch);
-  if (blk) sub.push("BLOCK: " + blk);
-  if (dst) sub.push("DISTRICT: " + dst);
-  if (udi) sub.push("(UDISE: " + udi + ")");
+  if (sch) sub.push("विद्यालय: " + sch);
+  if (blk) sub.push("ब्लॉक: " + blk);
+  if (dst) sub.push("जनपद: " + dst);
+  if (udi) sub.push("(यू-डायस: " + udi + ")");
 
-  document.getElementById('thBanner').innerText = sub.length ? banner + " (" + sub.join(' | ') + ")" : banner;
+  document.getElementById('thBanner').innerText = banner;
   document.getElementById('prTitle').innerText = banner;
   document.getElementById('prSub').innerText = sub.join(' | ');
+}
+
+// पोर्ट्रेट लेआउट को फ़ोर्स करने वाला प्रिंट इंजन (1-Page Strict)
+function forcePortraitPrint() {
+  updateHeader();
+  
+  var style = document.createElement('style');
+  style.id = 'force-portrait-style';
+  style.innerHTML = '@page { size: portrait !important; margin: 5mm 6mm !important; }';
+  document.head.appendChild(style);
+
+  window.print();
+
+  setTimeout(function() {
+    var s = document.getElementById('force-portrait-style');
+    if (s) s.remove();
+  }, 1000);
 }
 
 initYears();
