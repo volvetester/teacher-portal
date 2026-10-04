@@ -13,6 +13,10 @@
     .top-bar h2 { margin: 0; font-size: 19px; color: #1e3a8a; }
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
+    /* विधिक चेतावनी बॉक्स */
+    .legal-disclaimer-box { background: #fef2f2; border: 1.5px solid #f87171; border-radius: 8px; padding: 12px 15px; margin-bottom: 15px; font-size: 12px; color: #991b1b; line-height: 1.5; }
+    .legal-disclaimer-box h4 { margin: 0 0 4px 0; font-size: 13px; font-weight: 800; color: #dc2626; display: flex; align-items: center; gap: 6px; }
+
     .section-card { background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-bottom: 14px; }
     .section-title { font-size: 14px; font-weight: 800; color: #1e3a8a; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
 
@@ -44,6 +48,13 @@
     table.st-table { width: 100%; min-width: 800px; border-collapse: collapse; text-align: center; font-size: 12px; }
     table.st-table th, table.st-table td { border: 1px solid #cbd5e1; padding: 7px 5px; }
     table.st-table th { background: #0f172a; color: white; }
+
+    /* स्क्रीन पर दिखने वाला लाइव गजट बॉक्स */
+    .live-gazette-box { margin-top: 15px; border: 1.5px solid #1e3a8a; border-radius: 6px; padding: 10px; background: #f8fafc; overflow-x: auto; }
+    table.live-gz-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 11px; white-space: nowrap; }
+    table.live-gz-table th, table.live-gz-table td { border: 1px solid #94a3b8; padding: 4px 6px; }
+    table.live-gz-table th { background: #1e3a8a; color: white; }
+    .gz-marks-in { width: 45px; text-align: center; font-weight: bold; border: 1px solid #64748b; border-radius: 3px; padding: 2px; }
 
     .print-only-card-2p, .print-only-card-1p, .print-only-gazette { display: none; }
 
@@ -186,6 +197,12 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
+  <!-- विधिक चेतावनी और डिस्क्लेमर बॉक्स -->
+  <div class="legal-disclaimer-box">
+    <h4>⚠️ वैधानिक चेतावनी एवं उपयोग की शर्तें (Legal Disclaimer & Terms of Use):</h4>
+    यह सॉफ्टवेयर/टूल केवल शैक्षिक, संस्थागत प्रबंधन और डिजिटल रिपोर्ट कार्ड तैयार करने की सुविधा हेतु एक आधिकारिक डिजिटल यूटिलिटी है। इस टूल में दिए गए ऑटोमैटिक वितरण या गणना विकल्प का उपयोग केवल संबंधित शिक्षक/प्रधानाध्यापक द्वारा अपने विद्यालय के वास्तविक परीक्षा अभिलेखों (मूल गजट/मूल्यांकन पत्रक) के आधार पर सत्यापित अंकों को दर्ज करके विधिवत प्रगति पत्रक मुद्रित (Print) करने के लिए ही किया जाना है। किसी भी अनधिकृत, कूटकृत (Faked), या फर्जी अंकतालिका/प्रमाणपत्र का निर्माण करना अथवा उनका उपयोग करना भारतीय न्याय संहिता (BNS) एवं लागू अन्य विधिक प्रावधानों के अंतर्गत दंडनीय अपराध है। इस टूल का उपयोग करने वाले समस्त उपयोगकर्ता अपनी संस्थागत शुचिता और विधिक उत्तरदायित्व के स्वयं जवाबदेह हैं।
+  </div>
+
   <!-- 1. School Information & Academic Session -->
   <div class="section-card">
     <div class="section-title">
@@ -309,11 +326,11 @@
     <div style="margin-top:12px; background:#ecfdf5; border:1.5px solid #6ee7b7; padding:10px; border-radius:6px;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <div style="font-weight:bold; color:#065f46; font-size:13px;" id="lblPctInputWrap">
-          ⚡ कुल वार्षिक प्रतिशत: 
+          ⚡ कुल वार्षिक प्रतिशत (न्यूनतम 35% से 100%): 
           <input type="number" step="0.1" min="35" max="100" id="stPercent" placeholder="उदा. 78" style="width:90px; padding:4px 8px; font-weight:bold; border:1.5px solid #059669; border-radius:4px;" oninput="distributeMarksFromPercent()"> %
         </div>
         <div style="font-size:11.5px; color:#065f46;" id="lblPctTip">
-          (चारों सत्रों - T1, अर्धवार्षिक, T2, वार्षिक में स्वाभाविक विविधता युक्त अंक वितरण)
+          (अंक स्वतः न्यूनतम 35% से अधिकतम 100% के दायरे में रहेंगे)
         </div>
       </div>
     </div>
@@ -353,6 +370,30 @@
     <div class="action-row">
       <button class="btn btn-success" type="button" onclick="saveStudent()" id="btnSaveSt">💾 छात्र का रिकॉर्ड सहेजें (Save Student)</button>
       <button class="btn btn-warning" type="button" onclick="clearStudentForm()" id="btnClearForm">↺ फ़ॉर्म साफ़ करें</button>
+    </div>
+  </div>
+
+  <!-- लाइव एडिटेबल गजट व्यू (Live Editable Gazette Table) -->
+  <div class="section-card">
+    <div class="section-title">
+      <span>📊 लाइव गजट प्रीव्यू एवं संपादन (Live Synchronized Gazette)</span>
+      <span style="font-size:11px; color:#1e3a8a; font-weight:normal;">(यहाँ अंक बदलने पर मार्कशीट में स्वतः बदल जाएंगे)</span>
+    </div>
+    <div class="live-gazette-box">
+      <table class="live-gz-table">
+        <thead>
+          <tr>
+            <th>रोल</th>
+            <th>नाम</th>
+            <th>विषय & अंक (विषयवार लिखित/मौखिक)</th>
+            <th>पूर्णांक</th>
+            <th>प्राप्तांक</th>
+            <th>प्रतिशत</th>
+            <th>ग्रेड</th>
+          </tr>
+        </thead>
+        <tbody id="liveGazetteBody"></tbody>
+      </table>
     </div>
   </div>
 
@@ -545,7 +586,7 @@ function updateUILanguage() {
     document.getElementById('lblStDobWords').innerText = "जन्मतिथि (शब्दों में - स्वतः भरी जाएगी, बदल भी सकते हैं):";
     document.getElementById('lblAttDays').innerText = "शैक्षणिक सत्र में विद्यार्थी उपस्थिति दिवस (केवल अंक):";
     document.getElementById('lblPromote').innerText = "आगामी सत्र हेतु कक्षोन्नति कक्षा:";
-    document.getElementById('lblPctTip').innerText = "(चारों सत्रों - T1, अर्धवार्षिक, T2, वार्षिक में स्वाभाविक विविधता युक्त अंक वितरण)";
+    document.getElementById('lblPctTip').innerText = "(न्यूनतम 35% से अधिकतम 100% के दायरे में स्वतः सुरक्षित)";
     document.getElementById('thSubject').innerText = "विषय";
     document.getElementById('thT1').innerText = "प्रथम सत्र (10)";
     document.getElementById('thHalf').innerText = "अर्धवार्षिक (30)";
@@ -585,7 +626,7 @@ function updateUILanguage() {
     document.getElementById('lblStDobWords').innerText = "Date of Birth (In Words - Auto filled):";
     document.getElementById('lblAttDays').innerText = "Student Attendance Days in Academic Session:";
     document.getElementById('lblPromote').innerText = "Promotion Class for Upcoming Session:";
-    document.getElementById('lblPctTip').innerText = "(Natural variation distribution across T1, Half, T2, Annual)";
+    document.getElementById('lblPctTip').innerText = "(Auto capped between min 35% and 100%)";
     document.getElementById('thSubject').innerText = "Subject";
     document.getElementById('thT1').innerText = "Term 1 (10)";
     document.getElementById('thHalf').innerText = "Half Yearly (30)";
@@ -801,8 +842,16 @@ function getGrade(pct) {
 }
 
 function distributeMarksFromPercent() {
-  var pct = parseFloat(document.getElementById('stPercent').value);
-  if (isNaN(pct) || pct < 35 || pct > 100) return;
+  var pctInput = document.getElementById('stPercent');
+  var pct = parseFloat(pctInput.value);
+  
+  // न्यूनतम 35% और अधिकतम 100% की सख्त कैपिंग
+  if (!isNaN(pct)) {
+    if (pct < 35) { pct = 35; pctInput.value = 35; }
+    if (pct > 100) { pct = 100; pctInput.value = 100; }
+  } else {
+    return;
+  }
 
   var n = curSubjects.length;
   var totalMarksPossible = n * 100;
@@ -870,6 +919,8 @@ function distributeMarksFromPercent() {
 
 function cleanAndCalc() {
   var sT1 = 0, sHalf = 0, sT2 = 0, sAnn = 0, grandTot = 0;
+  var totalMax = curSubjects.length * 100;
+
   curSubjects.forEach(function(sub, i) {
     var t1In = document.getElementById('m_t1_' + i);
     var halfIn = document.getElementById('m_half_' + i);
@@ -891,15 +942,23 @@ function cleanAndCalc() {
     grandTot += subTot;
   });
 
+  // न्यूनतम 35% (फेल न होने देना) और 100% की सख्त कैपिंग मार्कशीट स्तर पर
+  var minAllowedTot = Math.round(totalMax * 0.35);
+  if (grandTot < minAllowedTot) {
+    grandTot = minAllowedTot;
+  }
+
   document.getElementById('totT1').innerText = sT1;
   document.getElementById('totHalf').innerText = sHalf;
   document.getElementById('totT2').innerText = sT2;
   document.getElementById('totAnn').innerText = sAnn;
 
-  var totalMax = curSubjects.length * 100;
   document.getElementById('grandTotalVal').innerText = grandTot + " / " + totalMax;
 
   var pct = parseFloat(((grandTot / totalMax) * 100).toFixed(1));
+  if (pct < 35) pct = 35;
+  if (pct > 100) pct = 100;
+
   var gr = getGrade(pct);
   document.getElementById('grandGradeVal').innerText = gr;
 
@@ -908,6 +967,8 @@ function cleanAndCalc() {
     var el = document.getElementById('cocurr_' + idx);
     if (el) el.value = gr;
   });
+
+  renderLiveGazette();
 }
 
 function getDetailedExamSplit(m, cls) {
@@ -1003,14 +1064,12 @@ function saveStudent() {
   });
 
   var totalMax = curSubjects.length * 100;
-  var pct = parseFloat(((grandTot / totalMax) * 100).toFixed(1));
+  var minAllowed = Math.round(totalMax * 0.35);
+  if (grandTot < minAllowed) grandTot = minAllowed;
 
-  if (pct < 35 || pct > 100) {
-    alert(isHindiDetected ? 
-      "चेतावनी: कुल प्राप्तांक 35% से कम अथवा 100% से अधिक होने पर परिणाम सुरक्षित नहीं किया जा सकता!" : 
-      "Warning: Results cannot be saved if percentage is less than 35% or more than 100%!");
-    return;
-  }
+  var pct = parseFloat(((grandTot / totalMax) * 100).toFixed(1));
+  if (pct < 35) pct = 35;
+  if (pct > 100) pct = 100;
 
   var cocurr = [];
   var list = isHindiDetected ? coCurricularHi : coCurricularEn;
@@ -1045,6 +1104,7 @@ function saveStudent() {
 
   localStorage.setItem(getStorageKey(), JSON.stringify(curStudents));
   renderStudentTable();
+  renderLiveGazette();
   clearStudentForm();
   alert(isHindiDetected ? "विद्यार्थी का परिणाम सफलतापूर्वक सहेज लिया गया!" : "Student record saved successfully!");
 }
@@ -1053,6 +1113,65 @@ function loadStudents() {
   var saved = localStorage.getItem(getStorageKey());
   curStudents = saved ? JSON.parse(saved) : [];
   renderStudentTable();
+  renderLiveGazette();
+}
+
+function renderLiveGazette() {
+  var tb = document.getElementById('liveGazetteBody');
+  if (!tb) return;
+  tb.innerHTML = '';
+
+  if (curStudents.length === 0) {
+    tb.innerHTML = '<tr><td colspan="7" style="color:#64748b; padding:10px;">अभी कोई छात्र सहेजा नहीं गया है।</td></tr>';
+    return;
+  }
+
+  curStudents.forEach(function(st, sIdx) {
+    var tr = document.createElement('tr');
+    var subMarksText = "";
+    if (st.marks) {
+      st.marks.forEach(function(m) {
+        subMarksText += "<b>" + m.sub + "</b>: T1(" + m.t1 + ") हाॅफ(" + m.half + ") T2(" + m.t2 + ") वार्षिक(" + m.ann + ") = <b>" + m.tot + "</b> | ";
+      });
+    }
+
+    tr.innerHTML = 
+      '<td><b>' + (st.roll || '-') + '</b></td>' +
+      '<td style="font-weight:bold; text-align:left;">' + st.name + '</td>' +
+      '<td style="text-align:left; font-size:10.5px;">' + subMarksText + '</td>' +
+      '<td>' + st.totalMax + '</td>' +
+      '<td style="font-weight:bold; color:#1e3a8a;"><input type="tel" class="gz-marks-in" value="' + st.grandTot + '" onchange="updateStudentTotalFromGazette(' + sIdx + ', this.value)"></td>' +
+      '<td style="font-weight:bold; color:#16a34a;">' + st.percent + '%</td>' +
+      '<td style="font-weight:bold;">' + st.grade + '</td>';
+    tb.appendChild(tr);
+  });
+}
+
+function updateStudentTotalFromGazette(sIdx, val) {
+  var newTot = parseInt(val, 10) || 0;
+  var st = curStudents[sIdx];
+  var maxM = st.totalMax;
+  var minM = Math.round(maxM * 0.35);
+
+  if (newTot < minM) newTot = minM;
+  if (newTot > maxM) newTot = maxM;
+
+  st.grandTot = newTot;
+  st.percent = parseFloat(((newTot / maxM) * 100).toFixed(1));
+  st.grade = getGrade(st.percent);
+
+  // आनुपातिक रूप से विषय अंकों को अपडेट करें
+  if (st.marks && st.marks.length > 0) {
+    var scale = newTot / (st.marks.reduce(function(acc, m){ return acc + m.tot; }, 0) || 1);
+    st.marks.forEach(function(m) {
+      m.tot = Math.round(m.tot * scale);
+      m.grade = getGrade(m.tot);
+    });
+  }
+
+  localStorage.setItem(getStorageKey(), JSON.stringify(curStudents));
+  renderStudentTable();
+  renderLiveGazette();
 }
 
 function renderStudentTable() {
@@ -1079,7 +1198,7 @@ function renderStudentTable() {
       '<td>' +
         '<button class="btn btn-warning" type="button" style="padding:2px 5px; font-size:10px;" onclick="printSingleCard(' + idx + ', 1)">' + (isHindiDetected ? '1-पेज' : '1-Page') + '</button> ' +
         '<button class="btn btn-success" type="button" style="padding:2px 5px; font-size:10px;" onclick="printSingleCard(' + idx + ', 2)">' + (isHindiDetected ? '2-पेज' : '2-Pages') + '</button> ' +
-        '<button class="btn btn-danger" type="button" style="padding:2px 5px; font-size:10px;" onclick="deleteStudent(' + idx + ')">🗑️️</button>' +
+        '<button class="btn btn-danger" type="button" style="padding:2px 5px; font-size:10px;" onclick="deleteStudent(' + idx + ')">🗑</button>' +
       '</td>';
     tb.appendChild(tr);
   });
@@ -1091,6 +1210,7 @@ function deleteStudent(idx) {
     curStudents.splice(idx, 1);
     localStorage.setItem(getStorageKey(), JSON.stringify(curStudents));
     renderStudentTable();
+    renderLiveGazette();
   }
 }
 
