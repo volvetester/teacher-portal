@@ -90,7 +90,7 @@
       }
 
       .no-print { display: none !important; }
-      #reportModal { display: none !important; } /* प्रिंट के समय मुख्य डेली व्यू प्रिंट हो */
+      #reportModal { display: none !important; }
       
       .print-header { display: block !important; margin-bottom: 5px !important; }
       .print-header h2 { font-size: 13.5px !important; margin: 0 !important; }
@@ -287,7 +287,7 @@
         </div>
       </div>
       <div class="btn-action-group">
-        <button class="btn-report" type="button" onclick="openMonthlyReport()">📊 पूरे महीने का रिकॉर्ड देखें</button>
+        <button class="btn-report" type="button" onclick="openMonthlyReport()">📊 पिछला/मासिक रिकॉर्ड देखें</button>
         <button class="btn-print-daily" type="button" onclick="window.print()">🖨 A4 PRINT</button>
       </div>
     </div>
@@ -363,13 +363,37 @@
 
 </div>
 
-<!-- पूरे महीने का रिकॉर्ड देखने का पॉप-अप (Modal) -->
+<!-- पिछले/मासिक रिकॉर्ड देखने का पॉप-अप (Modal) जिसमें माह और वर्ष चुनने का विकल्प है -->
 <div id="reportModal">
   <div class="report-content">
     <button class="close-modal" onclick="closeMonthlyReport()">✕ बंद करें (Close)</button>
-    <h3 id="reportTitle" style="margin-top:0; color:#1e3a8a;">मासिक समरी रिपोर्ट (Monthly Summary Report)</h3>
-    <div style="margin-bottom:10px; font-weight:bold; font-size:13px;" id="reportSchoolInfo"></div>
-    <div style="max-height: 400px; overflow-y: auto; border:1px solid #cbd5e1; border-radius:6px;">
+    <h3 style="margin-top:0; color:#1e3a8a;">📊 मासिक / पिछला रिकॉर्ड व्यूअर (Monthly Report Viewer)</h3>
+    
+    <!-- माह और वर्ष चयनकर्ता -->
+    <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px; background:#f1f5f9; padding:10px; border-radius:6px; flex-wrap:wrap;">
+      <label style="font-weight:bold; font-size:12px;">वर्ष चुनें:</label>
+      <select id="reportYear" style="padding:5px; font-weight:bold; border-radius:4px; border:1px solid #94a3b8;" onchange="generateReportTable()"></select>
+      
+      <label style="font-weight:bold; font-size:12px; margin-left:10px;">माह चुनें:</label>
+      <select id="reportMonth" style="padding:5px; font-weight:bold; border-radius:4px; border:1px solid #94a3b8;" onchange="generateReportTable()">
+        <option value="1">जनवरी (January)</option>
+        <option value="2">फ़रवरी (February)</option>
+        <option value="3">मार्च (March)</option>
+        <option value="4">अप्रैल (April)</option>
+        <option value="5">मई (May)</option>
+        <option value="6">जून (June)</option>
+        <option value="7">जुलाई (July)</option>
+        <option value="8">अगस्त (August)</option>
+        <option value="9">सितंबर (September)</option>
+        <option value="10">अक्टूबर (October)</option>
+        <option value="11">नवंबर (November)</option>
+        <option value="12">दिसंबर (December)</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom:8px; font-weight:bold; font-size:13px; color:#166534;" id="reportSchoolInfo"></div>
+    
+    <div style="max-height: 380px; overflow-y: auto; border:1px solid #cbd5e1; border-radius:6px;">
       <table style="width:100%; border-collapse:collapse; text-align:center; font-size:11.5px;">
         <thead>
           <tr style="background:#1e3a8a; color:white;">
@@ -383,9 +407,6 @@
         </thead>
         <tbody id="monthlyReportTableBody"></tbody>
       </table>
-    </div>
-    <div style="margin-top:15px; text-align:right;">
-      <button class="btn-print-daily" type="button" onclick="window.print()">🖨️ इस रिपोर्ट को प्रिंट करें</button>
     </div>
   </div>
 </div>
@@ -411,6 +432,17 @@ function initDate() {
   var mm = String(today.getMonth() + 1).padStart(2, '0');
   var dd = String(today.getDate()).padStart(2, '0');
   document.getElementById('dailyDate').value = yyyy + '-' + mm + '-' + dd;
+
+  // रिपोर्ट के लिए वर्ष ड्रॉपडाउन भरें
+  var rY = document.getElementById('reportYear');
+  rY.innerHTML = '';
+  for (var y = 2020; y <= 2050; y++) {
+    var opt = document.createElement('option');
+    opt.value = y; opt.innerText = y;
+    if (y === yyyy) opt.selected = true;
+    rY.appendChild(opt);
+  }
+
   loadMeta();
   onDailyDateChange();
 }
@@ -557,14 +589,22 @@ function updateHeader() {
 }
 
 // =========================================================
-// MONTHLY REPORT POP-UP GENERATOR
+// MONTHLY REPORT POP-UP & SELECTION ENGINE
 // =========================================================
 function openMonthlyReport() {
   var dVal = document.getElementById('dailyDate').value;
-  if (!dVal) return;
-  var p = dVal.split('-');
-  var yr = parseInt(p[0], 10);
-  var mo = parseInt(p[1], 10);
+  if (dVal) {
+    var p = dVal.split('-');
+    document.getElementById('reportYear').value = p[0];
+    document.getElementById('reportMonth').value = parseInt(p[1], 10);
+  }
+  generateReportTable();
+  document.getElementById('reportModal').style.display = 'block';
+}
+
+function generateReportTable() {
+  var yr = parseInt(document.getElementById('reportYear').value, 10);
+  var mo = parseInt(document.getElementById('reportMonth').value, 10);
   var daysInMonth = new Date(yr, mo, 0).getDate();
 
   var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
@@ -636,7 +676,6 @@ function openMonthlyReport() {
     tbody.appendChild(tr);
   }
 
-  // Footer Total Row
   var ftTr = document.createElement('tr');
   ftTr.style.background = "#f1f5f9";
   ftTr.style.fontWeight = "bold";
@@ -645,8 +684,6 @@ function openMonthlyReport() {
     '<td style="padding:6px; border:1px solid #94a3b8; color:#1e3a8a;">' + grandTotalStudents + '</td>' +
     '<td style="padding:6px; border:1px solid #94a3b8; color:#b91c1c;">₹' + grandTotalCost.toFixed(2) + '</td>';
   tbody.appendChild(ftTr);
-
-  document.getElementById('reportModal').style.display = 'block';
 }
 
 function closeMonthlyReport() {
