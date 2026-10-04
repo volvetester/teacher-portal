@@ -24,7 +24,7 @@
 
     .sub-tag-box { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; min-height: 40px; background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px dashed #cbd5e1; }
     .sub-tag { background: #e0f2fe; border: 1px solid #7dd3fc; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #0369a1; display: inline-flex; align-items: center; gap: 6px; }
-    .sub-tag input { border: none; background: transparent; font-weight: bold; font-size: 12px; color: #0369a1; width: 130px; outline: none; }
+    .sub-tag input { border: none; background: transparent; font-weight: bold; font-size: 12px; color: #0369a1; width: 180px; outline: none; }
     .sub-tag button { background: #ef4444; border: none; color: white; border-radius: 50%; width: 18px; height: 18px; cursor: pointer; font-size: 11px; line-height: 1; padding: 0; }
 
     .marks-table-box { width: 100%; overflow-x: auto; margin-top: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
@@ -48,7 +48,7 @@
     .print-only-card-2p, .print-only-card-1p, .print-only-gazette { display: none; }
 
     /* =========================================================
-       PRINT ENGINE: FULL A4 PORTRAIT (CARDS) & A3 LANDSCAPE (GAZETTE)
+       PRINT ENGINE: PERFECT PROPORTIONED LANDSCAPE (SQUARE CELLS)
        ========================================================= */
     @media print {
       body { background: white !important; padding: 0 !important; margin: 0 !important; color: #000 !important; }
@@ -58,69 +58,105 @@
       body.printing-card-1p .print-only-card-1p { display: block !important; }
       body.printing-gazette .print-only-gazette { display: block !important; width: 100% !important; }
 
-      body.printing-gazette {
-        @page { size: A3 landscape !important; margin: 4mm 5mm !important; }
+      @page {
+        margin: 3.5mm 4.5mm !important;
       }
 
-      body.printing-card-2p, body.printing-card-1p {
-        @page { size: A4 portrait !important; margin: 6mm 7mm !important; }
-      }
-
-      /* 1-पेज वाला संपूर्ण A4 कार्ड (पूर्ण पृष्ठ पर फैला हुआ) */
+      /* 1-पेज कार्ड: पूर्ण लैंडस्केप विस्तार */
       .rc-single-page {
         width: 100% !important;
-        page-break-after: always !important;
-        border: 2px solid #000 !important;
-        padding: 8mm 9mm !important;
+        height: 98.5vh !important;
         box-sizing: border-box !important;
-        height: 282mm !important;
+        border: 2.5px solid #000 !important;
+        padding: 5mm 6mm !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
       }
 
-      .rc-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 8px; }
-      .rc-header h2 { margin: 0; font-size: 18px; font-weight: 900; }
-      .rc-header h3 { margin: 3px 0; font-size: 14.5px; }
-      .rc-header p { margin: 2px 0; font-size: 12px; font-weight: bold; }
+      .rc-header { text-align: center; border-bottom: 2.2px solid #000; padding-bottom: 3px; margin-bottom: 6px; }
+      .rc-header h2 { margin: 0; font-size: 22px !important; font-weight: 900 !important; letter-spacing: 0.5px; }
+      .rc-header h3 { margin: 2px 0; font-size: 17.5px !important; font-weight: 800 !important; }
+      .rc-header p { margin: 1px 0; font-size: 14.5px !important; font-weight: 800 !important; }
 
-      .rc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; font-size: 11.5px; margin-bottom: 8px; line-height: 1.4; }
-      .rc-info-item { display: flex; }
-      .rc-info-label { font-weight: bold; width: 135px; }
-      .rc-info-val { border-bottom: 1px dotted #000; flex-grow: 1; font-weight: 600; min-height: 16px; }
+      /* छात्र विवरण: खुला, बड़ा और स्पष्ट डॉटेड लाइन */
+      .rc-info-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 6px 28px; 
+        font-size: 15px !important; 
+        margin-bottom: 8px; 
+        line-height: 1.45; 
+      }
+      .rc-info-item { display: flex; align-items: baseline; }
+      .rc-info-label { font-weight: 800 !important; width: 150px !important; font-size: 15px !important; white-space: nowrap !important; }
+      .rc-info-val { 
+        border-bottom: 2px dotted #000 !important; 
+        flex-grow: 1; 
+        font-weight: 700 !important; 
+        font-size: 15.5px !important; 
+        min-height: 22px; 
+      }
 
-      /* साइड-बाई-साइड 2 कॉलम लेआउट (बाएँ: विषय, दाएँ: 11 बिंदु) */
+      /* दोनों तालिकाओं का मुख्य कंटेनर */
       .rc-content-flex {
         display: flex !important;
         gap: 8px !important;
-        flex-grow: 1 !important;
+        flex: 1 1 auto !important;
         align-items: stretch !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 4px !important;
       }
 
-      .rc-left-col { flex: 1.35 !important; }
-      .rc-right-col { flex: 1 !important; }
+      .rc-left-col { flex: 1.6 !important; display: flex !important; flex-direction: column !important; }
+      .rc-right-col { flex: 1 !important; display: flex !important; flex-direction: column !important; }
 
-      table.rc-table { width: 100% !important; border-collapse: collapse !important; text-align: center !important; font-size: 10.5px !important; height: 100% !important; }
-      table.rc-table th, table.rc-table td { border: 1.2px solid #000 !important; padding: 4px 3px !important; }
-      table.rc-table th { background: #e2e8f0 !important; font-weight: 800 !important; font-size: 10px !important; }
+      table.rc-table { width: 100% !important; border-collapse: collapse !important; text-align: center !important; height: 100% !important; }
+      table.rc-table th, table.rc-table td { border: 1.4px solid #000 !important; vertical-align: middle !important; }
+      table.rc-table th { background: #e2e8f0 !important; font-weight: 900 !important; font-size: 13px !important; padding: 4px 2px !important; }
 
-      /* 2-पेज वाला कार्ड */
+      /* विषय नाम का आयताकार कॉलम */
+      table.rc-table td.sub-name { 
+        font-weight: 800 !important; 
+        font-size: 14px !important; 
+        padding: 2px 6px !important; 
+        text-align: left !important; 
+        width: 170px !important; 
+      }
+
+      /* अंक और ग्रेड के लगभग वर्गाकार (Square-like) सेल */
+      table.rc-table td.mark-val { 
+        font-size: 15.5px !important; 
+        font-weight: 800 !important; 
+        width: 44px !important; 
+      }
+      table.rc-table td.grade-val { 
+        font-size: 16px !important; 
+        font-weight: 900 !important; 
+        width: 50px !important; 
+      }
+
+      .bottom-section {
+        margin-top: auto !important;
+      }
+
       .rc-page {
         width: 100% !important;
+        min-height: 96vh !important;
         page-break-after: always !important;
+        page-break-inside: avoid !important;
         border: 2px solid #000 !important;
-        padding: 8mm 9mm !important;
+        padding: 5mm 6mm !important;
         box-sizing: border-box !important;
-        min-height: 280mm !important;
       }
 
-      /* गजट शीट */
-      .gazette-page { width: 100% !important; page-break-after: always !important; box-sizing: border-box !important; padding-bottom: 6mm !important; }
+      .gazette-page { width: 100% !important; page-break-after: always !important; box-sizing: border-box !important; padding-bottom: 5mm !important; }
       .gazette-wrap { width: 100% !important; margin: 0 !important; padding: 0 !important; }
       table.gazette-table { 
         width: 100% !important; 
-        max-width: 100% !important;
+        max-width: 100% !important; 
         table-layout: auto !important; 
         border-collapse: collapse !important; 
         text-align: center !important; 
@@ -142,10 +178,10 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
-  <!-- 1. School Information -->
+  <!-- 1. School Information & Academic Session -->
   <div class="section-card">
     <div class="section-title">
-      <span id="lblSchSec">🏫 1. विद्यालय विवरण (एक बार भरें - स्वतः सुरक्षित रहेगा)</span>
+      <span id="lblSchSec">🏫 1. विद्यालय विवरण एवं शैक्षिक सत्र (स्वतः सुरक्षित रहेगा)</span>
       <span style="font-size:12px; color:#16a34a; font-weight:bold;" id="langBadge">🌐 भाषा: हिन्दी</span>
     </div>
     <div class="form-grid-4">
@@ -166,6 +202,12 @@
         <input type="text" id="schDistrict" placeholder="उदा. कौशाम्बी" oninput="cleanText(this); detectLanguage(this.value); saveSchoolInfo();">
       </div>
     </div>
+    <div class="form-grid-4" style="margin-top:10px;">
+      <div class="form-group">
+        <label id="lblSession">शैक्षिक सत्र (Academic Session):</label>
+        <select id="selSession" onchange="onSessionChange(); saveSchoolInfo();" style="font-weight:bold; color:#1e3a8a;"></select>
+      </div>
+    </div>
   </div>
 
   <!-- 2. Class & Subject Manager -->
@@ -179,9 +221,9 @@
           <option value="2">कक्षा 2</option>
           <option value="3">कक्षा 3</option>
           <option value="4">कक्षा 4</option>
-          <option value="5" selected>कक्षा 5</option>
+          <option value="5">कक्षा 5</option>
           <option value="6">कक्षा 6</option>
-          <option value="7">कक्षा 7</option>
+          <option value="7" selected>कक्षा 7</option>
           <option value="8">कक्षा 8</option>
         </select>
       </div>
@@ -225,7 +267,7 @@
         <input type="tel" id="stRoll" placeholder="केवल अंक" oninput="cleanNumber(this);">
       </div>
       <div class="form-group">
-        <label id="lblStAadhaar">पहचान संख्या / आधार (वैकल्पिक - केवल अंक):</label>
+        <label id="lblStAadhaar">पहचान संख्या / आईडी (वैकल्पिक - केवल अंक):</label>
         <input type="tel" maxlength="12" id="stAadhaar" placeholder="12 अंक" oninput="cleanNumber(this); validateAadhaar(this);">
         <small id="adhWarn" style="color:red; display:none; font-size:10.5px; font-weight:bold;">12 अंक पूरे होने चाहिए</small>
       </div>
@@ -267,7 +309,7 @@
           <input type="number" step="0.1" min="35" max="100" id="stPercent" placeholder="उदा. 78" style="width:90px; padding:4px 8px; font-weight:bold; border:1.5px solid #059669; border-radius:4px;" oninput="distributeMarksFromPercent()"> %
         </div>
         <div style="font-size:11.5px; color:#065f46;" id="lblPctTip">
-          (चारों सत्रों - T1, अर्धवार्षिक, T2, वार्षिक में शुद्ध स्वाभाविक पूर्णांक वितरण)
+          (चारों सत्रों - T1, अर्धवार्षिक, T2, वार्षिक में स्वाभाविक विविधता युक्त अंक वितरण)
         </div>
       </div>
     </div>
@@ -313,7 +355,7 @@
   <!-- 4. Class Records & Print Center -->
   <div class="section-card">
     <div class="section-title">
-      <span id="savedListTitle">📋 कक्षा 5 - सहेजे गए विद्यार्थियों की सूची</span>
+      <span id="savedListTitle">📋 सहेजे गए विद्यार्थियों की सूची</span>
       <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
         <label style="font-size:11.5px; cursor:pointer; font-weight:bold;" id="lblPrintAadhaarCheck">
           <input type="checkbox" id="chkPrintAadhaar" checked> पहचान संख्या प्रिंट करें
@@ -370,26 +412,40 @@ function validateAadhaar(el) {
   }
 }
 
+function populateSessionDropdown() {
+  var sel = document.getElementById('selSession');
+  sel.innerHTML = '';
+  for (var y = 2024; y <= 2059; y++) {
+    var nextYShort = String(y + 1).slice(-2);
+    var sessVal = y + "-" + nextYShort;
+    var opt = document.createElement('option');
+    opt.value = sessVal;
+    opt.innerText = sessVal;
+    if (sessVal === "2026-27") opt.selected = true;
+    sel.appendChild(opt);
+  }
+}
+
 var defaultSubjectsMapHi = {
   1: ["हिन्दी", "गणित", "अंग्रेजी"],
   2: ["गणित", "अंग्रेजी", "हिन्दी"],
   3: ["गणित", "संस्कृत / उर्दू", "सामाजिक विषय", "अंग्रेजी", "हिन्दी", "कला / संगीत", "कार्यानुभव / नैतिक शिक्षा"],
   4: ["गणित", "संस्कृत / उर्दू", "सामाजिक विषय", "अंग्रेजी", "हिन्दी", "कला / संगीत", "कार्यानुभव / नैतिक शिक्षा"],
   5: ["गणित", "संस्कृत / उर्दू", "सामाजिक विषय", "अंग्रेजी", "हिन्दी", "कला / संगीत", "कार्यानुभव / नैतिक शिक्षा"],
-  6: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विषय", "संस्कृत / उर्दू", "पर्यावरण अध्ययन", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "बेसिक क्राफ्ट / कृषि / गृह शिल्प"],
-  7: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विषय", "संस्कृत / उर्दू", "पर्यावरण अध्ययन", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "बेसिक क्राफ्ट / कृषि / गृह शिल्प"],
-  8: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विषय", "संस्कृत / उर्दू", "पर्यावरण अध्ययन", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "बेसिक क्राफ्ट / कृषि / गृह शिल्प"]
+  6: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विषय", "संस्कृत / उर्दू", "पर्यावरण अध्ययन", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "कार्यानुभव / नैतिक शिक्षा"],
+  7: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विषय", "संस्कृत / उर्दू", "पर्यावरण अध्ययन", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "कार्यानुभव / नैतिक शिक्षा"],
+  8: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विषय", "संस्कृत / उर्दू", "पर्यावरण अध्ययन", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "कार्यानुभव / नैतिक शिक्षा"]
 };
 
 var defaultSubjectsMapEn = {
   1: ["HINDI", "MATHEMATICS", "ENGLISH"],
   2: ["MATHEMATICS", "ENGLISH", "HINDI"],
-  3: ["MATHEMATICS", "SANSKRIT / URDU", "SOCIAL STUDIES", "ENGLISH", "HINDI", "ART / MUSIC", "WORK EXPERIENCE"],
-  4: ["MATHEMATICS", "SANSKRIT / URDU", "SOCIAL STUDIES", "ENGLISH", "HINDI", "ART / MUSIC", "WORK EXPERIENCE"],
-  5: ["MATHEMATICS", "SANSKRIT / URDU", "SOCIAL STUDIES", "ENGLISH", "HINDI", "ART / MUSIC", "WORK EXPERIENCE"],
-  6: ["HINDI", "MATHEMATICS", "ENGLISH", "SCIENCE", "SOCIAL STUDIES", "SANSKRIT / URDU", "ENVIRONMENTAL STUDIES", "ART / MUSIC", "PHYSICAL EDUCATION", "BASIC CRAFT / AGRICULTURE"],
-  7: ["HINDI", "MATHEMATICS", "ENGLISH", "SCIENCE", "SOCIAL STUDIES", "SANSKRIT / URDU", "ENVIRONMENTAL STUDIES", "ART / MUSIC", "PHYSICAL EDUCATION", "BASIC CRAFT / AGRICULTURE"],
-  8: ["HINDI", "MATHEMATICS", "ENGLISH", "SCIENCE", "SOCIAL STUDIES", "SANSKRIT / URDU", "ENVIRONMENTAL STUDIES", "ART / MUSIC", "PHYSICAL EDUCATION", "BASIC CRAFT / AGRICULTURE"]
+  3: ["MATHEMATICS", "SANSKRIT / URDU", "SOCIAL STUDIES", "ENGLISH", "HINDI", "ART / MUSIC", "WORK EXPERIENCE / MORAL SCIENCE"],
+  4: ["MATHEMATICS", "SANSKRIT / URDU", "SOCIAL STUDIES", "ENGLISH", "HINDI", "ART / MUSIC", "WORK EXPERIENCE / MORAL SCIENCE"],
+  5: ["MATHEMATICS", "SANSKRIT / URDU", "SOCIAL STUDIES", "ENGLISH", "HINDI", "ART / MUSIC", "WORK EXPERIENCE / MORAL SCIENCE"],
+  6: ["HINDI", "MATHEMATICS", "ENGLISH", "SCIENCE", "SOCIAL STUDIES", "SANSKRIT / URDU", "ENVIRONMENTAL STUDIES", "ART / MUSIC", "PHYSICAL EDUCATION", "WORK EXPERIENCE / MORAL SCIENCE"],
+  7: ["HINDI", "MATHEMATICS", "ENGLISH", "SCIENCE", "SOCIAL STUDIES", "SANSKRIT / URDU", "ENVIRONMENTAL STUDIES", "ART / MUSIC", "PHYSICAL EDUCATION", "WORK EXPERIENCE / MORAL SCIENCE"],
+  8: ["HINDI", "MATHEMATICS", "ENGLISH", "SCIENCE", "SOCIAL STUDIES", "SANSKRIT / URDU", "ENVIRONMENTAL STUDIES", "ART / MUSIC", "PHYSICAL EDUCATION", "WORK EXPERIENCE / MORAL SCIENCE"]
 };
 
 var coCurricularHi = [
@@ -406,10 +462,27 @@ var coCurricularEn = [
   "10. Leadership Ability", "11. Co-operation Spirit"
 ];
 
-var curClass = 5;
+var curClass = 7;
 var curSubjects = [];
 var curStudents = [];
 var isHindiDetected = true;
+var currentSession = "2026-27";
+
+function getNextSessionShort(sess) {
+  var p = sess.split('-');
+  if (p.length === 2) {
+    var y1 = parseInt(p[0], 10) + 1;
+    var nextYShort = String(y1 + 1).slice(-2);
+    return y1 + "-" + nextYShort;
+  }
+  return "2027-28";
+}
+
+function onSessionChange() {
+  currentSession = document.getElementById('selSession').value;
+  updatePromotionClassText();
+  loadStudents();
+}
 
 function formatDateDDMMYYYY(val) {
   if (!val) return '-';
@@ -430,17 +503,28 @@ function detectLanguage(str) {
   convertDobWords();
 }
 
+function updatePromotionClassText() {
+  var nextCls = "";
+  if (curClass < 8) {
+    nextCls = isHindiDetected ? ("कक्षा " + (curClass + 1)) : ("Class " + (curClass + 1));
+  } else {
+    nextCls = isHindiDetected ? "कक्षा 9 (उच्च विद्यालय हेतु उत्तीर्ण)" : "Class 9 (Passed for Higher School)";
+  }
+  document.getElementById('stPromoteClass').value = nextCls;
+}
+
 function updateUILanguage() {
   var b = document.getElementById('langBadge');
   b.innerText = isHindiDetected ? "🌐 भाषा: हिन्दी" : "🌐 Language: English";
   b.style.color = isHindiDetected ? "#16a34a" : "#2563eb";
 
   if (isHindiDetected) {
-    document.getElementById('lblSchSec').innerText = "🏫 1. विद्यालय विवरण (एक बार भरें - स्वतः सुरक्षित रहेगा)";
+    document.getElementById('lblSchSec').innerText = "🏫 1. विद्यालय विवरण एवं शैक्षिक सत्र (स्वतः सुरक्षित रहेगा)";
     document.getElementById('lblSchName').innerText = "विद्यालय का नाम (केवल अक्षर):";
     document.getElementById('lblSchUdise').innerText = "यू-डायस (UDISE) कोड (केवल अंक):";
     document.getElementById('lblSchBlock').innerText = "विकास खण्ड (Block) (केवल अक्षर):";
     document.getElementById('lblSchDist').innerText = "जनपद (District) (केवल अक्षर):";
+    document.getElementById('lblSession').innerText = "शैक्षिक सत्र (Academic Session):";
     document.getElementById('lblClassSec').innerText = "📚 2. कक्षा व विषय प्रबंधन";
     document.getElementById('lblSelectClass').innerText = "कक्षा चुनें:";
     document.getElementById('lblSubjectTip').innerText = "💡 विषयों के नाम बदलें, जोड़ें या हटाएं (यह मेमोरी में सुरक्षित रहेगा):";
@@ -452,13 +536,13 @@ function updateUILanguage() {
     document.getElementById('lblStMother').innerText = "माता का नाम (केवल अक्षर):";
     document.getElementById('lblStSr').innerText = "प्रवेशांक (S.R. No.) (केवल अंक):";
     document.getElementById('lblStRoll').innerText = "अनुक्रमांक (Roll No.) (केवल अंक):";
-    document.getElementById('lblStAadhaar').innerText = "पहचान संख्या / आधार (वैकल्पिक - केवल अंक):";
+    document.getElementById('lblStAadhaar').innerText = "पहचान संख्या / आईडी (वैकल्पिक - केवल अंक):";
     document.getElementById('lblStDob').innerText = "जन्मतिथि (कैलेंडर से चुनें):";
     document.getElementById('lblStDobWords').innerText = "जन्मतिथि (शब्दों में - स्वतः भरी जाएगी, बदल भी सकते हैं):";
     document.getElementById('lblWorkDays').innerText = "विद्यालय कुल कार्य दिवस (केवल अंक):";
     document.getElementById('lblAttDays').innerText = "विद्यार्थी उपस्थिति दिवस (केवल अंक):";
     document.getElementById('lblPromote').innerText = "अगले सत्र हेतु प्रोन्नति कक्षा:";
-    document.getElementById('lblPctTip').innerText = "(चारों सत्रों - T1, अर्धवार्षिक, T2, वार्षिक में शुद्ध स्वाभाविक पूर्णांक वितरण)";
+    document.getElementById('lblPctTip').innerText = "(चारों सत्रों - T1, अर्धवार्षिक, T2, वार्षिक में स्वाभाविक विविधता युक्त अंक वितरण)";
     document.getElementById('thSubject').innerText = "विषय";
     document.getElementById('thT1').innerText = "प्रथम सत्र (10)";
     document.getElementById('thHalf').innerText = "अर्धवार्षिक (30)";
@@ -474,13 +558,14 @@ function updateUILanguage() {
     document.getElementById('btnPrintGazette').innerText = "🖨️ परीक्षा परिणाम गजट प्रिंट करें (A3 Landscape)";
     document.getElementById('btnPrint1P').innerText = "📑 सिंगल पेज प्रिंट (1 Page A4)";
     document.getElementById('btnPrint2P').innerText = "📄 टू-पेज प्रिंट (2 Pages Front-Back)";
-    document.getElementById('savedListTitle').innerText = "📋 कक्षा " + curClass + " - सहेजे गए विद्यार्थियों की सूची";
+    document.getElementById('savedListTitle').innerText = "📋 कक्षा " + curClass + " (" + currentSession + ") - सहेजे गए विद्यार्थियों की सूची";
   } else {
-    document.getElementById('lblSchSec').innerText = "🏫 1. School Information (Saved Permanently)";
+    document.getElementById('lblSchSec').innerText = "🏫 1. School Information & Academic Session (Auto-Saved)";
     document.getElementById('lblSchName').innerText = "School Name (Letters only):";
     document.getElementById('lblSchUdise').innerText = "UDISE Code (Numbers only):";
     document.getElementById('lblSchBlock').innerText = "Block (Letters only):";
     document.getElementById('lblSchDist').innerText = "District (Letters only):";
+    document.getElementById('lblSession').innerText = "Academic Session:";
     document.getElementById('lblClassSec').innerText = "📚 2. Class & Subject Manager";
     document.getElementById('lblSelectClass').innerText = "Select Class:";
     document.getElementById('lblSubjectTip').innerText = "💡 Modify, add, or remove subjects (Saved permanently):";
@@ -498,7 +583,7 @@ function updateUILanguage() {
     document.getElementById('lblWorkDays').innerText = "Total Working Days (Numbers only):";
     document.getElementById('lblAttDays').innerText = "Student Attendance Days (Numbers only):";
     document.getElementById('lblPromote').innerText = "Promoted to Class for Next Session:";
-    document.getElementById('lblPctTip').innerText = "(Pure natural integer distribution across T1, Half, T2, Annual)";
+    document.getElementById('lblPctTip').innerText = "(Natural variation distribution across T1, Half, T2, Annual)";
     document.getElementById('thSubject').innerText = "Subject";
     document.getElementById('thT1').innerText = "Term 1 (10)";
     document.getElementById('thHalf').innerText = "Half Yearly (30)";
@@ -514,9 +599,10 @@ function updateUILanguage() {
     document.getElementById('btnPrintGazette').innerText = "🖨️ Print Tabulation Gazette (A3 Landscape)";
     document.getElementById('btnPrint1P').innerText = "📑 Print Single Page (1 Page A4)";
     document.getElementById('btnPrint2P').innerText = "📄 Print Two Pages (Front-Back A4)";
-    document.getElementById('savedListTitle').innerText = "📋 Class " + curClass + " - Saved Students List";
+    document.getElementById('savedListTitle').innerText = "📋 Class " + curClass + " (" + currentSession + ") - Saved Students List";
   }
 
+  updatePromotionClassText();
   loadSubjects();
   renderSubjectTags();
   renderMarksTable();
@@ -528,7 +614,8 @@ function saveSchoolInfo() {
     name: document.getElementById('schName').value,
     udise: document.getElementById('schUdise').value,
     block: document.getElementById('schBlock').value,
-    dist: document.getElementById('schDistrict').value
+    dist: document.getElementById('schDistrict').value,
+    session: document.getElementById('selSession').value
   };
   localStorage.setItem('mdm_sch_info', JSON.stringify(info));
 }
@@ -542,6 +629,10 @@ function loadSchoolInfo() {
       document.getElementById('schUdise').value = p.udise || '';
       document.getElementById('schBlock').value = p.block || '';
       document.getElementById('schDistrict').value = p.dist || '';
+      if (p.session) {
+        document.getElementById('selSession').value = p.session;
+        currentSession = p.session;
+      }
       if (p.name) detectLanguage(p.name);
     } catch(e) {}
   }
@@ -550,14 +641,10 @@ function loadSchoolInfo() {
 function onClassChange() {
   curClass = parseInt(document.getElementById('selClass').value, 10);
   document.getElementById('savedListTitle').innerText = isHindiDetected ? 
-    ("📋 कक्षा " + curClass + " - सहेजे गए विद्यार्थियों की सूची") : 
-    ("📋 Class " + curClass + " - Saved Students List");
+    ("📋 कक्षा " + curClass + " (" + currentSession + ") - सहेजे गए विद्यार्थियों की सूची") : 
+    ("📋 Class " + curClass + " (" + currentSession + ") - Saved Students List");
   
-  var nextCls = (curClass < 8) ? 
-    (isHindiDetected ? ("कक्षा " + (curClass + 1)) : ("Class " + (curClass + 1))) : 
-    (isHindiDetected ? "कक्षा 9 (उच्च विद्यालय हेतु उत्तीर्ण)" : "Class 9 (Passed for Higher School)");
-  document.getElementById('stPromoteClass').value = nextCls;
-
+  updatePromotionClassText();
   loadSubjects();
   renderSubjectTags();
   renderMarksTable();
@@ -719,47 +806,47 @@ function distributeMarksFromPercent() {
   var totalMarksPossible = n * 100;
   var targetTotal = Math.round((pct / 100) * totalMarksPossible);
 
-  var offsets = [-3, 2, -2, 3, -1, 1, 0, -2, 2, 0];
   var rawTotals = [];
   var sumRaw = 0;
 
   for (var i = 0; i < n; i++) {
-    var off = offsets[i % offsets.length];
-    var val = Math.round(pct + off);
-    if (val > 100) val = 100;
+    var randOffset = Math.floor(Math.random() * 11) - 5;
+    var val = Math.round(pct + randOffset);
+    if (val > 98) val = 98;
     if (val < 35) val = 35;
     rawTotals.push(val);
     sumRaw += val;
   }
 
   var diff = targetTotal - sumRaw;
-  var step = diff > 0 ? 1 : -1;
-  var idx = 0;
   while (diff !== 0) {
-    var curVal = rawTotals[idx % n];
-    if ((step > 0 && curVal < 100) || (step < 0 && curVal > 35)) {
-      rawTotals[idx % n] += step;
-      diff -= step;
+    var randIdx = Math.floor(Math.random() * n);
+    if (diff > 0 && rawTotals[randIdx] < 99) {
+      rawTotals[randIdx]++;
+      diff--;
+    } else if (diff < 0 && rawTotals[randIdx] > 35) {
+      rawTotals[randIdx]--;
+      diff++;
     }
-    idx++;
-    if (idx > 500) break;
   }
 
   curSubjects.forEach(function(sub, i) {
     var subTot = rawTotals[i];
 
-    var t1 = Math.round(subTot * 0.10);
-    if (t1 > 10) t1 = 10;
-    if (t1 < 4 && subTot >= 35) t1 = 4;
+    var t1Base = Math.round(subTot * 0.10);
+    var t1Var = (Math.random() > 0.5 ? 1 : 0) * (Math.random() > 0.5 ? 1 : -1);
+    var t1 = Math.max(4, Math.min(10, t1Base + t1Var));
 
-    var t2 = Math.round(subTot * 0.10);
-    if (i % 2 === 1 && t2 > 4) t2 -= 1;
-    if (t2 > 10) t2 = 10;
+    var t2Base = Math.round(subTot * 0.10);
+    var t2Var = (Math.random() > 0.5 ? 1 : 0) * (Math.random() > 0.5 ? 1 : -1);
+    var t2 = Math.max(4, Math.min(10, t2Base + t2Var));
 
-    var half = Math.round(subTot * 0.30);
-    if (half > 30) half = 30;
+    var halfBase = Math.round(subTot * 0.30);
+    var halfVar = Math.floor(Math.random() * 3) - 1;
+    var half = Math.max(11, Math.min(30, halfBase + halfVar));
 
     var ann = subTot - (t1 + t2 + half);
+
     if (ann > 50) {
       var extra = ann - 50;
       ann = 50;
@@ -767,7 +854,7 @@ function distributeMarksFromPercent() {
     } else if (ann < 18 && subTot >= 35) {
       var need = 18 - ann;
       ann = 18;
-      half = Math.max(10, half - need);
+      half = Math.max(11, half - need);
     }
 
     document.getElementById('m_t1_' + i).value = t1;
@@ -821,9 +908,6 @@ function cleanAndCalc() {
   });
 }
 
-// =========================================================================
-// 3. आधिकारिक अंक-विभाजन इंजन (कक्षा 1, 2-3, 4-5, 6-8)
-// =========================================================================
 function getDetailedExamSplit(m, cls) {
   var t1 = m.t1 || 0, half = m.half || 0, t2 = m.t2 || 0, ann = m.ann || 0;
   
@@ -890,6 +974,10 @@ function getDetailedExamSplit(m, cls) {
   }
 }
 
+function getStorageKey() {
+  return 'mdm_sts_c' + curClass + '_' + currentSession.replace('-', '_');
+}
+
 function saveStudent() {
   var name = document.getElementById('stName').value.trim();
   if (!name) { 
@@ -941,6 +1029,7 @@ function saveStudent() {
     workDays: document.getElementById('schWorkDays').value,
     attDays: document.getElementById('stAttDays').value,
     promoteClass: document.getElementById('stPromoteClass').value,
+    session: currentSession,
     isHindi: isHindiDetected,
     marks: marks,
     grandTot: grandTot,
@@ -953,14 +1042,14 @@ function saveStudent() {
   curStudents.push(stObj);
   curStudents.sort(function(a,b) { return (parseInt(a.roll, 10) || 0) - (parseInt(b.roll, 10) || 0); });
 
-  localStorage.setItem('mdm_sts_c' + curClass, JSON.stringify(curStudents));
+  localStorage.setItem(getStorageKey(), JSON.stringify(curStudents));
   renderStudentTable();
   clearStudentForm();
   alert(isHindiDetected ? "विद्यार्थी का परिणाम सफलतापूर्वक सहेज लिया गया!" : "Student record saved successfully!");
 }
 
 function loadStudents() {
-  var saved = localStorage.getItem('mdm_sts_c' + curClass);
+  var saved = localStorage.getItem(getStorageKey());
   curStudents = saved ? JSON.parse(saved) : [];
   renderStudentTable();
 }
@@ -970,7 +1059,7 @@ function renderStudentTable() {
   tb.innerHTML = '';
   if (curStudents.length === 0) {
     tb.innerHTML = '<tr><td colspan="10" style="padding:15px; color:#64748b;">' + 
-      (isHindiDetected ? ("कक्षा " + curClass + " में अभी कोई छात्र सहेजा नहीं गया है।") : ("No students saved yet in Class " + curClass + ".")) + 
+      (isHindiDetected ? ("कक्षा " + curClass + " (" + currentSession + ") में अभी कोई छात्र सहेजा नहीं गया है।") : ("No students saved yet in Class " + curClass + " (" + currentSession + ").")) + 
       '</td></tr>';
     return;
   }
@@ -999,7 +1088,7 @@ function deleteStudent(idx) {
   var msg = isHindiDetected ? "क्या आप इस छात्र का रिकॉर्ड हटाना चाहते हैं?" : "Do you want to delete this student record?";
   if (confirm(msg)) {
     curStudents.splice(idx, 1);
-    localStorage.setItem('mdm_sts_c' + curClass, JSON.stringify(curStudents));
+    localStorage.setItem(getStorageKey(), JSON.stringify(curStudents));
     renderStudentTable();
   }
 }
@@ -1032,9 +1121,10 @@ function printClassGazette() {
   var totalPages = Math.ceil(curStudents.length / pageSize);
 
   var isHi = curStudents[0].isHindi;
+  var sessStr = currentSession;
 
   var tMain = isHi ? "बेसिक शिक्षा परिषद, उत्तर प्रदेश" : "BASIC SHIKSHA PARISHAD, UTTAR PRADESH";
-  var tSub = isHi ? "वार्षिक परीक्षा फल गजट (TABULATION REGISTER) - शैक्षिक सत्र 2025-2026" : "ANNUAL TABULATION REGISTER - ACADEMIC SESSION 2025-2026";
+  var tSub = isHi ? ("वार्षिक परीक्षा फल गजट (TABULATION REGISTER) - शैक्षिक सत्र " + sessStr) : ("ANNUAL TABULATION REGISTER - ACADEMIC SESSION " + sessStr);
   var lSchool = isHi ? "विद्यालय" : "School";
   var lUdise = isHi ? "यू-डायस" : "UDISE";
   var lBlock = isHi ? "विकास खण्ड" : "Block";
@@ -1059,7 +1149,7 @@ function printClassGazette() {
   var lTot = isHi ? "योग" : "Total";
   var lW_short = isHi ? "लि" : "W";
   var lO_short = isHi ? "मौ" : "O";
-  var lSign = isHi ? "प्रधानाध्यापक के हस्ताक्षर एवं मुहर" : "Signature & Stamp of Headmaster";
+  var lSign = isHi ? "प्रधानाध्यापक के हस्ताक्षर एवं मुहर" : "Headmaster Signature & Stamp";
 
   var fullHtml = '';
 
@@ -1191,55 +1281,74 @@ function printClassGazette() {
 }
 
 // =========================================================================
-// 5. 1-पेज वाला संपूर्ण A4 कार्ड (बाएँ: विषय, दाएँ: 11 बिंदु | पूरे पेज पर फिट)
+// 5. 1-पेज वाला संपूर्ण A4 कार्ड (स्पष्ट डॉटेड लाइन, बड़े अक्षर, वर्गाकार सेल)
 // =========================================================================
 function buildCardHtml1P(st) {
   var sch = JSON.parse(localStorage.getItem('mdm_sch_info') || '{}');
   var printAadhaar = document.getElementById('chkPrintAadhaar').checked;
-  var aadhaarVal = printAadhaar ? (st.aadhaar ? '[पहचान संख्या सुरक्षित]' : '') : '';
+  var aadhaarVal = printAadhaar ? (st.aadhaar || '') : '';
 
   var isHi = st.isHindi;
+  var sessStr = st.session || currentSession;
+  var nextSessStr = getNextSessionShort(sessStr);
+
   var titleMain = isHi ? "बेसिक शिक्षा परिषद, उत्तर प्रदेश" : "BASIC SHIKSHA PARISHAD, UTTAR PRADESH";
   var titleCard = isHi ? "वार्षिक परीक्षा प्रगति पत्रक" : "ANNUAL PROGRESS REPORT CARD";
-  var sessText = isHi ? "शैक्षिक सत्र: 2025-2026" : "ACADEMIC SESSION: 2025-2026";
+  var sessText = isHi ? ("शैक्षिक सत्र: " + sessStr) : ("ACADEMIC SESSION: " + sessStr);
 
   var cList = isHi ? coCurricularHi : coCurricularEn;
+
+  var nextClsText = "";
+  if (curClass < 8) {
+    nextClsText = isHi ? ("कक्षा " + (curClass + 1)) : ("Class " + (curClass + 1));
+  } else {
+    nextClsText = isHi ? "कक्षा 9" : "Class 9";
+  }
+
+  var dotStyle = "border-bottom: 2px dotted #000 !important; font-weight: 800 !important; font-size: 15.5px !important; min-height: 23px; padding-left: 5px;";
 
   var html = 
     '<div class="rc-single-page">' +
       '<div>' +
         '<div class="rc-header">' +
           '<h2>' + titleMain + '</h2>' +
-          '<h3>' + (sch.name || (isHi ? 'प्राथमिक / उच्च प्राथमिक विद्यालय' : 'Primary / Upper Primary School')) + '</h3>' +
+          '<h3>' + (sch.name || (isHi ? 'उच्च प्राथमिक विद्यालय' : 'Upper Primary School')) + '</h3>' +
           '<p>' + titleCard + ' (' + sessText + ')</p>' +
         '</div>' +
 
         '<div class="rc-info-grid">' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'विद्यार्थी का नाम' : 'Student Name') + ':</span><span class="rc-info-val">' + st.name + '</span></div>' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'अनुक्रमांक / कक्षा' : 'Roll / Class') + ':</span><span class="rc-info-val">' + (st.roll || '-') + ' / ' + (isHi ? 'कक्षा ' : 'Class ') + curClass + '</span></div>' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'माता का नाम' : "Mother's Name") + ':</span><span class="rc-info-val">' + (st.mother || '') + '</span></div>' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'पिता का नाम' : "Father's Name") + ':</span><span class="rc-info-val">' + (st.father || '') + '</span></div>' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'प्रवेशांक (SR No)' : 'S.R. No.') + ':</span><span class="rc-info-val">' + (st.sr || '-') + '</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'विद्यार्थी का नाम' : 'Student Name') + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + st.name + '</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'कक्षा' : 'Class') + ':</span><span class="rc-info-val" style="' + dotStyle + ' flex-grow:0.4; margin-right:15px;">' + (isHi ? 'कक्षा ' : 'Class ') + curClass + '</span><span class="rc-info-label" style="width:auto; margin-right:4px;">' + (isHi ? 'अनुक्रमांक' : 'Roll No.') + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + (st.roll || '-') + '</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'माता का नाम' : "Mother's Name") + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + (st.mother || '') + '</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'पिता का नाम' : "Father's Name") + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + (st.father || '') + '</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'प्रवेशांक (SR No)' : 'S.R. No.') + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + (st.sr || '-') + '</span></div>' +
           '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'यू-डायस कोड' : 'UDISE Code') + ':</span><span class="rc-info-val">' + (sch.udise || '') + '</span></div>' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'जन्मतिथि' : 'Date of Birth') + ':</span><span class="rc-info-val">' + formatDateDDMMYYYY(st.dob) + ' (' + (st.dobWords || '') + ')</span></div>' +
-          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'पहचान संख्या' : 'Identity No.') + ':</span><span class="rc-info-val">' + aadhaarVal + '</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'जन्मतिथि' : 'Date of Birth') + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + formatDateDDMMYYYY(st.dob) + ' (' + (st.dobWords || '') + ')</span></div>' +
+          '<div class="rc-info-item"><span class="rc-info-label">' + (isHi ? 'पहचान संख्या' : 'Identity No.') + ':</span><span class="rc-info-val" style="' + dotStyle + '">' + aadhaarVal + '</span></div>' +
         '</div>' +
       '</div>' +
 
-      '<!-- साइड-बाई-साइड लेआउट (बाएँ: विषय तालिका, दाएँ: 11 बिंदु) -->' +
+      '<!-- दोनों तालिकाओं का मुख्य कंटेनर: संतुलित वर्गाकार सेल -->' +
       '<div class="rc-content-flex">' +
-        '<!-- बायाँ स्तंभ: शैक्षिक विषय मूल्यांकन -->' +
+        '<!-- बायाँ स्तंभ: मुख्य विषय मूल्यांकन -->' +
         '<div class="rc-left-col">' +
-          '<table class="rc-table">' +
+          '<table class="rc-table" style="table-layout: fixed;">' +
             '<thead>' +
               '<tr>' +
-                '<th style="text-align:left; padding-left:4px;">' + (isHi ? 'विषय' : 'Subject') + '</th>' +
-                '<th>' + (isHi ? 'T1<br>(10)' : 'T1<br>(10)') + '</th>' +
-                '<th>' + (isHi ? 'अर्ध.<br>(30)' : 'Half<br>(30)') + '</th>' +
-                '<th>' + (isHi ? 'T2<br>(10)' : 'T2<br>(10)') + '</th>' +
-                '<th>' + (isHi ? 'वार्षिक<br>(50)' : 'Ann.<br>(50)') + '</th>' +
-                '<th>' + (isHi ? 'योग<br>(100)' : 'Tot<br>(100)') + '</th>' +
-                '<th>' + (isHi ? 'ग्रेड' : 'Grd') + '</th>' +
+                '<th rowspan="2" style="text-align:left; padding-left:6px; width:170px;">' + (isHi ? 'विषय' : 'Subject') + '</th>' +
+                '<th colspan="2">' + (isHi ? 'प्रथम सत्र' : 'Term 1') + '</th>' +
+                '<th colspan="2">' + (isHi ? 'अर्धवार्षिक' : 'Half Yearly') + '</th>' +
+                '<th colspan="2">' + (isHi ? 'द्वितीय सत्र' : 'Term 2') + '</th>' +
+                '<th colspan="2">' + (isHi ? 'वार्षिक' : 'Annual') + '</th>' +
+                '<th colspan="2">' + (isHi ? 'कुल योग' : 'Total') + '</th>' +
+                '<th rowspan="2" style="width:50px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
+              '</tr>' +
+              '<tr>' +
+                '<th style="width:44px;">' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th style="width:44px;">' + (isHi ? 'प्रा.' : 'Obt') + '</th>' +
+                '<th style="width:44px;">' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th style="width:44px;">' + (isHi ? 'प्रा.' : 'Obt') + '</th>' +
+                '<th style="width:44px;">' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th style="width:44px;">' + (isHi ? 'प्रा.' : 'Obt') + '</th>' +
+                '<th style="width:44px;">' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th style="width:44px;">' + (isHi ? 'प्रा.' : 'Obt') + '</th>' +
+                '<th style="width:44px;">' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th style="width:44px;">' + (isHi ? 'प्रा.' : 'Obt') + '</th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>';
@@ -1249,19 +1358,25 @@ function buildCardHtml1P(st) {
     t1Tot += m.t1; halfTot += m.half; t2Tot += m.t2; annTot += m.ann;
     html += 
       '<tr>' +
-        '<td style="text-align:left; font-weight:bold; padding-left:4px;">' + m.sub + '</td>' +
-        '<td>' + m.t1 + '</td><td>' + m.half + '</td><td>' + m.t2 + '</td><td>' + m.ann + '</td>' +
-        '<td style="font-weight:bold;">' + m.tot + '</td>' +
-        '<td style="font-weight:bold;">' + m.grade + '</td>' +
+        '<td class="sub-name">' + m.sub + '</td>' +
+        '<td class="mark-val">10</td><td class="mark-val">' + m.t1 + '</td>' +
+        '<td class="mark-val">30</td><td class="mark-val">' + m.half + '</td>' +
+        '<td class="mark-val">10</td><td class="mark-val">' + m.t2 + '</td>' +
+        '<td class="mark-val">50</td><td class="mark-val">' + m.ann + '</td>' +
+        '<td class="mark-val">100</td><td class="mark-val">' + m.tot + '</td>' +
+        '<td class="grade-val">' + m.grade + '</td>' +
       '</tr>';
   });
 
   html += 
-              '<tr style="font-weight:900; background:#f1f5f9;">' +
-                '<td style="text-align:left; padding-left:4px;">' + (isHi ? 'महायोग' : 'Total') + '</td>' +
-                '<td>' + t1Tot + '</td><td>' + halfTot + '</td><td>' + t2Tot + '</td><td>' + annTot + '</td>' +
-                '<td>' + st.grandTot + '</td>' +
-                '<td>' + st.grade + '</td>' +
+              '<tr style="font-weight:900; background:#f1f5f9; font-size:14px;">' +
+                '<td style="text-align:left; padding-left:6px;">' + (isHi ? 'महायोग' : 'Grand Total') + '</td>' +
+                '<td class="mark-val">' + (st.marks.length * 10) + '</td><td class="mark-val">' + t1Tot + '</td>' +
+                '<td class="mark-val">' + (st.marks.length * 30) + '</td><td class="mark-val">' + halfTot + '</td>' +
+                '<td class="mark-val">' + (st.marks.length * 10) + '</td><td class="mark-val">' + t2Tot + '</td>' +
+                '<td class="mark-val">' + (st.marks.length * 50) + '</td><td class="mark-val">' + annTot + '</td>' +
+                '<td class="mark-val">' + st.totalMax + '</td><td class="mark-val">' + st.grandTot + '</td>' +
+                '<td class="grade-val">' + st.grade + '</td>' +
               '</tr>' +
             '</tbody>' +
           '</table>' +
@@ -1269,12 +1384,12 @@ function buildCardHtml1P(st) {
 
         '<!-- दायाँ स्तंभ: 11 अतिरिक्त पाठ्यचर्या बिंदु -->' +
         '<div class="rc-right-col">' +
-          '<table class="rc-table">' +
+          '<table class="rc-table" style="table-layout: fixed;">' +
             '<thead>' +
               '<tr>' +
-                '<th style="width:24px;">' + (isHi ? 'क्र.' : 'SN') + '</th>' +
-                '<th style="text-align:left; padding-left:4px;">' + (isHi ? 'अतिरिक्त पाठ्यचर्या गतिविधियां' : 'Co-Curricular Activity') + '</th>' +
-                '<th style="width:40px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
+                '<th style="width:30px;">' + (isHi ? 'क्र.' : 'SN') + '</th>' +
+                '<th style="text-align:left; padding-left:6px;">' + (isHi ? 'अतिरिक्त पाठ्यचर्या गतिविधियां' : 'Co-Curricular Activity') + '</th>' +
+                '<th style="width:50px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>';
@@ -1284,9 +1399,9 @@ function buildCardHtml1P(st) {
     var gVal = (st.cocurr && st.cocurr[i]) ? st.cocurr[i] : st.grade;
     html += 
       '<tr>' +
-        '<td>' + (i + 1) + '</td>' +
-        '<td style="text-align:left; padding-left:4px; font-weight:600;">' + cTitle.replace(/^[0-9]+\.\s*/, '') + '</td>' +
-        '<td style="font-weight:bold;">' + gVal + '</td>' +
+        '<td><b>' + (i + 1) + '</b></td>' +
+        '<td style="text-align:left; padding-left:6px; font-weight:800; font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + cTitle.replace(/^[0-9]+\.\s*/, '') + '</td>' +
+        '<td class="grade-val">' + gVal + '</td>' +
       '</tr>';
   }
 
@@ -1296,21 +1411,20 @@ function buildCardHtml1P(st) {
         '</div>' +
       '</div>' +
 
-      '<!-- निचला हिस्सा: उपस्थिति, प्रोन्नति एवं केवल 2 हस्ताक्षर -->' +
-      '<div>' +
-        '<div style="font-size:12px; font-weight:bold; margin-top:8px; line-height:1.7; border-top:1.5px solid #000; padding-top:6px;">' +
+      '<!-- निचला हिस्सा: उपस्थिति, प्रोन्नति एवं हस्ताक्षर -->' +
+      '<div class="bottom-section">' +
+        '<div style="font-size:13px; font-weight:800; margin-top:2px; line-height:1.4; border-top:1.8px solid #000; padding-top:4px;">' +
           (isHi ? 
-            ('• विद्यालय के कुल <u>' + (st.workDays || '___') + '</u> कार्य दिवसों में से विद्यार्थी <u>' + (st.attDays || '___') + '</u> दिन उपस्थित रहे।<br>' +
-             '• विद्यार्थी को आगामी शैक्षिक सत्र 2026-2027 हेतु <u>' + st.promoteClass + '</u> में प्रोन्नति प्रदान की जाती है।') :
-            ('• Out of <u>' + (st.workDays || '___') + '</u> total working days, the student attended <u>' + (st.attDays || '___') + '</u> days.<br>' +
-             '• The student is hereby promoted to <u>' + st.promoteClass + '</u> for academic session 2026-2027.')) +
+            ('• विद्यालय के कुल <u>' + (st.workDays || '___') + '</u> कार्य दिवसों में से विद्यार्थी <u>' + (st.attDays || '___') + '</u> दिन उपस्थित रहे। | विद्यार्थी को आगामी सत्र ' + nextSessStr + ' हेतु <u>' + nextClsText + '</u> में प्रोन्नति प्रदान की जाती है।') :
+            ('• Out of <u>' + (st.workDays || '___') + '</u> total working days, the student attended <u>' + (st.attDays || '___') + '</u> days. | Promoted to <u>' + nextClsText + '</u> for academic session ' + nextSessStr + '.')) +
         '</div>' +
 
-        '<div style="display:flex; justify-content:space-between; margin-top:36px; padding:0 30px; font-weight:bold; font-size:12px;">' +
-          '<div style="text-align:center; border-top:1.5px dashed #000; width:220px; padding-top:5px;">' + 
+        '<!-- हस्ताक्षर के लिए खुली जगह -->' +
+        '<div style="display:flex; justify-content:space-between; margin-top:16mm; padding:0 30px; font-weight:800; font-size:13.5px;">' +
+          '<div style="text-align:center; border-top:2px dashed #000; width:230px; padding-top:4px;">' + 
             (isHi ? 'अभिभावक के हस्ताक्षर' : "Parent's Signature") + 
           '</div>' +
-          '<div style="text-align:center; border-top:1.5px dashed #000; width:250px; padding-top:5px;">' + 
+          '<div style="text-align:center; border-top:2px dashed #000; width:260px; padding-top:4px;">' + 
             (isHi ? 'प्रधानाध्यापक के हस्ताक्षर एवं मुहर' : "Headmaster Signature & Stamp") + 
           '</div>' +
         '</div>' +
@@ -1324,13 +1438,23 @@ function buildCardHtml1P(st) {
 function buildCardHtml2P(st) {
   var sch = JSON.parse(localStorage.getItem('mdm_sch_info') || '{}');
   var printAadhaar = document.getElementById('chkPrintAadhaar').checked;
-  var aadhaarVal = printAadhaar ? (st.aadhaar ? '[पहचान संख्या सुरक्षित]' : '') : '';
+  var aadhaarVal = printAadhaar ? (st.aadhaar || '') : '';
 
   var isHi = st.isHindi;
+  var sessStr = st.session || currentSession;
+  var nextSessStr = getNextSessionShort(sessStr);
+
   var titleMain = isHi ? "बेसिक शिक्षा परिषद" : "BASIC SHIKSHA PARISHAD";
   var titleSub = isHi ? "उत्तर प्रदेश" : "UTTAR PRADESH";
   var titleCard = isHi ? "प्रगति पत्र" : "PROGRESS REPORT CARD";
-  var sessText = isHi ? "शैक्षिक सत्र: 2025-2026" : "ACADEMIC SESSION: 2025-2026";
+  var sessText = isHi ? ("शैक्षिक सत्र: " + sessStr) : ("ACADEMIC SESSION: " + sessStr);
+
+  var nextClsText = "";
+  if (curClass < 8) {
+    nextClsText = isHi ? ("कक्षा " + (curClass + 1)) : ("Class " + (curClass + 1));
+  } else {
+    nextClsText = isHi ? "कक्षा 9" : "Class 9";
+  }
 
   var html = 
     '<div class="rc-page">' +
@@ -1367,7 +1491,7 @@ function buildCardHtml2P(st) {
         '1. ' + (isHi ? 'अभिभावक बच्चों को नियमित विद्यालय भेजें।' : 'Send children to school regularly.') + '<br>' +
         '2. ' + (isHi ? 'बच्चों की साफ-सफाई पर विशेष ध्यान रखें।' : 'Ensure neat and clean uniform.') + '<br>' +
         '3. ' + (isHi ? 'बच्चों की प्रगति के संबंध में प्रधानाध्यापक/शिक्षक से संपर्क में रहें।' : 'Stay in contact with teachers regarding progress.') + '<br>' +
-        '4. ' + (isHi ? 'नया शैक्षिक सत्र 1 अप्रैल 2026 से प्रारंभ होगा।' : 'New academic session begins on 1st April 2026.') +
+        '4. ' + (isHi ? ('नया शैक्षिक सत्र 1 अप्रैल ' + nextSessStr.split('-')[0] + ' से प्रारंभ होगा।') : ('New academic session begins from 1st April ' + nextSessStr.split('-')[0] + '.')) +
       '</div>' +
     '</div>' +
 
@@ -1385,14 +1509,15 @@ function buildCardHtml2P(st) {
         '<thead>' +
           '<tr>' +
             '<th rowspan="2" style="width:140px;">' + (isHi ? 'विषय' : 'Subject') + '</th>' +
-            '<th colspan="2">' + (isHi ? 'प्रथम सत्र' : 'Term 1') + ' (10)</th>' +
-            '<th colspan="2">' + (isHi ? 'अर्धवार्षिक' : 'Half Yearly') + ' (30)</th>' +
-            '<th colspan="2">' + (isHi ? 'द्वितीय सत्र' : 'Term 2') + ' (10)</th>' +
-            '<th colspan="2">' + (isHi ? 'वार्षिक परीक्षा' : 'Annual') + ' (50)</th>' +
-            '<th rowspan="2">' + (isHi ? 'कुल योग' : 'Total') + ' (100)</th>' +
+            '<th colspan="2">' + (isHi ? 'प्रथम सत्र' : 'Term 1') + '</th>' +
+            '<th colspan="2">' + (isHi ? 'अर्धवार्षिक' : 'Half Yearly') + '</th>' +
+            '<th colspan="2">' + (isHi ? 'द्वितीय सत्र' : 'Term 2') + '</th>' +
+            '<th colspan="2">' + (isHi ? 'वार्षिक परीक्षा' : 'Annual') + '</th>' +
+            '<th colspan="2">' + (isHi ? 'कुल योग' : 'Total') + '</th>' +
             '<th rowspan="2">' + (isHi ? 'श्रेणी' : 'Grade') + '</th>' +
           '</tr>' +
           '<tr>' +
+            '<th>' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th>' + (isHi ? 'प्राप्तांक' : 'Obt') + '</th>' +
             '<th>' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th>' + (isHi ? 'प्राप्तांक' : 'Obt') + '</th>' +
             '<th>' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th>' + (isHi ? 'प्राप्तांक' : 'Obt') + '</th>' +
             '<th>' + (isHi ? 'पूर्णांक' : 'Max') + '</th><th>' + (isHi ? 'प्राप्तांक' : 'Obt') + '</th>' +
@@ -1411,7 +1536,7 @@ function buildCardHtml2P(st) {
         '<td>30</td><td>' + m.half + '</td>' +
         '<td>10</td><td>' + m.t2 + '</td>' +
         '<td>50</td><td>' + m.ann + '</td>' +
-        '<td style="font-weight:bold;">' + m.tot + '</td>' +
+        '<td>100</td><td style="font-weight:bold;">' + m.tot + '</td>' +
         '<td style="font-weight:bold;">' + m.grade + '</td>' +
       '</tr>';
   });
@@ -1423,15 +1548,14 @@ function buildCardHtml2P(st) {
             '<td>' + (st.marks.length * 30) + '</td><td>' + halfTot + '</td>' +
             '<td>' + (st.marks.length * 10) + '</td><td>' + t2Tot + '</td>' +
             '<td>' + (st.marks.length * 50) + '</td><td>' + annTot + '</td>' +
-            '<td>' + st.grandTot + '</td>' +
+            '<td>' + st.totalMax + '</td><td>' + st.grandTot + '</td>' +
             '<td>' + st.grade + '</td>' +
           '</tr>' +
         '</tbody>' +
       '</table>' +
 
       '<div style="font-size:11px; font-weight:bold; margin-top:14px; line-height:1.8;">' +
-        '<div>' + (isHi ? '• विद्यालय के कुल <u>' + (st.workDays || '___') + '</u> कार्य दिवसों में से विद्यार्थी <u>' + (st.attDays || '___') + '</u> दिन उपस्थित रहे।' : '• Out of <u>' + (st.workDays || '___') + '</u> working days, student attended <u>' + (st.attDays || '___') + '</u> days.') + '</div>' +
-        '<div>' + (isHi ? '• विद्यार्थी को आगामी शैक्षिक सत्र 2026-2027 हेतु <u>' + st.promoteClass + '</u> में प्रोन्नति प्रदान की जाती है।' : '• Student is promoted to <u>' + st.promoteClass + '</u> for session 2026-2027.') + '</div>' +
+        '<div>' + (isHi ? ('• विद्यालय के कुल <u>' + (st.workDays || '___') + '</u> कार्य दिवसों में से विद्यार्थी <u>' + (st.attDays || '___') + '</u> दिन उपस्थित रहे। | विद्यार्थी को आगामी सत्र ' + nextSessStr + ' हेतु <u>' + nextClsText + '</u> में प्रोन्नति प्रदान की जाती है।') : ('• Out of <u>' + (st.workDays || '___') + '</u> working days, student attended <u>' + (st.attDays || '___') + '</u> days. | Promoted to <u>' + nextClsText + '</u> for session ' + nextSessStr + '.')) + '</div>' +
       '</div>' +
 
       '<div style="display:flex; justify-content:space-between; margin-top:35px; padding:0 30px; font-weight:bold; font-size:11px;">' +
@@ -1481,6 +1605,7 @@ function printAllReportCards(pages) {
 }
 
 window.onload = function() {
+  populateSessionDropdown();
   loadSchoolInfo();
   onClassChange();
   renderCoCurricularUI();
