@@ -107,7 +107,6 @@
         width: 100% !important;
       }
 
-      /* Fixed Table Layout - No column crushing, outer borders locked */
       table.count-table {
         width: 100% !important;
         min-width: 100% !important;
@@ -182,7 +181,6 @@
       .row-ups-tot { background: #f3e8ff !important; }
       .row-grand-tot { background: #dbeafe !important; }
 
-      /* Signature Footer */
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
@@ -361,17 +359,25 @@ function populateSessions() {
     var opt = document.createElement('option');
     opt.value = y + '-' + ny;
     opt.innerText = 'SESSION ' + y + '-' + ny;
-    if (y === 2026) opt.selected = true;
+    if (sessMatchDefault(y)) opt.selected = true;
     sel.appendChild(opt);
   }
 }
 
+function sessMatchDefault(y) {
+  return y === 2026;
+}
+
 function filterCapital(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNumbers(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+
+// सुधरा हुआ cleanInt फ़ंक्शन - कर्सर सही दिशा में आगे बढ़ेगा
 function cleanInt(el) {
-  var p = el.selectionStart - 1;
+  var oldPos = el.selectionStart;
+  var oldLen = el.value.length;
   el.value = el.value.replace(/[^0-9]/g, '');
-  if (p >= 0) el.setSelectionRange(p, p);
+  var newPos = Math.max(0, oldPos + (el.value.length - oldLen));
+  el.setSelectionRange(newPos, newPos);
 }
 
 function buildTable() {
@@ -575,7 +581,6 @@ function saveEnrollmentData() {
 }
 
 function loadEnrollmentData() {
-  // पहले सभी इनपुट साफ़ करें
   for (var c = 1; c <= 8; c++) {
     for (var i = 0; i < cats.length; i++) {
       var cat = cats[i];
@@ -600,7 +605,7 @@ function loadEnrollmentData() {
 function onSessionChange() {
   updateHeader();
   saveSchoolDetails();
-  loadEnrollmentData(); // सत्र बदलते ही उस सत्र का सुरक्षित डेटा लोड होगा
+  loadEnrollmentData();
 }
 
 function resetCurrentSessionData() {
@@ -611,7 +616,6 @@ function resetCurrentSessionData() {
   }
 }
 
-// लैंडस्केप को फ़ोर्स करने वाला प्रिंट इंजन (Full Page Fit)
 function forceLandscapePrint() {
   updateHeader();
   
