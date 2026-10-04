@@ -19,13 +19,16 @@
     .form-group input, .form-group select { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12px; background: white; text-transform: uppercase; }
 
     /* Level Selector Buttons */
-    .tab-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .tab-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .tab-btns-left { display: flex; gap: 8px; flex-wrap: wrap; }
     .tab-btn { padding: 8px 14px; border: 2px solid #1e3a8a; background: white; color: #1e3a8a; font-weight: bold; font-size: 12.5px; border-radius: 6px; cursor: pointer; }
     .tab-btn.active { background: #1e3a8a; color: white; }
 
-    .btn-container { text-align: right; margin-bottom: 12px; }
+    .btn-container { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 12px; }
     .btn-print { background: #166534; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print:hover { background: #15803d; }
+    .btn-reset { background: #dc2626; color: white; border: none; padding: 10px 16px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-reset:hover { background: #b91c1c; }
 
     .mobile-notice { display: block; font-size: 11px; color: #0f766e; background: #ccfbf1; padding: 6px 10px; border-radius: 6px; margin-bottom: 8px; font-weight: 600; text-align: center; }
 
@@ -212,34 +215,40 @@
   <div class="school-details no-print">
     <div class="form-group">
       <label>सत्र (SESSION):</label>
-      <select id="selSession" onchange="updateHeader()"></select>
+      <select id="selSession" onchange="onSessionChange()"></select>
     </div>
     <div class="form-group">
       <label>विद्यालय का नाम (SCHOOL NAME):</label>
-      <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCapital(this); updateHeader();">
+      <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCapital(this); updateHeader(); saveSchoolDetails();">
     </div>
     <div class="form-group">
       <label>विकास खंड (BLOCK):</label>
-      <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCapital(this); updateHeader();">
+      <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCapital(this); updateHeader(); saveSchoolDetails();">
     </div>
     <div class="form-group">
       <label>जनपद (DISTRICT):</label>
-      <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCapital(this); updateHeader();">
+      <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCapital(this); updateHeader(); saveSchoolDetails();">
     </div>
     <div class="form-group">
       <label>यू-डायस कोड (UDISE CODE):</label>
-      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNumbers(this); updateHeader();">
+      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNumbers(this); updateHeader(); saveSchoolDetails();">
     </div>
   </div>
 
   <!-- स्तर चयन टैब -->
   <div class="tab-container no-print">
-    <button class="tab-btn active" id="btnComp" type="button" onclick="setLevel('comp')">🏫 COMPOSITE SCHOOL (1 TO 8)</button>
-    <button class="tab-btn" id="btnPs" type="button" onclick="setLevel('ps')">🎒 PRIMARY SCHOOL (1 TO 5)</button>
-    <button class="tab-btn" id="btnUps" type="button" onclick="setLevel('ups')">🏛️ UPPER PRIMARY SCHOOL (6 TO 8)</button>
+    <div class="tab-btns-left">
+      <button class="tab-btn active" id="btnComp" type="button" onclick="setLevel('comp')">🏫 COMPOSITE SCHOOL (1 TO 8)</button>
+      <button class="tab-btn" id="btnPs" type="button" onclick="setLevel('ps')">🎒 PRIMARY SCHOOL (1 TO 5)</button>
+      <button class="tab-btn" id="btnUps" type="button" onclick="setLevel('ups')">🏛️ UPPER PRIMARY SCHOOL (6 TO 8)</button>
+    </div>
+    <div style="font-size:12px; color:#16a34a; font-weight:bold;">
+      💾 डेटा स्वतः सुरक्षित हो रहा है
+    </div>
   </div>
 
   <div class="btn-container no-print">
+    <button class="btn-reset" type="button" onclick="resetCurrentSessionData()">↺ सत्र डेटा साफ़ करें</button>
     <button class="btn-print" type="button" onclick="forceLandscapePrint()">🖨️ A4 LANDSCAPE PRINT (FULL PAGE)</button>
   </div>
 
@@ -347,7 +356,7 @@ var cats = ['sc', 'st', 'obc', 'gen'];
 function populateSessions() {
   var sel = document.getElementById('selSession');
   sel.innerHTML = '';
-  for (var y = 2026; y <= 2059; y++) {
+  for (var y = 2024; y <= 2059; y++) {
     var ny = String(y + 1).slice(-2);
     var opt = document.createElement('option');
     opt.value = y + '-' + ny;
@@ -377,9 +386,9 @@ function buildTable() {
     for (var i = 0; i < cats.length; i++) {
       var cat = cats[i];
       html += 
-        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + 'b' + c + '" oninput="cleanInt(this); recalcAll();"></td>' +
-        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + 'g' + c + '" oninput="cleanInt(this); recalcAll();"></td>' +
-        '<td class="col-' + cat + ' tot-cell" id="' + cat + 't' + c + '">0</td>';
+        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + '_b_' + c + '" oninput="cleanInt(this); recalcAll(); saveEnrollmentData();"></td>' +
+        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + '_g_' + c + '" oninput="cleanInt(this); recalcAll(); saveEnrollmentData();"></td>' +
+        '<td class="col-' + cat + ' tot-cell" id="' + cat + '_t_' + c + '">0</td>';
     }
 
     html += 
@@ -392,7 +401,7 @@ function buildTable() {
   }
 }
 
-function setLevel(lvl) {
+function setLevel(lvl, skipSave) {
   currentLevel = lvl;
   document.getElementById('btnComp').className = 'tab-btn' + (lvl === 'comp' ? ' active' : '');
   document.getElementById('btnPs').className = 'tab-btn' + (lvl === 'ps' ? ' active' : '');
@@ -415,6 +424,7 @@ function setLevel(lvl) {
   document.getElementById('rowGrandTot').style.display = (lvl === 'comp') ? '' : 'none';
 
   updateHeader();
+  if (!skipSave) saveSchoolDetails();
 }
 
 function getVal(id) {
@@ -438,11 +448,11 @@ function recalcAll() {
 
     for (var i = 0; i < cats.length; i++) {
       var cat = cats[i];
-      var b = getVal(cat + 'b' + c);
-      var g = getVal(cat + 'g' + c);
+      var b = getVal(cat + '_b_' + c);
+      var g = getVal(cat + '_g_' + c);
       var t = b + g;
 
-      document.getElementById(cat + 't' + c).innerText = t;
+      document.getElementById(cat + '_t_' + c).innerText = t;
 
       rowB += b;
       rowG += g;
@@ -514,6 +524,93 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
+// =========================================================
+// LOCALSTORAGE AUTO-SAVE & AUTO-LOAD ENGINE
+// =========================================================
+
+function saveSchoolDetails() {
+  var schData = {
+    school: document.getElementById('inSchool').value,
+    block: document.getElementById('inBlock').value,
+    district: document.getElementById('inDistrict').value,
+    udise: document.getElementById('inUdise').value,
+    level: currentLevel,
+    session: document.getElementById('selSession').value
+  };
+  localStorage.setItem('enr_sch_info', JSON.stringify(schData));
+}
+
+function loadSchoolDetails() {
+  var saved = localStorage.getItem('enr_sch_info');
+  if (saved) {
+    try {
+      var d = JSON.parse(saved);
+      if (d.school) document.getElementById('inSchool').value = d.school;
+      if (d.block) document.getElementById('inBlock').value = d.block;
+      if (d.district) document.getElementById('inDistrict').value = d.district;
+      if (d.udise) document.getElementById('inUdise').value = d.udise;
+      if (d.session) document.getElementById('selSession').value = d.session;
+      if (d.level) setLevel(d.level, true);
+    } catch(e) {}
+  }
+}
+
+function getSessionKey() {
+  var ses = document.getElementById('selSession').value;
+  return 'enr_counts_' + ses.replace('-', '_');
+}
+
+function saveEnrollmentData() {
+  var data = {};
+  for (var c = 1; c <= 8; c++) {
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
+      var bVal = document.getElementById(cat + '_b_' + c).value;
+      var gVal = document.getElementById(cat + '_g_' + c).value;
+      if (bVal) data[cat + '_b_' + c] = bVal;
+      if (gVal) data[cat + '_g_' + c] = gVal;
+    }
+  }
+  localStorage.setItem(getSessionKey(), JSON.stringify(data));
+}
+
+function loadEnrollmentData() {
+  // पहले सभी इनपुट साफ़ करें
+  for (var c = 1; c <= 8; c++) {
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
+      document.getElementById(cat + '_b_' + c).value = '';
+      document.getElementById(cat + '_g_' + c).value = '';
+    }
+  }
+
+  var saved = localStorage.getItem(getSessionKey());
+  if (saved) {
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        var el = document.getElementById(key);
+        if (el) el.value = data[key];
+      }
+    } catch(e) {}
+  }
+  recalcAll();
+}
+
+function onSessionChange() {
+  updateHeader();
+  saveSchoolDetails();
+  loadEnrollmentData(); // सत्र बदलते ही उस सत्र का सुरक्षित डेटा लोड होगा
+}
+
+function resetCurrentSessionData() {
+  var ses = document.getElementById('selSession').value;
+  if (confirm("क्या आप सत्र " + ses + " का नामांकन डेटा साफ़ करना चाहते हैं?")) {
+    localStorage.removeItem(getSessionKey());
+    loadEnrollmentData();
+  }
+}
+
 // लैंडस्केप को फ़ोर्स करने वाला प्रिंट इंजन (Full Page Fit)
 function forceLandscapePrint() {
   updateHeader();
@@ -531,10 +628,11 @@ function forceLandscapePrint() {
   }, 1000);
 }
 
+// पेज लोड होने पर प्रक्रिया प्रारंभ
 populateSessions();
 buildTable();
-setLevel('comp');
-recalcAll();
+loadSchoolDetails();
+loadEnrollmentData();
 updateHeader();
 </script>
 </body>
