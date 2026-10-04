@@ -24,7 +24,8 @@
     .rates-box input { width: 65px; height: 30px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
 
     /* Level Selector Tabs */
-    .tab-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .tab-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .tab-btns-left { display: flex; gap: 8px; flex-wrap: wrap; }
     .tab-btn { padding: 8px 14px; border: 2px solid #1e3a8a; background: white; color: #1e3a8a; font-weight: bold; font-size: 12.5px; border-radius: 6px; cursor: pointer; }
     .tab-btn.active { background: #1e3a8a; color: white; }
 
@@ -57,9 +58,11 @@
     .sunday-row input { background: #fecaca; color: #991b1b; cursor: not-allowed; }
     .row-footer { background: #f1f5f9; font-weight: bold; }
 
-    .btn-container { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+    .btn-container { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 12px; }
     .btn-print { background: #166534; color: white; border: none; padding: 10px 22px; font-size: 13.5px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print:hover { background: #15803d; }
+    .btn-reset { background: #dc2626; color: white; border: none; padding: 10px 16px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-reset:hover { background: #b91c1c; }
 
     .print-header { display: none; text-align: center; margin-bottom: 4px; }
     .print-header h2 { margin: 0; font-size: 15px; text-transform: uppercase; font-weight: 800; color: #000; }
@@ -200,11 +203,11 @@
   <div class="school-details no-print">
     <div class="form-group">
       <label>सत्र / वर्ष:</label>
-      <select id="selYear" onchange="buildMonth()"></select>
+      <select id="selYear" onchange="onDateChange()"></select>
     </div>
     <div class="form-group">
       <label>माह:</label>
-      <select id="selMonth" onchange="buildMonth()">
+      <select id="selMonth" onchange="onDateChange()">
         <option value="0">जनवरी (January)</option>
         <option value="1">फ़रवरी (February)</option>
         <option value="2">मार्च (March)</option>
@@ -221,34 +224,39 @@
     </div>
     <div class="form-group">
       <label>विद्यालय का नाम (Capital Only):</label>
-      <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader();">
+      <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader(); saveMeta();">
     </div>
     <div class="form-group">
       <label>विकास खंड (Block):</label>
-      <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCap(this); updateHeader();">
+      <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCap(this); updateHeader(); saveMeta();">
     </div>
     <div class="form-group">
       <label>जनपद (District):</label>
-      <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCap(this); updateHeader();">
+      <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCap(this); updateHeader(); saveMeta();">
     </div>
     <div class="form-group">
       <label>यू-डायस कोड (Numbers Only):</label>
-      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNum(this); updateHeader();">
+      <input type="tel" maxlength="11" id="inUdise" placeholder="उदा. 08750350708" oninput="filterNum(this); updateHeader(); saveMeta();">
     </div>
   </div>
 
   <div class="rates-box no-print">
     <span style="font-weight:bold; color:#065f46;">⚙️ दरें (प्रति छात्र):</span>
-    <div><label>प्राथमिक: </label><input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalc()"> ₹</div>
-    <div><label>उच्च प्राथ.: </label><input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalc()"> ₹</div>
-    <div><label>सोमवार फल: </label><input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalc()"> ₹</div>
-    <div><label>गुरुवार पोषण: </label><input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalc()"> ₹</div>
+    <div><label>प्राथमिक: </label><input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalc(); saveMeta();"> ₹</div>
+    <div><label>उच्च प्राथ.: </label><input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalc(); saveMeta();"> ₹</div>
+    <div><label>सोमवार फल: </label><input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalc(); saveMeta();"> ₹</div>
+    <div><label>गुरुवार पोषण: </label><input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalc(); saveMeta();"> ₹</div>
   </div>
 
   <div class="tab-container no-print">
-    <button class="tab-btn active" id="btnComp" onclick="setLevel('comp')">🏫 कंपोजिट (1-8)</button>
-    <button class="tab-btn" id="btnPs" onclick="setLevel('ps')">🎒 प्राथमिक (1-5)</button>
-    <button class="tab-btn" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
+    <div class="tab-btns-left">
+      <button class="tab-btn active" id="btnComp" onclick="setLevel('comp')">🏫 कंपोजिट (1-8)</button>
+      <button class="tab-btn" id="btnPs" onclick="setLevel('ps')">🎒 प्राथमिक (1-5)</button>
+      <button class="tab-btn" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
+    </div>
+    <div style="font-size:12px; color:#16a34a; font-weight:bold;">
+      💾 डेटा स्वतः सुरक्षित हो रहा है
+    </div>
   </div>
 
   <!-- मासिक समरी कार्ड्स -->
@@ -306,6 +314,7 @@
   </div>
 
   <div class="btn-container no-print">
+    <button class="btn-reset" type="button" onclick="resetCurrentMonthData()">↺ इस माह का डेटा साफ़ करें</button>
     <button class="btn-print" type="button" onclick="window.print()">🖨️ A4 पोर्ट्रेट प्रिंट निकालें (1 Page Full)</button>
   </div>
 
@@ -357,10 +366,14 @@ var monthsHindi = ["जनवरी", "फ़रवरी", "मार्च", "
 
 function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+
+// कर्सर को सही दिशा में आगे बढ़ाने वाला सुधरा हुआ फ़ंक्शन
 function cleanNum(el) {
-  var p = el.selectionStart - 1;
+  var oldPos = el.selectionStart;
+  var oldLen = el.value.length;
   el.value = el.value.replace(/[^0-9]/g, '');
-  if (p >= 0) el.setSelectionRange(p, p);
+  var newPos = Math.max(0, oldPos + (el.value.length - oldLen));
+  el.setSelectionRange(newPos, newPos);
 }
 
 function moveNext(e, type, day) {
@@ -369,7 +382,7 @@ function moveNext(e, type, day) {
     e.preventDefault();
     var tot = new Date(parseInt(document.getElementById('selYear').value, 10), parseInt(document.getElementById('selMonth').value, 10) + 1, 0).getDate();
     for (var d = day + 1; d <= tot; d++) {
-      var n = document.getElementById(type + 'att' + d);
+      var n = document.getElementById(type + '_att_' + d);
       if (n && !n.readOnly) {
         n.focus(); n.select();
         n.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -398,7 +411,7 @@ function initCurrentDates() {
   mSelect.value = curMonth;
 }
 
-function setLevel(lvl) {
+function setLevel(lvl, skipSave) {
   curLvl = lvl;
   document.getElementById('btnComp').className = 'tab-btn' + (lvl === 'comp' ? ' active' : '');
   document.getElementById('btnPs').className = 'tab-btn' + (lvl === 'ps' ? ' active' : '');
@@ -415,6 +428,7 @@ function setLevel(lvl) {
   for (var j = 0; j < u.length; j++) u[j].style.display = (lvl === 'ps') ? 'none' : '';
 
   updateHeader();
+  if (!skipSave) saveMeta();
 }
 
 function buildMonth() {
@@ -447,13 +461,13 @@ function buildMonth() {
     tr.innerHTML = 
       '<td style="font-weight:bold;">' + dStr + '</td>' +
       '<td style="font-weight:600;">' + dHindi + '</td>' +
-      '<td class="ps-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ps_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ps\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
+      '<td class="ps-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ps_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ps\', ' + d + ');" oninput="cleanNum(this); recalc(); saveMonthData();"></td>' +
       '<td class="ps-col" id="ps_cumu_' + d + '">0</td>' +
       '<td class="ps-col val-wheat" id="ps_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
       '<td class="ps-col val-rice" id="ps_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
       '<td class="ps-col val-fruit" id="ps_f_' + d + '" style="color:#d97706; font-weight:bold;">0</td>' +
       '<td class="ps-col val-cost" id="ps_c_' + d + '" style="color:#1e3a8a; font-weight:bold;">₹0.00</td>' +
-      '<td class="ups-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ups_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ups\', ' + d + ');" oninput="cleanNum(this); recalc();"></td>' +
+      '<td class="ups-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ups_att_' + d + '" ' + (isSun ? 'readonly placeholder="-"' : '') + ' onkeydown="moveNext(event, \'ups\', ' + d + ');" oninput="cleanNum(this); recalc(); saveMonthData();"></td>' +
       '<td class="ups-col" id="ups_cumu_' + d + '">0</td>' +
       '<td class="ups-col val-wheat" id="ups_w_' + d + '" style="color:#9a3412; font-weight:bold;">0.00</td>' +
       '<td class="ups-col val-rice" id="ups_r_' + d + '" style="color:#166534; font-weight:bold;">0.00</td>' +
@@ -463,7 +477,8 @@ function buildMonth() {
     tb.appendChild(tr);
   }
 
-  setLevel(curLvl);
+  setLevel(curLvl, true);
+  loadMonthData();
   recalc();
   updateHeader();
 }
@@ -478,7 +493,6 @@ function recalc() {
   var rFruit = parseFloat(document.getElementById('rateFruit').value) || 0;
   var rNutri = parseFloat(document.getElementById('rateNutri').value) || 0;
   
-  // डायनामिक लेबल अपडेट (@दर)
   var fruitText = 'फल धनराशि (@₹' + rFruit + '):';
   var nutriText = 'अतिरिक्त पोषण धनराशि (@₹' + rNutri + '):';
   document.getElementById('lbl_ps_fruit').innerText = fruitText;
@@ -603,7 +617,108 @@ function updateHeader() {
   document.getElementById('prSub').innerText = sub.join(' | ');
 }
 
+// =========================================================
+// LOCALSTORAGE AUTO-SAVE & AUTO-LOAD ENGINE
+// =========================================================
+
+function saveMeta() {
+  var meta = {
+    school: document.getElementById('inSchool').value,
+    block: document.getElementById('inBlock').value,
+    district: document.getElementById('inDistrict').value,
+    udise: document.getElementById('inUdise').value,
+    level: curLvl,
+    ratePs: document.getElementById('ratePs').value,
+    rateUps: document.getElementById('rateUps').value,
+    rateFruit: document.getElementById('rateFruit').value,
+    rateNutri: document.getElementById('rateNutri').value
+  };
+  localStorage.setItem('mdm_monthly_meta', JSON.stringify(meta));
+}
+
+function loadMeta() {
+  var saved = localStorage.getItem('mdm_monthly_meta');
+  if (saved) {
+    try {
+      var d = JSON.parse(saved);
+      if (d.school) document.getElementById('inSchool').value = d.school;
+      if (d.block) document.getElementById('inBlock').value = d.block;
+      if (d.district) document.getElementById('inDistrict').value = d.district;
+      if (d.udise) document.getElementById('inUdise').value = d.udise;
+      if (d.ratePs) document.getElementById('ratePs').value = d.ratePs;
+      if (d.rateUps) document.getElementById('rateUps').value = d.rateUps;
+      if (d.rateFruit) document.getElementById('rateFruit').value = d.rateFruit;
+      if (d.rateNutri) document.getElementById('rateNutri').value = d.rateNutri;
+      if (d.level) setLevel(d.level, true);
+    } catch(e) {}
+  }
+}
+
+function getMonthStorageKey() {
+  var y = document.getElementById('selYear').value;
+  var m = document.getElementById('selMonth').value;
+  return 'mdm_month_att_' + y + '_' + m;
+}
+
+function saveMonthData() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+  var data = {};
+
+  for (var d = 1; d <= tot; d++) {
+    var pIn = document.getElementById('ps_att_' + d);
+    var uIn = document.getElementById('ups_att_' + d);
+    if (pIn && pIn.value) data['ps_' + d] = pIn.value;
+    if (uIn && uIn.value) data['ups_' + d] = uIn.value;
+  }
+  localStorage.setItem(getMonthStorageKey(), JSON.stringify(data));
+}
+
+function loadMonthData() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  for (var d = 1; d <= tot; d++) {
+    var pIn = document.getElementById('ps_att_' + d);
+    var uIn = document.getElementById('ups_att_' + d);
+    if (pIn && !pIn.readOnly) pIn.value = '';
+    if (uIn && !uIn.readOnly) uIn.value = '';
+  }
+
+  var saved = localStorage.getItem(getMonthStorageKey());
+  if (saved) {
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        var el = (key.indexOf('ps_') === 0) ? 
+                 document.getElementById('ps_att_' + key.replace('ps_', '')) : 
+                 document.getElementById('ups_att_' + key.replace('ups_', ''));
+        if (el && !el.readOnly) el.value = data[key];
+      }
+    } catch(e) {}
+  }
+}
+
+function onDateChange() {
+  buildMonth();
+}
+
+function resetCurrentMonthData() {
+  var y = document.getElementById('selYear').value;
+  var mIdx = parseInt(document.getElementById('selMonth').value, 10);
+  var mHindi = monthsHindi[mIdx];
+  if (confirm("क्या आप " + mHindi + " " + y + " का एमडीएम उपस्थिति डेटा साफ़ करना चाहते हैं?")) {
+    localStorage.removeItem(getMonthStorageKey());
+    loadMonthData();
+    recalc();
+  }
+}
+
+// प्रारंभ
 initCurrentDates();
+loadMeta();
 buildMonth();
 </script>
 </body>
