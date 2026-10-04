@@ -367,7 +367,10 @@
 <div id="reportModal">
   <div class="report-content">
     <button class="close-modal" onclick="closeMonthlyReport()">✕ बंद करें (Close)</button>
-    <h3 style="margin-top:0; color:#1e3a8a;">📊 मासिक विस्तृत रिकॉर्ड (Monthly Detailed Material & Cost Register)</h3>
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+      <h3 style="margin:0; color:#1e3a8a;">📊 मासिक विस्तृत रिकॉर्ड (Monthly Detailed Material & Cost Register)</h3>
+      <button class="btn-print-daily" type="button" onclick="window.print()">🖨️ इस रिपोर्ट को प्रिंट करें</button>
+    </div>
     
     <!-- माह और वर्ष चयनकर्ता -->
     <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px; background:#f1f5f9; padding:10px; border-radius:6px; flex-wrap:wrap;">
@@ -393,27 +396,27 @@
 
     <div style="margin-bottom:8px; font-weight:bold; font-size:13px; color:#166534;" id="reportSchoolInfo"></div>
     
-    <!-- विस्तृत मासिक रिपोर्ट तालिका जिसमें सभी अलग-अलग कॉलम हैं -->
+    <!-- विस्तृत मासिक रिपोर्ट तालिका जिसमें स्टैक्ड हेडर और सभी कॉलम हैं -->
     <div style="max-height: 420px; overflow-x: auto; overflow-y: auto; border:1px solid #cbd5e1; border-radius:6px;">
-      <table style="width:100%; min-width:1300px; border-collapse:collapse; text-align:center; font-size:11px;">
+      <table style="width:100%; min-width:1200px; border-collapse:collapse; text-align:center; font-size:11px;">
         <thead>
           <tr style="background:#1e3a8a; color:white;">
-            <th style="padding:6px; border:1px solid #94a3b8;">दिनांक</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">दिन</th>
-            <th style="padding:6px; border:1px solid #94a3b8; width:50px;">प्राथ.</th>
-            <th style="padding:6px; border:1px solid #94a3b8; width:50px;">उच्च प्रा.</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">गेहूं (kg)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">चावल (kg)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">दाल (kg)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">सोया बड़ी (kg)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">सब्जी (kg)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">तेल (ml/g)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">फल (संख्या)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">दूध (ltr)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">चीनी (kg)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">गिलास (संख्या)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">पोषण (चना/चिक्की)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">कुल लागत (₹)</th>
+            <th style="padding:5px; border:1px solid #94a3b8;">दिनांक<br><span style="font-size:9px; font-weight:normal;">Date</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">दिन<br><span style="font-size:9px; font-weight:normal;">Day</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8; width:45px;">प्राथ.<br><span style="font-size:9px; font-weight:normal;">(1-5)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8; width:45px;">उच्च प्रा.<br><span style="font-size:9px; font-weight:normal;">(6-8)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">गेहूं<br><span style="font-size:9px; font-weight:normal;">(kg)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">चावल<br><span style="font-size:9px; font-weight:normal;">(kg)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">दाल<br><span style="font-size:9px; font-weight:normal;">(kg)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">सोया बड़ी<br><span style="font-size:9px; font-weight:normal;">(kg)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">सब्जी<br><span style="font-size:9px; font-weight:normal;">(kg)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">तेल<br><span style="font-size:9px; font-weight:normal;">(ml/g)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">फल<br><span style="font-size:9px; font-weight:normal;">(संख्या)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">दूध<br><span style="font-size:9px; font-weight:normal;">(ltr)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">चीनी<br><span style="font-size:9px; font-weight:normal;">(kg)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">गिलास<br><span style="font-size:9px; font-weight:normal;">(संख्या)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">पोषण<br><span style="font-size:9px; font-weight:normal;">(चना/चिक्की)</span></th>
+            <th style="padding:5px; border:1px solid #94a3b8;">लागत<br><span style="font-size:9px; font-weight:normal;">(₹)</span></th>
           </tr>
         </thead>
         <tbody id="monthlyReportTableBody"></tbody>
