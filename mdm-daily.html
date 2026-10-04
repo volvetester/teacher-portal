@@ -50,7 +50,7 @@
 
     /* Monthly Report Modal / Box */
     #reportModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; overflow-y: auto; padding: 15px; }
-    .report-content { max-width: 1300px; margin: auto; background: white; padding: 20px; border-radius: 8px; position: relative; }
+    .report-content { max-width: 1350px; margin: auto; background: white; padding: 20px; border-radius: 8px; position: relative; }
     .close-modal { position: absolute; top: 15px; right: 20px; background: #dc2626; color: white; border: none; padding: 6px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; }
 
     .print-header { display: none; text-align: center; margin-bottom: 6px; }
@@ -393,22 +393,26 @@
 
     <div style="margin-bottom:8px; font-weight:bold; font-size:13px; color:#166534;" id="reportSchoolInfo"></div>
     
-    <!-- विस्तृत मासिक रिपोर्ट तालिका जिसमें सभी खाद्यान्न और लागत के कॉलम हैं -->
+    <!-- विस्तृत मासिक रिपोर्ट तालिका जिसमें सभी अलग-अलग कॉलम हैं -->
     <div style="max-height: 420px; overflow-x: auto; overflow-y: auto; border:1px solid #cbd5e1; border-radius:6px;">
-      <table style="width:100%; min-width:1100px; border-collapse:collapse; text-align:center; font-size:11px;">
+      <table style="width:100%; min-width:1300px; border-collapse:collapse; text-align:center; font-size:11px;">
         <thead>
           <tr style="background:#1e3a8a; color:white;">
             <th style="padding:6px; border:1px solid #94a3b8;">दिनांक</th>
             <th style="padding:6px; border:1px solid #94a3b8;">दिन</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">प्राथ. (1-5)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">उच्च प्रा. (6-8)</th>
+            <th style="padding:6px; border:1px solid #94a3b8; width:50px;">प्राथ.</th>
+            <th style="padding:6px; border:1px solid #94a3b8; width:50px;">उच्च प्रा.</th>
             <th style="padding:6px; border:1px solid #94a3b8;">गेहूं (kg)</th>
             <th style="padding:6px; border:1px solid #94a3b8;">चावल (kg)</th>
             <th style="padding:6px; border:1px solid #94a3b8;">दाल (kg)</th>
             <th style="padding:6px; border:1px solid #94a3b8;">सोया बड़ी (kg)</th>
             <th style="padding:6px; border:1px solid #94a3b8;">सब्जी (kg)</th>
             <th style="padding:6px; border:1px solid #94a3b8;">तेल (ml/g)</th>
-            <th style="padding:6px; border:1px solid #94a3b8;">फल/दूध/पोषण</th>
+            <th style="padding:6px; border:1px solid #94a3b8;">फल (संख्या)</th>
+            <th style="padding:6px; border:1px solid #94a3b8;">दूध (ltr)</th>
+            <th style="padding:6px; border:1px solid #94a3b8;">चीनी (kg)</th>
+            <th style="padding:6px; border:1px solid #94a3b8;">गिलास (संख्या)</th>
+            <th style="padding:6px; border:1px solid #94a3b8;">पोषण (चना/चिक्की)</th>
             <th style="padding:6px; border:1px solid #94a3b8;">कुल लागत (₹)</th>
           </tr>
         </thead>
@@ -624,7 +628,7 @@ function generateReportTable() {
   var tbody = document.getElementById('monthlyReportTableBody');
   tbody.innerHTML = '';
 
-  var tW = 0, tR = 0, tDal = 0, tSoya = 0, tVeg = 0, tOil = 0, tExtraCost = 0, tConvCost = 0, tTotalCost = 0;
+  var tW = 0, tR = 0, tDal = 0, tSoya = 0, tVeg = 0, tOil = 0, tFruitCount = 0, tMilkLtr = 0, tSugarKg = 0, tGlassCount = 0, tNutriCount = 0, tTotalCost = 0;
 
   for (var d = 1; d <= daysInMonth; d++) {
     var dayStr = yr + '-' + String(mo).padStart(2, '0') + '-' + String(d).padStart(2, '0');
@@ -658,7 +662,8 @@ function generateReportTable() {
     var isWed = (dayName === "Wednesday");
     var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
 
-    var wheat = 0, rice = 0, dal = 0, soya = 0, veg = 0, oil = 0, extraItemStr = "-";
+    var wheat = 0, rice = 0, dal = 0, soya = 0, veg = 0, oil = 0;
+    var fruit = 0, milk = 0, sugar = 0, glass = 0, nutri = 0;
     var dayConv = 0, dayExtraCost = 0;
 
     if (!isSun && tot > 0) {
@@ -680,14 +685,15 @@ function generateReportTable() {
       oil = (ps * 5 + ups * 7.5);
 
       if (isMon) {
+        fruit = tot;
         dayExtraCost = tot * rFruit;
-        extraItemStr = "फल: " + tot + " (₹" + dayExtraCost.toFixed(2) + ")";
       } else if (isWed) {
-        var milk = (ps * 0.15 + ups * 0.20);
-        extraItemStr = "दूध: " + milk.toFixed(1) + " Ltr (" + tot + " गिलास)";
+        milk = (ps * 0.15 + ups * 0.20);
+        sugar = milk * 0.1;
+        glass = tot;
       } else if (isThu && isWinter) {
+        nutri = tot;
         dayExtraCost = tot * rNutri;
-        extraItemStr = "चना/चिक्की: " + tot + " (₹" + dayExtraCost.toFixed(2) + ")";
       }
     }
 
@@ -699,26 +705,33 @@ function generateReportTable() {
     tSoya += soya;
     tVeg += veg;
     tOil += oil;
-    tExtraCost += dayExtraCost;
-    tConvCost += dayConv;
+    tFruitCount += fruit;
+    tMilkLtr += milk;
+    tSugarKg += sugar;
+    tGlassCount += glass;
+    tNutriCount += nutri;
     tTotalCost += dayTotalCost;
 
     var formattedD = String(d).padStart(2, '0') + '/' + String(mo).padStart(2, '0') + '/' + yr;
 
     var tr = document.createElement('tr');
     tr.innerHTML = 
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + formattedD + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8; font-weight:bold;">' + dayName.slice(0,3) + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (isSun ? '-' : ps) + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (isSun ? '-' : ups) + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (wheat > 0 ? wheat.toFixed(2) : '-') + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (rice > 0 ? rice.toFixed(2) : '-') + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (dal > 0 ? dal.toFixed(2) : '-') + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (soya > 0 ? soya.toFixed(2) : '-') + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (veg > 0 ? veg.toFixed(3) : '-') + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8;">' + (oil > 0 ? oil.toFixed(1) : '-') + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8; font-size:10px;">' + extraItemStr + '</td>' +
-      '<td style="padding:5px; border:1px solid #94a3b8; font-weight:bold; color:#b91c1c;">' + (isSun ? '₹0.00' : '₹' + dayTotalCost.toFixed(2)) + '</td>';
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + formattedD + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8; font-weight:bold;">' + dayName.slice(0,3) + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (isSun ? '-' : ps) + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (isSun ? '-' : ups) + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (wheat > 0 ? wheat.toFixed(2) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (rice > 0 ? rice.toFixed(2) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (dal > 0 ? dal.toFixed(2) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (soya > 0 ? soya.toFixed(2) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (veg > 0 ? veg.toFixed(3) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (oil > 0 ? oil.toFixed(1) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8; color:#d97706; font-weight:bold;">' + (fruit > 0 ? fruit : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (milk > 0 ? milk.toFixed(1) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (sugar > 0 ? sugar.toFixed(2) : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8;">' + (glass > 0 ? glass : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8; color:#0f766e; font-weight:bold;">' + (nutri > 0 ? nutri : '-') + '</td>' +
+      '<td style="padding:4px; border:1px solid #94a3b8; font-weight:bold; color:#b91c1c;">' + (isSun ? '₹0.00' : '₹' + dayTotalCost.toFixed(2)) + '</td>';
     tbody.appendChild(tr);
   }
 
@@ -733,7 +746,11 @@ function generateReportTable() {
     '<td style="padding:6px; border:1px solid #94a3b8;">' + tSoya.toFixed(2) + ' kg</td>' +
     '<td style="padding:6px; border:1px solid #94a3b8;">' + tVeg.toFixed(3) + ' kg</td>' +
     '<td style="padding:6px; border:1px solid #94a3b8;">' + tOil.toFixed(1) + ' g</td>' +
-    '<td style="padding:6px; border:1px solid #94a3b8; color:#d97706;">₹' + tExtraCost.toFixed(2) + '</td>' +
+    '<td style="padding:6px; border:1px solid #94a3b8; color:#d97706;">' + tFruitCount + '</td>' +
+    '<td style="padding:6px; border:1px solid #94a3b8;">' + tMilkLtr.toFixed(1) + ' l</td>' +
+    '<td style="padding:6px; border:1px solid #94a3b8;">' + tSugarKg.toFixed(2) + ' kg</td>' +
+    '<td style="padding:6px; border:1px solid #94a3b8;">' + tGlassCount + '</td>' +
+    '<td style="padding:6px; border:1px solid #94a3b8; color:#0f766e;">' + tNutriCount + '</td>' +
     '<td style="padding:6px; border:1px solid #94a3b8; color:#b91c1c; font-size:12px;">₹' + tTotalCost.toFixed(2) + '</td>';
   tbody.appendChild(ftTr);
 }
