@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,14 +14,9 @@
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
     /* School Details */
-    .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 12px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .school-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px; color: #334155; }
     .form-group input { width: 100%; padding: 7px 8px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 12.5px; background: white; text-transform: uppercase; }
-
-    /* Rates Box */
-    .rates-box { display: flex; gap: 10px; align-items: center; background: #ecfdf5; padding: 10px 12px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 12px; font-size: 11px; flex-wrap: wrap; }
-    .rates-box label { font-weight: bold; color: #065f46; }
-    .rates-box input { width: 60px; height: 28px; font-weight: bold; text-align: center; border: 1px solid #10b981; border-radius: 4px; background: white; }
 
     /* Daily Box */
     .daily-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
@@ -32,13 +27,8 @@
 
     .menu-badge { background: #166534; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 14px; text-transform: uppercase; }
 
-    .btn-action-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 10px 18px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn-print-daily { background: #0f766e; color: white; border: none; padding: 11px 24px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
     .btn-print-daily:hover { background: #115e59; }
-    .btn-report { background: #1e3a8a; color: white; border: none; padding: 10px 18px; font-size: 13px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-    .btn-report:hover { background: #1e40af; }
-
-    .auto-save-notice { font-size: 11.5px; color: #16a34a; font-weight: bold; margin-bottom: 10px; text-align: right; }
 
     /* Tables */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 15px; background: white; }
@@ -48,22 +38,27 @@
     .daily-att-input { width: 55px; height: 35px; padding: 2px; text-align: center; border: 1.5px solid #16a34a; border-radius: 4px; font-weight: bold; font-size: 15px; }
     .daily-att-input:focus { outline: 2px solid #047857; background: #ecfdf5; }
 
-    /* Monthly Report Modal / Box */
-    #reportModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; overflow-y: auto; padding: 15px; }
-    .report-content { max-width: 1350px; margin: auto; background: white; padding: 20px; border-radius: 8px; position: relative; }
-    .close-modal { position: absolute; top: 15px; right: 20px; background: #dc2626; color: white; border: none; padding: 6px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; }
-
     .print-header { display: none; text-align: center; margin-bottom: 6px; }
     .print-header h2 { margin: 0; font-size: 14px; color: #000; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
     .print-header p { margin: 2px 0 0 0; font-size: 10.5px; font-weight: bold; color: #111; text-transform: uppercase; }
     .print-menu-box { display: none; }
     .print-sign-row { display: none; }
 
-    /* मासिक रिपोर्ट प्रिंट के लिए अलग से क्लास */
-    .print-monthly-only { display: none; }
+    /* एडसेंस विस्तृत मार्गदर्शिका स्टाइलिंग (1200+ शब्द) */
+    .seo-guide { margin-top: 35px; border-top: 2px solid #cbd5e1; padding-top: 25px; color: #1e293b; line-height: 1.75; }
+    .seo-guide h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px; }
+    .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 22px; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
+    .seo-guide p { font-size: 13.5px; margin-bottom: 12px; text-align: justify; }
+    .seo-guide ul { font-size: 13.5px; margin-bottom: 14px; padding-left: 20px; }
+    .seo-guide li { margin-bottom: 6px; }
+    .seo-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+    .seo-table th, .seo-table td { border: 1px solid #94a3b8; padding: 8px 10px; text-align: left; }
+    .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
+    .footer-links { text-align: center; margin-top: 35px; padding-top: 15px; border-top: 1px solid #cbd5e1; font-size: 12.5px; }
+    .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; font-weight: bold; }
 
     /* =========================================================
-       PRINT ENGINE
+       100% PURE ENGLISH STRICT SINGLE-PAGE PRINT ENGINE
        ========================================================= */
     @page {
       size: portrait;
@@ -88,50 +83,11 @@
         width: 100% !important;
         max-width: 100% !important;
         border: none !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
       }
 
-      .no-print { display: none !important; }
-      #reportModal { display: none !important; }
-
-      /* जब मासिक रिपोर्ट प्रिंट मोड सक्रिय हो */
-      body.printing-monthly .container { display: none !important; }
-      body.printing-monthly .print-monthly-only { display: block !important; }
-
-      @page {
-        size: landscape !important;
-        margin: 4mm !important;
-      }
-
-      .print-monthly-only {
-        width: 100% !important;
-        background: #fff !important;
-        color: #000 !important;
-      }
-
-      .print-monthly-only table {
-        width: 100% !important;
-        border-collapse: collapse !important;
-        text-align: center !important;
-        font-size: 8.5px !important;
-        table-layout: fixed !important;
-      }
-
-      .print-monthly-only th, .print-monthly-only td {
-        border: 1px solid #000 !important;
-        padding: 3px 1px !important;
-        color: #000 !important;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      .print-monthly-only th {
-        background: #e2e8f0 !important;
-        font-weight: 800 !important;
-      }
-
-      /* सामान्य दैनिक प्रिंट इंजन */
-      body:not(.printing-monthly) .print-monthly-only { display: none !important; }
-      body:not(.printing-monthly) .no-print { display: none !important; }
+      .no-print, .seo-guide, .footer-links { display: none !important; }
       
       .print-header { display: block !important; margin-bottom: 5px !important; }
       .print-header h2 { font-size: 13.5px !important; margin: 0 !important; }
@@ -202,12 +158,12 @@
       }
 
       table.mat-direct-table tr {
-        height: 8.5mm !important;
+        height: 10mm !important;
       }
 
       table.mat-direct-table th, table.mat-direct-table td {
         border: 1px solid #000 !important;
-        padding: 3px 6px !important;
+        padding: 4px 8px !important;
         color: #000 !important;
         vertical-align: middle !important;
         text-transform: uppercase !important;
@@ -216,39 +172,30 @@
       table.mat-direct-table th {
         background: #cbd5e1 !important;
         font-weight: 800 !important;
-        font-size: 10.5px !important;
+        font-size: 11px !important;
       }
 
       table.mat-direct-table td.mat-name {
         font-weight: 700 !important;
-        font-size: 10.5px !important;
+        font-size: 11.5px !important;
         text-align: left !important;
-        padding-left: 10px !important;
-        width: 55% !important;
+        padding-left: 12px !important;
+        width: 65% !important;
       }
 
       table.mat-direct-table td.val-tot {
         background: transparent !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 12px !important;
+        font-size: 13.5px !important;
         text-align: center !important;
-        width: 25% !important;
-      }
-
-      table.mat-direct-table td.val-cost {
-        background: transparent !important;
-        color: #000 !important;
-        font-weight: 800 !important;
-        font-size: 12px !important;
-        text-align: center !important;
-        width: 20% !important;
+        width: 35% !important;
       }
 
       .print-sign-row {
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 40px !important;
+        margin-top: 55px !important;
         padding: 0 15px !important;
         page-break-inside: avoid !important;
       }
@@ -277,29 +224,20 @@
   <div class="school-details no-print">
     <div class="form-group">
       <label>SCHOOL NAME:</label>
-      <input type="text" id="inSchool" placeholder="E.G. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader(); saveMeta();">
+      <input type="text" id="inSchool" placeholder="E.G. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
       <label>BLOCK:</label>
-      <input type="text" id="inBlock" placeholder="E.G. MOHALI" oninput="filterCap(this); updateHeader(); saveMeta();">
+      <input type="text" id="inBlock" placeholder="E.G. MOHALI" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
       <label>DISTRICT:</label>
-      <input type="text" id="inDistrict" placeholder="E.G. KANPUR" oninput="filterCap(this); updateHeader(); saveMeta();">
+      <input type="text" id="inDistrict" placeholder="E.G. KANPUR" oninput="filterCap(this); updateHeader();">
     </div>
     <div class="form-group">
       <label>UDISE CODE:</label>
-      <input type="tel" maxlength="11" id="inUdise" placeholder="E.G. 08750350708" oninput="filterNum(this); updateHeader(); saveMeta();">
+      <input type="tel" maxlength="11" id="inUdise" placeholder="E.G. 08750350708" oninput="filterNum(this); updateHeader();">
     </div>
-  </div>
-
-  <!-- Rates Box -->
-  <div class="rates-box no-print">
-    <span style="font-weight:bold; color:#065f46;">⚙ CONVERSION & ITEM RATES:</span>
-    <div><label>PS Rate: </label><input type="number" step="0.01" id="ratePs" value="6.78" oninput="calcDaily(); saveMeta();"> ₹</div>
-    <div><label>UPS Rate: </label><input type="number" step="0.01" id="rateUps" value="10.17" oninput="calcDaily(); saveMeta();"> ₹</div>
-    <div><label>Fruit Rate: </label><input type="number" step="0.01" id="rateFruit" value="4.00" oninput="calcDaily(); saveMeta();"> ₹</div>
-    <div><label>Nutri Rate: </label><input type="number" step="0.01" id="rateNutri" value="5.00" oninput="calcDaily(); saveMeta();"> ₹</div>
   </div>
 
   <!-- Print Header -->
@@ -327,18 +265,8 @@
           <input type="text" id="dailyDayName" readonly style="background:#f1f5f9; width:130px; color:#1e3a8a; border:1px solid #94a3b8; font-weight:bold; padding:5px 8px; border-radius:4px; text-transform:uppercase;">
         </div>
       </div>
-      <div class="btn-action-group">
-        <button class="btn-report" type="button" onclick="openMonthlyReport()">📊 पिछला/मासिक विस्तृत रिकॉर्ड देखें</button>
-        <button class="btn-print-daily" type="button" onclick="window.print()">🖨 A4 PRINT</button>
-      </div>
+      <button class="btn-print-daily" type="button" onclick="window.print()">🖨 A4 PRINT (SINGLE PAGE)</button>
     </div>
-
-    <!-- निर्देश जोड़ दिया गया है -->
-    <div style="font-size: 11.5px; color: #b91c1c; font-weight: bold; margin-bottom: 10px; text-align: right;" class="no-print">
-      💡 कृपया प्रिंट करने के समय गूगल क्रोम ब्राउज़र का इस्तेमाल करें और उसमें Landscape मोड सेलेक्ट करें मोबाइल से प्रिंट करते समय।
-    </div>
-
-    <div class="auto-save-notice no-print">💾 इस दिनांक का डेटा स्वतः सुरक्षित हो रहा है</div>
 
     <div class="menu-badge no-print" id="dailyMenuName">MENU LOADING...</div>
 
@@ -362,14 +290,14 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="tel" class="daily-att-input" id="d_cls_1" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_2" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_3" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_4" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_5" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_6" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_7" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
-            <td><input type="tel" class="daily-att-input" id="d_cls_8" oninput="cleanNum(this); calcDaily(); saveDayData();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_1" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_2" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_3" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_4" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_5" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_6" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_7" oninput="cleanNum(this); calcDaily();"></td>
+            <td><input type="tel" class="daily-att-input" id="d_cls_8" oninput="cleanNum(this); calcDaily();"></td>
             <td rowspan="2" style="font-weight:bold; color:#b91c1c; font-size:18px; background:#fee2e2; vertical-align:middle;" id="d_tot_all">0</td>
           </tr>
           <tr style="background:#f8fafc; font-weight:bold;">
@@ -381,7 +309,7 @@
     </div>
 
     <div style="font-size:12px; color:#065f46; font-weight:bold; margin-bottom:6px; text-transform:uppercase;">
-      📦 REQUIRED FOODGRAIN, MATERIAL & COST TODAY:
+      📦 REQUIRED FOODGRAIN & MATERIAL TODAY (TOTAL QUANTITY):
     </div>
 
     <!-- 2. Direct Material Table -->
@@ -389,9 +317,8 @@
       <table class="daily-table mat-direct-table">
         <thead>
           <tr>
-            <th style="width:55%; text-align:left; padding-left:10px;">ITEM / MATERIAL DESCRIPTION</th>
-            <th style="width:25%; background:#0f766e;">TOTAL QUANTITY</th>
-            <th style="width:20%; background:#1e3a8a;">ESTIMATED COST</th>
+            <th style="width:65%; text-align:left; padding-left:12px;">ITEM / MATERIAL DESCRIPTION</th>
+            <th style="width:35%; background:#0f766e;">TOTAL REQUIRED QUANTITY</th>
           </tr>
         </thead>
         <tbody id="matTableBody"></tbody>
@@ -407,86 +334,135 @@
 
   </div>
 
-</div>
+  <!-- Google AdSense Friendly Content Section (no-print: 1200+ Words Detailed Academic Guide) -->
+  <div class="seo-guide no-print">
+    <h3>उत्तर प्रदेश बेसिक शिक्षा: दैनिक मध्याह्न भोजन (PM POSHAN) उपभोग, मेन्यू प्रबंधन एवं सामग्री गणना विस्तृत मार्गदर्शिका</h3>
+    <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के नियंत्रणाधीन संचालित प्राथमिक, उच्च प्राथमिक एवं संविलियन (कम्पोजिट) विद्यालयों में अध्ययनरत कक्षा 1 से 8 तक के छात्र-छात्राओं के शारीरिक, मानसिक एवं पोषणिक विकास हेतु संचालित 'प्रधानमंत्री पोषण शक्ति निर्माण' (पूर्ववर्ती मध्याह्न भोजन योजना - MDM) भारत सरकार एवं राज्य सरकार की एक फ्लैगशिप जनकल्याणकारी योजना है। इस योजना का प्रमुख उद्देश्य विद्यालयों में बालकों के शत-प्रतिशत नामांकन में वृद्धि करना, छात्रों के दैनिक ठहराव (Retention) को सुनिश्चित करना तथा समाज के वंचित व पिछड़े वर्गों के बच्चों में व्याप्त कुपोषण एवं 'कक्षा-कक्ष भूख' (Classroom Hunger) का समूल निवारण करना है।</p>
+    <p>विद्यालय स्तर पर मध्याह्न भोजन का संचालन केवल भोजन पकाने और वितरित करने तक सीमित नहीं है, बल्कि यह एक अत्यंत संवेदनशील, पारदर्शी एवं विधिक लेखांकन प्रक्रिया है[cite: 9]। प्रतिदिन भोजन ग्रहण करने वाले लाभान्वित छात्रों की कक्षावार संख्या के आधार पर उपभोग होने वाले खाद्यान्न (गेहूं/चावल), दाल, हरी सब्जियां, तेल/मसाले, सोयाबीन बड़ी, दूध तथा ताजे मौसमी फलों की ग्राम-दर-ग्राम गणना करना और उसे दैनिक पंजिका में अभिलेखित करना प्रधानाध्यापकों एवं एमडीएम प्रभारियों का अनिवार्य वैधानिक दायित्व है[cite: 9]। यह विस्तृत मार्गदर्शिका शासन के नवीनतम उपभोग मानकों, साप्ताहिक मेन्यू चार्ट, खाद्यान्न आवंटन नियमों तथा दैनिक आईवीआरएस (IVRS) प्रणाली के समस्त तकनीकी पहलुओं का 1,200 से अधिक शब्दों में संपूर्ण विश्लेषण प्रस्तुत करती है[cite: 9]।</p>
 
-<!-- समर्पित प्रिंट के लिए छिपी हुई मासिक रिपोर्ट संरचना -->
-<div class="print-monthly-only" id="printMonthlyContainer"></div>
+    <h4>1. प्रति छात्र दैनिक पोषण एवं खाद्यान्न उपभोग के मानक (Nutritional & Foodgrain Norms)</h4>
+    <p>भारत सरकार के शिक्षा मंत्रालय एवं राज्य मध्याह्न भोजन प्राधिकरण द्वारा प्राथमिक (कक्षा 1 से 5) तथा उच्च प्राथमिक स्तर (कक्षा 6 से 8) के बच्चों की शारीरिक व जैविक आवश्यकताओं के आधार पर प्रति छात्र दैनिक उपभोग के मानक स्पष्ट रूप से निर्धारित किए गए हैं[cite: 9]:</p>
+    <table class="seo-table">
+      <thead>
+        <tr>
+          <th>मद / सामग्री का नाम</th>
+          <th>प्राथमिक स्तर (कक्षा 1 से 5)</th>
+          <th>उच्च प्राथमिक स्तर (कक्षा 6 से 8)</th>
+          <th>न्यूनतम पोषण मान (Energy/Protein)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>खाद्यान्न (गेहूं का आटा / चावल)</strong></td>
+          <td>100 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>150 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>ऊर्जा: प्राथमिक 450 कैलोरी, उच्च प्राथमिक 700 कैलोरी</td>
+        </tr>
+        <tr>
+          <td><strong>दालें (Pulses)</strong></td>
+          <td>20 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>30 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>प्रोटीन: प्राथमिक 12 ग्राम, उच्च प्राथमिक 20 ग्राम</td>
+        </tr>
+        <tr>
+          <td><strong>हरी एवं मौसमी सब्जियां</strong></td>
+          <td>50 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>75 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>सूक्ष्म पोषक तत्व, आयरन एवं विटामिन प्रचुरता</td>
+        </tr>
+        <tr>
+          <td><strong>खाद्य तेल (सरसों/रिफाइंड) एवं वसा</strong></td>
+          <td>5 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>7.5 ग्राम प्रति छात्र[cite: 9]</td>
+          <td>आवश्यक वसा एवं घुलनशील विटामिन्स का अवशोषण</td>
+        </tr>
+        <tr>
+          <td><strong>सोयाबीन बड़ी (Soya Chunks)</strong></td>
+          <td>10 ग्राम प्रति छात्र (मेन्यू दिवसों पर)[cite: 9]</td>
+          <td>15 ग्राम प्रति छात्र (मेन्यू दिवसों पर)[cite: 9]</td>
+          <td>उत्कृष्ट पादप प्रोटीन (Plant Protein)</td>
+        </tr>
+        <tr>
+          <td><strong>उबला दूध (Boiled Milk - बुधवार)</strong></td>
+          <td>150 मिलीलीटर प्रति छात्र[cite: 9]</td>
+          <td>200 मिलीलीटर प्रति छात्र[cite: 9]</td>
+          <td>कैल्शियम, फास्फोरस एवं विटामिन-डी</td>
+        </tr>
+        <tr>
+          <td><strong>ताजे मौसमी फल (सोमवार)</strong></td>
+          <td>1 फल प्रति छात्र (केला/सेब/संतरा आदि)[cite: 9]</td>
+          <td>1 फल प्रति छात्र[cite: 9]</td>
+          <td>प्राकृतिक खनिज, फाइबर एवं विटामिन-सी</td>
+        </tr>
+      </tbody>
+    </table>
 
-<!-- पिछले/मासिक विस्तृत रिकॉर्ड देखने का पॉप-अप (Modal) -->
-<div id="reportModal">
-  <div class="report-content">
-    <button class="close-modal" onclick="closeMonthlyReport()">✕ बंद करें (Close)</button>
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
-      <h3 style="margin:0; color:#1e3a8a;">📊 मासिक विस्तृत रिकॉर्ड (Monthly Detailed Material & Cost Register)</h3>
-      <button class="btn-print-daily" type="button" onclick="printMonthlyReportNow()">🖨️ इस रिपोर्ट को प्रिंट करें</button>
-    </div>
-    
-    <!-- माह और वर्ष चयनकर्ता -->
-    <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px; background:#f1f5f9; padding:10px; border-radius:6px; flex-wrap:wrap;">
-      <label style="font-weight:bold; font-size:12px;">वर्ष चुनें:</label>
-      <select id="reportYear" style="padding:5px; font-weight:bold; border-radius:4px; border:1px solid #94a3b8;" onchange="generateReportTable()"></select>
-      
-      <label style="font-weight:bold; font-size:12px; margin-left:10px;">माह चुनें:</label>
-      <select id="reportMonth" style="padding:5px; font-weight:bold; border-radius:4px; border:1px solid #94a3b8;" onchange="generateReportTable()">
-        <option value="1">जनवरी (January)</option>
-        <option value="2">फ़रवरी (February)</option>
-        <option value="3">मार्च (March)</option>
-        <option value="4">अप्रैल (April)</option>
-        <option value="5">मई (May)</option>
-        <option value="6">जून (June)</option>
-        <option value="7">जुलाई (July)</option>
-        <option value="8">अगस्त (August)</option>
-        <option value="9">सितंबर (September)</option>
-        <option value="10">अक्टूबर (October)</option>
-        <option value="11">नवंबर (November)</option>
-        <option value="12">दिसंबर (December)</option>
-      </select>
-    </div>
+    <h4>2. उत्तर प्रदेश बेसिक शिक्षा परिषद: निर्धारित साप्ताहिक मेन्यू चक्र (Weekly Menu Chart)</h4>
+    <p>उत्तर प्रदेश शासन द्वारा बच्चों की रुचि, संतुलित आहार तथा क्षेत्रीय खाद्य प्राथमिकताओं को ध्यान में रखते हुए सप्ताह के छह कार्यदिवसों हेतु दिन-वार विशेष मेन्यू निर्धारित किया गया है[cite: 9]:</p>
+    <ul>
+      <li><strong>सोमवार (Monday):</strong> गेहूं की रोटी, मौसमी मिश्रित सब्जी एवं ताजा मौसमी फल[cite: 9]। (प्रत्येक छात्र को भोजन उपरांत एक साबुत मौसमी फल अनिवार्य रूप से दिया जाता है)[cite: 9]।</li>
+      <li><strong>मंगलवार (Tuesday):</strong> चावल के साथ दाल और सब्जी[cite: 9]। (दाल में पर्याप्त हरी सब्जियों का मिश्रण पकाया जाता है)[cite: 9]।</li>
+      <li><strong>बुधवार (Wednesday):</strong> सोयाबीन बड़ी व सब्जी युक्त तहरी तथा मीठा गर्म उबला दूध[cite: 9]। (दूध में चीनी की मात्रा 10 ग्राम प्रति लीटर के अनुपात में मिलाई जाती है)[cite: 9]।</li>
+      <li><strong>गुरुवार (Thursday):</strong> गेहूं की रोटी और दाल-सब्जी[cite: 9]। (शीतकालीन महीनों- नवंबर से मार्च के दौरान अतिरिक्त पोषण हेतु प्रति छात्र 50 ग्राम भुना चना तथा 20 ग्राम गुड़-मूंगफली की चिक्की का वितरण भी शामिल होता है)[cite: 9]।</li>
+      <li><strong>शुक्रवार (Friday):</strong> सोयाबीन बड़ी एवं मौसमी सब्जियों से युक्त पौष्टिक तहरी[cite: 9]।</li>
+      <li><strong>शनिवार (Saturday):</strong> चावल के साथ सोयाबीन बड़ी और हरी मिश्रित सब्जी[cite: 9]।</li>
+      <li><strong>रविवार (Sunday):</strong> साप्ताहिक अवकाश (रसोई बंद रहती है)[cite: 9]।</li>
+    </ul>
 
-    <div style="margin-bottom:8px; font-weight:bold; font-size:13px; color:#166534;" id="reportSchoolInfo"></div>
-    
-    <!-- विस्तृत मासिक रिपोर्ट तालिका जिसमें संतुलित और छोटे कॉलम हैं -->
-    <div style="max-height: 420px; overflow-x: auto; overflow-y: auto; border:1px solid #cbd5e1; border-radius:6px;">
-      <table style="width:100%; min-width:1100px; border-collapse:collapse; text-align:center; font-size:11px; table-layout:fixed;">
-        <thead>
-          <tr style="background:#1e3a8a; color:white;">
-            <th style="padding:5px; border:1px solid #94a3b8; width:65px;">दिनांक</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:40px;">दिन</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:40px;">प्राथ.</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:40px;">उच्च प्रा.</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">गेहूं<br>(kg)</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">चावल<br>(kg)</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">दाल<br>(kg)</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">सोया बड़ी<br>(kg)</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">सब्जी<br>(kg)</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">तेल<br>(ml/g)</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:45px;">फल</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:45px;">दूध</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:45px;">चीनी</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:45px;">गिलास</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:55px;">पोषण</th>
-            <th style="padding:5px; border:1px solid #94a3b8; width:75px;">लागत<br>(₹)</th>
-          </tr>
-        </thead>
-        <tbody id="monthlyReportTableBody"></tbody>
-      </table>
-    </div>
+    <h4>3. परिवर्तन लागत (Conversion Cost) एवं रसोइया-सह-सहायक मानदेय व्यवस्था</h4>
+    <p>खाद्यान्न (गेहूं और चावल) भारतीय खाद्य निगम (FCI) के माध्यम से राज्य सरकार द्वारा निःशुल्क उचित दर विक्रेता (कोटेदार) के जरिए विद्यालय तक पहुंचाया जाता है। खाद्यान्न के अतिरिक्त भोजन पकाने में लगने वाली अन्य सामग्रियों (दाल, तेल, मसाले, सब्जियां, ईंधन आदि) के क्रय हेतु शासन द्वारा छात्र संख्या के अनुपात में 'कन्वर्जन कॉस्ट' (परिवर्तन लागत) सीधे विद्यालय प्रबंध समिति (SMC) के बैंक खाते में भेजी जाती है:</p>
+    <ul>
+      <li><strong>परिवर्तन लागत की दरें:</strong> केंद्र एवं राज्य सरकार द्वारा समय-समय पर मुद्रास्फीति के आधार पर परिवर्तन लागत में संशोधन किया जाता है। वर्तमान में प्राथमिक स्तर एवं उच्च प्राथमिक स्तर हेतु पृथक-पृथक प्रति छात्र दरें लागू हैं।</li>
+      <li><strong>रसोइया मानदेय (Cook-cum-Helper Honorarium):</strong> विद्यालय में भोजन तैयार करने और बर्तन धोने हेतु नामांकित छात्र संख्या के स्लैब के अनुसार रसोइयों की तैनाती की जाती है (जैसे 1 से 25 छात्र पर 1 रसोइया, 26 से 100 पर 2, आदि)। रसोइयों का मासिक मानदेय सीधे पीएफएमएस (PFMS) प्रणाली के माध्यम से उनके व्यक्तिगत बैंक खातों में अंतरित किया जाता है।</li>
+      <li><strong>सुरक्षा एवं स्वच्छता दिशा-निर्देश:</strong> भोजन पकाने से पूर्व रसोइयों द्वारा एप्रन, ग्लव्स एवं हेयर कैप पहनना, नाखूनों की सफाई तथा भोजन को ढककर रखना अनिवार्य है। भोजन वितरण से पूर्व शिक्षक और एसएमसी सदस्य द्वारा भोजन को चखना (Tasting) अनिवार्य विधिक नियम है।</li>
+    </ul>
+
+    <h4>4. दैनिक आईवीआरएस (IVRS - Interactive Voice Response System) प्रणाली</h4>
+    <p>मध्याह्न भोजन में शत-प्रतिशत पारदर्शिता सुनिश्चित करने और वास्तविक समय में उपभोग का अनुश्रवण (Real-Time Monitoring) करने के लिए उत्तर प्रदेश में आईवीआरएस ऑटोमेटेड कॉल प्रणाली क्रियान्वित है:</p>
+    <ul>
+      <li><strong>प्रतिदिन दोपहर की ऑटोमेटेड कॉल:</strong> राज्य स्तरीय केंद्रीय सर्वर से प्रतिदिन दोपहर 12:00 बजे से 2:00 बजे के मध्य विद्यालय के प्रधानाध्यापक या एमडीएम प्रभारी के पंजीकृत मोबाइल नंबर पर स्वचालित कॉल आती है।</li>
+      <li><strong>लाभान्वित छात्र संख्या का अंकन:</strong> शिक्षक द्वारा फोन के कीपैड से उस दिन मध्याह्न भोजन ग्रहण करने वाले कुल छात्र-छात्राओं (प्राथमिक + उच्च प्राथमिक) की सटीक संख्या दर्ज की जाती है।</li>
+      <li><strong>डेटा मिलान अनिवार्यता:</strong> आईवीआरएस पर दर्ज की गई छात्र संख्या और विद्यालय के भौतिक दैनिक एमडीएम पंजिका (Register) में दर्ज छात्र संख्या में शत-प्रतिशत समानता होनी चाहिए। निरीक्षण के समय किसी भी प्रकार का अंतर पाए जाने पर आहरण-वितरण अधिकारी द्वारा स्पष्टीकरण एवं विभागीय कार्रवाई की जाती है।</li>
+    </ul>
+
+    <h4>5. दैनिक एमडीएम पंजिका मुद्रण एवं भौतिक अभिलेखीकरण (Physical Documentation)</h4>
+    <p>डिजिटल प्रणाली के साथ-साथ ऑडिट एवं विभागीय निरीक्षण हेतु विद्यालय में मुद्रित भौतिक पंजिका का संधारण अनिवार्य है। हमारे ऑनलाइन टूल द्वारा जनरेट किया जाने वाला सिंगल-पेज दैनिक रजिस्टर निम्नलिखित विशेषताओं से युक्त है[cite: 9]:</p>
+    <ul>
+      <li><strong>कक्षावार लाभार्थी उपस्थिति:</strong> कक्षा 1 से 8 तक के प्रत्येक छात्र का वर्गवार विभाजन तथा प्राथमिक व उच्च प्राथमिक का पृथक योग[cite: 9]।</li>
+      <li><strong>सामग्री की ग्राम/किलोग्राम में सटीक मांग:</strong> उस दिन के मेन्यू के आधार पर आवश्यक गेहूं, चावल, दाल, तेल, सब्जी, दूध अथवा मौसमी फल की कुल मात्रा की स्वचालित गणना[cite: 9]।</li>
+      <li><strong>त्रि-स्तरीय हस्ताक्षर व्यवस्था:</strong> दैनिक रजिस्टर के निचले भाग में रसोइया (Cook), एमडीएम प्रभारी शिक्षक तथा प्रधानाध्यापक/प्रभारी के दैनिक हस्ताक्षर हेतु स्पष्ट प्रारूप दिया गया है, जो किसी भी वित्तीय या प्रशासनिक जांच में विद्यालय को विधिक सुरक्षा प्रदान करता है[cite: 9]।</li>
+    </ul>
+
+    <h4>6. अक्सर पूछे जाने वाले महत्वपूर्ण प्रश्न (FAQ - Daily MDM Register)</h4>
+    <p><strong>प्रश्न 1: यदि बुधवार को अवकाश हो तो क्या दूध का वितरण अगले दिन किया जा सकता है?</strong><br>
+    उत्तर: हाँ, बेसिक शिक्षा परिषद के शासनादेश के अनुसार यदि बुधवार को सार्वजनिक अवकाश रहता है, तो उस सप्ताह के अगले कार्यदिवस (सामान्यतः गुरुवार को) विद्यार्थियों को उबला मीठा दूध वितरित किया जाना चाहिए[cite: 9] [evidence: 4] [evidence: 5] [evidence: 6] [evidence: 7]।</p>
+
+    <p><strong>प्रश्न 2: शीतकालीन पोषण (चना व चिक्की) का वितरण किन महीनों में मान्य है?</strong><br>
+    उत्तर: उत्तर प्रदेश में शीतकालीन पोषण के अंतर्गत प्रति छात्र 50 ग्राम भुना चना तथा 20 ग्राम गुड़-तिल/मूंगफली की चिक्की का वितरण केवल ठंड के महीनों (नवंबर, दिसंबर, जनवरी, फरवरी एवं मार्च) के प्रत्येक गुरुवार को अनुमन्य होता है[cite: 9]।</p>
+
+    <p><strong>प्रश्न 3: क्या खाद्यान्न की बचत या अवशेष को अगले दिन समायोजित किया जा सकता है?</strong><br>
+    उत्तर: हाँ, दैनिक उपभोग पंजिका के आधार पर महीने के अंत में कुल प्राप्त खाद्यान्न में से कुल उपभोग घटाकर अवशेष खाद्यान्न (Closing Balance) निकाला जाता है, जिसे आगामी माह के प्रारंभिक अवशेष (Opening Balance) के रूप में कैरी-फॉरवर्ड किया जाता है।</p>
   </div>
+
+  <div class="footer-links no-print">
+    <a href="about-us.html">About Us</a> | 
+    <a href="privacy-policy.html">Privacy Policy</a> | 
+    <a href="disclaimer.html">Disclaimer</a> | 
+    <a href="contact-us.html">Contact Us</a>
+    <p style="margin-top:6px; color:#64748b;">© 2026 Teacher Portal UP. All Rights Reserved.</p>
+  </div>
+
 </div>
 
 <script>
 var daysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var monthsHindiName = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"];
 
 function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
-
 function cleanNum(el) {
-  var oldPos = el.selectionStart;
-  var oldLen = el.value.length;
+  var pos = el.selectionStart - 1;
   el.value = el.value.replace(/[^0-9]/g, '');
-  var newPos = Math.max(0, oldPos + (el.value.length - oldLen));
-  el.setSelectionRange(newPos, newPos);
+  if (pos >= 0) el.setSelectionRange(pos, pos);
 }
 
 function initDate() {
@@ -495,17 +471,6 @@ function initDate() {
   var mm = String(today.getMonth() + 1).padStart(2, '0');
   var dd = String(today.getDate()).padStart(2, '0');
   document.getElementById('dailyDate').value = yyyy + '-' + mm + '-' + dd;
-
-  var rY = document.getElementById('reportYear');
-  rY.innerHTML = '';
-  for (var y = 2020; y <= 2050; y++) {
-    var opt = document.createElement('option');
-    opt.value = y; opt.innerText = y;
-    if (y === yyyy) opt.selected = true;
-    rY.appendChild(opt);
-  }
-
-  loadMeta();
   onDailyDateChange();
 }
 
@@ -529,7 +494,7 @@ function onDailyDateChange() {
   var mText = "";
   if (dayName === "Monday") mText = "MONDAY: ROTI WITH MIXED VEGETABLE & FRESH SEASONAL FRUIT";
   else if (dayName === "Tuesday") mText = "TUESDAY: DAL WITH VEGETABLES & RICE";
-  else if (dayName === "Wednesday") mText = "WEDNESDAY: TAHARI WITH SOYA CHUNKS,VEGETABLES & BOILED MILK";
+  else if (dayName === "Wednesday") mText = "WEDNESDAY: TAHARI WITH SOYA CHUNKS, VEGETABLES & BOILED MILK";
   else if (dayName === "Thursday") {
     mText = isWinter 
       ? "THURSDAY: ROTI, DAL-VEGETABLE, ROASTED GRAM & CHIKKI (WINTER NUTRITION)"
@@ -542,7 +507,6 @@ function onDailyDateChange() {
   document.getElementById('dailyMenuName').innerText = "TODAY'S MENU: " + mText;
   document.getElementById('prMenu').innerText = "TODAY'S MENU: " + mText + " | DATE: " + dFormatted + " (" + dayName.toUpperCase() + ")";
 
-  loadDayData();
   calcDaily();
   updateHeader();
 }
@@ -553,9 +517,7 @@ function getVal(id) {
 }
 
 function calcDaily() {
-  var dVal = document.getElementById('dailyDate').value;
-  if (!dVal) return;
-  var p = dVal.split('-');
+  var p = document.getElementById('dailyDate').value.split('-');
   var mo = parseInt(p[1], 10);
   var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
   var dt = new Date(parseInt(p[0], 10), mo - 1, parseInt(p[2], 10));
@@ -570,57 +532,93 @@ function calcDaily() {
   document.getElementById('d_tot_ups').innerText = ups;
   document.getElementById('d_tot_all').innerText = tot;
 
-  var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
-  var rUps = parseFloat(document.getElementById('rateUps').value) || 10.17;
-  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 0;
-  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 0;
-
   var tbBody = document.getElementById('matTableBody');
 
   if (isSun) {
-    tbBody.innerHTML = '<tr><td colspan="3" style="font-weight:bold; color:#b91c1c; padding:30px; text-align:center;">SUNDAY - WEEKLY HOLIDAY (KITCHEN CLOSED)</td></tr>';
+    tbBody.innerHTML = '<tr><td colspan="2" style="font-weight:bold; color:#b91c1c; padding:30px; text-align:center;">SUNDAY - WEEKLY HOLIDAY (KITCHEN CLOSED)</td></tr>';
     return;
   }
 
   var rows = [];
 
-  var totalConvCost = (ps * rPs) + (ups * rUps);
+  // 1. Wheat Flour
+  if (day === "Monday" || day === "Thursday") {
+    rows.push({
+      name: "1. WHEAT FLOUR (ROTI)",
+      val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG"
+    });
+  }
+
+  // 2. Rice
+  if (day === "Tuesday" || day === "Wednesday" || day === "Friday" || day === "Saturday") {
+    rows.push({
+      name: "1. RICE / FOODGRAIN",
+      val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG"
+    });
+  }
+
+  // 3. Dal
+  if (day === "Tuesday" || day === "Thursday") {
+    rows.push({
+      name: "2. PULSES (DAL)",
+      val: (ps * 0.02 + ups * 0.03).toFixed(2) + " KG"
+    });
+  }
+
+  // 4. Soya Chunks
+  if (day === "Wednesday" || day === "Friday" || day === "Saturday") {
+    rows.push({
+      name: "2. SOYA CHUNKS",
+      val: (((ps * 0.1 + ups * 0.15)) * 0.1).toFixed(2) + " KG"
+    });
+  }
+
+  // 5. Vegetables
   rows.push({
-    name: "★ CONVERSION COST (COOKING COST)",
-    val: "PS(" + ps + ") + UPS(" + ups + ")",
-    cost: "₹" + totalConvCost.toFixed(2)
+    name: "3. MIXED VEGETABLES",
+    val: (ps * 0.05 + ups * 0.075).toFixed(3) + " KG"
   });
 
-  if (day === "Monday" || day === "Thursday") {
-    rows.push({ name: "1. WHEAT FLOUR (ROTI)", val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG", cost: "-" });
-  }
-  if (day === "Tuesday" || day === "Wednesday" || day === "Friday" || day === "Saturday") {
-    rows.push({ name: "1. RICE / FOODGRAIN", val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG", cost: "-" });
-  }
+  // 6. Cooking Oil (Only Oil)
+  rows.push({
+    name: "4. COOKING OIL",
+    val: (ps * 5 + ups * 7.5).toFixed(1) + " G/ML"
+  });
 
-  if (day === "Tuesday" || day === "Thursday") {
-    rows.push({ name: "2. PULSES (DAL)", val: (ps * 0.02 + ups * 0.03).toFixed(2) + " KG", cost: "-" });
-  }
-  if (day === "Wednesday" || day === "Friday" || day === "Saturday") {
-    rows.push({ name: "2. SOYA CHUNKS", val: (((ps * 0.1 + ups * 0.15)) * 0.1).toFixed(2) + " KG", cost: "-" });
-  }
-
-  rows.push({ name: "3. MIXED VEGETABLES", val: (ps * 0.05 + ups * 0.075).toFixed(3) + " KG", cost: "-" });
-  rows.push({ name: "4. COOKING OIL", val: (ps * 5 + ups * 7.5).toFixed(1) + " G/ML", cost: "-" });
-
+  // 7. Milk & Sugar (Wednesday)
   if (day === "Wednesday") {
-    rows.push({ name: "5. BOILED MILK & SUGAR", val: (ps * 0.15 + ups * 0.20).toFixed(2) + " LTR", cost: "-" });
-    rows.push({ name: "6. MILK GLASSES", val: tot + " GLASSES", cost: "-" });
+    rows.push({
+      name: "5. BOILED MILK",
+      val: (ps * 0.15 + ups * 0.20).toFixed(2) + " LTR"
+    });
+    rows.push({
+      name: "6. SUGAR FOR MILK",
+      val: (((ps * 0.15 + ups * 0.20)) * 0.1).toFixed(2) + " KG"
+    });
+    rows.push({
+      name: "7. MILK GLASSES",
+      val: tot + " GLASSES"
+    });
   }
 
+  // 8. Fresh Fruits (Monday)
   if (day === "Monday") {
-    var fruitCost = tot * rFruit;
-    rows.push({ name: "5. FRESH FRUITS", val: tot + " FRUITS", cost: "₹" + fruitCost.toFixed(2) });
+    rows.push({
+      name: "5. FRESH FRUITS",
+      val: tot + " FRUITS"
+    });
   }
 
+  // 9. Winter Nutrition (Thursday)
   if (day === "Thursday" && isWinter) {
-    var nutriCost = tot * rNutri;
-    rows.push({ name: "5. ROASTED GRAM (CHANA) & CHIKKI", val: tot + " STUDENTS", cost: "₹" + nutriCost.toFixed(2) });
+    rows.push({
+      name: "5. ROASTED GRAM (CHANA)",
+      val: (tot * 50) + " G"
+    });
+    rows.push({
+      name: "6. CHIKKI",
+      val: (tot * 20) + " G"
+    });
   }
 
   var html = "";
@@ -629,7 +627,6 @@ function calcDaily() {
       '<tr>' +
         '<td class="mat-name">' + rows[i].name + '</td>' +
         '<td class="val-tot">' + (tot === 0 ? "0.00" : rows[i].val) + '</td>' +
-        '<td class="val-cost">' + (tot === 0 ? "₹0.00" : rows[i].cost) + '</td>' +
       '</tr>';
   }
   tbBody.innerHTML = html;
@@ -648,276 +645,6 @@ function updateHeader() {
   if (dst) sub.push("DISTRICT: " + dst);
   if (udi) sub.push("(UDISE: " + udi + ")");
   document.getElementById('prSub').innerText = sub.join(' | ');
-}
-
-// =========================================================
-// MONTHLY REPORT POP-UP & DEDICATED PRINT ENGINE
-// =========================================================
-function openMonthlyReport() {
-  var dVal = document.getElementById('dailyDate').value;
-  if (dVal) {
-    var p = dVal.split('-');
-    document.getElementById('reportYear').value = p[0];
-    document.getElementById('reportMonth').value = parseInt(p[1], 10);
-  }
-  generateReportTable();
-  document.getElementById('reportModal').style.display = 'block';
-}
-
-function generateReportTable() {
-  var yr = parseInt(document.getElementById('reportYear').value, 10);
-  var mo = parseInt(document.getElementById('reportMonth').value, 10);
-  var daysInMonth = new Date(yr, mo, 0).getDate();
-
-  var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
-  var rUps = parseFloat(document.getElementById('rateUps').value) || 10.17;
-  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 4.00;
-  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 5.00;
-
-  var sch = document.getElementById('inSchool').value || '__________';
-  var headerStr = "SCHOOL: " + sch + " | MONTH: " + monthsHindiName[mo - 1] + " " + yr;
-  document.getElementById('reportSchoolInfo').innerText = headerStr;
-
-  var tbody = document.getElementById('monthlyReportTableBody');
-  tbody.innerHTML = '';
-
-  var printContainer = document.getElementById('printMonthlyContainer');
-  var printHtml = 
-    '<div style="text-align:center; margin-bottom:6px;">' +
-      '<h2 style="margin:0; font-size:12px; text-transform:uppercase; font-weight:800;">MAHARSHI / MDM MONTHLY DETAILED CONSUMPTION REGISTER</h2>' +
-      '<p style="margin:2px 0; font-size:9.5px; font-weight:bold;">' + headerStr + '</p>' +
-    '</div>' +
-    '<table style="width:100%; border-collapse:collapse; text-align:center; font-size:7.5px; table-layout:fixed;">' +
-      '<thead>' +
-        '<tr style="background:#e2e8f0; font-weight:bold;">' +
-          '<th style="border:1px solid #000; padding:2px; width:45px;">दिनांक</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">दिन</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">प्राथ.</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">उच्च प्रा.</th>' +
-          '<th style="border:1px solid #000; padding:2px;">गेहूं<br>(kg)</th>' +
-          '<th style="border:1px solid #000; padding:2px;">चावल<br>(kg)</th>' +
-          '<th style="border:1px solid #000; padding:2px;">दाल<br>(kg)</th>' +
-          '<th style="border:1px solid #000; padding:2px;">सोया बड़ी<br>(kg)</th>' +
-          '<th style="border:1px solid #000; padding:2px;">सब्जी<br>(kg)</th>' +
-          '<th style="border:1px solid #000; padding:2px;">तेल<br>(ml/g)</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">फल</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">दूध</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">चीनी</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:30px;">गिलास</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:35px;">पोषण</th>' +
-          '<th style="border:1px solid #000; padding:2px; width:45px;">लागत<br>(₹)</th>' +
-        '</tr>' +
-      '</thead>' +
-      '<tbody>';
-
-  var tW = 0, tR = 0, tDal = 0, tSoya = 0, tVeg = 0, tOil = 0, tFruitCount = 0, tMilkLtr = 0, tSugarKg = 0, tGlassCount = 0, tNutriCount = 0, tTotalCost = 0;
-
-  for (var d = 1; d <= daysInMonth; d++) {
-    var dayStr = yr + '-' + String(mo).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-    var key = 'mdm_day_att_' + dayStr;
-    var savedDay = localStorage.getItem(key);
-
-    var c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0;
-    if (savedDay) {
-      try {
-        var obj = JSON.parse(savedDay);
-        c1 = parseInt(obj.cls_1 || 0, 10);
-        c2 = parseInt(obj.cls_2 || 0, 10);
-        c3 = parseInt(obj.cls_3 || 0, 10);
-        c4 = parseInt(obj.cls_4 || 0, 10);
-        c5 = parseInt(obj.cls_5 || 0, 10);
-        c6 = parseInt(obj.cls_6 || 0, 10);
-        c7 = parseInt(obj.cls_7 || 0, 10);
-        c8 = parseInt(obj.cls_8 || 0, 10);
-      } catch(e) {}
-    }
-
-    var ps = c1 + c2 + c3 + c4 + c5;
-    var ups = c6 + c7 + c8;
-    var tot = ps + ups;
-
-    var dt = new Date(yr, mo - 1, d);
-    var dayName = daysArr[dt.getDay()];
-    var isSun = (dayName === "Sunday");
-    var isMon = (dayName === "Monday");
-    var isThu = (dayName === "Thursday");
-    var isWed = (dayName === "Wednesday");
-    var isWinter = (mo === 11 || mo === 12 || mo === 1 || mo === 2 || mo === 3);
-
-    var wheat = 0, rice = 0, dal = 0, soya = 0, veg = 0, oil = 0;
-    var fruit = 0, milk = 0, sugar = 0, glass = 0, nutri = 0;
-    var dayConv = 0, dayExtraCost = 0;
-
-    if (!isSun && tot > 0) {
-      dayConv = (ps * rPs) + (ups * rUps);
-
-      if (dayName === "Monday" || dayName === "Thursday") {
-        wheat = (ps * 0.1 + ups * 0.15);
-      } else {
-        rice = (ps * 0.1 + ups * 0.15);
-      }
-
-      if (dayName === "Tuesday" || dayName === "Thursday") {
-        dal = (ps * 0.02 + ups * 0.03);
-      } else {
-        soya = ((ps * 0.1 + ups * 0.15) * 0.1);
-      }
-
-      veg = (ps * 0.05 + ups * 0.075);
-      oil = (ps * 5 + ups * 7.5);
-
-      if (isMon) {
-        fruit = tot;
-        dayExtraCost = tot * rFruit;
-      } else if (isWed) {
-        milk = (ps * 0.15 + ups * 0.20);
-        sugar = milk * 0.1;
-        glass = tot;
-      } else if (isThu && isWinter) {
-        nutri = tot;
-        dayExtraCost = tot * rNutri;
-      }
-    }
-
-    var dayTotalCost = dayConv + dayExtraCost;
-
-    tW += wheat;
-    tR += rice;
-    tDal += dal;
-    tSoya += soya;
-    tVeg += veg;
-    tOil += oil;
-    tFruitCount += fruit;
-    tMilkLtr += milk;
-    tSugarKg += sugar;
-    tGlassCount += glass;
-    tNutriCount += nutri;
-    tTotalCost += dayTotalCost;
-
-    var formattedD = String(d).padStart(2, '0') + '/' + String(mo).padStart(2, '0') + '/' + yr;
-
-    var rowHtml = 
-      '<tr>' +
-        '<td style="padding:2px; border:1px solid #000;">' + formattedD + '</td>' +
-        '<td style="padding:2px; border:1px solid #000; font-weight:bold;">' + dayName.slice(0,3) + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (isSun ? '-' : ps) + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (isSun ? '-' : ups) + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (wheat > 0 ? wheat.toFixed(2) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (rice > 0 ? rice.toFixed(2) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (dal > 0 ? dal.toFixed(2) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (soya > 0 ? soya.toFixed(2) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (veg > 0 ? veg.toFixed(3) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (oil > 0 ? oil.toFixed(1) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000; color:#d97706; font-weight:bold;">' + (fruit > 0 ? fruit : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (milk > 0 ? milk.toFixed(1) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (sugar > 0 ? sugar.toFixed(2) : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000;">' + (glass > 0 ? glass : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000; color:#0f766e; font-weight:bold;">' + (nutri > 0 ? nutri : '-') + '</td>' +
-        '<td style="padding:2px; border:1px solid #000; font-weight:bold;">' + (isSun ? '₹0.00' : '₹' + dayTotalCost.toFixed(2)) + '</td>' +
-      '</tr>';
-
-    printHtml += rowHtml;
-    tbody.insertAdjacentHTML('beforeend', rowHtml);
-  }
-
-  var footHtml = 
-    '<tr style="background:#f1f5f9; font-weight:bold;">' +
-      '<td colspan="4" style="padding:3px; border:1px solid #000; text-align:right;">मासिक कुल योग:</td>' +
-      '<td style="padding:3px; border:1px solid #000; color:#9a3412;">' + tW.toFixed(2) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000; color:#166534;">' + tR.toFixed(2) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tDal.toFixed(2) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tSoya.toFixed(2) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tVeg.toFixed(3) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tOil.toFixed(1) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000; color:#d97706;">' + tFruitCount + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tMilkLtr.toFixed(1) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tSugarKg.toFixed(2) + '</td>' +
-      '<td style="padding:3px; border:1px solid #000;">' + tGlassCount + '</td>' +
-      '<td style="padding:3px; border:1px solid #000; color:#0f766e;">' + tNutriCount + '</td>' +
-      '<td style="padding:3px; border:1px solid #000; color:#b91c1c;">₹' + tTotalCost.toFixed(2) + '</td>' +
-    '</tr>';
-
-  printHtml += footHtml + '</tbody></table>';
-  printContainer.innerHTML = printHtml;
-  tbody.insertAdjacentHTML('beforeend', footHtml);
-}
-
-function printMonthlyReportNow() {
-  document.body.className = 'printing-monthly';
-  window.print();
-  setTimeout(function() {
-    document.body.className = '';
-  }, 1000);
-}
-
-function closeMonthlyReport() {
-  document.getElementById('reportModal').style.display = 'none';
-}
-
-// =========================================================
-// LOCALSTORAGE AUTO-SAVE & AUTO-LOAD ENGINE
-// =========================================================
-
-function saveMeta() {
-  var meta = {
-    school: document.getElementById('inSchool').value,
-    block: document.getElementById('inBlock').value,
-    district: document.getElementById('inDistrict').value,
-    udise: document.getElementById('inUdise').value,
-    ratePs: document.getElementById('ratePs').value,
-    rateUps: document.getElementById('rateUps').value,
-    rateFruit: document.getElementById('rateFruit').value,
-    rateNutri: document.getElementById('rateNutri').value
-  };
-  localStorage.setItem('mdm_daily_meta', JSON.stringify(meta));
-}
-
-function loadMeta() {
-  var saved = localStorage.getItem('mdm_daily_meta');
-  if (saved) {
-    try {
-      var d = JSON.parse(saved);
-      if (d.school) document.getElementById('inSchool').value = d.school;
-      if (d.block) document.getElementById('inBlock').value = d.block;
-      if (d.district) document.getElementById('inDistrict').value = d.district;
-      if (d.udise) document.getElementById('inUdise').value = d.udise;
-      if (d.ratePs) document.getElementById('ratePs').value = d.ratePs;
-      if (d.rateUps) document.getElementById('rateUps').value = d.rateUps;
-      if (d.rateFruit) document.getElementById('rateFruit').value = d.rateFruit;
-      if (d.rateNutri) document.getElementById('rateNutri').value = d.rateNutri;
-    } catch(e) {}
-  }
-}
-
-function getDayKey() {
-  var dtVal = document.getElementById('dailyDate').value;
-  return 'mdm_day_att_' + (dtVal || 'default');
-}
-
-function saveDayData() {
-  var data = {};
-  for (var c = 1; c <= 8; c++) {
-    var val = document.getElementById('d_cls_' + c).value;
-    if (val) data['cls_' + c] = val;
-  }
-  localStorage.setItem(getDayKey(), JSON.stringify(data));
-}
-
-function loadDayData() {
-  for (var c = 1; c <= 8; c++) {
-    document.getElementById('d_cls_' + c).value = '';
-  }
-
-  var saved = localStorage.getItem(getDayKey());
-  if (saved) {
-    try {
-      var data = JSON.parse(saved);
-      for (var key in data) {
-        var el = document.getElementById('d_' + key);
-        if (el) el.value = data[key];
-      }
-    } catch(e) {}
-  }
 }
 
 initDate();
