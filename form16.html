@@ -7,7 +7,7 @@
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
     body { background: #f1f5f9; margin: 0; padding: 15px; color: #000; }
-    .wrap { max-width: 960px; margin: auto; background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .wrap { max-width: 980px; margin: auto; background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     
     .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 15px; }
     .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
@@ -25,24 +25,24 @@
     .btn-prn { background: #1e3a8a; color: #fff; }
     .btn-rst { background: #dc2626; color: #fff; }
 
-    /* विवरणी शीट - स्क्रीन व्यू */
-    .sheet { border: 2px solid #000; padding: 12px; margin-top: 15px; background: #fff; }
-    .sheet-head { text-align: center; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 8px; }
-    .sheet-head h1 { margin: 0; font-size: 17px; font-weight: bold; }
-    .sheet-head-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 12.5px; margin-top: 4px; }
+    /* स्क्रीन पर दिखने वाला लेआउट */
+    .sheet { border: 2.5px solid #000; padding: 16px; margin-top: 15px; background: #fff; }
+    .sheet-head { text-align: center; border-bottom: 2px solid #000; padding-bottom: 6px; margin-bottom: 10px; }
+    .sheet-head h1 { margin: 0; font-size: 20px; font-weight: bold; }
+    .sheet-head-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; margin-top: 5px; }
 
-    table.t-info { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-    table.t-info td { border: 1px solid #000; padding: 4px 6px; font-size: 11.5px; }
+    table.t-info { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    table.t-info td { border: 1.5px solid #000; padding: 6px 8px; font-size: 13px; }
 
-    table.t-month { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-    table.t-month th, table.t-month td { border: 1px solid #000; padding: 3px 5px; font-size: 11px; text-align: right; }
-    table.t-month th { background: #f1f5f9; text-align: center; font-weight: bold; }
+    table.t-month { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    table.t-month th, table.t-month td { border: 1.5px solid #000; padding: 5px 6px; font-size: 12.5px; text-align: right; }
+    table.t-month th { background: #f1f5f9; text-align: center; font-weight: bold; font-size: 13px; }
     table.t-month td.txt { text-align: left; }
-    table.t-month tr.bold-row td { font-weight: bold; background: #f8fafc; }
+    table.t-month tr.bold-row td { font-weight: bold; background: #f8fafc; font-size: 13px; }
 
-    .calc-flex { display: flex; gap: 8px; }
-    .calc-col { flex: 1; border: 1px solid #000; padding: 6px; font-size: 11.5px; }
-    .calc-row { display: flex; justify-content: space-between; padding: 2.5px 0; border-bottom: 1px dashed #cbd5e1; }
+    .calc-flex { display: flex; gap: 10px; }
+    .calc-col { flex: 1; border: 1.5px solid #000; padding: 8px 10px; font-size: 13px; }
+    .calc-row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dashed #cbd5e1; }
     .calc-row:last-child { border-bottom: none; font-weight: bold; }
 
     .month-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 6px; }
@@ -50,7 +50,6 @@
     .m-box span { display: block; font-size: 11px; font-weight: bold; margin-bottom: 2px; }
     .m-box input { width: 100%; padding: 5px; font-size: 12px; text-align: right; border: 1px solid #94a3b8; border-radius: 3px; font-weight: bold; }
 
-    /* एडसेंस गाइड स्टाइल */
     .seo-guide { margin-top: 30px; border-top: 2px solid #e2e8f0; padding-top: 20px; color: #1e293b; line-height: 1.6; }
     .seo-guide h3 { color: #1e3a8a; font-size: 16px; margin-bottom: 8px; border-left: 4px solid #1e3a8a; padding-left: 8px; }
     .seo-guide h4 { color: #0f172a; font-size: 14px; margin-top: 14px; margin-bottom: 4px; }
@@ -60,11 +59,13 @@
     .footer-links { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #cbd5e1; font-size: 12px; }
     .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; font-weight: bold; }
 
-    /* प्रिंट मीडिया क्वेरी - A4 फुल-पेज सटीक फैलाव */
+    /* =======================================================
+       प्रिंट मीडिया क्वेरी: बाहरी आउटलाइन बैलेंस व बड़े फॉन्ट (A4 Full Page)
+       ======================================================= */
     @media print {
       @page {
         size: A4 portrait;
-        margin: 6mm 8mm;
+        margin: 6mm 8mm; /* संतुलित आउटर स्पेस */
       }
       html, body {
         width: 100% !important;
@@ -84,67 +85,109 @@
       .no-print, .top-bar, .card, .btn-row, .seo-guide, .footer-links {
         display: none !important;
       }
+
+      /* बाहरी संतुलित आउटलाइन */
       .sheet {
         margin: 0 !important;
-        border: 2px solid #000 !important;
+        border: 2.5px solid #000 !important;
         box-sizing: border-box !important;
-        height: 282mm !important;
+        height: 284mm !important; /* पूरे A4 पेज की सटीक लंबाई */
+        width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
         page-break-after: avoid !important;
         page-break-inside: avoid !important;
-        padding: 10px 12px !important;
+        padding: 12px 14px !important;
       }
+
+      /* हेडर बड़ा और स्पष्ट */
       .sheet-head {
-        margin-bottom: 6px !important;
-        padding-bottom: 4px !important;
+        border-bottom: 2.5px solid #000 !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 6px !important;
       }
       .sheet-head h1 {
-        font-size: 18px !important;
+        font-size: 22px !important;
+        font-weight: 800 !important;
       }
       .sheet-head-row {
-        font-size: 13px !important;
-        margin-top: 3px !important;
+        font-size: 15px !important;
+        font-weight: bold !important;
+        margin-top: 4px !important;
       }
+
+      /* कार्मिक विवरण तालिका */
       table.t-info {
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
       }
       table.t-info td {
-        padding: 5px 7px !important;
-        font-size: 12px !important;
-        line-height: 1.3 !important;
+        border: 1.5px solid #000 !important;
+        padding: 6px 8px !important;
+        font-size: 13.5px !important;
+        line-height: 1.35 !important;
       }
+
+      /* 12 माह की वेतन तालिका (बड़े अक्षर व संतुलित रो) */
       table.t-month {
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
       }
       table.t-month th {
-        padding: 5px 3px !important;
-        font-size: 11.5px !important;
+        border: 1.5px solid #000 !important;
+        padding: 6px 4px !important;
+        font-size: 13px !important;
+        background: #f1f5f9 !important;
+        -webkit-print-color-adjust: exact;
       }
       table.t-month td {
-        padding: 4.8px 4px !important;
-        font-size: 11.5px !important;
+        border: 1.5px solid #000 !important;
+        padding: 5px 6px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
       }
       table.t-month tr.bold-row td {
-        font-size: 12px !important;
-        padding: 6px 4px !important;
+        font-size: 13.5px !important;
+        font-weight: 800 !important;
+        padding: 7px 6px !important;
+        background: #e2e8f0 !important;
+        -webkit-print-color-adjust: exact;
       }
+
+      /* नीचे के दोनों गणना बॉक्स */
       .calc-flex {
         display: flex !important;
-        gap: 8px !important;
+        gap: 10px !important;
         flex-grow: 1 !important;
       }
       .calc-col {
         flex: 1 !important;
-        border: 1.5px solid #000 !important;
-        padding: 8px 10px !important;
+        border: 2px solid #000 !important;
+        padding: 10px 12px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
       }
+      .calc-col div[style*="font-weight:bold; border-bottom"] {
+        font-size: 14.5px !important;
+        padding-bottom: 5px !important;
+      }
       .calc-row {
-        padding: 3.5px 0 !important;
+        padding: 4px 0 !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        border-bottom: 1px dashed #64748b !important;
+      }
+      .calc-row span {
+        font-size: 13px !important;
+      }
+      .calc-row[style*="font-size:12px; color:#065f46; background:#e2e8f0;"],
+      .calc-row[style*="background:#e2e8f0;"] {
+        padding: 5px 4px !important;
+        font-size: 13.5px !important;
+        background: #e2e8f0 !important;
+        -webkit-print-color-adjust: exact;
+      }
+      #lblDisclaimer {
         font-size: 11.5px !important;
         line-height: 1.3 !important;
       }
@@ -361,7 +404,7 @@
     <div class="sheet-head">
       <div class="sheet-head-row">
         <span><span id="pLblFy">वित्तीय वर्ष</span> : 2026-27</span>
-        <span style="font-size:16px;" id="pSlipHeading">आयकर आगणन प्रपत्र</span>
+        <span style="font-size:18px;" id="pSlipHeading">आयकर आगणन प्रपत्र</span>
         <span><span id="pLblAy">निर्धारण वर्ष</span> : 2027-28</span>
       </div>
     </div>
@@ -421,7 +464,7 @@
       
       <!-- बायाँ कॉलम: कर आगणन -->
       <div class="calc-col">
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #000; padding-bottom:3px; margin-bottom:5px;" id="boxTaxCalcTitle">
+        <div style="text-align:center; font-weight:bold; border-bottom:1.5px solid #000; padding-bottom:4px; margin-bottom:5px;" id="boxTaxCalcTitle">
           गणना - (01.04.2026 से 31.03.2027)
         </div>
         <div class="calc-row"><span id="lblRowGross">1. कुल आय (Gross Income):</span><span id="cGross">₹ 0</span></div>
@@ -439,7 +482,7 @@
           <span id="lblRowTaxable">7. कर योग्य आय (Taxable Income):</span><span id="cTaxable">₹ 0</span>
         </div>
         
-        <div style="margin-top:5px; font-weight:bold; border-top:1px solid #000; padding-top:3px;" id="lblSlabHead">
+        <div style="margin-top:4px; font-weight:bold; border-top:1px solid #000; padding-top:3px;" id="lblSlabHead">
           आयकर स्लैब अनुसार आगणन:
         </div>
         <div class="calc-row"><span id="lblSlab1">स्लैब 1:</span><span id="cSlab1">₹ 0</span></div>
@@ -451,14 +494,14 @@
         <div class="calc-row"><span id="lblRowCess">11. उपकर (Cess @ 4%):</span><span id="cCess">₹ 0</span></div>
         <div class="calc-row" style="font-weight:bold;"><span id="lblRowNetPay">12. कुल देय आयकर (Gross Tax):</span><span id="cNetPayBeforeAdv">₹ 0</span></div>
         <div class="calc-row"><span id="lblRowAdvPaid">13. घटाएं अग्रिम आयकर (Adv. IT):</span><span id="cAdvPaid">₹ 0</span></div>
-        <div class="calc-row" style="font-weight:bold; font-size:12px; color:#065f46; background:#e2e8f0;">
+        <div class="calc-row" style="font-weight:bold; font-size:13px; color:#065f46; background:#e2e8f0;">
           <span id="lblRowFinalTax">14. शुद्ध देय / प्रतिदेय आयकर (Refund):</span><span id="cNetTax">₹ 0</span>
         </div>
       </div>
 
       <!-- दायाँ कॉलम: धारा 80C विवरण -->
       <div class="calc-col">
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #000; padding-bottom:3px; margin-bottom:5px;" id="box80cTitle">
+        <div style="text-align:center; font-weight:bold; border-bottom:1.5px solid #000; padding-bottom:4px; margin-bottom:5px;" id="box80cTitle">
           धारा 80C की बचत का विवरण (Max 1.5 लाख)
         </div>
         <div class="calc-row"><span>1. NPS 80CCD(1):</span><span>₹ 0</span></div>
@@ -469,11 +512,11 @@
         <div class="calc-row"><span id="lbl80cTution">6. ट्यूशन फीस (Tuition Fee):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cHl">7. होम लोन मूलधन:</span><span id="vHlPrinc">₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cSukanya">8. सुकन्या समृद्धि योजना:</span><span>₹ 0</span></div>
-        <div class="calc-row" style="font-weight:bold; background:#e2e8f0; margin-top:20px;">
+        <div class="calc-row" style="font-weight:bold; background:#e2e8f0; margin-top:15px;">
           <span id="lbl80cFinal">कुल 80C कटौती (Max 1,50,000):</span><span id="v80cFinal">₹ 0</span>
         </div>
 
-        <div style="margin-top:25px; border-top:1px dashed #000; padding-top:6px; font-size:10.5px; color:#475569;" id="lblDisclaimer">
+        <div style="margin-top:20px; border-top:1px dashed #000; padding-top:6px; font-size:11.5px; color:#475569;" id="lblDisclaimer">
           * यह आगणन उत्तर प्रदेश सरकार के कार्मिकों हेतु 7वें वेतन आयोग के पे-मैट्रिक्स एवं वित्तीय वर्ष 2026-27 के आयकर नियमों के अनुसार स्वतः तैयार किया गया है।
         </div>
       </div>
@@ -727,7 +770,7 @@ const hraData = {
   "1900": [{ h: "₹ 770 (Rural)", e: "₹ 770 (Rural)", v: 770 }, { h: "₹ 1160 (B श्रेणी)", e: "₹ 1160 (Class B)", v: 1160 }, { h: "₹ 2320 (A श्रेणी)", e: "₹ 2320 (Class A)", v: 2320 }],
   "2000": [{ h: "₹ 800 (Rural)", e: "₹ 800 (Rural)", v: 800 }, { h: "₹ 1200 (B श्रेणी)", e: "₹ 1200 (Class B)", v: 1200 }, { h: "₹ 2400 (A श्रेणी)", e: "₹ 2400 (Class A)", v: 2400 }],
   "2400": [{ h: "₹ 980 (Rural)", e: "₹ 980 (Rural)", v: 980 }, { h: "₹ 1470 (B श्रेणी)", e: "₹ 1470 (Class B)", v: 1470 }, { h: "₹ 2940 (A श्रेणी)", e: "₹ 2940 (Class A)", v: 2940 }],
-  "2800": [{ h: "₹ 1110 (Rural)", e: "₹ 1110 (Rural)", v: 1110 }, { h: "₹ 1660 (B श्रेणी)", e: "₹ 1660 (Class B)", v: 1160 }, { h: "₹ 3340 (A श्रेणी)", e: "₹ 3340 (Class A)", v: 3340 }],
+  "2800": [{ h: "₹ 1110 (Rural)", e: "₹ 1110 (Rural)", v: 1110 }, { h: "₹ 1660 (B श्रेणी)", e: "₹ 1660 (Class B)", v: 1660 }, { h: "₹ 3340 (A श्रेणी)", e: "₹ 3340 (Class A)", v: 3340 }],
   "4200": [{ h: "₹ 1340 (Rural)", e: "₹ 1340 (Rural)", v: 1340 }, { h: "₹ 2020 (B श्रेणी)", e: "₹ 2020 (Class B)", v: 2020 }, { h: "₹ 4040 (A श्रेणी)", e: "₹ 4040 (Class A)", v: 4040 }],
   "4600": [{ h: "₹ 1840 (Rural)", e: "₹ 1840 (Rural)", v: 1840 }, { h: "₹ 2760 (B श्रेणी)", e: "₹ 2760 (Class B)", v: 2760 }, { h: "₹ 5520 (A श्रेणी)", e: "₹ 5520 (Class A)", v: 5520 }],
   "4800": [{ h: "₹ 1870 (Rural)", e: "₹ 1870 (Rural)", v: 1870 }, { h: "₹ 2810 (B श्रेणी)", e: "₹ 2810 (Class B)", v: 2810 }, { h: "₹ 5620 (A श्रेणी)", e: "₹ 5620 (Class A)", v: 5620 }],
@@ -892,8 +935,7 @@ function runTaxCalc() {
   const curIdx = slabList.indexOf(currentBasic);
   const incBasic = (curIdx !== -1 && curIdx < slabList.length - 1) ? slabList[curIdx + 1] : currentBasic;
 
-  // FY 2026-27: 12 महीने का चक्र
-  // मार्च-जून (60%), जुलाई-अक्टूबर (वेतन में 60%), नवंबर-फरवरी (वेतन में 63%)
+  // 12 माह का चक्र
   const months = [
     { m: "MAR-26", daRate: 60, isInc: false },
     { m: "APR-26", daRate: 60, isInc: false },
@@ -948,7 +990,7 @@ function runTaxCalc() {
   });
   document.getElementById('monthTbody').innerHTML = html;
 
-  // DA (60% - 63%) एरियर (4 माह का 3% अंतर)
+  // DA (60% - 63%) एरियर
   const baseForArrear = (incMonth === 7) ? incBasic : currentBasic;
   let daArrearTotal = isDaArrPaid ? Math.round((baseForArrear * 0.03) * 4) : 0;
   let daArrearNps = 0;
