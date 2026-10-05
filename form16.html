@@ -50,17 +50,18 @@
     .m-box span { display: block; font-size: 11px; font-weight: bold; margin-bottom: 2px; }
     .m-box input { width: 100%; padding: 5px; font-size: 12px; text-align: right; border: 1px solid #94a3b8; border-radius: 3px; font-weight: bold; }
 
-    .seo-guide { margin-top: 30px; border-top: 2px solid #e2e8f0; padding-top: 20px; color: #1e293b; line-height: 1.6; }
-    .seo-guide h3 { color: #1e3a8a; font-size: 16px; margin-bottom: 8px; border-left: 4px solid #1e3a8a; padding-left: 8px; }
-    .seo-guide h4 { color: #0f172a; font-size: 14px; margin-top: 14px; margin-bottom: 4px; }
-    .seo-guide p { font-size: 12.5px; margin-bottom: 10px; text-align: justify; }
-    .seo-guide ul { font-size: 12.5px; margin-bottom: 10px; padding-left: 20px; }
-    .seo-guide li { margin-bottom: 4px; }
-    .footer-links { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #cbd5e1; font-size: 12px; }
+    /* एडसेंस विस्तृत गाइड स्टाइलिंग */
+    .seo-guide { margin-top: 35px; border-top: 2px solid #cbd5e1; padding-top: 25px; color: #1e293b; line-height: 1.7; }
+    .seo-guide h3 { color: #1e3a8a; font-size: 17px; margin-bottom: 10px; border-left: 4px solid #1e3a8a; padding-left: 10px; }
+    .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 18px; margin-bottom: 6px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
+    .seo-guide p { font-size: 13px; margin-bottom: 10px; text-align: justify; }
+    .seo-guide ul { font-size: 13px; margin-bottom: 12px; padding-left: 20px; }
+    .seo-guide li { margin-bottom: 5px; }
+    .footer-links { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #cbd5e1; font-size: 12.5px; }
     .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; font-weight: bold; }
 
     /* =======================================================
-       प्रिंट मीडिया क्वेरी: 100% फुल A4 पेज लॉक, पूरी आउटलाइन व बड़े फॉन्ट
+       प्रिंट मीडिया क्वेरी: 100% फुल A4 पेज लॉक व संतुलित बॉर्डर
        ======================================================= */
     @media print {
       @page {
@@ -87,13 +88,13 @@
         display: none !important;
       }
 
-      /* बाहरी बॉर्डर: पूरे पेज को ऊपर से नीचे तक 100% घेरेगा */
+      /* बाहरी बॉर्डर: पूरे पेज को ऊपर से नीचे तक 100% लॉक */
       .sheet {
         margin: 0 !important;
         border: 2.5px solid #000 !important;
         box-sizing: border-box !important;
         width: 100% !important;
-        height: 98vh !important; /* पूरे पेज की ऊंचाई तक खिंचाव */
+        height: 98vh !important;
         padding: 8px 12px !important;
         display: flex !important;
         flex-direction: column !important;
@@ -130,7 +131,7 @@
         font-weight: 700 !important;
       }
 
-      /* 12 माह वेतन तालिका: हर पंक्ति को पर्याप्त ऊंचाई दी गई है */
+      /* 12 माह वेतन तालिका */
       table.t-month {
         margin-bottom: 6px !important;
         width: 100% !important;
@@ -145,7 +146,7 @@
       }
       table.t-month td {
         border: 1.8px solid #000 !important;
-        padding: 7px 6px !important; /* महीने वाली टेबल को बड़ा किया */
+        padding: 7px 6px !important;
         font-size: 14.5px !important;
         font-weight: 700 !important;
       }
@@ -157,12 +158,12 @@
         -webkit-print-color-adjust: exact;
       }
 
-      /* नीचे के दोनों डिब्बे: बची हुई खाली जगह को नीचे तक भरेंगे */
+      /* नीचे के दोनों डिब्बे */
       .calc-flex {
         display: flex !important;
         gap: 12px !important;
         width: 100% !important;
-        flex: 1 1 auto !important; /* पूरा विस्तार */
+        flex: 1 1 auto !important;
         margin-top: 4px !important;
       }
       .calc-col {
@@ -182,7 +183,7 @@
         margin-bottom: 5px !important;
       }
       .calc-row {
-        padding: 6.5px 0 !important; /* दोनों बॉक्स की पंक्तियों के बीच का फैलाव */
+        padding: 6px 0 !important;
         font-size: 14px !important;
         font-weight: 600 !important;
         border-bottom: 1px dashed #64748b !important;
@@ -201,7 +202,7 @@
       #lblDisclaimer {
         font-size: 12.5px !important;
         line-height: 1.4 !important;
-        margin-top: 10px !important;
+        margin-top: 8px !important;
         font-weight: 600 !important;
       }
     }
@@ -285,7 +286,7 @@
 
     <!-- 2. वेतन, ग्रेड पे व एरियर विवरण -->
     <div class="card">
-      <div class="card-title" id="secFinanceTitle">📊 वेतन, ग्रेड पे व एरियर विवरण (FY 2026-27)</div>
+      <div class="card-title" id="secFinanceTitle">📊 वेतन, ग्रेड पे, एरियर व अन्य आय विवरण (FY 2026-27)</div>
       <div class="grid">
         <div class="f-group">
           <label id="lblGradePay">ग्रेड पे / स्तर (Level 1 to 10):</label>
@@ -357,6 +358,10 @@
             <option value="nsc75">25% नकद, शेष 75% NSC में</option>
           </select>
         </div>
+        <div class="f-group">
+          <label id="lblOtherIncomeInp">अन्य स्रोतों से आय (बैंक ब्याज/अन्य):</label>
+          <input type="number" id="inpOtherIncome" value="0" placeholder="₹ दर्ज करें" oninput="runTaxCalc()">
+        </div>
       </div>
     </div>
 
@@ -402,6 +407,10 @@
         <div class="f-group">
           <label id="lbl80d">धारा 80D (स्वास्थ्य बीमा):</label>
           <input type="number" id="inp80d" value="0" oninput="runTaxCalc()">
+        </div>
+        <div class="f-group">
+          <label id="lblOtherDedInp">अन्य अनुमन्य कटौती (Other Deductions):</label>
+          <input type="number" id="inpOtherDed" value="0" placeholder="₹ दर्ज करें" oninput="runTaxCalc()">
         </div>
       </div>
     </div>
@@ -480,17 +489,18 @@
         <div style="text-align:center; font-weight:bold; border-bottom:2px solid #000; padding-bottom:5px; margin-bottom:5px;" id="boxTaxCalcTitle">
           गणना - (01.04.2026 से 31.03.2027)
         </div>
-        <div class="calc-row"><span id="lblRowGross">1. कुल आय (Gross Income):</span><span id="cGross">₹ 0</span></div>
+        <div class="calc-row"><span id="lblRowGross">1. कुल वेतन आय (Gross Salary):</span><span id="cGross">₹ 0</span></div>
         <div class="calc-row"><span id="lblRowHraEx">2(a) मकान किराया से छूट (Sec 10):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lblRowHlInt">2(b) होम लोन ब्याज (Sec 24B):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lblRowStdDed">2(c) स्टैंडर्ड डिडक्शन:</span><span id="cStdDed">₹ 75,000</span></div>
-        <div class="calc-row" style="font-weight:bold;"><span id="lblRowRemInc">3. शेष आय (1 - 2):</span><span id="cRemIncome">₹ 0</span></div>
-        <div class="calc-row"><span id="lblRowOtherInc">4. अन्य स्रोतों से आय:</span><span>₹ 0</span></div>
+        <div class="calc-row" style="font-weight:bold;"><span id="lblRowRemInc">3. शेष वेतन आय (1 - 2):</span><span id="cRemIncome">₹ 0</span></div>
+        <div class="calc-row"><span id="lblRowOtherInc">4. अन्य स्रोतों से आय (बैंक आदि):</span><span id="cOtherIncome">₹ 0</span></div>
         <div class="calc-row" style="font-weight:bold;"><span id="lblRowTotGross">5. सकल आय (3 + 4):</span><span id="cTotGross">₹ 0</span></div>
         <div class="calc-row"><span id="lblRow80c">6(a) धारा 80C बचत छूट:</span><span id="cDed80c">₹ 0</span></div>
         <div class="calc-row"><span id="lblRow80d">6(b) धारा 80D (स्वास्थ्य बीमा):</span><span id="cDed80d">₹ 0</span></div>
         <div class="calc-row"><span id="lblRow80ccd">6(c) NPS 80CCD(1B):</span><span id="cDedNps">₹ 0</span></div>
         <div class="calc-row"><span id="lblRow80u">6(d) धारा 80U दिव्यांग छूट:</span><span id="cDed80u">₹ 0</span></div>
+        <div class="calc-row"><span>6(e) अन्य अनुमन्य कटौती:</span><span id="cDedOther">₹ 0</span></div>
         <div class="calc-row" style="font-weight:bold; background:#e2e8f0;">
           <span id="lblRowTaxable">7. कर योग्य आय (Taxable Income):</span><span id="cTaxable">₹ 0</span>
         </div>
@@ -525,11 +535,11 @@
         <div class="calc-row"><span id="lbl80cTution">6. ट्यूशन फीस (Tuition Fee):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cHl">7. होम लोन मूलधन:</span><span id="vHlPrinc">₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cSukanya">8. सुकन्या समृद्धि योजना:</span><span>₹ 0</span></div>
-        <div class="calc-row" style="font-weight:bold; background:#e2e8f0; margin-top:15px;">
+        <div class="calc-row" style="font-weight:bold; background:#e2e8f0; margin-top:20px;">
           <span id="lbl80cFinal">कुल 80C कटौती (Max 1,50,000):</span><span id="v80cFinal">₹ 0</span>
         </div>
 
-        <div style="margin-top:20px; border-top:1.5px dashed #000; padding-top:6px; font-size:12.5px; color:#475569;" id="lblDisclaimer">
+        <div style="margin-top:25px; border-top:1.5px dashed #000; padding-top:6px; font-size:12.5px; color:#475569;" id="lblDisclaimer">
           * यह आगणन उत्तर प्रदेश सरकार के कार्मिकों हेतु 7वें वेतन आयोग के पे-मैट्रिक्स एवं वित्तीय वर्ष 2026-27 के आयकर नियमों के अनुसार स्वतः तैयार किया गया है।
         </div>
       </div>
@@ -537,54 +547,83 @@
     </div>
   </div>
 
-  <!-- Google AdSense Friendly Content Section (no-print) -->
+  <!-- Google AdSense Friendly Content Section (no-print: 1200+ Words Deep Dive) -->
   <div class="seo-guide no-print">
-    <h3>उत्तर प्रदेश शिक्षक एवं राज्य कर्मचारी आयकर आगणन मार्गदर्शिका (वित्तीय वर्ष 2026-27 / कर निर्धारण वर्ष 2027-28)</h3>
-    <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के परिषदीय शिक्षकों, माध्यमिक शिक्षकों एवं अन्य राज्य कर्मचारियों के लिए वित्तीय वर्ष के अंत में वार्षिक आयकर आगणन प्रपत्र (Tax Computation Sheet) एवं फॉर्म 16 का संकलन एक अत्यंत महत्वपूर्ण वित्तीय प्रक्रिया है। आयकर अधिनियम के अद्यतन प्रावधानों, 7वें वेतन आयोग के पे-मैट्रिक्स, समय-समय पर घोषित महंगाई भत्ते (DA), एरियर भुगतान और विभिन्न कटौतियों के कारण आयकर की गणना को सटीक रखना आवश्यक होता है।</p>
+    <h3>उत्तर प्रदेश शिक्षक एवं राज्य कर्मचारी आयकर आगणन विस्तृत मार्गदर्शिका (वित्तीय वर्ष 2026-27 / कर निर्धारण वर्ष 2027-28)</h3>
+    <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के परिषदीय प्राथमिक व उच्च प्राथमिक विद्यालयों के शिक्षकों, सहायता प्राप्त माध्यमिक विद्यालयों के अध्यापकों, लिपिक संवर्ग, लेखपालों एवं अन्य राज्य कर्मचारियों के लिए प्रत्येक वित्तीय वर्ष के समापन पर आयकर आगणन प्रपत्र (Tax Computation Sheet) तैयार करना एक अनिवार्य वैधानिक प्रक्रिया है। यह प्रपत्र न केवल संबंधित आहरण-वितरण अधिकारी (DDO) / वित्त एवं लेखाधिकारी कार्यालय में जमा होता है, बल्कि आयकर विभाग में ऑनलाइन आयकर विवरणी (ITR-1 / Sahaj) दाखिल करने का प्राथमिक आधार भी बनता है।</p>
+    <p>वित्तीय वर्ष 2026-27 (कर निर्धारण वर्ष 2027-28) के दौरान केंद्रीय बजट के संशोधित प्रावधानों, उत्तर प्रदेश 7वें राज्य वेतन आयोग के पे-मैट्रिक्स, महंगाई भत्ता (DA) संशोधनों और एरियर के चक्र ने कर गणना को विशेष रूप से महत्वपूर्ण बना दिया है। नीचे दी गई मार्गदर्शिका में कार्मिकों की सुविधा हेतु प्रत्येक चरण को विस्तार से समझाया गया है।</p>
 
-    <h4>1. वार्षिक वेतन चक्र एवं आधार मूल वेतन (Basic Pay in March 2026)</h4>
-    <p>उत्तर प्रदेश के कार्मिकों का वित्तीय वर्ष 1 अप्रैल से 31 मार्च तक होता है, जिसमें वेतन आहरण का चक्र <strong>मार्च (देय अप्रैल) से लेकर फरवरी (देय मार्च)</strong> तक कुल 12 महीनों का होता है।</p>
+    <h4>1. वेतन चक्र एवं मूल वेतन निर्धारण (Salary Cycle & Basic Pay)</h4>
+    <p>उत्तर प्रदेश सरकार के कार्मिकों हेतु वार्षिक वेतन आहरण का चक्र 1 मार्च 2026 से 28 फरवरी 2027 तक कुल 12 महीनों का होता है। वित्तीय वर्ष की शुरुआत में <strong>मार्च 2026 (देय अप्रैल 2026)</strong> के वेतन को आधार माना जाता है।</p>
     <ul>
-      <li><strong>मार्च 2026 का मूल वेतन:</strong> आयकर आगणन हेतु हमेशा मार्च माह में आहरित मूल वेतन को आधार माना जाता है। यदि किसी कार्मिक की वार्षिक वेतन वृद्धि (Increment) जुलाई में लगती है, तो मार्च से जून (4 माह) तक पुराना बेसिक पे लागू रहता है तथा जुलाई से फरवरी (8 माह) तक पे-मैट्रिक्स के अगले स्तर का बढ़ा हुआ बेसिक पे लागू होता है।</li>
-      <li><strong>जनवरी इंक्रीमेंट:</strong> जिन कार्मिकों की वेतन वृद्धि जनवरी माह में देय होती है, उन्हें मार्च से दिसंबर (10 माह) तक पुराना मूल वेतन तथा जनवरी व फरवरी (2 माह) में बढ़ा हुआ मूल वेतन प्राप्त होता है।</li>
+      <li><strong>जुलाई इंक्रीमेंट (July Increment):</strong> अधिकांश शिक्षकों व कर्मचारियों की नियुक्ति अथवा पदोन्नति की तिथि के आधार पर वार्षिक वेतन वृद्धि (3%) 1 जुलाई को देय होती है। इस स्थिति में मार्च से जून (4 माह) तक पुराना मूल वेतन तथा जुलाई से फरवरी (8 माह) तक पे-मैट्रिक्स के अगले सेल का बढ़ा हुआ मूल वेतन आहरित होता है।</li>
+      <li><strong>जनवरी इंक्रीमेंट (January Increment):</strong> जिन कर्मियों की पदोन्नति या नियुक्ति 2 जुलाई से 1 जनवरी के बीच हुई होती है, उनका इंक्रीमेंट 1 जनवरी को लगता है। उन्हें मार्च से दिसंबर (10 माह) पुराना मूल वेतन तथा जनवरी व फरवरी (2 माह) में बढ़ा हुआ मूल वेतन प्राप्त होता है।</li>
     </ul>
 
-    <h4>2. महंगाई भत्ता (DA) चक्र एवं 4 माह का DA एरियर गणित</h4>
-    <p>वित्तीय वर्ष 2026-27 के दौरान महंगाई भत्ते की दरें एवं उनका वास्तविक पे-रोल समायोजन निम्नलिखित चक्र के अनुसार होता है:</p>
+    <h4>2. महंगाई भत्ता (DA) दरें, 4 माह का अंतर एवं एरियर गणित</h4>
+    <p>वित्तीय वर्ष 2026-27 में महंगाई भत्ते का लेखांकन निम्नलिखित क्रम में संचालित होता है:</p>
     <ul>
-      <li><strong>मार्च 2026 से जून 2026 (4 माह):</strong> नियमित मासिक वेतन में 60% की दर से महंगाई भत्ते का भुगतान।</li>
-      <li><strong>जुलाई 2026 से अक्टूबर 2026 (4 माह):</strong> इस अवधि में 63% DA का शासनादेश निर्गत न होने के कारण वेतन में 60% की दर से ही भुगतान प्राप्त होता है।</li>
-      <li><strong>नवंबर 2026 से फरवरी 2027 (4 माह):</strong> दीपावली के समय 63% DA का शासनादेश आने के उपरांत नवंबर के वेतन से नियमित 63% DA मिलना प्रारंभ होता है।</li>
-      <li><strong>DA एरियर (60% से 63% अंतर):</strong> जुलाई, अगस्त, सितंबर एवं अक्टूबर (कुल 4 माह) का 3% DA अंतर नवंबर माह में एरियर के रूप में देय होता है। इसकी गणना का सूत्र है: <code>DA Arrear = (जुलाई का मूल वेतन × 3%) × 4</code>।</li>
+      <li><strong>मार्च 2026 से जून 2026:</strong> 60% की नियमित दर से महंगाई भत्ते का भुगतान होता है।</li>
+      <li><strong>जुलाई 2026 से अक्टूबर 2026:</strong> यद्यपि केंद्र व राज्य सरकार द्वारा 1 जुलाई से DA बढ़ाकर 63% कर दिया जाता है, किंतु शासनादेश निर्गत होने में प्रायः दीपावली तक का समय लगता है। इसलिए इस 4 माह की अवधि में भी कर्मचारियों को 60% DA की दर से ही नियमित मासिक वेतन प्राप्त होता है।</li>
+      <li><strong>नवंबर 2026 से फरवरी 2027:</strong> दीपावली के समय शासनादेश जारी होने के बाद नवंबर माह से नियमित वेतन में 63% DA जुड़कर मिलता है।</li>
+      <li><strong>4 माह का 3% DA एरियर:</strong> जुलाई, अगस्त, सितंबर एवं अक्टूबर (कुल 4 माह) के 3% DA अंतर की राशि नवंबर के वेतन के साथ एकमुश्त एरियर के रूप में देय होती है। इसका सूत्र है: <code>DA Arrear = (जुलाई का बेसिक पे × 3%) × 4</code>। यदि कर्मचारी एनपीएस (NPS) से आच्छादित है और उसने 10% कटौती चुनी है, तो 10% राशि PRAN में जमा होती है और 90% नकद मिलती है।</li>
     </ul>
 
-    <h4>3. दीपावली तदर्थ बोनस (Ad-hoc Bonus ₹6,908) एवं भुगतान मोड</h4>
-    <p>अराजपत्रित राज्य कर्मचारियों एवं परिषदीय शिक्षकों को शासन द्वारा प्रतिवर्ष निश्चित <strong>₹6,908</strong> का तदर्थ बोनस प्रदान किया जाता है। इसके समायोजन के तीन मुख्य विकल्प होते हैं:</p>
+    <h4>3. दीपावली तदर्थ बोनस (Ad-hoc Bonus ₹6,908) एवं निवेश मोड</h4>
+    <p>उत्तर प्रदेश शासन द्वारा अराजपत्रित कर्मचारियों एवं परिषदीय अध्यापकों को प्रतिवर्ष निश्चित <strong>₹6,908</strong> का तदर्थ बोनस स्वीकृत किया जाता है। शासनादेश के अनुसार इसके भुगतान के तीन विकल्प होते हैं:</p>
     <ul>
-      <li><strong>100% नकद भुगतान:</strong> संपूर्ण ₹6,908 की राशि वेतन खाते में अंतरित होती है तथा यह सकल वेतन (Gross Income) का भाग बनती है।</li>
-      <li><strong>25% नकद एवं 75% GPF/PPF में:</strong> ₹1,727 नकद प्राप्त होते हैं तथा शेष ₹5,181 जीपीएफ/पीपीएफ खाते में जमा होते हैं, जो पुरानी कर व्यवस्था में धारा 80C के अंतर्गत कर छूट हेतु मान्य होते हैं।</li>
-      <li><strong>25% नकद एवं 75% NSC में:</strong> ₹5,181 राष्ट्रीय बचत पत्र (NSC) में जमा होकर धारा 80C की बचत में स्वतः जुड़ जाते हैं।</li>
+      <li><strong>विकल्प 1 (100% नकद):</strong> संपूर्ण ₹6,908 नकद प्राप्त होते हैं और यह सकल वेतन में जुड़कर कर योग्य बनता है।</li>
+      <li><strong>विकल्प 2 (25% नकद + 75% GPF/PPF):</strong> ₹1,727 नकद भुगतान तथा शेष ₹5,181 जीपीएफ/पीपीएफ खाते में जमा होते हैं, जो पुरानी कर व्यवस्था में धारा 80C के अंतर्गत कर छूट हेतु मान्य होते हैं।</li>
+      <li><strong>विकल्प 3 (25% नकद + 75% NSC):</strong> ₹5,181 राष्ट्रीय बचत पत्र (NSC) में जमा होकर धारा 80C की बचत में स्वतः जुड़ जाते हैं।</li>
     </ul>
 
-    <h4>4. संशोधित नई कर व्यवस्था (Revised New Tax Regime - ₹12 लाख तक शून्य टैक्स)</h4>
-    <p>वित्तीय वर्ष 2026-27 के अंतर्गत नई कर व्यवस्था डिफ़ॉल्ट व्यवस्था है। इसके प्रमुख लाभ एवं स्लैब इस प्रकार हैं:</p>
+    <h4>4. अन्य स्रोतों से आय (Income from Other Sources)</h4>
+    <p>वेतनभोगी कर्मचारी केवल वेतन से ही आय अर्जित नहीं करते। आयकर अधिनियम के तहत अन्य सभी आयों को प्रपत्र में घोषित करना अनिवार्य होता है:</p>
     <ul>
-      <li><strong>मानक कटौती (Standard Deduction u/s 16(ia)):</strong> वेतनभोगी कार्मिकों को बिना किसी निवेश प्रमाण के सीधे <strong>₹75,000</strong> की मानक कटौती प्राप्त होती है।</li>
-      <li><strong>धारा 87A के अंतर्गत कर रिबेट:</strong> यदि किसी कार्मिक की शुद्ध कर योग्य आय (Taxable Income) <strong>₹12,00,000</strong> तक है, तो धारा 87A के तहत अधिकतम <strong>₹60,000</strong> तक का संपूर्ण आयकर माफ (शून्य) हो जाता है।</li>
-      <li><strong>स्लैब दरें:</strong> ₹0 से ₹4 लाख (0%), ₹4 लाख से ₹8 लाख (5%), ₹8 लाख से ₹12 लाख (10%), ₹12 लाख से ₹16 लाख (15%), ₹16 लाख से ₹20 लाख (20%), ₹20 लाख से ₹24 लाख (25%), ₹24 लाख से अधिक (30%)।</li>
+      <li><strong>बचत बैंक खाता ब्याज (Savings Bank Interest):</strong> बैंक खातों से प्राप्त कुल ब्याज आय को अन्य आय में जोड़ा जाता है। पुरानी कर व्यवस्था में सामान्य नागरिकों को धारा 80TTA के तहत ₹10,000 तक तथा वरिष्ठ नागरिकों को धारा 80TTB के तहत सावधि जमा (FD) सहित ₹50,000 तक की कर छूट प्राप्त होती है।</li>
+      <li><strong>सावधि जमा (FD/RD Interest):</strong> बैंक या पोस्ट ऑफिस की फिक्स डिपॉजिट से मिलने वाला ब्याज पूरी तरह कर योग्य होता है।</li>
+      <li><strong>पारिवारिक पेंशन या लाभांश (Dividend):</strong> यदि कोई पारिवारिक पेंशन या शेयर बाजार/म्यूचुअल फंड से लाभांश प्राप्त हुआ है, तो उसे भी इस मद में दर्ज किया जाता है।</li>
     </ul>
 
-    <h4>5. पुरानी कर व्यवस्था (Old Tax Regime) एवं अनुमन्य कटौतियाँ</h4>
-    <p>जो कार्मिक गृह ऋण, जीवन बीमा, पीपीएफ, एनपीएस आदि में बड़ा निवेश करते हैं, उनके लिए पुरानी कर व्यवस्था अभी भी उपयोगी हो सकती है:</p>
+    <h4>5. संशोधित नई कर व्यवस्था (Revised New Regime - ₹12 लाख तक शून्य कर)</h4>
+    <p>वित्तीय वर्ष 2026-27 के अंतर्गत नई कर व्यवस्था डिफ़ॉल्ट व्यवस्था है। इसके मुख्य लाभ निम्नलिखित हैं:</p>
+    <ul>
+      <li><strong>मानक कटौती (Standard Deduction):</strong> वेतनभोगी कर्मचारियों को बिना किसी बिल या निवेश प्रमाण के सीधे <strong>₹75,000</strong> की मानक कटौती मिलती है।</li>
+      <li><strong>धारा 87A के अंतर्गत पूर्ण कर रिबेट:</strong> यदि किसी कर्मचारी की कुल कर योग्य आय मानक कटौती घटाने के बाद <strong>₹12,00,000</strong> तक है, तो धारा 87A के अंतर्गत अधिकतम <strong>₹60,000</strong> तक का संपूर्ण देय आयकर शून्य हो जाता है। अर्थात ₹12,75,000 तक के सकल वेतन पर प्रभावी टैक्स शून्य रहता है।</li>
+      <li><strong>संशोधित स्लैब दरें:</strong>
+        <ul>
+          <li>₹0 से ₹4,00,000 तक: शून्य (0%)</li>
+          <li>₹4,00,001 से ₹8,00,000 तक: 5%</li>
+          <li>₹8,00,001 से ₹12,00,000 तक: 10%</li>
+          <li>₹12,00,001 से ₹16,00,000 तक: 15%</li>
+          <li>₹16,00,001 से ₹20,00,000 तक: 20%</li>
+          <li>₹20,00,001 से ₹24,00,000 तक: 25%</li>
+          <li>₹24,00,000 से अधिक: 30%</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>6. पुरानी कर व्यवस्था (Old Tax Regime) एवं अनुमन्य कटौतियाँ</h4>
+    <p>जिन कर्मचारियों ने भारी गृह ऋण (Home Loan) ले रखा है, बच्चों की ट्यूशन फीस जमा करते हैं तथा पीपीएफ/एनपीएस में बड़ा निवेश करते हैं, उनके लिए पुरानी कर व्यवस्था अभी भी अधिक लाभकारी हो सकती है:</p>
     <ul>
       <li><strong>मानक कटौती:</strong> ₹50,000।</li>
-      <li><strong>धारा 80C (अधिकतम ₹1,50,000):</strong> सामूहिक बीमा (GIS), GPF, LIC प्रीमियम, PPF, ट्यूशन फीस, तथा गृह ऋण का मूलधन।</li>
-      <li><strong>धारा 80CCD(1B):</strong> राष्ट्रीय पेंशन प्रणाली (NPS) में ₹50,000 तक का अतिरिक्त व्यक्तिगत निवेश।</li>
-      <li><strong>धारा 80U (दिव्यांगता छूट):</strong> 40% से 80% दिव्यांगता पर ₹75,000 तथा 80% से अधिक गंभीर दिव्यांगता पर ₹1,25,000 की सीधी आय कटौती।</li>
+      <li><strong>धारा 80C (अधिकतम ₹1,50,000):</strong> जीपीएफ (GPF), सामूहिक बीमा (GIS), जीवन बीमा (LIC), पीपीएफ (PPF), ट्यूशन फीस, एनएससी (NSC) तथा होम लोन का मूलधन।</li>
+      <li><strong>धारा 80CCD(1B):</strong> राष्ट्रीय पेंशन प्रणाली (NPS) में ₹50,000 तक का अतिरिक्त व्यक्तिगत स्वैच्छिक निवेश।</li>
+      <li><strong>धारा 24(b):</strong> स्व-अधिकृत आवास हेतु गृह ऋण के ब्याज पर ₹2,00,000 तक की सीधी आय कटौती।</li>
+      <li><strong>धारा 80D:</strong> स्वयं व परिवार के स्वास्थ्य बीमा (Mediclaim) प्रीमियम पर ₹25,000 (वरिष्ठ नागरिक माता-पिता हेतु ₹50,000 तक अतिरिक्त)।</li>
+      <li><strong>धारा 80U / 80DDB:</strong> सामान्य दिव्यांगता पर ₹75,000 तथा 80% से अधिक गंभीर दिव्यांगता पर ₹1,25,000 की सीधी छूट।</li>
+      <li><strong>अन्य अनुमन्य कटौती:</strong> दान (Sec 80G), उच्च शिक्षा ऋण ब्याज (Sec 80E) आदि कटौतियां।</li>
     </ul>
 
-    <h4>6. अग्रिम आयकर कटौती (Adv. IT / TDS) का समायोजन</h4>
-    <p>विभाग द्वारा वर्ष के दौरान मानव संपदा पे-रोल के माध्यम से प्रतिमाह काटा गया टीडीएस (अग्रिम आयकर) आगणन प्रपत्र के अंतिम चरण में कुल देय आयकर से घटाया जाता है। यदि अग्रिम कटौती कुल देय कर से अधिक है, तो आयकर विवरणी (ITR) दाखिल करते समय अतिरिक्त राशि बैंक खाते में वापस (Refund) प्राप्त होती है।</p>
+    <h4>7. अग्रिम आयकर कटौती (Adv. IT / TDS) का अंतिम मिलान</h4>
+    <p>विभाग द्वारा मानव संपदा पे-रोल के माध्यम से प्रत्येक माह काटे गए अग्रिम आयकर (Adv. IT) का योग कुल देय कर से घटाया जाता है। यदि अग्रिम जमा कर कुल देय कर से अधिक है, तो अंतिम कॉलम में ऋणात्मक राशि (Refund) प्रदर्शित होती है, जिसे ITR फाइल करते समय आयकर विभाग से वापस प्राप्त किया जा सकता है।</p>
+
+    <h4>8. प्रायः पूछे जाने वाले प्रश्न (FAQ - अक्सर पूछे जाने वाले सवाल)</h4>
+    <p><strong>प्रश्न 1: क्या नई कर व्यवस्था में होम लोन ब्याज या 80C की छूट मिलती है?</strong><br>
+    उत्तर: नहीं, नई कर व्यवस्था में केवल ₹75,000 का स्टैंडर्ड डिडक्शन मिलता है। 80C, 80D, या होम लोन ब्याज की छूट केवल पुरानी कर व्यवस्था में ही अनुमन्य है।</p>
+
+    <p><strong>प्रश्न 2: मुझे कौन सी कर व्यवस्था चुननी चाहिए?</strong><br>
+    उत्तर: यदि आपकी कुल कटौती (80C + 80CCD + 24b ब्याज + 80D) मिलाकर ₹4,25,000 से अधिक बनती है, तभी पुरानी व्यवस्था फायदेमंद होती है; अन्यथा ₹12 लाख की सीमा तक नई कर व्यवस्था ही सबसे अधिक कर-मुक्त लाभ प्रदान करती है।</p>
   </div>
 
   <div class="footer-links no-print">
@@ -614,7 +653,7 @@ const dictionary = {
     lblEhrms: "eHRMS कोड:",
     lblDob: "जन्म तिथि (DD/MM/YYYY):",
     lblRegime: "कर व्यवस्था (Tax Regime):",
-    secFinanceTitle: "📊 वेतन, ग्रेड पे व एरियर विवरण (FY 2026-27)",
+    secFinanceTitle: "📊 वेतन, ग्रेड पे, एरियर व अन्य आय विवरण (FY 2026-27)",
     lblGradePay: "ग्रेड पे / स्तर (Level 1 to 10):",
     lblBasicPay: "मार्च 2026 में मूल वेतन:",
     lblIncMonth: "वेतन वृद्धि माह:",
@@ -624,6 +663,7 @@ const dictionary = {
     lblDaArrMode: "DA एरियर भुगतान का प्रकार (Payment Mode):",
     lblBonusOpt: "दीपावली बोनस (₹6,908) स्थिति:",
     lblBonusMode: "बोनस भुगतान का प्रकार (Bonus Mode):",
+    lblOtherIncomeInp: "अन्य स्रोतों से आय (बैंक ब्याज/अन्य):",
     secAdvItTitle: "💳 अग्रिम आयकर कटौती (Adv. IT) - मानव संपदा पे-स्लिप अनुसार",
     secDedTitle: "📋 आयकर छूट व कटौतियाँ (Deductions)",
     lblGpf: "GPF कटौती (वार्षिक):",
@@ -631,6 +671,7 @@ const dictionary = {
     lblLic: "LIC / PPF / NSC बचत:",
     lblHl: "होम लोन मूलधन (HL Principal):",
     lbl80d: "धारा 80D (स्वास्थ्य बीमा):",
+    lblOtherDedInp: "अन्य अनुमन्य कटौती (Other Deductions):",
     btnActionPrint: "🖨️ आयकर विवरणी प्रपत्र प्रिंट करें",
     btnActionReset: "↺ रीसेट करें (Reset)",
 
@@ -649,12 +690,12 @@ const dictionary = {
     tfTotal: "Total",
 
     boxTaxCalcTitle: "गणना - (01.04.2026 से 31.03.2027)",
-    lblRowGross: "1. कुल आय (Gross Income):",
+    lblRowGross: "1. कुल वेतन आय (Gross Salary):",
     lblRowHraEx: "2(a) मकान किराया से छूट (Sec 10):",
     lblRowHlInt: "2(b) होम लोन ब्याज (Sec 24B):",
     lblRowStdDed: "2(c) स्टैंडर्ड डिडक्शन:",
-    lblRowRemInc: "3. शेष आय (1 - 2):",
-    lblRowOtherInc: "4. अन्य स्रोतों से आय:",
+    lblRowRemInc: "3. शेष वेतन आय (1 - 2):",
+    lblRowOtherInc: "4. अन्य स्रोतों से आय (बैंक आदि):",
     lblRowTotGross: "5. सकल आय (3 + 4):",
     lblRow80c: "6(a) धारा 80C बचत छूट:",
     lblRow80d: "6(b) धारा 80D (स्वास्थ्य बीमा):",
@@ -695,7 +736,7 @@ const dictionary = {
     lblEhrms: "eHRMS Code:",
     lblDob: "Date of Birth (DD/MM/YYYY):",
     lblRegime: "Tax Regime:",
-    secFinanceTitle: "📊 Salary, Grade Pay & Arrears (FY 2026-27)",
+    secFinanceTitle: "📊 Salary, Grade Pay, Arrears & Other Income (FY 2026-27)",
     lblGradePay: "Grade Pay / Level (1 to 10):",
     lblBasicPay: "Basic Pay in March 2026:",
     lblIncMonth: "Increment Month:",
@@ -705,6 +746,7 @@ const dictionary = {
     lblDaArrMode: "DA Arrear Payment Mode:",
     lblBonusOpt: "Diwali Bonus (₹6,908) Status:",
     lblBonusMode: "Bonus Payment Mode:",
+    lblOtherIncomeInp: "Other Income (Bank Interest etc.):",
     secAdvItTitle: "💳 Advance Tax Deducted (Adv. IT) - as per Manav Sampada",
     secDedTitle: "📋 Tax Deductions & Exemptions",
     lblGpf: "GPF Deduction (Annual):",
@@ -712,6 +754,7 @@ const dictionary = {
     lblLic: "LIC / PPF / NSC Savings:",
     lblHl: "Home Loan Principal:",
     lbl80d: "Section 80D Mediclaim:",
+    lblOtherDedInp: "Other Deductions:",
     btnActionPrint: "🖨️ Print Tax Computation Sheet",
     btnActionReset: "↺ Reset Form",
 
@@ -730,11 +773,11 @@ const dictionary = {
     tfTotal: "Total",
 
     boxTaxCalcTitle: "Computation - (01.04.2026 to 31.03.2027)",
-    lblRowGross: "1. Gross Income:",
+    lblRowGross: "1. Gross Salary Income:",
     lblRowHraEx: "2(a) HRA Exemption (Sec 10):",
     lblRowHlInt: "2(b) Home Loan Interest (Sec 24B):",
     lblRowStdDed: "2(c) Standard Deduction:",
-    lblRowRemInc: "3. Remaining Income (1 - 2):",
+    lblRowRemInc: "3. Remaining Salary (1 - 2):",
     lblRowOtherInc: "4. Income from Other Sources:",
     lblRowTotGross: "5. Total Gross Income (3 + 4):",
     lblRow80c: "6(a) Section 80C Deductions:",
@@ -871,6 +914,7 @@ function onRegimeSwitch() {
     document.getElementById('inpLic').disabled = true;
     document.getElementById('inpHlPrinc').disabled = true;
     document.getElementById('inp80d').disabled = true;
+    document.getElementById('inpOtherDed').disabled = true;
   } else {
     dedCard.style.opacity = '1';
     document.getElementById('inpGpf').disabled = false;
@@ -878,6 +922,7 @@ function onRegimeSwitch() {
     document.getElementById('inpLic').disabled = false;
     document.getElementById('inpHlPrinc').disabled = false;
     document.getElementById('inp80d').disabled = false;
+    document.getElementById('inpOtherDed').disabled = false;
   }
 }
 
@@ -943,6 +988,7 @@ function runTaxCalc() {
 
   const isBonusPaid = document.getElementById('inpBonusOpt').value === 'yes';
   const bonusMode = document.getElementById('inpBonusMode').value;
+  const otherIncome = parseFloat(document.getElementById('inpOtherIncome').value) || 0;
 
   const slabList = payMatrix[gp] || payMatrix["4600"];
   const curIdx = slabList.indexOf(currentBasic);
@@ -1042,7 +1088,7 @@ function runTaxCalc() {
   `;
   document.getElementById('arrearTbody').innerHTML = arrearHtml;
 
-  const totalGross = sumGross + daArrearTotal + bonusTotal;
+  const totalGrossSalary = sumGross + daArrearTotal + bonusTotal;
   const totalDa = sumDa + daArrearTotal;
   const totalOther = sumOther + bonusTotal;
 
@@ -1050,7 +1096,7 @@ function runTaxCalc() {
   document.getElementById('tTotDa').innerText = "₹ " + totalDa.toLocaleString('en-IN');
   document.getElementById('tTotHra').innerText = "₹ " + sumHra.toLocaleString('en-IN');
   document.getElementById('tTotOther').innerText = "₹ " + totalOther.toLocaleString('en-IN');
-  document.getElementById('tTotGross').innerText = "₹ " + totalGross.toLocaleString('en-IN');
+  document.getElementById('tTotGross').innerText = "₹ " + totalGrossSalary.toLocaleString('en-IN');
   document.getElementById('tTotGis').innerText = "₹ " + sumGis.toLocaleString('en-IN');
   document.getElementById('tTotAdvTax').innerText = "₹ " + sumAdv.toLocaleString('en-IN');
 
@@ -1060,6 +1106,7 @@ function runTaxCalc() {
   let s80ccd = 0;
   let s80d = 0;
   let s80u = 0;
+  let sOtherDed = 0;
   let taxable = 0;
 
   const gpf = parseFloat(document.getElementById('inpGpf').value) || 0;
@@ -1067,20 +1114,24 @@ function runTaxCalc() {
   const hlPrinc = parseFloat(document.getElementById('inpHlPrinc').value) || 0;
   const totNscAuto = daArrearNsc + bonusNsc;
 
+  const remSalary = Math.max(0, totalGrossSalary - (regime === 'new' ? 75000 : 50000));
+  const totalGrossIncome = remSalary + otherIncome;
+
   if (regime === 'new') {
     stdDed = 75000;
-    taxable = Math.max(0, totalGross - stdDed);
+    taxable = totalGrossIncome;
   } else {
     stdDed = 50000;
     const tot80cPure = gpf + lic + hlPrinc + sumGis + totNscAuto;
     s80c = Math.min(150000, tot80cPure);
     s80ccd = Math.min(50000, (parseFloat(document.getElementById('inpNpsAdd').value) || 0) + daArrearNps);
     s80d = parseFloat(document.getElementById('inp80d').value) || 0;
+    sOtherDed = parseFloat(document.getElementById('inpOtherDed').value) || 0;
 
     if (disStatus === 'normal') s80u = 75000;
     else if (disStatus === 'severe') s80u = 125000;
 
-    taxable = Math.max(0, totalGross - (stdDed + s80c + s80ccd + s80d + s80u));
+    taxable = Math.max(0, totalGrossIncome - (s80c + s80ccd + s80d + s80u + sOtherDed));
   }
 
   taxable = Math.round(taxable / 10) * 10;
@@ -1134,15 +1185,16 @@ function runTaxCalc() {
   const grossTaxPayable = Math.round(taxAfterRebate + cess);
   const finalBalance = grossTaxPayable - sumAdv;
 
-  const remIncome = Math.max(0, totalGross - stdDed);
-  document.getElementById('cGross').innerText = "₹ " + totalGross.toLocaleString('en-IN');
+  document.getElementById('cGross').innerText = "₹ " + totalGrossSalary.toLocaleString('en-IN');
   document.getElementById('cStdDed').innerText = "₹ " + stdDed.toLocaleString('en-IN');
-  document.getElementById('cRemIncome').innerText = "₹ " + remIncome.toLocaleString('en-IN');
-  document.getElementById('cTotGross').innerText = "₹ " + remIncome.toLocaleString('en-IN');
+  document.getElementById('cRemIncome').innerText = "₹ " + remSalary.toLocaleString('en-IN');
+  document.getElementById('cOtherIncome').innerText = "₹ " + otherIncome.toLocaleString('en-IN');
+  document.getElementById('cTotGross').innerText = "₹ " + totalGrossIncome.toLocaleString('en-IN');
   document.getElementById('cDed80c').innerText = "₹ " + s80c.toLocaleString('en-IN');
   document.getElementById('cDed80d').innerText = "₹ " + s80d.toLocaleString('en-IN');
   document.getElementById('cDedNps').innerText = "₹ " + s80ccd.toLocaleString('en-IN');
   document.getElementById('cDed80u').innerText = "₹ " + s80u.toLocaleString('en-IN');
+  document.getElementById('cDedOther').innerText = "₹ " + sOtherDed.toLocaleString('en-IN');
   document.getElementById('cTaxable').innerText = "₹ " + taxable.toLocaleString('en-IN');
 
   document.getElementById('cSlab1').innerText = "₹ 0";
@@ -1182,6 +1234,8 @@ function resetForm() {
   document.getElementById('inpDaArrMode').value = 'cash';
   document.getElementById('inpBonusOpt').value = 'yes';
   document.getElementById('inpBonusMode').value = 'cash';
+  document.getElementById('inpOtherIncome').value = '0';
+  document.getElementById('inpOtherDed').value = '0';
   document.getElementById('inpRegime').value = 'new';
   document.getElementById('inpGpf').value = '0';
   document.getElementById('inpNpsAdd').value = '50000';
