@@ -2,589 +2,418 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Teacher Salary Slip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UP Teacher & Govt Employee Salary Calculator - 7th Pay Matrix</title>
   <style>
-    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #f1f5f9; margin: 0; padding: 15px; color: #0f172a; }
-    .container { max-width: 900px; margin: auto; background: #ffffff; padding: 22px; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.08); }
-    
-    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 18px; }
-    .top-bar h2 { margin: 0; font-size: 19px; color: #1e3a8a; }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { background: #f1f5f9; margin: 0; padding: 15px; color: #000; }
+    .wrap { max-width: 920px; margin: auto; background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
+    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 15px; }
+    .top-bar h2 { margin: 0; font-size: 18px; color: #1e3a8a; }
     .top-bar a { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
 
-    .card-box { background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-    .card-title { font-size: 14.5px; font-weight: 800; color: #1e3a8a; margin-bottom: 12px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
+    .card { background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 6px; padding: 14px; margin-bottom: 14px; }
+    .card-title { font-size: 14px; font-weight: bold; color: #1e3a8a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .f-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #334155; }
+    .f-group input, .f-group select { width: 100%; padding: 7px 9px; border: 1.5px solid #94a3b8; border-radius: 4px; font-size: 13px; font-weight: bold; }
 
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-    .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #334155; }
-    .form-group input, .form-group select { width: 100%; padding: 8px 10px; border: 1.5px solid #94a3b8; border-radius: 5px; font-size: 13.5px; background: white; font-weight: bold; }
-    .form-group input:focus, .form-group select:focus { outline: 2px solid #2563eb; border-color: #2563eb; }
+    .btn-row { display: flex; gap: 10px; margin: 15px 0; }
+    .btn { padding: 9px 18px; border-radius: 5px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; }
+    .btn-prn { background: #1e3a8a; color: #fff; }
+    .btn-rst { background: #dc2626; color: #fff; }
 
-    .result-box { margin-top: 14px; background: #ecfdf5; border: 1.5px solid #6ee7b7; border-radius: 8px; padding: 16px; }
-    .result-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #a7f3d0; font-size: 14px; }
-    .result-row:last-child { border-bottom: none; font-size: 16px; font-weight: 900; color: #065f46; margin-top: 6px; padding-top: 10px; border-top: 2px solid #34d399; }
+    /* सैलरी स्लिप प्रिंट लेआउट */
+    .slip { border: 2px solid #000; padding: 15px; margin-top: 15px; background: #fff; }
+    .slip-head { text-align: center; border-bottom: 2px solid #000; padding-bottom: 6px; margin-bottom: 10px; }
+    .slip-head h1 { margin: 0; font-size: 18px; font-weight: bold; }
+    .slip-head-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; margin-top: 5px; }
 
-    .action-row { display: flex; gap: 12px; margin-top: 20px; }
-    .btn { padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; }
-    .btn-primary { background: #1e3a8a; color: white; }
-    .btn-success { background: #16a34a; color: white; }
+    table.t-info { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    table.t-info td { border: 1px solid #000; padding: 5px 8px; font-size: 12px; }
 
-    .print-only-area { display: none !important; }
+    .slip-grid { display: flex; gap: 10px; }
+    .slip-col { flex: 1; border: 1px solid #000; }
+    .col-head { background: #f1f5f9; font-weight: bold; text-align: center; padding: 6px; border-bottom: 1px solid #000; font-size: 13px; }
+    .slip-row { display: flex; justify-content: space-between; padding: 5px 8px; border-bottom: 1px dashed #cbd5e1; font-size: 12px; }
+    .slip-row.tot { border-top: 1px solid #000; border-bottom: none; font-weight: bold; background: #f8fafc; }
+
+    .net-box { border: 2px solid #000; margin-top: 10px; padding: 8px; text-align: center; background: #f1f5f9; font-size: 14px; font-weight: bold; }
+
+    /* एडसेंस गाइड स्टाइलिंग */
+    .seo-guide { margin-top: 30px; border-top: 2px solid #e2e8f0; padding-top: 20px; color: #1e293b; line-height: 1.6; }
+    .seo-guide h3 { color: #1e3a8a; font-size: 16px; margin-bottom: 8px; border-left: 4px solid #1e3a8a; padding-left: 8px; }
+    .seo-guide h4 { color: #0f172a; font-size: 14px; margin-top: 14px; margin-bottom: 4px; }
+    .seo-guide p { font-size: 12.5px; margin-bottom: 10px; text-align: justify; }
+    .seo-guide ul { font-size: 12.5px; margin-bottom: 10px; padding-left: 20px; }
+    .seo-guide li { margin-bottom: 4px; }
+    .footer-links { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #cbd5e1; font-size: 12px; }
+    .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; font-weight: bold; }
 
     @media print {
-      @page { size: A4 portrait; margin: 15mm; }
-      body { background: #ffffff !important; padding: 0 !important; color: #000000 !important; }
-      .container { box-shadow: none !important; border: 2px solid #000000 !important; width: 100% !important; max-width: 100% !important; padding: 20px !important; }
-      
-      .screen-only-area, .top-bar, .action-row { display: none !important; }
-      .print-only-area { display: block !important; }
-
-      .p-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 15px; }
-      .p-header h1 { margin: 0; font-size: 18pt; font-weight: 900; }
-      .p-header h2 { margin: 4px 0 0 0; font-size: 14pt; font-weight: 800; }
-
-      table.p-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-      table.p-table th, table.p-table td { border: 1.2px solid #000; padding: 8px 10px; font-size: 11pt; }
-      table.p-table th { background: #f1f5f9 !important; font-weight: 800; text-align: left; }
-      table.p-table td.amount { text-align: right; font-weight: 800; }
-      table.p-table tr.total-row td { font-weight: 900; background: #f8fafc !important; }
+      @page { size: A4 portrait; margin: 10mm; }
+      body { background: #fff !important; padding: 0 !important; }
+      .wrap { box-shadow: none !important; border: none !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
+      .no-print, .top-bar, .card, .btn-row, .seo-guide, .footer-links { display: none !important; }
+      .slip { margin-top: 0 !important; border: 2px solid #000 !important; }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="wrap">
   
-  <div class="top-bar screen-only-area">
-    <h2 id="uiTitle">💰 परिषदीय शिक्षक वेतन एवं पर्ची जनरेटर</h2>
-    <a href="index.html" id="uiHome">← होमपेज पर जाएं</a>
+  <div class="top-bar no-print">
+    <h2>📊 शिक्षक एवं कर्मचारी मासिक वेतन कैलकुलेटर (7th CPC)</h2>
+    <a href="form16.html">📑 आयकर कैलकुलेटर (Form 16) →</a>
   </div>
 
-  <div class="screen-only-area">
-    <div class="card-box">
-      <div class="card-title" id="secTeacherTitle">👤 शिक्षक एवं विद्यालय का विवरण</div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label id="lblTeacherName">शिक्षक/शिक्षिका का नाम:</label>
-          <input type="text" id="teacherName" placeholder="नाम लिखें" oninput="triggerLanguageDetection(this.value); syncData();">
+  <div class="no-print">
+    <!-- कार्मिक इनपुट -->
+    <div class="card">
+      <div class="card-title">👤 कार्मिक व विद्यालय विवरण</div>
+      <div class="grid">
+        <div class="f-group">
+          <label>कार्मिक का नाम:</label>
+          <input type="text" id="inpName" placeholder="नाम लिखें" oninput="runSalaryCalc()">
         </div>
-        <div class="form-group">
-          <label id="lblTeacherPost">पद / पदनाम:</label>
-          <select id="teacherPost" onchange="togglePostMode(); syncData();">
-            <option value="सहायक अध्यापक">सहायक अध्यापक</option>
-            <option value="प्रधानाध्यापक">प्रधानाध्यापक</option>
-            <option value="शिक्षामित्र">शिक्षामित्र</option>
-            <option value="अनुदेशक">अनुदेशक</option>
+        <div class="f-group">
+          <label>पद / पदनाम:</label>
+          <select id="inpPost" onchange="runSalaryCalc()">
+            <option value="सहायक अध्यापक (प्रा० वि०)">सहायक अध्यापक (प्रा० वि०)</option>
+            <option value="प्रधानाध्यापक (प्रा० वि०) / स० अ० (उच्च प्रा० वि०)">प्रधानाध्यापक (प्रा०) / स० अ० (उच्च प्रा०)</option>
+            <option value="प्रधानाध्यापक (उच्च प्रा० वि०)">प्रधानाध्यापक (उच्च प्रा० वि०)</option>
+            <option value="लिपिक / कनिष्ठ सहायक">लिपिक / कनिष्ठ सहायक</option>
+            <option value="अन्य कर्मचारी">अन्य कर्मचारी</option>
           </select>
         </div>
-        <div class="form-group">
-          <label id="lblSchoolName">विद्यालय का नाम:</label>
-          <input type="text" id="schoolName" placeholder="विद्यालय का नाम लिखें" oninput="triggerLanguageDetection(this.value); syncData();">
+        <div class="f-group">
+          <label>विद्यालय / कार्यालय का नाम:</label>
+          <input type="text" id="inpOffice" placeholder="विद्यालय का नाम" oninput="runSalaryCalc()">
         </div>
-        <div class="form-group">
-          <label id="lblSchoolUdise">यू-डायस (UDISE) कोड:</label>
-          <input type="text" id="schoolUdise" placeholder="09340201102" oninput="syncData()">
+        <div class="f-group">
+          <label>eHRMS / मानव संपदा कोड:</label>
+          <input type="text" id="inpEhrms" placeholder="मानव संपदा कोड" oninput="runSalaryCalc()">
         </div>
-      </div>
-    </div>
-
-    <div class="card-box" id="regInputsCard">
-      <div class="card-title" id="secFinanceTitle">📊 वेतन विवरण एवं भत्ते</div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label id="lblGradePay">ग्रेड पे स्तर:</label>
-          <select id="gradePayLevel" onchange="updateBasicOptions(); updateHraOptions();">
-            <option value="4200">Level 6 (Grade Pay 4200)</option>
-            <option value="4600" selected>Level 7 (Grade Pay 4600)</option>
-            <option value="4800">Level 8 (Grade Pay 4800)</option>
-            <option value="5400">Level 9 (Grade Pay 5400)</option>
+        <div class="f-group">
+          <label>वेतन माह व वर्ष:</label>
+          <select id="inpMonth" onchange="runSalaryCalc()">
+            <option value="जुलाई 2026">जुलाई 2026</option>
+            <option value="अगस्त 2026">अगस्त 2026</option>
+            <option value="सितंबर 2026">सितंबर 2026</option>
+            <option value="अक्टूबर 2026">अक्टूबर 2026</option>
+            <option value="नवंबर 2026" selected>नवंबर 2026</option>
+            <option value="दिसंबर 2026">दिसंबर 2026</option>
+            <option value="जनवरी 2027">जनवरी 2027</option>
+            <option value="फरवरी 2027">फरवरी 2027</option>
+            <option value="मार्च 2027">मार्च 2027</option>
           </select>
         </div>
-        <div class="form-group">
-          <label id="lblBasicPay">मूल वेतन:</label>
-          <select id="basicPay" onchange="calculateSalary()"></select>
-        </div>
-        <div class="form-group">
-          <label id="lblDaRate">महंगाई भत्ता (DA) दर:</label>
-          <select id="daPercent" onchange="calculateSalary()"></select>
-        </div>
-        <div class="form-group">
-          <label id="lblHra">आवास भत्ता (HRA):</label>
-          <select id="hraAmount" onchange="calculateSalary()"></select>
-        </div>
-        <div class="form-group">
-          <label id="lblGis">सामूहिक जीवन बीमा (GIS) कटौती:</label>
-          <select id="gisDeduction" onchange="calculateSalary()">
-            <option value="87" selected>Yes (₹ 87)</option>
-            <option value="0">No (₹ 0)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label id="lblNps">क्या एन०पी०एस० (NPS) सब्सक्राइबर हैं?</label>
-          <select id="pensionType" onchange="calculateSalary()">
-            <option value="nps" selected>Yes (10% of Basic+DA)</option>
-            <option value="no">No</option>
+        <div class="f-group">
+          <label>पेंशन व्यवस्था (NPS / OPS):</label>
+          <select id="inpPension" onchange="runSalaryCalc()">
+            <option value="nps" selected>NPS (10% कटौती लागू)</option>
+            <option value="ops">OPS (पुरानी पेंशन - शून्य NPS)</option>
           </select>
         </div>
       </div>
     </div>
 
-    <div class="card-box" id="smInputsCard" style="display:none;">
-      <div class="card-title" id="secSmTitle">💵 मानदेय विवरण</div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label id="lblHonorarium">नियत मानदेय:</label>
-          <input type="number" id="fixedHonorarium" value="18000" oninput="calculateSalary()">
+    <!-- वेतन पैरामीटर्स -->
+    <div class="card">
+      <div class="card-title">💵 ग्रेड पे, मूल वेतन एवं भत्ता पैरामीटर्स</div>
+      <div class="grid">
+        <div class="f-group">
+          <label>ग्रेड पे / स्तर (Level 1 to 10):</label>
+          <select id="inpGrade" onchange="renderBasicList(); renderHraList();">
+            <option value="1800">Grade Pay 1800 (Level 1)</option>
+            <option value="1900">Grade Pay 1900 (Level 2)</option>
+            <option value="2000">Grade Pay 2000 (Level 3)</option>
+            <option value="2400">Grade Pay 2400 (Level 4)</option>
+            <option value="2800">Grade Pay 2800 (Level 5)</option>
+            <option value="4200">Grade Pay 4200 (Level 6)</option>
+            <option value="4600" selected>Grade Pay 4600 (Level 7)</option>
+            <option value="4800">Grade Pay 4800 (Level 8)</option>
+            <option value="5400_9">Grade Pay 5400 (Level 9)</option>
+            <option value="5400_10">Grade Pay 5400 (Level 10)</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>वर्तमान मूल वेतन (Basic Pay):</label>
+          <select id="inpBasic" onchange="runSalaryCalc()"></select>
+        </div>
+        <div class="f-group">
+          <label>महंगाई भत्ता दर (DA Rate %):</label>
+          <select id="inpDaRate" onchange="runSalaryCalc()">
+            <option value="63" selected>63% (लागू दर - नवंबर 2026 से)</option>
+            <option value="60">60% (मार्च - अक्टूबर 2026)</option>
+            <option value="58">58%</option>
+            <option value="55">55%</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>मकान किराया भत्ता (HRA):</label>
+          <select id="inpHra" onchange="runSalaryCalc()"></select>
+        </div>
+        <div class="f-group">
+          <label>मासिक GIS कटौती:</label>
+          <select id="inpGis" onchange="runSalaryCalc()">
+            <option value="87" selected>₹ 87 (प्राथमिक/उच्च प्रा० शिक्षक)</option>
+            <option value="41">₹ 41</option>
+            <option value="100">₹ 100</option>
+            <option value="200">₹ 200</option>
+            <option value="0">₹ 0</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>अग्रिम आयकर / TDS कटौती (यदि कोई):</label>
+          <input type="number" id="inpTds" value="0" placeholder="₹ प्रति माह" oninput="runSalaryCalc()">
+        </div>
+        <div class="f-group">
+          <label>दिव्यांगता भत्ता / अन्य भत्ता:</label>
+          <input type="number" id="inpOther" value="0" placeholder="₹ प्रति माह" oninput="runSalaryCalc()">
         </div>
       </div>
     </div>
 
-    <div class="card-box" style="background:#ffffff; border-color:#1e3a8a;">
-      <div class="card-title" id="secResultTitle" style="color:#1e3a8a;">📋 वेतन गणना परिणाम</div>
-      
-      <div class="result-box" id="scrRegBox">
-        <div class="result-row"><span id="srBasic">मूल वेतन:</span><span id="txtScrBasic">₹ 0</span></div>
-        <div class="result-row"><span id="srDa">महंगाई भत्ता:</span><span id="txtScrDa">₹ 0</span></div>
-        <div class="result-row"><span id="srHra">आवास भत्ता:</span><span id="txtScrHra">₹ 0</span></div>
-        <div class="result-row" style="font-weight:bold; color:#1e3a8a; border-top:1.5px solid #cbd5e1; margin-top:5px; padding-top:8px;">
-          <span id="srGross">सकल वेतन:</span><span id="txtScrGross">₹ 0</span>
-        </div>
-        <div class="result-row"><span id="srNps">एन०पी०एस० कटौती:</span><span id="txtScrNps">₹ 0</span></div>
-        <div class="result-row"><span id="srGis">सामूहिक जीवन बीमा:</span><span id="txtScrGis">₹ 0</span></div>
-        <div class="result-row" style="font-weight:bold; color:#b91c1c;"><span id="srTotDed">कुल कटौती:</span><span id="txtScrTotDed">₹ 0</span></div>
-        <div class="result-row"><span id="srNet">शुद्ध देय वेतन:</span><span id="txtScrNet">₹ 0</span></div>
-      </div>
-
-      <div class="result-box" id="scrSmBox" style="display:none;">
-        <div class="result-row"><span id="srSmHon">नियत मानदेय:</span><span id="txtScrSmHon">₹ 18,000</span></div>
-        <div class="result-row"><span id="srSmDed">कुल कटौती:</span><span>₹ 0</span></div>
-        <div class="result-row"><span id="srSmNet">शुद्ध देय मानदेय:</span><span id="txtScrSmNet">₹ 18,000</span></div>
-      </div>
-
-      <div class="action-row">
-        <button class="btn btn-primary" onclick="window.print()" id="btnActionPrint">🖨️ वेतन पर्ची प्रिंट करें</button>
-        <button class="btn btn-success" onclick="resetAll()" id="btnActionReset">↺ रीसेट करें</button>
-      </div>
+    <div class="btn-row">
+      <button class="btn btn-prn" onclick="window.print()">🖨️ वेतन पर्ची (Salary Slip) प्रिंट करें</button>
+      <button class="btn btn-rst" onclick="resetForm()">↺ रीसेट करें (Reset)</button>
     </div>
   </div>
 
-  <div class="print-only-area">
-    <div class="p-header">
-      <h1 id="pCouncilName">बेसिक शिक्षा परिषद, उत्तर प्रदेश</h1>
-      <h2 id="pSlipHeading">मासिक वेतन विवरण पर्ची</h2>
+  <!-- प्रिंट वेतन पर्ची (Salary Slip Format) -->
+  <div class="slip">
+    <div class="slip-head">
+      <h1>उत्तर प्रदेश बेसिक शिक्षा परिषद</h1>
+      <div style="font-size:14px; font-weight:bold; margin-top:2px;">मासिक वेतन पर्ची (Salary Slip)</div>
+      <div class="slip-head-row">
+        <span><strong>वेतन माह:</strong> <span id="vMonth">नवंबर 2026</span></span>
+        <span><strong>पे-लेवल:</strong> <span id="vLevel">Level 7 (GP 4600)</span></span>
+        <span><strong>पेंशन प्रणाली:</strong> <span id="vPension">NPS</span></span>
+      </div>
     </div>
 
-    <table class="p-table" style="margin-bottom: 12px;">
+    <table class="t-info">
       <tr>
-        <td style="width:50%;"><strong><span id="pmLblName">शिक्षक/शिक्षिका का नाम</span>:</strong> <span id="pmValName">-</span></td>
-        <td style="width:50%;"><strong><span id="pmLblPost">पद / पदनाम</span>:</strong> <span id="pmValPost">सहायक अध्यापक</span></td>
+        <td style="width:30%;"><strong>कर्मचारी का नाम:</strong> <span id="vName">-</span></td>
+        <td style="width:35%;"><strong>पदनाम:</strong> <span id="vPost">-</span></td>
+        <td style="width:35%;"><strong>eHRMS कोड:</strong> <span id="vEhrms">-</span></td>
       </tr>
       <tr>
-        <td><strong><span id="pmLblSchool">विद्यालय का नाम</span>:</strong> <span id="pmValSchool">-</span></td>
-        <td><strong><span id="pmLblUdise">यू-डायस कोड</span>:</strong> <span id="pmValUdise">-</span></td>
+        <td colspan="3"><strong>विद्यालय / कार्यालय का नाम:</strong> <span id="vOffice">-</span></td>
       </tr>
     </table>
 
-    <table class="p-table" id="pRegTable">
-      <thead>
-        <tr>
-          <th style="width:65%;" id="ptHeadDesc">वेतन एवं कटौती विवरण</th>
-          <th style="width:35%; text-align:right;" id="ptHeadAmt">धनराशि (₹)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><span id="ptBasic">मूल वेतन</span></td><td class="amount" id="txtPBasic">₹ 0</td></tr>
-        <tr><td><span id="ptDa">महंगाई भत्ता</span></td><td class="amount" id="txtPDa">₹ 0</td></tr>
-        <tr><td><span id="ptHra">आवास भत्ता</span></td><td class="amount" id="txtPHra">₹ 0</td></tr>
-        <tr class="total-row"><td><span id="ptGross">सकल वेतन</span></td><td class="amount" id="txtPGross">₹ 0</td></tr>
-        <tr><td><span id="ptNps">एन०पी०एस० कटौती</span></td><td class="amount" id="txtPNps">₹ 0</td></tr>
-        <tr><td><span id="ptGis">सामूहिक जीवन बीमा</span></td><td class="amount" id="txtPGis">₹ 0</td></tr>
-        <tr style="color:#b91c1c;"><td><span id="ptTotDed">कुल कटौती</span></td><td class="amount" id="txtPTotDed">₹ 0</td></tr>
-        <tr class="total-row" style="background:#e2e8f0 !important;">
-          <td><span id="ptNet">शुद्ध देय वेतन</span></td><td class="amount" id="txtPNet">₹ 0</td></tr>
-      </tbody>
-    </table>
+    <div class="slip-grid">
+      <!-- परिलब्धियां (Earnings) -->
+      <div class="slip-col">
+        <div class="col-head">परिलब्धियां (Gross Earnings)</div>
+        <div class="slip-row"><span>मूल वेतन (Basic Pay):</span><span id="sBasic">₹ 0</span></div>
+        <div class="slip-row"><span>महंगाई भत्ता (<span id="sDaLabel">63%</span> DA):</span><span id="sDa">₹ 0</span></div>
+        <div class="slip-row"><span>मकान किराया भत्ता (HRA):</span><span id="sHra">₹ 0</span></div>
+        <div class="slip-row"><span>दिव्यांगता / अन्य भत्ता:</span><span id="sOther">₹ 0</span></div>
+        <div class="slip-row tot"><span>सकल वेतन (Gross Salary):</span><span id="sGross" style="color:#1e3a8a;">₹ 0</span></div>
+      </div>
 
-    <table class="p-table" id="pSmTable" style="display:none;">
-      <thead>
-        <tr>
-          <th style="width:65%;" id="ptHeadDescSm">मानदेय विवरण</th>
-          <th style="width:35%; text-align:right;" id="ptHeadAmtSm">धनराशि (₹)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><span id="ptSmHon">नियत मासिक मानदेय</span></td><td class="amount" id="txtPSmHon">₹ 18,000</td></tr>
-        <tr><td><span id="ptSmDed">कुल कटौती</span></td><td class="amount">₹ 0</td></tr>
-        <tr class="total-row" style="background:#e2e8f0 !important;">
-          <td><span id="ptSmNet">शुद्ध देय मानदेय</span></td><td class="amount" id="txtPSmNet">₹ 18,000</td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- कटौतियां (Deductions) -->
+      <div class="slip-col">
+        <div class="col-head">कटौतियां (Deductions)</div>
+        <div class="slip-row"><span>NPS कटौती (10% Basic+DA):</span><span id="sNps">₹ 0</span></div>
+        <div class="slip-row"><span>सामूहिक बीमा (GIS):</span><span id="sGis">₹ 0</span></div>
+        <div class="slip-row"><span>अग्रिम आयकर (TDS / Adv. IT):</span><span id="sTds">₹ 0</span></div>
+        <div class="slip-row"><span>अन्य कटौती:</span><span>₹ 0</span></div>
+        <div class="slip-row tot"><span>कुल कटौती (Total Deductions):</span><span id="sDed" style="color:#dc2626;">₹ 0</span></div>
+      </div>
+    </div>
+
+    <div class="net-box">
+      खाते में देय शुद्ध वेतन (Net In-Hand Salary): <span id="sNet" style="color:#15803d; font-size:16px;">₹ 0</span>
+    </div>
+  </div>
+
+  <!-- Google AdSense Friendly Content Section (no-print: प्रिंट में नहीं दिखेगा) -->
+  <div class="seo-guide no-print">
+    <h3>उत्तर प्रदेश शिक्षक एवं राज्य कर्मचारी मासिक वेतन गणना मार्गदर्शिका (7वां वेतन आयोग - Level 1 से 10)</h3>
+    <p>उत्तर प्रदेश शासन के बेसिक शिक्षा परिषद के परिषदीय प्राथमिक व उच्च प्राथमिक शिक्षकों, माध्यमिक विद्यालय के अध्यापकों एवं अन्य राज्य कर्मचारियों के मासिक वेतन की गणना 7वें राज्य वेतन आयोग के पे-मैट्रिक्स और वित्त विभाग के अद्यतन शासनादेशों के आधार पर की जाती है। मानव संपदा (eHRMS) पोर्टल के पे-रोल मॉड्यूल द्वारा वेतन पर्ची जारी होने से पूर्व प्रत्येक कर्मचारी के लिए अपने मूल वेतन, महंगाई भत्ते (DA), मकान किराया भत्ते (HRA) तथा मासिक कटौतियों के नियमों को समझना आवश्यक है।</p>
+
+    <h4>1. 7वें वेतन आयोग का पे-मैट्रिक्स एवं स्तर (Level 1 to 10 Structure)</h4>
+    <p>उत्तर प्रदेश में कार्मिकों का वेतन पे-मैट्रिक्स के संबंधित स्तर (Level) एवं सेल (Cell) द्वारा निर्धारित होता है:</p>
+    <ul>
+      <li><strong>लेवल 1 से लेवल 5 (ग्रेड पे 1800 से 2800):</strong> इसके अंतर्गत समूह 'घ' कर्मी, कनिष्ठ सहायक, लिपिक संवर्ग एवं राजस्व लेखपाल आते हैं।</li>
+      <li><strong>लेवल 6 (ग्रेड पे 4200):</strong> परिषदीय प्राथमिक विद्यालय के सहायक अध्यापकों का प्रारंभिक मूल वेतन ₹35,400 से प्रारंभ होता है।</li>
+      <li><strong>लेवल 7 (ग्रेड पे 4600):</strong> प्राथमिक विद्यालय के प्रधानाध्यापक एवं उच्च प्राथमिक विद्यालय के सहायक अध्यापकों का प्रारंभिक मूल वेतन ₹44,900 निर्धारित है।</li>
+      <li><strong>लेवल 8 (ग्रेड पे 4800):</strong> उच्च प्राथमिक विद्यालय के प्रधानाध्यापक तथा प्रवक्ता संवर्ग का प्रारंभिक मूल वेतन ₹47,600 होता है।</li>
+      <li><strong>लेवल 9 एवं 10 (ग्रेड पे 5400):</strong> खंड शिक्षा अधिकारी (BEO) एवं अन्य राजपत्रित प्रशासनिक पद इसके अंतर्गत आते हैं।</li>
+    </ul>
+
+    <h4>2. वार्षिक वेतन वृद्धि (Annual Increment Rules - July & January)</h4>
+    <p>राज्य सरकार के नियमों के अनुसार कर्मचारियों को वर्ष में एक बार 3% की दर से वार्षिक वेतन वृद्धि (Increment) प्रदान की जाती है:</p>
+    <ul>
+      <li><strong>1 जुलाई इंक्रीमेंट:</strong> जिन कार्मिकों की नियुक्ति या पदोन्नति 2 जनवरी से 1 जुलाई के मध्य हुई हो, उन्हें प्रतिवर्ष 1 जुलाई को पे-मैट्रिक्स का अगला ऊर्ध्वाधर सेल (Next Vertical Cell) प्राप्त होता है।</li>
+      <li><strong>1 जनवरी इंक्रीमेंट:</strong> जिन कार्मिकों की नियुक्ति 2 जुलाई से 1 जनवरी के मध्य होती है, उन्हें 1 जनवरी को वेतन वृद्धि का लाभ मिलता है।</li>
+    </ul>
+
+    <h4>3. महंगाई भत्ता (Dearness Allowance - DA) का नियम</h4>
+    <p>महंगाई भत्ते की गणना सीधे वर्तमान मूल वेतन (Basic Pay) के प्रतिशत के रूप में की जाती है। केंद्र सरकार एवं उत्तर प्रदेश शासन द्वारा प्रतिवर्ष दो बार (जनवरी एवं जुलाई) महंगाई भत्ते में वृद्धि की जाती है। शासनादेश विलंब से जारी होने पर विगत महीनों का अंतर डीए एरियर (DA Arrear) के रूप में देय होता है।</p>
+
+    <h4>4. मकान किराया भत्ता (HRA) वर्गीकरण - शासनादेश 2018</h4>
+    <p>उत्तर प्रदेश में शासनादेश संख्या 1/2018 के तहत नगरों की जनसंख्या और श्रेणी के आधार पर 3 प्रकार की दरें लागू हैं:</p>
+    <ul>
+      <li><strong>श्रेणी 'अ' (Class A - 5 लाख से अधिक आबादी):</strong> लखनऊ, कानपुर, प्रयागराज, वाराणसी, आगरा, मेरठ, गाजियाबाद, बरेली, अलीगढ़, मुरादाबाद जैसे बड़े नगर निगम क्षेत्र।</li>
+      <li><strong>श्रेणी 'ब' (Class B - 50 हजार से 5 लाख आबादी):</strong> जिला मुख्यालय, नगरपालिका परिषद एवं अधिसूचित नगर क्षेत्र।</li>
+      <li><strong>श्रेणी 'स' / ग्रामीण (Class C / Rural):</strong> ग्रामीण क्षेत्र में स्थित समस्त परिषदीय विद्यालय (जैसे लेवल 7 हेतु ₹1,840 नियत है)।</li>
+    </ul>
+
+    <h4>5. मासिक कटौतियाँ एवं शुद्ध वेतन (Net In-Hand Salary Calculation)</h4>
+    <p>सकल वेतन में से कर्मचारी के बैंक खाते में अंतरित होने वाले शुद्ध वेतन की गणना हेतु निम्नलिखित कटौतियाँ की जाती हैं:</p>
+    <ul>
+      <li><strong>राष्ट्रीय पेंशन प्रणाली (NPS Deduction):</strong> मूल वेतन और महंगाई भत्ते के कुल योग का ठीक 10% कर्मचारी के PRAN खाते में जमा होता है: <code>NPS = (Basic Pay + DA) × 10%</code>।</li>
+      <li><strong>सामूहिक बीमा योजना (GIS):</strong> समूह 'ख' एवं 'ग' के शिक्षकों व कर्मियों के लिए ₹87, ₹100 या ₹200 की मासिक कटौती।</li>
+      <li><strong>अग्रिम आयकर (TDS / Adv. IT):</strong> आयकर देनदारी के आधार पर मानव संपदा पे-रोल से मासिक टीडीएस कटौती।</li>
+    </ul>
+    <p><strong>शुद्ध वेतन सूत्र:</strong> <code>Net In-Hand Salary = Gross Salary - (NPS + GIS + TDS)</code></p>
+  </div>
+
+  <div class="footer-links no-print">
+    <a href="about-us.html">About Us</a> | 
+    <a href="privacy-policy.html">Privacy Policy</a> | 
+    <a href="disclaimer.html">Disclaimer</a> | 
+    <a href="contact-us.html">Contact Us</a>
+    <p style="margin-top:6px; color:#64748b;">© 2026 Teacher Portal UP. All Rights Reserved.</p>
   </div>
 
 </div>
 
 <script>
-const dictionary = {
-  hi: {
-    uiTitle: "💰 परिषदीय शिक्षक वेतन एवं पर्ची जनरेटर",
-    uiHome: "← होमपेज पर जाएं",
-    pCouncilName: "बेसिक शिक्षा परिषद, उत्तर प्रदेश",
-    pSlipHeading: "मासिक वेतन विवरण पर्ची",
-    secTeacherTitle: "👤 शिक्षक एवं विद्यालय का विवरण",
-    lblTeacherName: "शिक्षक/शिक्षिका का नाम:",
-    lblTeacherPost: "पद / पदनाम:",
-    lblSchoolName: "विद्यालय का नाम:",
-    lblSchoolUdise: "यू-डायस (UDISE) कोड:",
-    pmLblName: "शिक्षक/शिक्षिका का नाम",
-    pmLblPost: "पद / पदनाम",
-    pmLblSchool: "विद्यालय का नाम",
-    pmLblUdise: "यू-डायस कोड",
-    secFinanceTitle: "📊 वेतन विवरण एवं भत्ते",
-    lblGradePay: "ग्रेड पे स्तर:",
-    lblBasicPay: "मूल वेतन:",
-    lblDaRate: "महंगाई भत्ता (DA) दर:",
-    lblHra: "आवास भत्ता (HRA):",
-    lblGis: "सामूहिक जीवन बीमा (GIS) कटौती:",
-    lblNps: "क्या एन०पी०एस० (NPS) सब्सक्राइबर हैं?",
-    secSmTitle: "💵 मानदेय विवरण",
-    lblHonorarium: "नियत मानदेय:",
-    secResultTitle: "📋 वेतन गणना परिणाम",
-    srBasic: "मूल वेतन:",
-    srDa: "महंगाई भत्ता:",
-    srHra: "आवास भत्ता:",
-    srGross: "सकल वेतन:",
-    srNps: "एन०पी०एस० कटौती:",
-    srGis: "सामूहिक जीवन बीमा:",
-    srTotDed: "कुल कटौती:",
-    srNet: "शुद्ध देय वेतन:",
-    srSmHon: "नियत मानदेय:",
-    srSmDed: "कुल कटौती:",
-    srSmNet: "शुद्ध देय मानदेय:",
-    btnActionPrint: "🖨️ वेतन पर्ची प्रिंट करें",
-    btnActionReset: "↺ रीसेट करें",
-    ptHeadDesc: "वेतन एवं कटौती विवरण",
-    ptHeadAmt: "धनराशि (₹)",
-    ptHeadDescSm: "मानदेय विवरण",
-    ptHeadAmtSm: "धनराशि (₹)",
-    ptBasic: "मूल वेतन",
-    ptDa: "महंगाई भत्ता",
-    ptHra: "आवास भत्ता",
-    ptGross: "सकल वेतन",
-    ptNps: "एन०पी०एस० कटौती",
-    ptGis: "सामूहिक जीवन बीमा",
-    ptTotDed: "कुल कटौती",
-    ptNet: "शुद्ध देय वेतन",
-    ptSmHon: "नियत मासिक मानदेय",
-    ptSmDed: "कुल कटौती",
-    ptSmNet: "शुद्ध देय मानदेय",
-    posts: ["सहायक अध्यापक", "प्रधानाध्यापक", "शिक्षामित्र", "अनुदेशक"]
-  },
-  en: {
-    uiTitle: "💰 Teacher Salary Slip & Calculator",
-    uiHome: "← Go to Homepage",
-    pCouncilName: "BASIC SHIKSHA PARISHAD, UTTAR PRADESH",
-    pSlipHeading: "MONTHLY SALARY SLIP",
-    secTeacherTitle: "👤 Teacher & School Details",
-    lblTeacherName: "Teacher's Name:",
-    lblTeacherPost: "Designation:",
-    lblSchoolName: "School Name:",
-    lblSchoolUdise: "UDISE Code:",
-    pmLblName: "Teacher's Name",
-    pmLblPost: "Designation",
-    pmLblSchool: "School Name",
-    pmLblUdise: "UDISE Code",
-    secFinanceTitle: "📊 Salary Details & Allowances",
-    lblGradePay: "Grade Pay Level:",
-    lblBasicPay: "Basic Pay:",
-    lblDaRate: "DA Rate:",
-    lblHra: "HRA:",
-    lblGis: "GIS Deduction:",
-    lblNps: "NPS Subscriber?",
-    secSmTitle: "💵 Honorarium Details",
-    lblHonorarium: "Fixed Honorarium:",
-    secResultTitle: "📋 Salary Breakdown Result",
-    srBasic: "Basic Pay:",
-    srDa: "DA Amount:",
-    srHra: "HRA:",
-    srGross: "Gross Salary:",
-    srNps: "NPS Deduction:",
-    srGis: "GIS Deduction:",
-    srTotDed: "Total Deductions:",
-    srNet: "Net In-Hand Salary:",
-    srSmHon: "Fixed Honorarium:",
-    srSmDed: "Total Deductions:",
-    srSmNet: "Net In-Hand Honorarium:",
-    btnActionPrint: "🖨 Print Salary Slip",
-    btnActionReset: "↺ Reset Form",
-    ptHeadDesc: "Salary & Deduction Description",
-    ptHeadAmt: "Amount (₹)",
-    ptHeadDescSm: "Honorarium Description",
-    ptHeadAmtSm: "Amount (₹)",
-    ptBasic: "Basic Pay",
-    ptDa: "Dearness Allowance (DA)",
-    ptHra: "House Rent Allowance (HRA)",
-    ptGross: "Gross Salary",
-    ptNps: "NPS Deduction",
-    ptGis: "GIS Deduction",
-    ptTotDed: "Total Deductions",
-    ptNet: "Net In-Hand Salary",
-    ptSmHon: "Fixed Monthly Honorarium",
-    ptSmDed: "Total Deductions",
-    ptSmNet: "Net In-Hand Honorarium",
-    posts: ["Assistant Teacher", "Headmaster", "Shikshamitra", "Instructor"]
-  }
-};
-
-let currentLang = "hi";
-
-var basicSlabs = {
+const payMatrix = {
+  "1800": [18000, 18500, 19100, 19700, 20300, 20900, 21500, 22100, 22800, 23500, 24200, 24900, 25600, 26400, 27200, 28000, 28800, 29700, 30600, 31500, 32400, 33400, 34400, 35400, 36500, 37600, 38700, 39900, 41100, 42300, 43600, 44900, 46200, 47600, 49000, 50500, 52000, 53600, 55200, 56900],
+  "1900": [19900, 20500, 21100, 21700, 22400, 23100, 23800, 24500, 25200, 26000, 26800, 27600, 28400, 29300, 30200, 31100, 32000, 33000, 34000, 35000, 36100, 37200, 38300, 39400, 40600, 41800, 43100, 44400, 45700, 47100, 48500, 50000, 51500, 53000, 54600, 56200, 57900, 59600, 61400, 63200],
+  "2000": [21700, 22400, 23100, 23800, 24500, 25200, 26000, 26800, 27600, 28400, 29300, 30200, 31100, 32000, 33000, 34000, 35000, 36100, 37200, 38300, 39400, 40600, 41800, 43100, 44400, 45700, 47100, 48500, 50000, 51500, 53000, 54600, 56200, 57900, 59600, 61400, 63200, 65100, 67100, 69100],
+  "2400": [25500, 26300, 27100, 27900, 28700, 29600, 30500, 31400, 32300, 33300, 34300, 35300, 36400, 37500, 38600, 39800, 41000, 42200, 43500, 44800, 46100, 47500, 48900, 50400, 51900, 53500, 55100, 56800, 58500, 60300, 62100, 64000, 65900, 67900, 69900, 72000, 74200, 76400, 78700, 81100],
+  "2800": [29200, 30100, 31000, 31900, 32900, 33900, 34900, 35900, 37000, 38100, 39200, 40400, 41600, 42800, 44100, 45400, 46800, 48200, 49600, 51100, 52600, 54200, 55800, 57500, 59200, 61000, 62800, 64700, 66600, 68600, 70700, 72800, 75000, 77300, 79600, 82000, 84500, 87000, 89600, 92300],
   "4200": [35400, 36500, 37600, 38700, 39900, 41100, 42300, 43600, 44900, 46200, 47600, 49000, 50500, 52000, 53600, 55200, 56900, 58600, 60400, 62200, 64100, 66000, 68000, 70000, 72100, 74300, 76500, 78800, 81200, 83600, 86100, 88700, 91400, 94100, 96900, 99800, 102800, 105900, 109100, 112400],
   "4600": [44900, 46200, 47600, 49000, 50500, 52000, 53600, 55200, 56900, 58600, 60400, 62200, 64100, 66000, 68000, 70000, 72100, 74300, 76500, 78800, 81200, 83600, 86100, 88700, 91400, 94100, 96900, 99800, 102800, 105900, 109100, 112400, 115800, 119300, 122900, 126600, 130400, 134300, 138300, 142400],
   "4800": [47600, 49000, 50500, 52000, 53600, 55200, 56900, 58600, 60400, 62200, 64100, 66000, 68000, 70000, 72100, 74300, 76500, 78800, 81200, 83600, 86100, 88700, 91400, 94100, 96900, 99800, 102800, 105900, 109100, 112400, 115800, 119300, 122900, 126600, 130400, 134300, 138300, 142400, 146700, 151100],
-  "5400": [56100, 57800, 59500, 61300, 63100, 65000, 67000, 69000, 71100, 73200, 75400, 77700, 80000, 82400, 84900, 87400, 90000, 92700, 95500, 98400, 101400, 104400, 107500, 110700, 114000, 117400, 120900, 124500, 128200, 132000, 136000, 140100, 144300, 148600, 153100, 157700, 162400, 167300, 172300, 177500]
+  "5400_9": [53100, 54700, 56300, 58000, 59700, 61500, 63300, 65200, 67200, 69200, 71300, 73400, 75600, 77900, 80200, 82600, 85100, 87700, 90300, 93000, 95800, 98700, 101700, 104800, 107900, 111100, 114400, 117800, 121300, 124900, 128600, 132500, 136500, 140600, 144800, 149100, 153600, 158200, 162900, 167800],
+  "5400_10": [56100, 57800, 59500, 61300, 63100, 65000, 67000, 69000, 71100, 73200, 75400, 77700, 80000, 82400, 84900, 87400, 90000, 92700, 95500, 98400, 101400, 104400, 107500, 110700, 114000, 117400, 120900, 124500, 128200, 132000, 136000, 140100, 144300, 148600, 153100, 157700, 162400, 167300, 172300, 177500]
 };
 
-var daList = [
-  { val: 2, hi: "2% (1st July 2016)", en: "2% (1st July 2016)" },
-  { val: 4, hi: "4% (1st Jan 2017)", en: "4% (1st Jan 2017)" },
-  { val: 5, hi: "5% (1st July 2017)", en: "5% (1st July 2017)" },
-  { val: 7, hi: "7% (1st Jan 2018)", en: "7% (1st Jan 2018)" },
-  { val: 9, hi: "9% (1st July 2018)", en: "9% (1st July 2018)" },
-  { val: 12, hi: "12% (1st Jan 2019)", en: "12% (1st Jan 2019)" },
-  { val: 17, hi: "17% (1st July 2019)", en: "17% (1st July 2019)" },
-  { val: 28, hi: "28% (1st Jan 2021)", en: "28% (1st Jan 2021)" },
-  { val: 31, hi: "31% (1st July 2021)", en: "31% (1st July 2021)" },
-  { val: 34, hi: "34% (1st Jan 2022)", en: "34% (1st Jan 2022)" },
-  { val: 38, hi: "38% (1st July 2022)", en: "38% (1st July 2022)" },
-  { val: 42, hi: "42% (1st Jan 2023)", en: "42% (1st Jan 2023)" },
-  { val: 46, hi: "46% (1st July 2023)", en: "46% (1st July 2023)" },
-  { val: 50, hi: "50% (1st Jan 2024)", en: "50% (1st Jan 2024)" },
-  { val: 53, hi: "53% (1st July 2024)", en: "53% (1st July 2024)" },
-  { val: 55, hi: "55% (1st Jan 2025)", en: "55% (1st Jan 2025)" },
-  { val: 58, hi: "58% (1st July 2025) [Effective]", en: "58% (1st July 2025) [Effective]" },
-  { val: 60, hi: "60% (1st Jan 2026)", en: "60% (1st Jan 2026)" },
-  { val: 63, hi: "63% (1st July 2026) - Expected", en: "63% (1st July 2026) - Expected" }
-];
-
-var hraList = {
-  "4200": [
-    { h: "₹ 4040 (A Class Cities)", e: "₹ 4040 (A Class Cities)", v: 4040 },
-    { h: "₹ 2020 (B Class Cities)", e: "₹ 2020 (B Class Cities)", v: 2020 },
-    { h: "₹ 1340 (In Rural Areas)", e: "₹ 1340 (In Rural Areas)", v: 1340 }
-  ],
-  "4600": [
-    { h: "₹ 4040 (A Class Cities)", e: "₹ 4040 (A Class Cities)", v: 4040 },
-    { h: "₹ 2020 (B Class Cities)", e: "₹ 2020 (B Class Cities)", v: 2020 },
-    { h: "₹ 1340 (In Rural Areas)", e: "₹ 1340 (In Rural Areas)", v: 1340 }
-  ],
-  "4800": [
-    { h: "₹ 5520 (A Class Cities)", e: "₹ 5520 (A Class Cities)", v: 5520 },
-    { h: "₹ 2760 (B Class Cities)", e: "₹ 2760 (B Class Cities)", v: 2760 },
-    { h: "₹ 1840 (In Rural Areas)", e: "₹ 1840 (In Rural Areas)", v: 1840 }
-  ],
-  "5400": [
-    { h: "₹ 5520 (A Class Cities)", e: "₹ 5520 (A Class Cities)", v: 5520 },
-    { h: "₹ 2760 (B Class Cities)", e: "₹ 2760 (B Class Cities)", v: 2760 },
-    { h: "₹ 1840 (In Rural Areas)", e: "₹ 1840 (In Rural Areas)", v: 1840 }
-  ]
+const hraData = {
+  "1800": [{ t: "₹ 730 (ग्रामीण / Rural)", v: 730 }, { t: "₹ 1100 (B श्रेणी)", v: 1100 }, { t: "₹ 2200 (A श्रेणी)", v: 2200 }],
+  "1900": [{ t: "₹ 770 (ग्रामीण / Rural)", v: 770 }, { t: "₹ 1160 (B श्रेणी)", v: 1160 }, { t: "₹ 2320 (A श्रेणी)", v: 2320 }],
+  "2000": [{ t: "₹ 800 (ग्रामीण / Rural)", v: 800 }, { t: "₹ 1200 (B श्रेणी)", v: 1200 }, { t: "₹ 2400 (A श्रेणी)", v: 2400 }],
+  "2400": [{ t: "₹ 980 (ग्रामीण / Rural)", v: 980 }, { t: "₹ 1470 (B श्रेणी)", v: 1470 }, { t: "₹ 2940 (A श्रेणी)", v: 2940 }],
+  "2800": [{ t: "₹ 1110 (ग्रामीण / Rural)", v: 1110 }, { t: "₹ 1660 (B श्रेणी)", v: 1660 }, { t: "₹ 3340 (A श्रेणी)", v: 3340 }],
+  "4200": [{ t: "₹ 1340 (ग्रामीण / Rural)", v: 1340 }, { t: "₹ 2020 (B श्रेणी)", v: 2020 }, { t: "₹ 4040 (A श्रेणी)", v: 4040 }],
+  "4600": [{ t: "₹ 1840 (ग्रामीण / Rural)", v: 1840 }, { t: "₹ 2760 (B श्रेणी)", v: 2760 }, { t: "₹ 5520 (A श्रेणी)", v: 5520 }],
+  "4800": [{ t: "₹ 1870 (ग्रामीण / Rural)", v: 1870 }, { t: "₹ 2810 (B श्रेणी)", v: 2810 }, { t: "₹ 5620 (A श्रेणी)", v: 5620 }],
+  "5400_9": [{ t: "₹ 2100 (ग्रामीण / Rural)", v: 2100 }, { t: "₹ 3150 (B श्रेणी)", v: 3150 }, { t: "₹ 6300 (A श्रेणी)", v: 6300 }],
+  "5400_10": [{ t: "₹ 2100 (ग्रामीण / Rural)", v: 2100 }, { t: "₹ 3150 (B श्रेणी)", v: 3150 }, { t: "₹ 6300 (A श्रेणी)", v: 6300 }]
 };
 
-function triggerLanguageDetection(text) {
-  var tName = document.getElementById('teacherName').value;
-  var sName = document.getElementById('schoolName').value;
-  var clean = (tName + sName).trim();
-
-  if (!clean) return;
-
-  var hasEnglish = /[a-zA-Z]/.test(clean);
-  var hasHindi = /[\u0900-\u097F]/.test(clean);
-
-  if (hasEnglish && !hasHindi && currentLang !== "en") {
-    currentLang = "en";
-    renderTranslatedContent("en");
-  } else if (hasHindi && currentLang !== "hi") {
-    currentLang = "hi";
-    renderTranslatedContent("hi");
-  }
-}
-
-function renderTranslatedContent(lang) {
-  var data = dictionary[lang];
-
-  Object.keys(data).forEach(function(id) {
-    if (id !== "posts") {
-      var el = document.getElementById(id);
-      if (el) el.innerText = data[id];
-    }
-  });
-
-  var pSel = document.getElementById("teacherPost");
-  if (pSel) {
-    for (var i = 0; i < pSel.options.length; i++) {
-      pSel.options[i].text = data.posts[i];
-    }
-  }
-
-  updateDaOptions();
-  updateHraOptions();
-  syncData();
-}
-
-function updateBasicOptions() {
-  var gp = document.getElementById('gradePayLevel').value;
-  var sel = document.getElementById('basicPay');
-  var prevVal = sel.value;
+function renderBasicList() {
+  const gp = document.getElementById('inpGrade').value;
+  const sel = document.getElementById('inpBasic');
   sel.innerHTML = "";
-  var list = basicSlabs[gp] || basicSlabs["4600"];
-  list.forEach(function(amt, idx) {
-    var opt = document.createElement('option');
-    opt.value = amt;
-    opt.innerText = "₹ " + amt.toLocaleString('en-IN');
-    if (prevVal && parseInt(prevVal, 10) === amt) {
-      opt.selected = true;
-    } else if (!prevVal && idx === 2) {
-      opt.selected = true;
-    }
+  const list = payMatrix[gp] || payMatrix["4600"];
+  list.forEach((val, idx) => {
+    const opt = document.createElement('option');
+    opt.value = val;
+    opt.innerText = "₹ " + val.toLocaleString('en-IN');
+    if (idx === 2) opt.selected = true;
     sel.appendChild(opt);
   });
-  calculateSalary();
+  runSalaryCalc();
 }
 
-function updateDaOptions() {
-  var sel = document.getElementById('daPercent');
-  var currentVal = sel.value ? parseFloat(sel.value) : 58;
+function renderHraList() {
+  const gp = document.getElementById('inpGrade').value;
+  const sel = document.getElementById('inpHra');
   sel.innerHTML = "";
-  daList.forEach(function(item) {
-    var opt = document.createElement('option');
-    opt.value = item.val;
-    opt.innerText = (currentLang === "en") ? item.en : item.hi;
-    if (item.val === currentVal) {
-      opt.selected = true;
-    }
-    sel.appendChild(opt);
-  });
-  calculateSalary();
-}
-
-function updateHraOptions() {
-  var gp = document.getElementById('gradePayLevel').value;
-  var sel = document.getElementById('hraAmount');
-  var prevHra = sel.value ? parseFloat(sel.value) : null;
-  sel.innerHTML = "";
-  var list = hraList[gp] || hraList["4600"];
-  list.forEach(function(obj, idx) {
-    var opt = document.createElement('option');
+  const list = hraData[gp] || hraData["4600"];
+  list.forEach((obj, idx) => {
+    const opt = document.createElement('option');
     opt.value = obj.v;
-    opt.innerText = (currentLang === "en") ? obj.e : obj.h;
-    if (prevHra && prevHra === obj.v) {
-      opt.selected = true;
-    } else if (!prevHra && idx === 2) {
-      opt.selected = true;
-    }
+    opt.innerText = obj.t;
+    if (idx === 0) opt.selected = true;
     sel.appendChild(opt);
   });
-  calculateSalary();
+  runSalaryCalc();
 }
 
-function togglePostMode() {
-  var post = document.getElementById('teacherPost').value;
-  var isSm = (post === 'शिक्षामित्र' || post === 'अनुदेशक');
+function runSalaryCalc() {
+  const name = document.getElementById('inpName').value.trim();
+  const post = document.getElementById('inpPost').value;
+  const office = document.getElementById('inpOffice').value.trim();
+  const ehrms = document.getElementById('inpEhrms').value.trim();
+  const month = document.getElementById('inpMonth').value;
+  const pension = document.getElementById('inpPension').value;
 
-  document.getElementById('regInputsCard').style.display = isSm ? 'none' : 'block';
-  document.getElementById('smInputsCard').style.display = isSm ? 'block' : 'none';
-  document.getElementById('scrRegBox').style.display = isSm ? 'none' : 'block';
-  document.getElementById('scrSmBox').style.display = isSm ? 'block' : 'none';
+  document.getElementById('vName').innerText = name || '-';
+  document.getElementById('vPost').innerText = post;
+  document.getElementById('vOffice').innerText = office || '-';
+  document.getElementById('vEhrms').innerText = ehrms || '-';
+  document.getElementById('vMonth').innerText = month;
+  document.getElementById('vPension').innerText = (pension === 'nps') ? 'NPS' : 'OPS (Old Pension)';
 
-  document.getElementById('pRegTable').style.display = isSm ? 'none' : 'table';
-  document.getElementById('pSmTable').style.display = isSm ? 'table' : 'none';
+  const gp = document.getElementById('inpGrade').value;
+  const levelText = gp === "5400_9" ? "Level 9 (GP 5400)" : gp === "5400_10" ? "Level 10 (GP 5400)" : `Level (GP ${gp})`;
+  document.getElementById('vLevel').innerText = levelText;
 
-  calculateSalary();
-}
+  const basic = parseFloat(document.getElementById('inpBasic').value) || 0;
+  const daRate = parseFloat(document.getElementById('inpDaRate').value) || 0;
+  const hra = parseFloat(document.getElementById('inpHra').value) || 0;
+  const other = parseFloat(document.getElementById('inpOther').value) || 0;
+  const gis = parseFloat(document.getElementById('inpGis').value) || 0;
+  const tds = parseFloat(document.getElementById('inpTds').value) || 0;
 
-function syncData() {
-  var name = document.getElementById('teacherName').value.trim();
-  var pSel = document.getElementById('teacherPost');
-  var postTxt = pSel.options[pSel.selectedIndex].text;
-  var school = document.getElementById('schoolName').value.trim();
-  var udise = document.getElementById('schoolUdise').value.trim();
+  const da = Math.round(basic * (daRate / 100));
+  const gross = basic + da + hra + other;
 
-  document.getElementById('pmValName').innerText = name || '-';
-  document.getElementById('pmValPost').innerText = postTxt || '-';
-  document.getElementById('pmValSchool').innerText = school || '-';
-  document.getElementById('pmValUdise').innerText = udise || '-';
-}
-
-function calculateSalary() {
-  var post = document.getElementById('teacherPost').value;
-
-  if (post === 'शिक्षामित्र' || post === 'अनुदेशक') {
-    var hon = parseFloat(document.getElementById('fixedHonorarium').value) || 0;
-    var fmt = "₹ " + hon.toLocaleString('en-IN');
-
-    document.getElementById('txtScrSmHon').innerText = fmt;
-    document.getElementById('txtScrSmNet').innerText = fmt;
-    document.getElementById('txtPSmHon').innerText = fmt;
-    document.getElementById('txtPSmNet').innerText = fmt;
-  } else {
-    var basic = parseFloat(document.getElementById('basicPay').value) || 0;
-    var daRate = parseFloat(document.getElementById('daPercent').value) || 0;
-    var hra = parseFloat(document.getElementById('hraAmount').value) || 0;
-    var gis = parseFloat(document.getElementById('gisDeduction').value) || 0;
-    var pType = document.getElementById('pensionType').value;
-
-    var da = Math.round(basic * (daRate / 100));
-    var gross = basic + da + hra;
-    var nps = (pType === 'nps') ? Math.round((basic + da) * 0.10) : 0;
-    var totDed = nps + gis;
-    var net = gross - totDed;
-
-    document.getElementById('txtScrBasic').innerText = "₹ " + basic.toLocaleString('en-IN');
-    document.getElementById('txtScrDa').innerText = "₹ " + da.toLocaleString('en-IN') + " (" + daRate + "%)";
-    document.getElementById('txtScrHra').innerText = "₹ " + hra.toLocaleString('en-IN');
-    document.getElementById('txtScrGross').innerText = "₹ " + gross.toLocaleString('en-IN');
-    document.getElementById('txtScrNps').innerText = "₹ " + nps.toLocaleString('en-IN');
-    document.getElementById('txtScrGis').innerText = "₹ " + gis.toLocaleString('en-IN');
-    document.getElementById('txtScrTotDed').innerText = "₹ " + totDed.toLocaleString('en-IN');
-    document.getElementById('txtScrNet').innerText = "₹ " + net.toLocaleString('en-IN');
-
-    document.getElementById('txtPBasic').innerText = "₹ " + basic.toLocaleString('en-IN');
-    document.getElementById('txtPDa').innerText = "₹ " + da.toLocaleString('en-IN');
-    document.getElementById('txtPHra').innerText = "₹ " + hra.toLocaleString('en-IN');
-    document.getElementById('txtPGross').innerText = "₹ " + gross.toLocaleString('en-IN');
-    document.getElementById('txtPNps').innerText = "₹ " + nps.toLocaleString('en-IN');
-    document.getElementById('txtPGis').innerText = "₹ " + gis.toLocaleString('en-IN');
-    document.getElementById('txtPTotDed').innerText = "₹ " + totDed.toLocaleString('en-IN');
-    document.getElementById('txtPNet').innerText = "₹ " + net.toLocaleString('en-IN');
+  let nps = 0;
+  if (pension === 'nps') {
+    nps = Math.round((basic + da) * 0.10);
   }
+
+  const totDed = nps + gis + tds;
+  const netPay = gross - totDed;
+
+  document.getElementById('sDaLabel').innerText = daRate + "%";
+  document.getElementById('sBasic').innerText = "₹ " + basic.toLocaleString('en-IN');
+  document.getElementById('sDa').innerText = "₹ " + da.toLocaleString('en-IN');
+  document.getElementById('sHra').innerText = "₹ " + hra.toLocaleString('en-IN');
+  document.getElementById('sOther').innerText = "₹ " + other.toLocaleString('en-IN');
+  document.getElementById('sGross').innerText = "₹ " + gross.toLocaleString('en-IN');
+
+  document.getElementById('sNps').innerText = "₹ " + nps.toLocaleString('en-IN');
+  document.getElementById('sGis').innerText = "₹ " + gis.toLocaleString('en-IN');
+  document.getElementById('sTds').innerText = "₹ " + tds.toLocaleString('en-IN');
+  document.getElementById('sDed').innerText = "₹ " + totDed.toLocaleString('en-IN');
+
+  document.getElementById('sNet').innerText = "₹ " + netPay.toLocaleString('en-IN');
 }
 
-function resetAll() {
-  document.getElementById('teacherName').value = '';
-  document.getElementById('teacherPost').value = 'सहायक अध्यापक';
-  document.getElementById('schoolName').value = '';
-  document.getElementById('schoolUdise').value = '';
-  document.getElementById('gradePayLevel').value = '4600';
-  document.getElementById('gisDeduction').value = '87';
-  document.getElementById('pensionType').value = 'nps';
-  document.getElementById('fixedHonorarium').value = '18000';
-
-  currentLang = "hi";
-  renderTranslatedContent("hi");
-  updateBasicOptions();
-  updateDaOptions();
-  togglePostMode();
-  updatePrintMeta();
+function resetForm() {
+  document.getElementById('inpName').value = '';
+  document.getElementById('inpOffice').value = '';
+  document.getElementById('inpEhrms').value = '';
+  document.getElementById('inpPost').selectedIndex = 0;
+  document.getElementById('inpGrade').value = '4600';
+  document.getElementById('inpDaRate').value = '63';
+  document.getElementById('inpGis').value = '87';
+  document.getElementById('inpTds').value = '0';
+  document.getElementById('inpOther').value = '0';
+  document.getElementById('inpPension').value = 'nps';
+  document.getElementById('inpMonth').value = 'नवंबर 2026';
+  renderBasicList();
+  renderHraList();
 }
 
 window.onload = function() {
-  updateBasicOptions();
-  updateDaOptions();
-  updateHraOptions();
-  togglePostMode();
-  updatePrintMeta();
-  renderTranslatedContent("hi");
+  renderBasicList();
+  renderHraList();
 };
 </script>
 
