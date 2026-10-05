@@ -516,10 +516,10 @@
         </div>
       </div>
 
-      <!-- दायाँ कॉलम: धारा 80C एवं अन्य बचत विवरण -->
+      <!-- दायाँ कॉलम: धारा 80C एवं अन्य बचत या कटौती विवरण -->
       <div class="calc-col">
         <div style="text-align:center; font-weight:bold; border-bottom:2px solid #000; padding-bottom:5px; margin-bottom:5px;" id="box80cTitle">
-          धारा 80C एवं अन्य बचत विवरण
+          धारा 80C एवं अन्य बचत या कटौती
         </div>
         <div class="calc-row"><span>1. NPS 80CCD(1):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cGpf">2. GPF कटौती:</span><span id="vGpf">₹ 0</span></div>
@@ -535,7 +535,7 @@
 
         <!-- अन्य बचत एवं कटौतियाँ विवरण -->
         <div style="margin-top:8px; border-top:1.5px solid #000; padding-top:4px;">
-          <div style="font-weight:bold; text-align:center; margin-bottom:4px; font-size:14px;">अन्य बचत एवं कटौतियों का विवरण</div>
+          <div style="font-weight:bold; text-align:center; margin-bottom:4px; font-size:14px;">अन्य बचत या कटौती विवरण</div>
           <div class="calc-row"><span>1. NPS 80CCD(1B) अतिरिक्त (Max 50k):</span><span id="vNpsAddRight">₹ 0</span></div>
           <div class="calc-row"><span>2. धारा 80D (स्वास्थ्य बीमा):</span><span id="v80dRight">₹ 0</span></div>
           <div class="calc-row"><span>3. धारा 80U (दिव्यांगता छूट):</span><span id="v80uRight">₹ 0</span></div>
@@ -588,11 +588,11 @@
       <li><strong>पारिवारिक पेंशन या लाभांश (Dividend):</strong> यदि कोई पारिवारिक पेंशन या शेयर बाजार/म्यूचुअल फंड से लाभांश प्राप्त हुआ है, तो उसे भी इस मद में दर्ज किया जाता है।</li>
     </ul>
 
-    <h4>5. संशोधित नई कर व्यवस्था (Revised New Regime - ₹12 लाख तक शून्य कर)</h4>
+    <h4>5. संशोधित नई कर व्यवस्था (Revised New Tax Regime - ₹12 लाख तक शून्य कर)</h4>
     <p>वित्तीय वर्ष 2026-27 के अंतर्गत नई कर व्यवस्था डिफ़ॉल्ट व्यवस्था है। इसके मुख्य लाभ निम्नलिखित हैं:</p>
     <ul>
       <li><strong>मानक कटौती (Standard Deduction):</strong> वेतनभोगी कर्मचारियों को बिना किसी बिल या निवेश प्रमाण के सीधे <strong>₹75,000</strong> की मानक कटौती मिलती है।</li>
-      <li><strong>धारा 87A के अंतर्गत पूर्ण कर रिबेट:</strong> यदि किसी कर्मचारी की कुल कर योग्य आय मानक कटौती घटाने के बाद <strong>₹12,00,000</strong> तक है, तो धारा 87A के अंतर्गत अधिकतम <strong>₹60,000</strong> तक का संपूर्ण देय आयकर शून्य हो जाता है। अर्थात ₹12,75,000 तक के सकल वेतन पर प्रभावी टैक्स शून्य रहता है।</li>
+      <li><strong>धारा 87A के अंतर्गत पूर्ण कर रिबेट:</strong> यदि किसी कर्मचारी की कुल कर योग्य आय मानक कटौती घटाने के बाद <strong>₹12,00,000</strong> तक है, तो धारा 87A के तहत अधिकतम <strong>₹60,000</strong> तक का संपूर्ण देय आयकर शून्य हो जाता है। अर्थात ₹12,75,000 तक के सकल वेतन पर प्रभावी टैक्स शून्य रहता है।</li>
       <li><strong>संशोधित स्लैब दरें:</strong>
         <ul>
           <li>₹0 से ₹4,00,000 तक: शून्य (0%)</li>
@@ -712,7 +712,7 @@ const dictionary = {
     lblRowAdvPaid: "13. घटाएं अग्रिम आयकर (Adv. IT):",
     lblRowFinalTax: "14. शुद्ध देय / प्रतिदेय आयकर (Refund):",
 
-    box80cTitle: "धारा 80C एवं अन्य बचत विवरण",
+    box80cTitle: "धारा 80C एवं अन्य बचत या कटौती",
     lbl80cGpf: "2. GPF कटौती:",
     lbl80cGis: "3. सामूहिक बीमा (GIS):",
     lbl80cLic: "4. LIC प्रीमियम:",
@@ -735,7 +735,7 @@ const dictionary = {
     lblDisAllowance: "Monthly Disability Allowance:",
     lblTeacherPost: "Designation:",
     lblSchoolName: "School / Office Name:",
-    lblPan: "PAN Number:",
+    lblPAN: "PAN Number:",
     lblEhrms: "eHRMS Code:",
     lblDob: "Date of Birth (DD/MM/YYYY):",
     lblRegime: "Tax Regime:",
@@ -795,7 +795,7 @@ const dictionary = {
     lblRowAdvPaid: "13. Less Advance Tax (Adv. IT):",
     lblRowFinalTax: "14. Net Tax Payable / Refund:",
 
-    box80cTitle: "Section 80C & Other Deductions",
+    box80cTitle: "Section 80C & Other Savings/Deductions",
     lbl80cGpf: "2. GPF Deduction:",
     lbl80cGis: "3. Group Insurance (GIS):",
     lbl80cLic: "4. LIC Premium:",
@@ -829,7 +829,7 @@ const hraData = {
   "1900": [{ h: "₹ 770 (Rural)", e: "₹ 770 (Rural)", v: 770 }, { h: "₹ 1160 (B श्रेणी)", e: "₹ 1160 (Class B)", v: 1160 }, { h: "₹ 2320 (A श्रेणी)", e: "₹ 2320 (Class A)", v: 2320 }],
   "2000": [{ h: "₹ 800 (Rural)", e: "₹ 800 (Rural)", v: 800 }, { h: "₹ 1200 (B श्रेणी)", e: "₹ 1200 (Class B)", v: 1200 }, { h: "₹ 2400 (A श्रेणी)", e: "₹ 2400 (Class A)", v: 2400 }],
   "2400": [{ h: "₹ 980 (Rural)", e: "₹ 980 (Rural)", v: 980 }, { h: "₹ 1470 (B श्रेणी)", e: "₹ 1470 (Class B)", v: 1470 }, { h: "₹ 2940 (A श्रेणी)", e: "₹ 2940 (Class A)", v: 2940 }],
-  "2800": [{ h: "₹ 1110 (Rural)", e: "₹ 1110 (Rural)", v: 1110 }, { h: "₹ 1660 (B श्रेणी)", e: "₹ 1160 (Class B)", v: 1160 }, { h: "₹ 3340 (A श्रेणी)", e: "₹ 3340 (Class A)", v: 3340 }],
+  "2800": [{ h: "₹ 1110 (Rural)", e: "₹ 1110 (Rural)", v: 1110 }, { h: "₹ 1660 (B श्रेणी)", e: "₹ 1660 (Class B)", v: 1660 }, { h: "₹ 3340 (A श्रेणी)", e: "₹ 3340 (Class A)", v: 3340 }],
   "4200": [{ h: "₹ 1340 (Rural)", e: "₹ 1340 (Rural)", v: 1340 }, { h: "₹ 2020 (B श्रेणी)", e: "₹ 2020 (Class B)", v: 2020 }, { h: "₹ 4040 (A श्रेणी)", e: "₹ 4040 (Class A)", v: 4040 }],
   "4600": [{ h: "₹ 1840 (Rural)", e: "₹ 1840 (Rural)", v: 1840 }, { h: "₹ 2760 (B श्रेणी)", e: "₹ 2760 (Class B)", v: 2760 }, { h: "₹ 5520 (A श्रेणी)", e: "₹ 5520 (Class A)", v: 5520 }],
   "4800": [{ h: "₹ 1870 (Rural)", e: "₹ 1870 (Rural)", v: 1870 }, { h: "₹ 2810 (B श्रेणी)", e: "₹ 2810 (Class B)", v: 2810 }, { h: "₹ 5620 (A श्रेणी)", e: "₹ 5620 (Class A)", v: 5620 }],
@@ -1205,7 +1205,7 @@ function runTaxCalc() {
   document.getElementById('cSlab3').innerText = "₹ " + Math.round(slab3Tax).toLocaleString('en-IN');
   document.getElementById('cBaseTax').innerText = "₹ " + Math.round(baseTax).toLocaleString('en-IN');
   document.getElementById('cRebate').innerText = "₹ " + Math.round(rebate).toLocaleString('en-IN');
-  document.getElementById('cTaxAfterReb').innerText = "₹ " + Math.round(taxAfterRebate).toLocaleString('en-IN');
+  document.getElementById('cTaxAfterReb').innerText = "₹ " + Math.round(taxAfterReb).toLocaleString('en-IN');
   document.getElementById('cCess').innerText = "₹ " + cess.toLocaleString('en-IN');
   document.getElementById('cNetPayBeforeAdv').innerText = "₹ " + grossTaxPayable.toLocaleString('en-IN');
   document.getElementById('cAdvPaid').innerText = "₹ " + sumAdv.toLocaleString('en-IN');
