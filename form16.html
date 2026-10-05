@@ -50,7 +50,6 @@
     .m-box span { display: block; font-size: 11px; font-weight: bold; margin-bottom: 2px; }
     .m-box input { width: 100%; padding: 5px; font-size: 12px; text-align: right; border: 1px solid #94a3b8; border-radius: 3px; font-weight: bold; }
 
-    /* एडसेंस विस्तृत गाइड स्टाइलिंग */
     .seo-guide { margin-top: 35px; border-top: 2px solid #cbd5e1; padding-top: 25px; color: #1e293b; line-height: 1.7; }
     .seo-guide h3 { color: #1e3a8a; font-size: 17px; margin-bottom: 10px; border-left: 4px solid #1e3a8a; padding-left: 10px; }
     .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 18px; margin-bottom: 6px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
@@ -88,7 +87,6 @@
         display: none !important;
       }
 
-      /* बाहरी बॉर्डर: पूरे पेज को ऊपर से नीचे तक 100% लॉक */
       .sheet {
         margin: 0 !important;
         border: 2.5px solid #000 !important;
@@ -103,7 +101,6 @@
         page-break-inside: avoid !important;
       }
 
-      /* हेडर */
       .sheet-head {
         border-bottom: 2.5px solid #000 !important;
         margin-bottom: 6px !important;
@@ -119,7 +116,6 @@
         margin-top: 3px !important;
       }
 
-      /* कार्मिक विवरण तालिका */
       table.t-info {
         margin-bottom: 6px !important;
         width: 100% !important;
@@ -131,7 +127,6 @@
         font-weight: 700 !important;
       }
 
-      /* 12 माह वेतन तालिका */
       table.t-month {
         margin-bottom: 6px !important;
         width: 100% !important;
@@ -158,7 +153,6 @@
         -webkit-print-color-adjust: exact;
       }
 
-      /* नीचे के दोनों डिब्बे */
       .calc-flex {
         display: flex !important;
         gap: 12px !important;
@@ -183,7 +177,7 @@
         margin-bottom: 5px !important;
       }
       .calc-row {
-        padding: 6px 0 !important;
+        padding: 5.5px 0 !important;
         font-size: 14px !important;
         font-weight: 600 !important;
         border-bottom: 1px dashed #64748b !important;
@@ -522,10 +516,10 @@
         </div>
       </div>
 
-      <!-- दायाँ कॉलम: धारा 80C विवरण -->
+      <!-- दायाँ कॉलम: धारा 80C एवं अन्य बचत विवरण -->
       <div class="calc-col">
         <div style="text-align:center; font-weight:bold; border-bottom:2px solid #000; padding-bottom:5px; margin-bottom:5px;" id="box80cTitle">
-          धारा 80C की बचत का विवरण (Max 1.5 लाख)
+          धारा 80C एवं अन्य बचत विवरण
         </div>
         <div class="calc-row"><span>1. NPS 80CCD(1):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cGpf">2. GPF कटौती:</span><span id="vGpf">₹ 0</span></div>
@@ -535,11 +529,20 @@
         <div class="calc-row"><span id="lbl80cTution">6. ट्यूशन फीस (Tuition Fee):</span><span>₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cHl">7. होम लोन मूलधन:</span><span id="vHlPrinc">₹ 0</span></div>
         <div class="calc-row"><span id="lbl80cSukanya">8. सुकन्या समृद्धि योजना:</span><span>₹ 0</span></div>
-        <div class="calc-row" style="font-weight:bold; background:#e2e8f0; margin-top:20px;">
+        <div class="calc-row" style="font-weight:bold; background:#e2e8f0; margin-top:5px;">
           <span id="lbl80cFinal">कुल 80C कटौती (Max 1,50,000):</span><span id="v80cFinal">₹ 0</span>
         </div>
 
-        <div style="margin-top:25px; border-top:1.5px dashed #000; padding-top:6px; font-size:12.5px; color:#475569;" id="lblDisclaimer">
+        <!-- अन्य बचत एवं कटौतियाँ विवरण -->
+        <div style="margin-top:8px; border-top:1.5px solid #000; padding-top:4px;">
+          <div style="font-weight:bold; text-align:center; margin-bottom:4px; font-size:14px;">अन्य बचत एवं कटौतियों का विवरण</div>
+          <div class="calc-row"><span>1. NPS 80CCD(1B) अतिरिक्त (Max 50k):</span><span id="vNpsAddRight">₹ 0</span></div>
+          <div class="calc-row"><span>2. धारा 80D (स्वास्थ्य बीमा):</span><span id="v80dRight">₹ 0</span></div>
+          <div class="calc-row"><span>3. धारा 80U (दिव्यांगता छूट):</span><span id="v80uRight">₹ 0</span></div>
+          <div class="calc-row"><span>4. अन्य अनुमन्य छूट (80E/80G आदि):</span><span id="vOtherDedRight">₹ 0</span></div>
+        </div>
+
+        <div style="margin-top:10px; border-top:1.5px dashed #000; padding-top:6px; font-size:12px; color:#475569;" id="lblDisclaimer">
           * यह आगणन उत्तर प्रदेश सरकार के कार्मिकों हेतु 7वें वेतन आयोग के पे-मैट्रिक्स एवं वित्तीय वर्ष 2026-27 के आयकर नियमों के अनुसार स्वतः तैयार किया गया है।
         </div>
       </div>
@@ -547,7 +550,7 @@
     </div>
   </div>
 
-  <!-- Google AdSense Friendly Content Section (no-print: 1200+ Words Deep Dive) -->
+  <!-- Google AdSense Friendly Content Section (no-print: 1200+ Words) -->
   <div class="seo-guide no-print">
     <h3>उत्तर प्रदेश शिक्षक एवं राज्य कर्मचारी आयकर आगणन विस्तृत मार्गदर्शिका (वित्तीय वर्ष 2026-27 / कर निर्धारण वर्ष 2027-28)</h3>
     <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के परिषदीय प्राथमिक व उच्च प्राथमिक विद्यालयों के शिक्षकों, सहायता प्राप्त माध्यमिक विद्यालयों के अध्यापकों, लिपिक संवर्ग, लेखपालों एवं अन्य राज्य कर्मचारियों के लिए प्रत्येक वित्तीय वर्ष के समापन पर आयकर आगणन प्रपत्र (Tax Computation Sheet) तैयार करना एक अनिवार्य वैधानिक प्रक्रिया है। यह प्रपत्र न केवल संबंधित आहरण-वितरण अधिकारी (DDO) / वित्त एवं लेखाधिकारी कार्यालय में जमा होता है, बल्कि आयकर विभाग में ऑनलाइन आयकर विवरणी (ITR-1 / Sahaj) दाखिल करने का प्राथमिक आधार भी बनता है।</p>
@@ -709,7 +712,7 @@ const dictionary = {
     lblRowAdvPaid: "13. घटाएं अग्रिम आयकर (Adv. IT):",
     lblRowFinalTax: "14. शुद्ध देय / प्रतिदेय आयकर (Refund):",
 
-    box80cTitle: "धारा 80C की बचत का विवरण (Max 1.5 लाख)",
+    box80cTitle: "धारा 80C एवं अन्य बचत विवरण",
     lbl80cGpf: "2. GPF कटौती:",
     lbl80cGis: "3. सामूहिक बीमा (GIS):",
     lbl80cLic: "4. LIC प्रीमियम:",
@@ -792,7 +795,7 @@ const dictionary = {
     lblRowAdvPaid: "13. Less Advance Tax (Adv. IT):",
     lblRowFinalTax: "14. Net Tax Payable / Refund:",
 
-    box80cTitle: "Section 80C Deductions (Max 1.5 Lakh)",
+    box80cTitle: "Section 80C & Other Deductions",
     lbl80cGpf: "2. GPF Deduction:",
     lbl80cGis: "3. Group Insurance (GIS):",
     lbl80cLic: "4. LIC Premium:",
@@ -1208,12 +1211,18 @@ function runTaxCalc() {
   document.getElementById('cAdvPaid').innerText = "₹ " + sumAdv.toLocaleString('en-IN');
   document.getElementById('cNetTax').innerText = "₹ " + finalBalance.toLocaleString('en-IN');
 
+  // दाएँ कॉलम में मान सेट करना
   document.getElementById('vGpf').innerText = "₹ " + gpf.toLocaleString('en-IN');
   document.getElementById('vGisTot').innerText = "₹ " + sumGis.toLocaleString('en-IN');
   document.getElementById('vLic').innerText = "₹ " + lic.toLocaleString('en-IN');
   document.getElementById('vNscTot').innerText = "₹ " + totNscAuto.toLocaleString('en-IN');
   document.getElementById('vHlPrinc').innerText = "₹ " + hlPrinc.toLocaleString('en-IN');
   document.getElementById('v80cFinal').innerText = "₹ " + s80c.toLocaleString('en-IN');
+
+  document.getElementById('vNpsAddRight').innerText = "₹ " + s80ccd.toLocaleString('en-IN');
+  document.getElementById('v80dRight').innerText = "₹ " + s80d.toLocaleString('en-IN');
+  document.getElementById('v80uRight').innerText = "₹ " + s80u.toLocaleString('en-IN');
+  document.getElementById('vOtherDedRight').innerText = "₹ " + sOtherDed.toLocaleString('en-IN');
 }
 
 function resetForm() {
