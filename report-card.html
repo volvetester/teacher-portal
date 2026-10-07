@@ -74,6 +74,9 @@
 
     .print-only-card-2p, .print-only-card-1p, .print-only-gazette { display: none; }
 
+    /* ==========================================================
+       अलग-अलग मोड हेतु पृथक प्रिंट मीडिया नियम (No Inter-conflict)
+       ========================================================== */
     @media print {
       html, body {
         width: 100% !important;
@@ -88,13 +91,16 @@
 
       .container, .no-print, .seo-guide, .footer-links { display: none !important; }
       
-      body.printing-card-2p .print-only-card-2p { display: block !important; }
       body.printing-card-1p .print-only-card-1p { display: block !important; width: 100% !important; }
+      body.printing-card-2p .print-only-card-2p { display: block !important; width: 100% !important; }
       body.printing-gazette .print-only-gazette { display: block !important; width: 100% !important; }
 
-      @page {
-        size: A4 landscape;
-        margin: 3mm 4mm !important;
+      /* 1. सिंगल पेज कार्ड हेतु लैंडस्केप व 1 पेज लॉक */
+      body.printing-card-1p {
+        @page {
+          size: A4 landscape;
+          margin: 3mm 4mm !important;
+        }
       }
 
       .rc-single-page {
@@ -176,6 +182,14 @@
         padding-top: 1px !important;
       }
 
+      /* 2. टू-पेज कार्ड हेतु A4 पोर्ट्रेट */
+      body.printing-card-2p {
+        @page {
+          size: A4 portrait;
+          margin: 5mm 6mm !important;
+        }
+      }
+
       .rc-page {
         width: 100% !important;
         min-height: 96vh !important;
@@ -186,20 +200,39 @@
         box-sizing: border-box !important;
       }
 
-      .gazette-page { width: 100% !important; page-break-after: always !important; box-sizing: border-box !important; padding-bottom: 5mm !important; }
-      .gazette-wrap { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+      /* 3. परीक्षा परिणाम गजट हेतु पूर्णतः स्वतंत्र A3 लैंडस्केप लेआउट (कोई लाइन नहीं कटेगी) */
+      body.printing-gazette {
+        @page {
+          size: A3 landscape !important;
+          margin: 6mm 7mm !important;
+        }
+      }
+
+      .gazette-page { 
+        width: 100% !important; 
+        page-break-after: always !important; 
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important; 
+        padding: 2mm 0 6mm 0 !important; 
+      }
+      .gazette-wrap { width: 100% !important; margin: 0 !important; }
       table.gazette-table { 
         width: 100% !important; 
         max-width: 100% !important; 
         table-layout: auto !important; 
         border-collapse: collapse !important; 
         text-align: center !important; 
-        font-size: 7.5pt !important; 
-        line-height: 1.15 !important;
+        font-size: 8pt !important; 
+        line-height: 1.2 !important;
       }
-      table.gazette-table th, table.gazette-table td { border: 1px solid #000 !important; padding: 2px 0.5px !important; white-space: nowrap !important; }
-      table.gazette-table th { background: #e2e8f0 !important; font-weight: 800 !important; font-size: 7.5pt !important; }
-      table.gazette-table td.wrap-txt { white-space: normal !important; word-break: break-word !important; max-width: 85px !important; }
+      table.gazette-table th, table.gazette-table td { 
+        border: 1.2px solid #000 !important; 
+        padding: 3px 1px !important; 
+        white-space: nowrap !important; 
+      }
+      table.gazette-table th { background: #e2e8f0 !important; font-weight: 900 !important; font-size: 8pt !important; }
+      table.gazette-table td.wrap-txt { white-space: normal !important; word-break: break-word !important; max-width: 90px !important; }
     }
   </style>
 </head>
