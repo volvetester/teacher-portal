@@ -1396,7 +1396,7 @@ function renderStudentTable() {
   tb.innerHTML = '';
   if (curStudents.length === 0) {
     tb.innerHTML = '<tr><td colspan="10" style="padding:15px; color:#64748b;">' + 
-      (isHindiDetected ? ("कक्षा " + curClass + " (" + currentSession + ") में अभी कोई छात्र सहेजा नहीं गया है।") : ("No students saved yet in Class " + curClass + " (" + currentSession + ").")) + 
+      (isHindiDetected ? ("कक्षा " + curClass + " (" + currentSession + ") में अभी कोई छात्र सहेजा नहीं गया है") : ("No students saved yet in Class " + curClass + " (" + currentSession + ").")) + 
       '</td></tr>';
     return;
   }
