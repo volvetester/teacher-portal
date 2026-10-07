@@ -75,7 +75,7 @@
     .print-only-card-2p, .print-only-card-1p, .print-only-gazette { display: none; }
 
     /* ==========================================================
-       परफेक्ट सिंगल पेज प्रिंट लेआउट (मोबाइल और लैपटॉप दोनों के लिए)
+       लैंडस्केप मोड प्रिंट लेआउट (A4 Landscape - चौड़ाई में पूरा फिट)
        ========================================================== */
     @media print {
       html, body {
@@ -95,8 +95,8 @@
       body.printing-gazette .print-only-gazette { display: block !important; width: 100% !important; }
 
       @page {
-        size: A4 portrait;
-        margin: 3mm 4mm !important;
+        size: A4 landscape;
+        margin: 4mm 6mm !important;
       }
 
       .rc-single-page {
@@ -104,8 +104,8 @@
         height: 98vh !important;
         max-height: 98vh !important;
         box-sizing: border-box !important;
-        border: 2px solid #000 !important;
-        padding: 4mm 5mm !important;
+        border: 2.5px solid #000 !important;
+        padding: 4mm 8mm !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
@@ -114,63 +114,63 @@
         overflow: hidden !important;
       }
 
-      .rc-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 2px; margin-bottom: 4px; }
-      .rc-header h2 { margin: 0; font-size: 18px !important; font-weight: 900 !important; }
-      .rc-header h3 { margin: 1px 0; font-size: 14px !important; font-weight: 800 !important; }
-      .rc-header p { margin: 1px 0; font-size: 12px !important; font-weight: 800 !important; }
+      .rc-header { text-align: center; border-bottom: 2.2px solid #000; padding-bottom: 3px; margin-bottom: 6px; }
+      .rc-header h2 { margin: 0; font-size: 22px !important; font-weight: 900 !important; letter-spacing: 0.5px; }
+      .rc-header h3 { margin: 2px 0; font-size: 16px !important; font-weight: 800 !important; }
+      .rc-header p { margin: 2px 0; font-size: 13.5px !important; font-weight: 800 !important; }
 
       .rc-info-grid { 
         display: grid; 
-        grid-template-columns: 1fr 1fr; 
-        gap: 4px 20px; 
-        font-size: 12.5px !important; 
-        margin-bottom: 4px; 
-        line-height: 1.35; 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 6px 20px; 
+        font-size: 13.5px !important; 
+        margin-bottom: 6px; 
+        line-height: 1.4; 
       }
       .rc-info-item { display: flex; align-items: baseline; }
-      .rc-info-label { font-weight: 800 !important; width: 135px !important; font-size: 12.5px !important; white-space: nowrap !important; }
+      .rc-info-label { font-weight: 800 !important; width: 130px !important; font-size: 13.5px !important; white-space: nowrap !important; }
       .rc-info-val { 
-        border-bottom: 1.5px dotted #000 !important; 
+        border-bottom: 1.8px dotted #000 !important; 
         flex-grow: 1; 
         font-weight: 700 !important; 
-        font-size: 13px !important; 
-        min-height: 18px; 
+        font-size: 14px !important; 
+        min-height: 20px; 
       }
 
       .rc-content-flex {
         display: flex !important;
-        gap: 6px !important;
+        gap: 12px !important;
         flex: 1 1 auto !important;
         align-items: stretch !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 6px !important;
       }
 
-      .rc-left-col { flex: 1.6 !important; display: flex !important; flex-direction: column !important; }
-      .rc-right-col { flex: 1 !important; display: flex !important; flex-direction: column !important; }
+      .rc-left-col { flex: 1.8 !important; display: flex !important; flex-direction: column !important; }
+      .rc-right-col { flex: 1.2 !important; display: flex !important; flex-direction: column !important; }
 
       table.rc-table { width: 100% !important; border-collapse: collapse !important; text-align: center !important; height: 100% !important; }
-      table.rc-table th, table.rc-table td { border: 1.2px solid #000 !important; vertical-align: middle !important; }
-      table.rc-table th { background: #e2e8f0 !important; font-weight: 900 !important; font-size: 11px !important; padding: 3px 2px !important; }
+      table.rc-table th, table.rc-table td { border: 1.3px solid #000 !important; vertical-align: middle !important; }
+      table.rc-table th { background: #e2e8f0 !important; font-weight: 900 !important; font-size: 12.5px !important; padding: 5px 3px !important; }
 
       table.rc-table td.sub-name { 
         font-weight: 800 !important; 
-        font-size: 12px !important; 
-        padding: 2px 4px !important; 
+        font-size: 13.5px !important; 
+        padding: 4px 8px !important; 
         text-align: left !important; 
-        width: 150px !important; 
+        width: 200px !important; 
       }
 
       table.rc-table td.mark-val { 
-        font-size: 13px !important; 
+        font-size: 14.5px !important; 
         font-weight: 800 !important; 
-        width: 35px !important; 
-        padding: 2px !important;
+        width: 45px !important; 
+        padding: 3px !important;
       }
       table.rc-table td.grade-val { 
-        font-size: 13.5px !important; 
+        font-size: 15px !important; 
         font-weight: 900 !important; 
-        width: 42px !important; 
-        padding: 2px !important;
+        width: 55px !important; 
+        padding: 3px !important;
       }
 
       .bottom-section {
@@ -422,7 +422,7 @@
           <input type="checkbox" id="chkPrintAadhaar" checked> पहचान संख्या प्रिंट करें
         </label>
         <button class="btn btn-primary" type="button" onclick="printClassGazette()" id="btnPrintGazette">🖨️ परीक्षा परिणाम गजट प्रिंट करें (A3 Landscape)</button>
-        <button class="btn btn-warning" type="button" onclick="printAllReportCards(1)" id="btnPrint1P">📑 सिंगल पेज प्रिंट (1 Page A4)</button>
+        <button class="btn btn-warning" type="button" onclick="printAllReportCards(1)" id="btnPrint1P">📑 सिंगल पेज प्रिंट (Landscape A4)</button>
         <button class="btn btn-success" type="button" onclick="printAllReportCards(2)" id="btnPrint2P">📄 टू-पेज प्रिंट (2 Pages Front-Back)</button>
       </div>
     </div>
@@ -724,7 +724,7 @@ function updateUILanguage() {
     document.getElementById('btnClearForm').innerText = "↺ फ़ॉर्म साफ़ करें";
     document.getElementById('lblPrintAadhaarCheck').innerHTML = '<input type="checkbox" id="chkPrintAadhaar" checked> पहचान संख्या प्रिंट करें';
     document.getElementById('btnPrintGazette').innerText = "🖨️ परीक्षा परिणाम गजट प्रिंट करें (A3 Landscape)";
-    document.getElementById('btnPrint1P').innerText = "📑 सिंगल पेज प्रिंट (1 Page A4)";
+    document.getElementById('btnPrint1P').innerText = "📑 सिंगल पेज प्रिंट (Landscape A4)";
     document.getElementById('btnPrint2P').innerText = "📄 टू-पेज प्रिंट (2 Pages Front-Back)";
     document.getElementById('savedListTitle').innerText = "📋 कक्षा " + curClass + " (" + currentSession + ") - सहेजे गए विद्यार्थियों की सूची (नाम पर क्लिक करके एडिट करें)";
   } else {
@@ -763,7 +763,7 @@ function updateUILanguage() {
     document.getElementById('btnClearForm').innerText = "↺ Clear Form";
     document.getElementById('lblPrintAadhaarCheck').innerHTML = '<input type="checkbox" id="chkPrintAadhaar" checked> Print Identity Number';
     document.getElementById('btnPrintGazette').innerText = "🖨 Print Tabulation Gazette (A3 Landscape)";
-    document.getElementById('btnPrint1P').innerText = "📑 Print Single Page (1 Page A4)";
+    document.getElementById('btnPrint1P').innerText = "📑 Print Single Page (Landscape A4)";
     document.getElementById('btnPrint2P').innerText = "📄 Print Two Pages (Front-Back A4)";
     document.getElementById('savedListTitle').innerText = "📋 Class " + curClass + " (" + currentSession + ") - Saved Students List";
   }
@@ -1618,7 +1618,7 @@ function printClassGazette() {
   setTimeout(function() { document.body.className = ''; }, 1000);
 }
 
-// 1-पेज वाला A4 कार्ड (सटीक फिटिंग के साथ)
+// 1-पेज वाला A4 लैंडस्केप कार्ड (अब लैंडस्केप मोड के लिए पूरी तरह ऑप्टिमाइज़्ड)
 function buildCardHtml1P(st) {
   var sch = JSON.parse(localStorage.getItem('mdm_sch_info') || '{}');
   var printAadhaar = document.getElementById('chkPrintAadhaar').checked;
@@ -1641,7 +1641,7 @@ function buildCardHtml1P(st) {
     nextClsText = isHi ? "कक्षा 9" : "Class 9";
   }
 
-  var dotStyle = "border-bottom: 2px dotted #000 !important; font-weight: 800 !important; font-size: 14px !important; min-height: 20px; padding-left: 4px;";
+  var dotStyle = "border-bottom: 1.8px dotted #000 !important; font-weight: 800 !important; font-size: 14px !important; min-height: 20px; padding-left: 5px;";
 
   var html = 
     '<div class="rc-single-page">' +
@@ -1669,9 +1669,9 @@ function buildCardHtml1P(st) {
           '<table class="rc-table">' +
             '<thead>' +
               '<tr>' +
-                '<th rowspan="2" style="text-align:left; padding-left:4px; width:150px;">' + (isHi ? 'विषय' : 'Subject') + '</th>' +
+                '<th rowspan="2" style="text-align:left; padding-left:6px; width:200px;">' + (isHi ? 'विषय' : 'Subject') + '</th>' +
                 '<th colspan="2">प्रथम सत्र</th><th colspan="2">अर्धवार्षिक</th><th colspan="2">द्वितीय सत्र</th><th colspan="2">वार्षिक</th><th colspan="2">कुल योग</th>' +
-                '<th rowspan="2" style="width:40px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
+                '<th rowspan="2" style="width:55px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
               '</tr>' +
               '<tr>' +
                 '<th>पू.</th><th>प्रा.</th><th>पू.</th><th>प्रा.</th><th>पू.</th><th>प्रा.</th><th>पू.</th><th>प्रा.</th><th>पू.</th><th>प्रा.</th>' +
@@ -1696,7 +1696,7 @@ function buildCardHtml1P(st) {
 
   html += 
               '<tr style="font-weight:900; background:#f1f5f9;">' +
-                '<td style="text-align:left; padding-left:4px;">' + (isHi ? 'महायोग' : 'Grand Total') + '</td>' +
+                '<td style="text-align:left; padding-left:6px;">' + (isHi ? 'महायोग' : 'Grand Total') + '</td>' +
                 '<td class="mark-val">' + (st.marks.length * 10) + '</td><td class="mark-val">' + t1Tot + '</td>' +
                 '<td class="mark-val">' + (st.marks.length * 30) + '</td><td class="mark-val">' + halfTot + '</td>' +
                 '<td class="mark-val">' + (st.marks.length * 10) + '</td><td class="mark-val">' + t2Tot + '</td>' +
@@ -1712,9 +1712,9 @@ function buildCardHtml1P(st) {
           '<table class="rc-table">' +
             '<thead>' +
               '<tr>' +
-                '<th style="width:26px;">' + (isHi ? 'क्र.' : 'SN') + '</th>' +
-                '<th style="text-align:left; padding-left:4px;">' + (isHi ? 'अतिरिक्त गतिविधियां' : 'Co-Curricular') + '</th>' +
-                '<th style="width:40px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
+                '<th style="width:32px;">' + (isHi ? 'क्र.' : 'SN') + '</th>' +
+                '<th style="text-align:left; padding-left:6px;">' + (isHi ? 'अतिरिक्त पाठ्यचर्या गतिविधियां' : 'Co-Curricular') + '</th>' +
+                '<th style="width:55px;">' + (isHi ? 'ग्रेड' : 'Grade') + '</th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>';
@@ -1725,7 +1725,7 @@ function buildCardHtml1P(st) {
     html += 
       '<tr>' +
         '<td><b>' + (i + 1) + '</b></td>' +
-        '<td style="text-align:left; padding-left:4px; font-weight:700; font-size:10.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + cTitle.replace(/^[0-9]+\.\s*/, '') + '</td>' +
+        '<td style="text-align:left; padding-left:6px; font-weight:800; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + cTitle.replace(/^[0-9]+\.\s*/, '') + '</td>' +
         '<td class="grade-val">' + gVal + '</td>' +
       '</tr>';
   }
@@ -1737,17 +1737,17 @@ function buildCardHtml1P(st) {
       '</div>' +
 
       '<div class="bottom-section">' +
-        '<div style="font-size:11.5px; font-weight:800; border-top:1.5px solid #000; padding-top:2px;">' +
+        '<div style="font-size:13px; font-weight:800; border-top:1.8px solid #000; padding-top:3px;">' +
           (isHi ? 
-            ('• उपस्थिति: <u>&nbsp;&nbsp;' + (st.attDays || '___') + '&nbsp;&nbsp;</u> दिन। | आगामी सत्र <u>&nbsp;' + nextSessStr + '&nbsp;</u> हेतु <u>&nbsp;' + nextClsText + '&nbsp;</u> में कक्षोन्नति प्रदान की जाती है।') :
-            ('• Attendance: <u>&nbsp;&nbsp;' + (st.attDays || '___') + '&nbsp;&nbsp;</u> Days. | Promoted to <u>&nbsp;' + nextClsText + '&nbsp;</u> for session <u>&nbsp;' + nextSessStr + '&nbsp;</u>.')) +
+            ('• शैक्षणिक सत्र में विद्यार्थी की उपस्थिति: <u>&nbsp;&nbsp;' + (st.attDays || '___') + '&nbsp;&nbsp;</u> दिन। &nbsp;&nbsp;|&nbsp;&nbsp; विद्यार्थी को आगामी सत्र <u>&nbsp;' + nextSessStr + '&nbsp;</u> के लिये <u>&nbsp;' + nextClsText + '&nbsp;</u> में कक्षोन्नति प्रदान की जाती है।') :
+            ('• Attendance in Academic Session: <u>&nbsp;&nbsp;' + (st.attDays || '___') + '&nbsp;&nbsp;</u> Days. &nbsp;&nbsp;|&nbsp;&nbsp; Promoted to <u>&nbsp;' + nextClsText + '&nbsp;</u> for upcoming session <u>&nbsp;' + nextSessStr + '&nbsp;</u>.')) +
         '</div>' +
 
-        '<div style="display:flex; justify-content:space-between; margin-top:8mm; padding:0 25px; font-weight:800; font-size:12px;">' +
-          '<div style="text-align:center; border-top:1.5px dashed #000; width:200px; padding-top:2px;">' + 
+        '<div style="display:flex; justify-content:space-between; margin-top:10mm; padding:0 40px; font-weight:800; font-size:13px;">' +
+          '<div style="text-align:center; border-top:2px dashed #000; width:240px; padding-top:3px;">' + 
             (isHi ? 'अभिभावक के हस्ताक्षर' : "Parent's Signature") + 
           '</div>' +
-          '<div style="text-align:center; border-top:1.5px dashed #000; width:230px; padding-top:2px;">' + 
+          '<div style="text-align:center; border-top:2px dashed #000; width:280px; padding-top:3px;">' + 
             (isHi ? 'प्रधानाध्यापक के हस्ताक्षर एवं मुहर' : "Headmaster Signature & Stamp") + 
           '</div>' +
         '</div>' +
