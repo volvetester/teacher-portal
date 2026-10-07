@@ -59,7 +59,6 @@
     .gz-sub-box b { color: #0369a1; display: block; font-size: 11px; margin-bottom: 2px; }
     .gz-sub-in { width: 32px; text-align: center; font-weight: bold; border: 1px solid #0284c7; border-radius: 3px; padding: 1px; font-size: 10.5px; background: white; }
 
-    /* एडसेंस विस्तृत लेख स्टाइलिंग */
     .seo-guide { margin-top: 35px; border-top: 2px solid #cbd5e1; padding-top: 25px; color: #1e293b; line-height: 1.75; }
     .seo-guide h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px; }
     .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 22px; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
@@ -91,78 +90,79 @@
       body.printing-gazette .print-only-gazette { display: block !important; width: 100% !important; }
 
       @page {
-        margin: 4mm 5mm !important;
+        size: A4 portrait;
+        margin: 3mm 4mm !important;
       }
 
       .rc-single-page {
         width: 100% !important;
-        height: 97vh !important;
+        height: 98vh !important;
         box-sizing: border-box !important;
-        border: 2.5px solid #000 !important;
-        padding: 4mm 6mm !important;
+        border: 2px solid #000 !important;
+        padding: 3mm 5mm !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        page-break-after: always !important;
+        page-break-after: avoid !important;
         page-break-inside: avoid !important;
         overflow: hidden !important;
       }
 
-      .rc-header { text-align: center; border-bottom: 2.2px solid #000; padding-bottom: 2px; margin-bottom: 4px; }
-      .rc-header h2 { margin: 0; font-size: 21px !important; font-weight: 900 !important; letter-spacing: 0.5px; }
-      .rc-header h3 { margin: 2px 0; font-size: 17px !important; font-weight: 800 !important; }
-      .rc-header p { margin: 1px 0; font-size: 14px !important; font-weight: 800 !important; }
+      .rc-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 1px; margin-bottom: 3px; }
+      .rc-header h2 { margin: 0; font-size: 19px !important; font-weight: 900 !important; }
+      .rc-header h3 { margin: 1px 0; font-size: 15px !important; font-weight: 800 !important; }
+      .rc-header p { margin: 1px 0; font-size: 13px !important; font-weight: 800 !important; }
 
       .rc-info-grid { 
         display: grid; 
         grid-template-columns: 1fr 1fr; 
-        gap: 5px 28px; 
-        font-size: 14.5px !important; 
-        margin-bottom: 5px; 
-        line-height: 1.4; 
+        gap: 3px 20px; 
+        font-size: 13.5px !important; 
+        margin-bottom: 3px; 
+        line-height: 1.35; 
       }
       .rc-info-item { display: flex; align-items: baseline; }
-      .rc-info-label { font-weight: 800 !important; width: 150px !important; font-size: 14.5px !important; white-space: nowrap !important; }
+      .rc-info-label { font-weight: 800 !important; width: 135px !important; font-size: 13.5px !important; white-space: nowrap !important; }
       .rc-info-val { 
-        border-bottom: 2px dotted #000 !important; 
+        border-bottom: 1.5px dotted #000 !important; 
         flex-grow: 1; 
         font-weight: 700 !important; 
-        font-size: 15px !important; 
-        min-height: 20px; 
+        font-size: 14px !important; 
+        min-height: 18px; 
       }
 
       .rc-content-flex {
         display: flex !important;
-        gap: 8px !important;
+        gap: 6px !important;
         flex: 1 1 auto !important;
         align-items: stretch !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 2px !important;
       }
 
       .rc-left-col { flex: 1.6 !important; display: flex !important; flex-direction: column !important; }
       .rc-right-col { flex: 1 !important; display: flex !important; flex-direction: column !important; }
 
       table.rc-table { width: 100% !important; border-collapse: collapse !important; text-align: center !important; height: 100% !important; }
-      table.rc-table th, table.rc-table td { border: 1.4px solid #000 !important; vertical-align: middle !important; }
-      table.rc-table th { background: #e2e8f0 !important; font-weight: 900 !important; font-size: 13px !important; padding: 4px 2px !important; }
+      table.rc-table th, table.rc-table td { border: 1.2px solid #000 !important; vertical-align: middle !important; }
+      table.rc-table th { background: #e2e8f0 !important; font-weight: 900 !important; font-size: 12px !important; padding: 3px 2px !important; }
 
       table.rc-table td.sub-name { 
         font-weight: 800 !important; 
-        font-size: 14px !important; 
-        padding: 2px 6px !important; 
+        font-size: 13px !important; 
+        padding: 2px 4px !important; 
         text-align: left !important; 
-        width: 170px !important; 
+        width: 155px !important; 
       }
 
       table.rc-table td.mark-val { 
-        font-size: 15.5px !important; 
+        font-size: 14px !important; 
         font-weight: 800 !important; 
-        width: 44px !important; 
+        width: 38px !important; 
       }
       table.rc-table td.grade-val { 
-        font-size: 16px !important; 
+        font-size: 14.5px !important; 
         font-weight: 900 !important; 
-        width: 50px !important; 
+        width: 44px !important; 
       }
 
       .bottom-section {
@@ -205,13 +205,11 @@
     <a href="index.html">← होमपेज</a>
   </div>
 
-  <!-- विधिक चेतावनी और डिस्क्लेमर बॉक्स -->
   <div class="legal-disclaimer-box">
     <h4>⚠️ वैधानिक चेतावनी एवं उपयोग की शर्तें (Legal Disclaimer & Terms of Use):</h4>
-    यह सॉफ्टवेयर/टूल केवल शैक्षिक, संस्थागत प्रबंधन और डिजिटल रिपोर्ट कार्ड तैयार करने की सुविधा हेतु एक आधिकारिक डिजिटल यूटिलिटी है। इस टूल में दिए गए ऑटोमैटिक वितरण या गणना विकल्प का उपयोग केवल संबंधित शिक्षक/प्रधानाध्यापक द्वारा अपने विद्यालय के वास्तविक परीक्षा अभिलेखों (मूल गजट/मूल्यांकन पत्रक) के आधार पर सत्यापित अंकों को दर्ज करके विधिवत प्रगति पत्रक मुद्रित (Print) करने के लिए ही किया जाना है। किसी भी अनधिकृत, कूटकृत (Faked), या फर्जी अंकतालिका/प्रमाणपत्र का निर्माण करना अथवा उनका उपयोग करना भारतीय न्याय संहिता (BNS) एवं लागू अन्य विधिक प्रावधानों के अंतर्गत दंडनीय अपराध है[cite: 8]। इस टूल का उपयोग करने वाले समस्त उपयोगकर्ता अपनी संस्थागत शुचिता और विधिक उत्तरदायित्व के स्वयं जवाबदेह हैं[cite: 8]।
+    यह सॉफ्टवेयर/टूल केवल शैक्षिक, संस्थागत प्रबंधन और डिजिटल रिपोर्ट कार्ड तैयार करने की सुविधा हेतु एक आधिकारिक डिजिटल यूटिलिटी है। इस टूल में दिए गए ऑटोमैटिक वितरण या गणना विकल्प का उपयोग केवल संबंधित शिक्षक/प्रधानाध्यापक द्वारा अपने विद्यालय के वास्तविक परीक्षा अभिलेखों (मूल गजट/मूल्यांकन पत्रक) के आधार पर सत्यापित अंकों को दर्ज करके विधिवत प्रगति पत्रक मुद्रित (Print) करने के लिए ही किया जाना है। किसी भी अनधिकृत, कूटकृत (Faked), या फर्जी अंकतालिका/प्रमाणपत्र का निर्माण करना अथवा उनका उपयोग करना भारतीय न्याय संहिता (BNS) एवं लागू अन्य विधिक प्रावधानों के अंतर्गत दंडनीय अपराध है। इस टूल का उपयोग करने वाले समस्त उपयोगकर्ता अपनी संस्थागत शुचिता और विधिक उत्तरदायित्व के स्वयं जवाबदेह हैं।
   </div>
 
-  <!-- 1. School Information & Academic Session -->
   <div class="section-card">
     <div class="section-title">
       <span id="lblSchSec">🏫 1. विद्यालय विवरण एवं शैक्षिक सत्र (स्वतः सुरक्षित रहेगा)</span>
@@ -243,7 +241,6 @@
     </div>
   </div>
 
-  <!-- 2. Class & Subject Manager -->
   <div class="section-card">
     <div class="section-title">
       <span id="lblClassSec">📚 2. कक्षा व विषय प्रबंधन</span>
@@ -272,7 +269,6 @@
     </div>
   </div>
 
-  <!-- 3. Student Registration & Marks -->
   <div class="section-card">
     <div class="section-title">
       <span id="lblStSec">👤 3. छात्र विवरण एवं प्राप्तांक प्रविष्टि</span>
@@ -307,7 +303,6 @@
       </div>
     </div>
 
-    <!-- Date of Birth Section -->
     <div class="form-grid-3" style="margin-top:10px;">
       <div class="form-group">
         <label id="lblStDob">जन्मतिथि (कैलेंडर से चुनें):</label>
@@ -319,7 +314,6 @@
       </div>
     </div>
 
-    <!-- Attendance & Promotion -->
     <div class="form-grid-3" style="margin-top:10px; background:#f8fafc; padding:8px; border-radius:6px; border:1px solid #e2e8f0;">
       <div class="form-group">
         <label id="lblAttDays">शैक्षणिक सत्र में विद्यार्थी उपस्थिति दिवस (केवल अंक):</label>
@@ -331,7 +325,6 @@
       </div>
     </div>
 
-    <!-- Percentage Calculation Section -->
     <div style="margin-top:12px; background:#ecfdf5; border:1.5px solid #6ee7b7; padding:10px; border-radius:6px;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <div style="font-weight:bold; color:#065f46; font-size:13px;" id="lblPctInputWrap">
@@ -339,12 +332,11 @@
           <input type="number" step="0.1" min="42" max="100" id="stPercent" placeholder="उदा. 75" style="width:90px; padding:4px 8px; font-weight:bold; border:1.5px solid #059669; border-radius:4px;" onchange="distributeMarksFromPercent()"> %
         </div>
         <div style="font-size:11.5px; color:#065f46;" id="lblPctTip">
-          (ओवरऑल न्यूनतम 42% एवं प्रत्येक विषय में न्यूनतम 35 अंक सुरक्षित)[cite: 8]
+          (ओवरऑल न्यूनतम 42% एवं प्रत्येक विषय में न्यूनतम 35 अंक सुरक्षित)
         </div>
       </div>
     </div>
 
-    <!-- Marks Table -->
     <div class="marks-table-box">
       <table class="marks-table">
         <thead>
@@ -370,7 +362,6 @@
       </table>
     </div>
 
-    <!-- 11 Co-Curricular Activities -->
     <div style="margin-top:12px;">
       <label style="font-size:12px; font-weight:bold; color:#1e3a8a;" id="lblCoCurr">🎯 अतिरिक्त पाठ्यचर्या गतिविधियां (11 बिंदु):</label>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:6px; margin-top:5px;" id="coCurrBox"></div>
@@ -382,7 +373,6 @@
     </div>
   </div>
 
-  <!-- लाइव टू-वे लिंक्ड एडिटेबल गजट व्यू -->
   <div class="section-card">
     <div class="section-title">
       <span>📊 लाइव गजट प्रीव्यू एवं टू-वे सिंक (Live Synchronized Gazette)</span>
@@ -406,7 +396,6 @@
     </div>
   </div>
 
-  <!-- 4. Class Records & Print Center -->
   <div class="section-card">
     <div class="section-title">
       <span id="savedListTitle">📋 सहेजे गए विद्यार्थियों की सूची (नाम पर क्लिक करके एडिट करें)</span>
@@ -441,104 +430,9 @@
     </div>
   </div>
 
-  <!-- Google AdSense Friendly Content Section (no-print: 1200+ Words Detailed Academic Guide) -->
   <div class="seo-guide no-print">
     <h3>उत्तर प्रदेश बेसिक शिक्षा: सतत एवं व्यापक मूल्यांकन (CCE), परीक्षा परिणाम गजट एवं प्रगति पत्रक निर्माण विस्तृत मार्गदर्शिका</h3>
-    <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के नियंत्रणाधीन संचालित प्राथमिक, उच्च प्राथमिक एवं संविलियन (कंपोजिट) विद्यालयों में प्रत्येक शैक्षिक सत्र के अंत में विद्यार्थियों का वार्षिक मूल्यांकन संपन्न कर प्रगति पत्रक (Progress Report Card) तथा परीक्षा फल गजट (Tabulation Register) तैयार करना एक अनिवार्य वैधानिक और प्रशासनिक प्रक्रिया है[cite: 8]। राष्ट्रीय शिक्षा नीति (NEP 2020) तथा निशुल्क एवं अनिवार्य बाल शिक्षा का अधिकार अधिनियम (RTE Act 2009) के प्रावधानों के अंतर्गत अब पारंपरिक परीक्षा प्रणाली के स्थान पर सीखने के प्रतिफलों (Learning Outcomes) और सतत एवं व्यापक मूल्यांकन (Continuous and Comprehensive Evaluation - CCE) पर विशेष बल दिया जा रहा है।</p>
-    <p>विद्यालय स्तर पर विद्यार्थियों के शैक्षिक विकास के साथ-साथ उनके संज्ञानात्मक, भावात्मक और मनोक्रियात्मक कौशलों का वस्तुनिष्ठ अंकन करना प्रत्येक शिक्षक एवं संस्था प्रधान का दायित्व है। प्रायः शिक्षकों को सत्रवार अंकों के संकलन, लिखित एवं मौखिक अधिभार (Weightage) के विभाजन, 8-बिंदु ग्रेडिंग स्केल तथा 11-बिंदु सह-पाठ्यचर्या गतिविधियों के मूल्यांकन में तकनीकी कठिनाइयों का सामना करना पड़ता है[cite: 8]। यह मार्गदर्शिका बेसिक शिक्षा विभाग के नवीनतम मूल्यांकन प्रारूप, गजट अभिलेखीकरण, कक्षोन्नति नियमों तथा रिपोर्ट कार्ड मुद्रण के समस्त तकनीकी व विधिक पहलुओं का 1,200 से अधिक शब्दों में विस्तृत विश्लेषण प्रस्तुत करती है।</p>
-
-    <h4>1. सतत एवं व्यापक मूल्यांकन (CCE) का स्वरूप एवं 100 अंकीय संरचना</h4>
-    <p>उत्तर प्रदेश के परिषदीय विद्यालयों में शैक्षिक सत्र (अप्रैल से मार्च) के दौरान विद्यार्थियों का मूल्यांकन चार चरणों में विभाजित होता है, जिसका कुल योग 100 अंक प्रति विषय निर्धारित है[cite: 8]:</p>
-    <ul>
-      <li><strong>प्रथम त्रैमासिक / प्रथम सत्र परीक्षा (Term 1 - माह अगस्त/सितंबर):</strong> इसका अधिभार 10 अंक निर्धारित है[cite: 8]। यह प्रारंभिक दक्षताओं और उपचारात्मक शिक्षण की प्रगति का आकलन करता है।</li>
-      <li><strong>अर्धवार्षिक परीक्षा (Half Yearly Examination - माह अक्टूबर/नवंबर):</strong> इसका कुल अधिभार 30 अंक होता है[cite: 8]। इसमें सत्र के प्रथमार्ध के संपूर्ण पाठ्यक्रम का मूल्यांकन किया जाता है।</li>
-      <li><strong>द्वितीय त्रैमासिक / द्वितीय सत्र परीक्षा (Term 2 - माह जनवरी):</strong> इसका अधिभार 10 अंक निर्धारित है[cite: 8]। यह वार्षिक परीक्षा से पूर्व छात्रों की अवधारणात्मक समझ की जांच हेतु आयोजित की जाती है।</li>
-      <li><strong>वार्षिक परीक्षा (Annual Examination - माह मार्च):</strong> इसका कुल अधिभार 50 अंक निर्धारित है[cite: 8]। इसमें संपूर्ण सत्र के पाठ्यक्रम पर आधारित दक्षता-आधारित प्रश्नों का समावेश होता है।</li>
-      <li><strong>कुल वार्षिक योग:</strong> प्रत्येक विषय का वार्षिक मूल्यांकन <code>10 + 30 + 10 + 50 = 100</code> अंकों के पूर्णांक पर किया जाता है[cite: 8]।</li>
-    </ul>
-
-    <h4>2. कक्षावार लिखित एवं मौखिक परीक्षा का पूर्णांक-बद्ध स्प्लिट नियम</h4>
-    <p>विद्यार्थियों के मानसिक स्तर एवं अभिव्यक्ति कौशल को ध्यान में रखते हुए शासन द्वारा विभिन्न कक्षाओं के लिए लिखित और मौखिक परीक्षा का अनुपात अलग-अलग निर्धारित किया गया है[cite: 8]:</p>
-    <table class="seo-table">
-      <thead>
-        <tr>
-          <th>कक्षा संवर्ग</th>
-          <th>मूल्यांकन प्रकृति</th>
-          <th>सत्रवार लिखित / मौखिक विभाजन (पूर्णांक-बद्ध)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>कक्षा 1</strong></td>
-          <td>शत-प्रतिशत मौखिक (100% Oral)</td>
-          <td>T1 (10 मौखिक), अर्धवार्षिक (30 मौखिक), T2 (10 मौखिक), वार्षिक (50 मौखिक)। लिखित परीक्षा शून्य होती है[cite: 8]।</td>
-        </tr>
-        <tr>
-          <td><strong>कक्षा 2 से 5 (प्राथमिक स्तर)</strong></td>
-          <td>लिखित एवं मौखिक मिश्रित (पूर्णांक-बद्ध स्प्लिट)</td>
-          <td>
-            • प्रथम सत्र (10 अंक): लिखित 7 अंक + मौखिक 3 अंक[cite: 8]<br>
-            • अर्धवार्षिक (30 अंक): लिखित 22 अंक + मौखिक 8 अंक[cite: 8]<br>
-            • द्वितीय सत्र (10 अंक): लिखित 7 अंक + मौखिक 3 अंक[cite: 8]<br>
-            • वार्षिक परीक्षा (50 अंक): लिखित 38 अंक + मौखिक 12 अंक[cite: 8]<br>
-            • कुल 100 अंक: लिखित 74 अंक + मौखिक 26 अंक[cite: 8]।
-          </td>
-        </tr>
-        <tr>
-          <td><strong>कक्षा 6 से 8 (उच्च प्राथमिक स्तर)</strong></td>
-          <td>शत-प्रतिशत लिखित (100% Written)</td>
-          <td>T1 (10 लिखित), अर्धवार्षिक (30 लिखित), T2 (10 लिखित), वार्षिक (50 लिखित)। प्रयोगात्मक विषयों (कला/शारीरिक शिक्षा) में प्रोजेक्ट कार्य सम्मिलित होता है[cite: 8]।</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>3. परिषदीय 8-बिंदु ग्रेडिंग प्रणाली (Grading Scale A1 to D2)</h4>
-    <p>मूल्यांकन प्रक्रिया में बच्चों को किसी प्रकार के मानसिक तनाव या हीनभावना से बचाने के लिए अंकों के साथ-साथ अक्षरात्मक ग्रेड (Letter Grades) प्रदान किए जाते हैं[cite: 8]। बेसिक शिक्षा परिषद द्वारा स्वीकृत 8-बिंदु ग्रेडिंग पैमाना इस प्रकार है[cite: 8]:</p>
-    <ul>
-      <li><strong>A1 ग्रेड (91% से 100%):</strong> सर्वोत्कृष्ट प्रदर्शन (Outstanding Academic Performance)[cite: 8]।</li>
-      <li><strong>A2 ग्रेड (81% से 90%):</strong> उत्कृष्ट प्रदर्शन (Excellent Performance)[cite: 8]।</li>
-      <li><strong>B1 ग्रेड (71% से 80%):</strong> बहुत अच्छा प्रदर्शन (Very Good Performance)[cite: 8]।</li>
-      <li><strong>B2 ग्रेड (61% से 70%):</strong> अच्छा प्रदर्शन (Good Performance)[cite: 8]।</li>
-      <li><strong>C1 ग्रेड (51% से 60%):</strong> संतोषजनक प्रदर्शन (Satisfactory Performance)[cite: 8]।</li>
-      <li><strong>C2 ग्रेड (41% से 50%):</strong> औसत प्रदर्शन (Average Performance)[cite: 8]।</li>
-      <li><strong>D1 ग्रेड (33% से 40%):</strong> सामान्य प्रदर्शन (Needs Improvement)[cite: 8]।</li>
-      <li><strong>D2 ग्रेड (32% या उससे कम):</strong> उपचारात्मक शिक्षण की आवश्यकता (Remedial Support Required)[cite: 8]।</li>
-      <li><strong>उत्तीर्णता एवं सुरक्षा मानक:</strong> परिषदीय व्यवस्था में गुणवत्ता सुनिश्चित करने हेतु ओवरऑल 42% न्यूनतम अंक तथा प्रत्येक विषय में कम से कम 35 अंक सुरक्षित रखने का मानक व्यवहार में लाया जाता है[cite: 8]।</li>
-    </ul>
-
-    <h4>4. 11-बिंदु सह-पाठ्यचर्या गतिविधियां (Co-Curricular Assessment Criteria)</h4>
-    <p>होलिस्टिक रिपोर्ट कार्ड (Holistic Progress Card - HPC) के निर्माण हेतु केवल किताबी ज्ञान पर्याप्त नहीं है। छात्र के व्यक्तित्व के सर्वांगीण विकास के मूल्यांकन हेतु प्रगति पत्रक में 11 विशिष्ट सह-पाठ्यचर्या बिंदुओं का समावेश किया गया है[cite: 8]:</p>
-    <ul>
-      <li><strong>1. नियमितता एवं समयबद्धता (Regularity & Punctuality):</strong> विद्यालय में दैनिक उपस्थिति और प्रार्थना सभा में समय पर आगमन[cite: 8]।</li>
-      <li><strong>2. अनुशासन एवं शिष्टाचार (Discipline & Etiquette):</strong> सहपाठियों, शिक्षकों एवं विद्यालयी संपत्ति के प्रति आदर व व्यवहार[cite: 8]।</li>
-      <li><strong>3. स्वच्छता एवं साफ-सफाई (Cleanliness & Hygiene):</strong> स्वच्छ गणवेश, व्यक्तिगत स्वच्छता और पर्यावरण के प्रति सजगता[cite: 8]।</li>
-      <li><strong>4. प्रार्थना सभा में प्रतिभाग:</strong> दैनिक प्रार्थना, राष्ट्रगान, प्रतिज्ञा एवं नैतिक सुविचारों में सक्रिय सहभागिता[cite: 8]।</li>
-      <li><strong>5. मध्याह्न भोजन (MDM) में आचरण:</strong> पंक्तिबद्ध भोजन ग्रहण करना, भोजन से पूर्व हाथ धोना और अन्न की बर्बादी न करना[cite: 8]।</li>
-      <li><strong>6. खेलकूद एवं योग में सहभागिता:</strong> शारीरिक शिक्षा, पारंपरिक खेलों और सामूहिक योग सत्रों में उत्साहपूर्वक भाग लेना[cite: 8]।</li>
-      <li><strong>7. सांस्कृतिक कार्यक्रम एवं उत्सव:</strong> राष्ट्रीय पर्वों (15 अगस्त, 26 जनवरी), बाल सभा और सांस्कृतिक मंचों पर प्रदर्शन[cite: 8]।</li>
-      <li><strong>8. रचनात्मक एवं अभिव्यक्ति कौशल:</strong> वाद-विवाद, भाषण, कहानी सुनाना और प्रश्नोत्तरी में स्वतंत्र अभिव्यक्ति[cite: 8]।</li>
-      <li><strong>9. चित्रकला, संगीत एवं हस्तशिल्प:</strong> कला, क्राफ्ट, मिट्टी के खिलौने तथा स्थानीय शिल्प में रचनात्मक रुचि[cite: 8]।</li>
-      <li><strong>10. नेतृत्व क्षमता (Leadership Ability):</strong> कक्षा नायक (Monitor), बाल संसद और समूह गतिविधियों का कुशल संचालन[cite: 8]।</li>
-      <li><strong>11. सहयोग एवं सहानुभूति की भावना:</strong> दिव्यांग बच्चों, कमजोर सहपाठियों और समाज के प्रति सेवा भाव[cite: 8]।</li>
-    </ul>
-
-    <h4>5. परीक्षा परिणाम गजट (Tabulation Register) एवं प्रगति पत्रक का विधिक महत्व</h4>
-    <p>विद्यालय स्तर पर संकलित परीक्षा परिणाम केवल तात्कालिक सूचना नहीं है, बल्कि इसका दीर्घकालिक विधिक व अभिलेखीय महत्व होता है[cite: 8]:</p>
-    <ul>
-      <li><strong>स्थायी अभिलेख (Permanent Record):</strong> परीक्षा फल गजट विद्यालय का स्थायी अभिलेख (Record of Permanent Value) होता है[cite: 8]। भविष्य में किसी विद्यार्थी द्वारा स्थानांतरण प्रमाण पत्र (TC), जन्मतिथि सत्यापन अथवा माध्यमिक स्तर पर प्रवेश के समय इसी गजट से अंकों का मिलान किया जाता है।</li>
-      <li><strong>कक्षावार कक्षोन्नति (Class Promotion):</strong> RTE अधिनियम की धारा 16 (No-Detention Policy) के तहत प्राथमिक व उच्च प्राथमिक स्तर पर किसी बच्चे को अनुत्तीर्ण कर उसी कक्षा में नहीं रोका जाता, बल्कि उपचारात्मक टिप्पणी के साथ अगली उच्च कक्षा में कक्षोन्नति प्रदान की जाती है[cite: 8]।</li>
-      <li><strong>अभिभावक-शिक्षक बैठक (PTM) में साझाकरण:</strong> सत्र के अंतिम दिवस (प्रायः 31 मार्च) को संकुल/विद्यालय स्तर पर अभिभावकों को आमंत्रित कर उनके सम्मुख प्रगति पत्रक वितरित किए जाते हैं और छात्र की खूबियों व सुधार योग्य क्षेत्रों पर हस्ताक्षर सहित सहमति ली जाती है[cite: 8]।</li>
-    </ul>
-
-    <h4>6. अक्सर पूछे जाने वाले महत्वपूर्ण प्रश्न (FAQ - Report Card & Gazette)</h4>
-    <p><strong>प्रश्न 1: क्या कक्षा 1 के प्रगति पत्रक में लिखित परीक्षा के अंक दर्ज किए जा सकते हैं?</strong><br>
-    उत्तर: नहीं, बेसिक शिक्षा परिषद के नियमों के अनुसार कक्षा 1 में केवल मौखिक परीक्षा (100% Oral) के आधार पर ही मूल्यांकन मान्य है[cite: 8]।</p>
-
-    <p><strong>प्रश्न 2: परीक्षा परिणाम गजट A3 साइज में क्यों प्रिंट किया जाता है?</strong><br>
-    उत्तर: गजट में छात्र के विवरण के साथ-साथ सभी विषयों के चारों सत्रों के लिखित व मौखिक अंकों के 20 से अधिक कॉलम होते हैं[cite: 8]। A3 लैंडस्केप पेपर पर प्रिंट करने से प्रत्येक अंक स्पष्ट, सुपाठ्य और निरीक्षण योग्य रहता है[cite: 8] [evidence: 3]।</p>
-
-    <p><strong>प्रश्न 3: प्रगति पत्रक में सिंगल पेज (1 Page) और टू-पेज (2 Pages) प्रिंट में क्या अंतर है?</strong><br>
-    उत्तर: सिंगल पेज प्रारूप में छात्र विवरण, मुख्य विषय तालिका, 11 सह-पाठ्यचर्या बिंदु और हस्ताक्षर एक ही A4 पृष्ठ पर संतुलित रूप से समाहित होते हैं[cite: 8]। जबकि टू-पेज प्रारूप में अग्रभाग (Front) पर विद्यालय व छात्र का विस्तृत ब्योरा और पृष्ठभाग (Back) पर संपूर्ण मूल्यांकन तालिका अलग-अलग पृष्ठों पर मुद्रित होती है[cite: 8]।</p>
+    <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के नियंत्रणाधीन संचालित प्राथमिक, उच्च प्राथमिक एवं संविलियन (कंपोजिट) विद्यालयों में प्रत्येक शैक्षिक सत्र के अंत में विद्यार्थियों का वार्षिक मूल्यांकन संपन्न कर प्रगति पत्रक (Progress Report Card) तथा परीक्षा फल गजट (Tabulation Register) तैयार करना एक अनिवार्य वैधानिक और प्रशासनिक प्रक्रिया है। राष्ट्रीय शिक्षा नीति (NEP 2020) तथा निशुल्क एवं अनिवार्य बाल शिक्षा का अधिकार अधिनियम (RTE Act 2009) के प्रावधानों के अंतर्गत अब पारंपरिक परीक्षा प्रणाली के स्थान पर सीखने के प्रतिफलों (Learning Outcomes) और सतत एवं व्यापक मूल्यांकन (Continuous and Comprehensive Evaluation - CCE) पर विशेष बल दिया जा रहा है।</p>
   </div>
 
   <div class="footer-links no-print">
@@ -551,7 +445,6 @@
 
 </div>
 
-<!-- Print Containers -->
 <div class="print-only-card-2p" id="printCardContainer2P"></div>
 <div class="print-only-card-1p" id="printCardContainer1P"></div>
 <div class="print-only-gazette" id="printGazetteContainer"></div>
@@ -755,7 +648,7 @@ function updateUILanguage() {
     document.getElementById('btnSaveSt').innerText = "💾 Save Student Record";
     document.getElementById('btnClearForm').innerText = "↺ Clear Form";
     document.getElementById('lblPrintAadhaarCheck').innerHTML = '<input type="checkbox" id="chkPrintAadhaar" checked> Print Identity Number';
-    document.getElementById('btnPrintGazette').innerText = "🖨️️ Print Tabulation Gazette (A3 Landscape)";
+    document.getElementById('btnPrintGazette').innerText = "🖨 Print Tabulation Gazette (A3 Landscape)";
     document.getElementById('btnPrint1P').innerText = "📑 Print Single Page (1 Page A4)";
     document.getElementById('btnPrint2P').innerText = "📄 Print Two Pages (Front-Back A4)";
     document.getElementById('savedListTitle').innerText = "📋 Class " + curClass + " (" + currentSession + ") - Saved Students List";
@@ -977,7 +870,7 @@ function distributeMarksFromPercent() {
     var randOffset = Math.floor(Math.random() * 15) - 7; 
     var val = Math.round(pct + randOffset);
     if (val > 98) val = 98;
-    if (val < 35) val = 35; // विषयवार न्यूनतम 35 अंक
+    if (val < 35) val = 35; 
     rawTotals.push(val);
     sumRaw += val;
   }
@@ -996,7 +889,6 @@ function distributeMarksFromPercent() {
 
   curSubjects.forEach(function(sub, i) {
     var subTot = rawTotals[i];
-
     var t1 = Math.max(2, Math.round(subTot * 0.10));
     var t2 = Math.max(2, Math.round(subTot * 0.10));
     var half = Math.max(8, Math.round(subTot * 0.30));
@@ -1030,7 +922,7 @@ function cleanAndCalc() {
     var ann = annIn ? Math.max(0, Math.min(50, parseInt(annIn.value, 10) || 0)) : 0;
 
     var subTot = t1 + half + t2 + ann;
-    if (subTot < 35) subTot = 35; // विषयवार न्यूनतम 35 अंक
+    if (subTot < 35) subTot = 35; 
 
     var mTot = document.getElementById('m_tot_' + i);
     var mGrd = document.getElementById('m_grd_' + i);
@@ -1041,7 +933,7 @@ function cleanAndCalc() {
     grandTot += subTot;
   });
 
-  var minAllowedTot = Math.round(totalMax * 0.42); // ओवरऑल न्यूनतम 42%
+  var minAllowedTot = Math.round(totalMax * 0.42); 
   if (grandTot < minAllowedTot) grandTot = minAllowedTot;
 
   document.getElementById('totT1').innerText = sT1;
@@ -1134,7 +1026,7 @@ function saveStudent() {
     var ann = parseInt(document.getElementById('m_ann_' + i).value, 10) || 0;
     
     var subTot = t1 + half + t2 + ann;
-    if (subTot < 35) subTot = 35; // विषयवार न्यूनतम 35 अंक
+    if (subTot < 35) subTot = 35; 
     grandTot += subTot;
 
     marks.push({ 
@@ -1313,7 +1205,7 @@ function updatePrimarySplit(sIdx, mIdx, type, val) {
   m.ann = ann_w + ann_o;
 
   var subTot = m.t1 + m.half + m.t2 + m.ann;
-  if (subTot < 35) subTot = 35; // विषयवार न्यूनतम 35 अंक
+  if (subTot < 35) subTot = 35; 
   m.tot = subTot;
   m.grade = getGrade(subTot);
 
@@ -1322,7 +1214,7 @@ function updatePrimarySplit(sIdx, mIdx, type, val) {
   var newGrand = 0;
   st.marks.forEach(function(subObj) { newGrand += subObj.tot; });
   
-  var minGrand = Math.round(st.totalMax * 0.42); // ओवरऑल न्यूनतम 42%
+  var minGrand = Math.round(st.totalMax * 0.42); 
   if (newGrand < minGrand) newGrand = minGrand;
   st.grandTot = newGrand;
 
@@ -1355,7 +1247,7 @@ function updateGazetteSubMark(sIdx, mIdx, field, val) {
   if (field === 'ann') { m.ann = Math.min(50, Math.max(0, num)); }
 
   var subTot = m.t1 + m.half + m.t2 + m.ann;
-  if (subTot < 35) subTot = 35; // विषयवार न्यूनतम 35 अंक
+  if (subTot < 35) subTot = 35; 
   m.tot = subTot;
   m.grade = getGrade(subTot);
 
@@ -1364,7 +1256,7 @@ function updateGazetteSubMark(sIdx, mIdx, field, val) {
   var newGrand = 0;
   st.marks.forEach(function(subObj) { newGrand += subObj.tot; });
   
-  var minGrand = Math.round(st.totalMax * 0.42); // ओवरऑल न्यूनतम 42%
+  var minGrand = Math.round(st.totalMax * 0.42); 
   if (newGrand < minGrand) newGrand = minGrand;
   st.grandTot = newGrand;
 
@@ -1611,7 +1503,6 @@ function printClassGazette() {
   setTimeout(function() { document.body.className = ''; }, 1000);
 }
 
-// 1-पेज वाला A4 कार्ड
 function buildCardHtml1P(st) {
   var sch = JSON.parse(localStorage.getItem('mdm_sch_info') || '{}');
   var printAadhaar = document.getElementById('chkPrintAadhaar').checked;
@@ -1758,7 +1649,6 @@ function buildCardHtml1P(st) {
   return html;
 }
 
-// 2-पेज वाला कार्ड
 function buildCardHtml2P(st) {
   var sch = JSON.parse(localStorage.getItem('mdm_sch_info') || '{}');
   var printAadhaar = document.getElementById('chkPrintAadhaar').checked;
